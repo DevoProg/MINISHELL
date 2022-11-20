@@ -1,0 +1,2 @@
+# MINISHELL
+Depot projet 42 : MINISHELL.
