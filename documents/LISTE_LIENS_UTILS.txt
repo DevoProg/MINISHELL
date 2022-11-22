@@ -1,0 +1,25 @@
+
+                 LIENS UTILS PROJET MINISHELL
+
+____________________________________________________________________
+
+INFOS ELEMENTS CONSTRUCTION D UN TERMINAL SHELL
+
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+TERMINFO et TERMCAP
+
+https://zestedesavoir.com/tutoriels/1733/termcap-et-terminfo/
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+COMMANDES SHELL
+
+https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+
+
+
