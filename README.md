@@ -1,2 +1,3 @@
-# MINISHELL
-Depot projet 42 : MINISHELL.
+# MINISHELL 
+Depot projet 42 : LE MINISHELL.
+Test de la branch.
