@@ -14,7 +14,6 @@ void minishell_loop(void)
 	while(1)
 	{
 		line_read = readline(">$");
-		ft_strlen(line_read);
 		free(line_read);
 	}
 }
