@@ -1,21 +1,27 @@
 #include "../includes/minishell.h"
-    
+
+void control_c()
+{
+	printf("tu as press control c");//il faudra kill les process en cours et free/close
+	exit(1);
+}
+
+void minishell_loop(void)
+{
+	char *line_read;
+
+	signal(SIGINT, &control_c);
+	while(1)
+	{
+		line_read = readline(">$");
+		ft_strlen(line_read);
+		free(line_read);
+	}
+}
+
 int    main(void)
 {
-    char    *buffer;
-    size_t	buf_size;
-	
-	buf_size = 2048;
-	buffer = (char *)malloc(sizeof(char) * buf_size + 1);
-	
-	if(!buffer)
-	{
-		perror("Alloc memory failed");
-		return (EXIT_FAILURE);
-	}
-	
-	write(1, "$> ", 3);
-	
-	while()
+	minishell_loop();
+	return(1);
 	
 }

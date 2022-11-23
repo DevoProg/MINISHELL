@@ -1,31 +1,29 @@
 NAME = minishell
-
-SRCS = sources/main.c
-
-INCLUDES = includes
-
-OBJS = $(SRC:.c=.o)
-
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread
-
 CC = gcc
+FLAGS = -Wall -Wextra -Werror
+SOURCE = sources/main.c
+OBJ = $(SOURCE:.c=.o)
 
-$(RM) = rm -rf
+%.o: %.c
+	cd libft && make
+	cd ..
+	$(CC) $(FLAGS) -c $< -o $@
 
-.c.o: $(SRC)
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
-	
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJ) -lpthread -o $@
-	
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	$(CC) -lreadline  libft/libft.a $(OBJ) -o $(NAME)
+
 clean:
-	$(RM) $(OBJS)
-	
+	cd libft && make clean
+	cd ..
+	rm -f $(OBJ)
+
 fclean: clean
-	$(RM) $(NAME)
-	
-re: fclean clean
+	cd libft && make fclean
+	cd ..
+	rm -f $(NAME)
+
+re: fclean all
 
 .PHONY: all clean fclean re
