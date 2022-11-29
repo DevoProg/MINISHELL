@@ -107,6 +107,4 @@ void line_to_cmd(t_data *minis)
     if(!minis->tab_cmd[minis->nb_tab])
         ft_error("malloc doesnt work", minis, 2);
     minis->tab_cmd[minis->nb_tab][0] = '\0';
-    minis->nb_tab++;
-    printf("%d\n", minis->nb_tab);
 }

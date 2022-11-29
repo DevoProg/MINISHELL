@@ -1,7 +1,7 @@
 NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-SOURCE = sources/main.c sources/ft_split_cmd.c sources/ft_error.c
+SOURCE = sources/main.c sources/ft_split_cmd.c sources/ft_error.c sources/init_struct.c
 OBJ = $(SOURCE:.c=.o)
 
 %.o: %.c
