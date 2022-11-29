@@ -5,7 +5,7 @@ SOURCE = sources/main.c sources/ft_split_cmd.c sources/ft_error.c
 OBJ = $(SOURCE:.c=.o)
 
 %.o: %.c
-	cd libft && make bonus
+	cd libft && make bonus && make
 	cd ..
 	$(CC) $(FLAGS) -c $< -o $@
 
