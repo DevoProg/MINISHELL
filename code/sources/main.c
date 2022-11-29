@@ -8,13 +8,24 @@ void control_c()
 
 void minishell_loop(void)
 {
-	char *line_read;
+	t_data minis;
+	int i;
 
 	signal(SIGINT, &control_c);
 	while(1)
 	{
-		line_read = readline(">$");
-		free(line_read);
+		minis.line = readline(">$");
+		if(minis.line)
+		{
+			line_to_cmd(&minis);
+			i = 0;
+			while(minis.tab_cmd[i][0] != '\0')//pour voir les commmandes dans le tableau mais il faudra supprimer la boucle
+			{
+				printf("cmd[%d] = %s\n", i, minis.tab_cmd[i]);
+				i++;
+			}
+		}
+		free(minis.line);
 	}
 }
 
@@ -22,5 +33,4 @@ int    main(void)
 {
 	minishell_loop();
 	return(1);
-	
 }

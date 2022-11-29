@@ -10,4 +10,14 @@
 
 #include "../libft/libft.h"
 
+typedef struct s_data
+{
+	char *line;
+	char **tab_cmd;
+	int nb_tab;
+}			t_data;
+
+void line_to_cmd(t_data *minis);
+void ft_error(char *message, t_data *minis, int z);
+
 #endif
