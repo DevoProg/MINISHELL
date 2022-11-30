@@ -97,14 +97,14 @@ void line_to_cmd(t_data *minis)
     if(!minis->tab_cmd)
         ft_error("Malloc doesn't work", minis, 1);
     i = 0;
-    minis->nb_tab = 0;
-    while(minis->nb_tab < nb_cmd)//boucle qui met chaque commande dans une case du tableau
+    minis->nb_cmd = 0;
+    while(minis->nb_cmd < nb_cmd)//boucle qui met chaque commande dans une case du tableau
     {
-        minis->tab_cmd[minis->nb_tab] = str_cpy_cmd(minis->line + i, &i, minis);
-        minis->nb_tab++;
+        minis->tab_cmd[minis->nb_cmd] = str_cpy_cmd(minis->line + i, &i, minis);
+        minis->nb_cmd++;
     }
-    minis->tab_cmd[minis->nb_tab] = malloc(sizeof(char) * 2);//dernier element du tableau = '\0'
-    if(!minis->tab_cmd[minis->nb_tab])
+    minis->tab_cmd[minis->nb_cmd] = malloc(sizeof(char) * 2);//dernier element du tableau = '\0'
+    if(!minis->tab_cmd[minis->nb_cmd])
         ft_error("malloc doesnt work", minis, 2);
-    minis->tab_cmd[minis->nb_tab][0] = '\0';
+    minis->tab_cmd[minis->nb_cmd][0] = '\0';
 }

@@ -12,7 +12,7 @@ OBJ = $(SOURCE:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -lreadline  libft/libft.a $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME) -lreadline libft/libft.a
 
 clean:
 	cd libft && make clean
