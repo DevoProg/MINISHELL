@@ -18,7 +18,7 @@ void ft_error(char *message, t_data *minis, int z)
     if(z == 1 || z == 2)
         free(minis->line);
     if(z == 2)
-        free_tab(minis->tab_cmd, minis->nb_tab);
+        free_tab(minis->tab_cmd, minis->nb_cmd);
     perror(message);
     exit(1);
 }
