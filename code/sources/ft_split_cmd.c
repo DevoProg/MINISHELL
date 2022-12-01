@@ -13,7 +13,7 @@ int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et
     {
         if(line[j] == 39)// 39 == '
             single_quote++;
-        if(line[j] == 34)//34 = "
+        if(line[j] == 34)//34 == "
             double_quote++;
         j++;
     }

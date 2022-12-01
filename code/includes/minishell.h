@@ -19,7 +19,7 @@ typedef struct s_data
 {
 	char *line;//la ligne lue
 	char **tab_cmd;
-	int nb_cmd;//le nombre de commande lue sur 1 ligne
+	int nb_cmd;//le nombre de commande lue sur la ligne
 	t_board *cmd;//tableau de structure pour chaque commande cmd[0]->structure de la premiere commande
 }			t_data;
 
@@ -37,6 +37,7 @@ int is_no_open_quote(char *line, int i);
 
 //innit_struct.c
 void init_struct(t_data *minis);
+void free_struct(t_data *minis);
 
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);
