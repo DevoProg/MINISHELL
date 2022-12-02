@@ -30,12 +30,13 @@ void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier 
         i++;
     }
     free_tab(minis->tab_cmd, minis->nb_cmd + 1);
-    i = 0;
-    while(i < minis->nb_cmd)//boucle pour imprimer les commandes dans la struct on peut la supprimer
-    {
-        printf("%s\n", minis->cmd[i].line_cmd);
-        // if(i < minis->nb_cmd - 1)
-        //     printf("--->il faudra pipe le fd\n");
-        i++;
-    }
+    get_envp_var(minis);
+    // i = 0;
+    // while(i < minis->nb_cmd)//boucle pour imprimer les commandes dans la struct on peut la supprimer
+    // {
+    //     printf("%s\n", minis->cmd[i].line_cmd);
+    //     // if(i < minis->nb_cmd - 1)
+    //     //     printf("--->il faudra pipe le fd\n");
+    //     i++;
+    // }
 }

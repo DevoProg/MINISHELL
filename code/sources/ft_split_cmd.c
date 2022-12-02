@@ -91,7 +91,7 @@ void line_to_cmd(t_data *minis)
     int nb_cmd;
 
     if(minis->line && *minis->line == '|')//si la ligne lue commence par un pipe->error
-        ft_error("Parsing error", minis, 1);
+        ft_error("Parsing error", minis, 1);//ne devrait pas perror(!!!a changer!!!!)
     nb_cmd = ft_count_command(minis->line);//retourne le nombre de commande dans la ligne
     minis->tab_cmd = malloc(sizeof(char *) * (nb_cmd + 1));//allocation d'un tableau pour les commmandes
     if(!minis->tab_cmd)

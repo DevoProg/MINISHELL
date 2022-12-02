@@ -39,6 +39,9 @@ int is_no_open_quote(char *line, int i);
 void init_struct(t_data *minis);
 void free_struct(t_data *minis);
 
+//ft_envp_var.c
+char *get_envp_var(t_data *minis);
+
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);
 void free_tab(char **tab, int i);
