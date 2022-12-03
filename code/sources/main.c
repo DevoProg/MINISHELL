@@ -18,8 +18,10 @@ void minishell_loop(void)
 		{
 			line_to_cmd(&minis);//split les commandes
 			init_struct(&minis);//init struct et put les commandes dans chaque struct
-			//inserer les fonctions ici
 			
+			//inserer les fonctions ici
+			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
+
 			free_struct((&minis));//free la structure des commandes
 			free(minis.line);//free uniquement si elle existe?
 		}

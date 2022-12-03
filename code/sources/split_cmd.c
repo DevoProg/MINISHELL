@@ -1,29 +1,5 @@
 #include "../includes/minishell.h"
 
-int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et se ferme derriere le pipe
-{
-    int single_quote;
-    int double_quote;
-    int j;
-
-    j = 0;
-    single_quote = 0;
-    double_quote = 0;
-    while(j < i)
-    {
-        if(line[j] == 39)// 39 == '
-            single_quote++;
-        if(line[j] == 34)//34 == "
-            double_quote++;
-        j++;
-    }
-    if(single_quote % 2 != 0)
-        return(0);
-    if(double_quote % 2 != 0)
-        return(0);
-    return(1);
-}
-
 int ft_count_command(char *line)//fonction qui compte le nombre de commande
 {
 	int i;
@@ -40,22 +16,6 @@ int ft_count_command(char *line)//fonction qui compte le nombre de commande
 		i++;
 	}
 	return(count + 1);
-}
-
-int ft_len_cmd(char *line)//calcule la longueur de la prochaine commande
-{
-    int i;
-
-    if(!line)
-		return(0);
-	i = 0;
-	while(line[i])
-	{
-		if(is_no_open_quote(line, i) && line[i] == '|')
-			return(i);
-		i++;
-	}
-	return (i);
 }
 
 char *str_cpy_cmd(char *line, int *i, t_data *minis)//fonction qui alloue une string avec la commande et la retourne pour la mettre dans le tableau
