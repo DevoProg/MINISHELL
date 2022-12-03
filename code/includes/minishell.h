@@ -13,15 +13,16 @@
 typedef struct s_board
 {
 	char *line_cmd;//la commande
-}				t_board;
+}				t_board;//structure pour chaque commande
 
 typedef struct s_data
 {
 	char *line;//la ligne lue
-	char **tab_cmd;
-	int nb_cmd;//le nombre de commande lue sur la ligne
+	int nb_cmd;//le nombre de commande lue sur la ligne lue
+	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
 	t_board *cmd;//tableau de structure pour chaque commande cmd[0]->structure de la premiere commande
-}			t_data;
+															//cmd[1]->de la deuxieme ect
+}			t_data;//structure du programme minishell
 
 
 //main.c
@@ -40,7 +41,7 @@ void init_struct(t_data *minis);
 void free_struct(t_data *minis);
 
 //ft_envp_var.c
-char *get_envp_var(t_data *minis);
+char *get_envp_var(char *cmd);//remplace la string cmd par sa variable d'environnement
 
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);
