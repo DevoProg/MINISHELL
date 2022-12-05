@@ -17,6 +17,7 @@ typedef struct s_board
 
 typedef struct s_data
 {
+	char *path;//Endroit actuel (pwd)
 	char *line;//la ligne lue
 	int nb_cmd;//le nombre de commande lue sur la ligne lue
 	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
