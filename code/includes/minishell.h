@@ -32,7 +32,7 @@ typedef struct s_data
 
 
 //main.c
-void minishell_loop(void);
+void minishell_loop(char **envp);
 void control_c();
 
 //ft_split_line.c
@@ -55,7 +55,7 @@ void    put_env_var(t_data *minis);
 void    ft_split_cmd(t_data *minis);
 
 //ft_check_builtins.c
-void ft_check_builtins(t_data *minis);
+void ft_check_builtins(t_data *minis, char **envp);
 int  ft_pwd(void);
 
 //utils.c

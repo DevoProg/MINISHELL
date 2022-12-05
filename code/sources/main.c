@@ -6,7 +6,7 @@ void control_c()
 	exit(1);
 }
 
-void minishell_loop(void)
+void minishell_loop(char **envp)
 {
 	t_data minis;
 
@@ -23,22 +23,18 @@ void minishell_loop(void)
 			//inserer les fonctions ici
 			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);//fonction qui split la commande ' ' et prendre en compte les quotes
-			ft_check_builtins(&minis);//fonction qui regarde si la fonction comprend des echo pwd ect
-
-
-
-
-			int i = 0;
-    		while(i < minis.nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
-    		{
-				int j = 0;
-				while(j < minis.cmd[i].nb_words - 1)
-				{
-					printf("->%s\n", minis.cmd[i].tab[j]);
-					j++;
-				}
-        		i++;
-    		}
+			ft_check_builtins(&minis, envp);//fonction qui regarde si la fonction comprend des echo pwd ect
+			// int i = 0;
+    		// while(i < minis.nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
+    		// {
+			// 	int j = 0;
+			// 	while(j < minis.cmd[i].nb_words - 1)
+			// 	{
+			// 		printf("->%s\n", minis.cmd[i].tab[j]);
+			// 		j++;
+			// 	}
+        	// 	i++;
+    		// }
 
 			free_struct((&minis));//free la structure des commandes
 			free(minis.line);//free uniquement si elle existe?
@@ -46,8 +42,10 @@ void minishell_loop(void)
 	}
 }
 
-int    main(void)
+int    main(int argc, char **argv, char **envp)
 {
-	minishell_loop();
+	minishell_loop(envp);
+	(void)argv;
+	(void)argc;
 	return(1);
 }
