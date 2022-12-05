@@ -28,7 +28,7 @@ void minishell_loop(void)
     		while(i < minis.nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
     		{
 				int j = 0;
-				while(j < minis.cmd[i].nb_words)
+				while(j < minis.cmd[i].nb_words - 1)
 				{
 					printf("->%s\n", minis.cmd[i].tab[j]);
 					j++;
