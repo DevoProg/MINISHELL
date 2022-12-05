@@ -9,13 +9,18 @@ void control_c()
 void minishell_loop(void)
 {
 	t_data minis;
+	HIST_ENTRY *history;
 
 	signal(SIGINT, &control_c);//si tu appuye sur control c ca quitte
+	using_history();
 	while(1)//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
 		if(minis.line)
 		{
+			add_history(minis.line);
+			history = history_list;
+
 			line_to_cmd(&minis);//split les commandes
 			init_struct(&minis);//init struct et put les commandes dans chaque struct
 			
