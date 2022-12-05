@@ -7,8 +7,12 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
 #include "../libft/libft.h"
+
+#define PATH_LEN 1024
+
+#define SUCCESS 1
+#define ERROR 0
 
 typedef struct s_board
 {
@@ -19,7 +23,6 @@ typedef struct s_board
 
 typedef struct s_data
 {
-	char *path;//pwd actuel
 	char *line;//la ligne lue
 	int nb_cmd;//le nombre de commande lue sur la ligne lue
 	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
@@ -50,6 +53,10 @@ void    put_env_var(t_data *minis);
 
 //ft_split_cmd.c
 void    ft_split_cmd(t_data *minis);
+
+//ft_check_builtins.c
+void ft_check_builtins(t_data *minis);
+int  ft_pwd(void);
 
 //utils.c
 int is_no_open_single_quote(char *line, int i);

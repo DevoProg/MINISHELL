@@ -16,12 +16,16 @@ void minishell_loop(void)
 		minis.line = readline(">$");
 		if(minis.line)
 		{
+			add_history(minis.line);
 			line_to_cmd(&minis);//split les commandes
 			init_struct(&minis);//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
 			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);//fonction qui split la commande ' ' et prendre en compte les quotes
+			ft_check_builtins(&minis);//fonction qui regarde si la fonction comprend des echo pwd ect
+
+
 
 
 			int i = 0;
