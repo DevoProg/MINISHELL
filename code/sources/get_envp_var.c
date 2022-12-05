@@ -102,12 +102,4 @@ void    put_env_var(t_data *minis)
         minis->cmd[i].line_cmd = get_envp_var(minis->cmd[i].line_cmd);//la $variable d'environnement remplacée par son contenu pour chaque commandes
         i++;
     }
-    i = 0;
-    while(i < minis->nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
-    {
-        printf("->%s\n", minis->cmd[i].line_cmd);
-        // if(i < minis->nb_cmd - 1)
-        //     printf("--->il faudra pipe le fd\n");
-        i++;
-    }
 }

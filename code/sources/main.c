@@ -21,6 +21,20 @@ void minishell_loop(void)
 			
 			//inserer les fonctions ici
 			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
+			ft_split_cmd(&minis);//fonction qui split la commande ' ' et prendre en compte les quotes
+
+
+			int i = 0;
+    		while(i < minis.nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
+    		{
+				int j = 0;
+				while(j < minis.cmd[i].nb_words)
+				{
+					printf("->%s\n", minis.cmd[i].tab[j]);
+					j++;
+				}
+        		i++;
+    		}
 
 			free_struct((&minis));//free la structure des commandes
 			free(minis.line);//free uniquement si elle existe?

@@ -12,7 +12,9 @@
 
 typedef struct s_board
 {
-	char *line_cmd;//la commande
+	char *line_cmd;//toute la commande qui a ete split du |
+	char **tab;//split la commande en tableau des espaces
+	int nb_words;//le nombre de cases dans le tableau
 }				t_board;//structure pour chaque commande
 
 typedef struct s_data
@@ -29,7 +31,7 @@ typedef struct s_data
 void minishell_loop(void);
 void control_c();
 
-//ft_split_cmd.c
+//ft_split_line.c
 void line_to_cmd(t_data *minis);
 char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
@@ -42,8 +44,11 @@ void free_struct(t_data *minis);
 char *get_envp_var(char *cmd);//remplace la string cmd par sa variable d'environnement
 char *ft_cpy_new_line(char *cmd, char *var_env, int i);
 char  *search_env_var(char *str, int i);
-int ft_strlen_var(char *str, int j);
+int 	ft_strlen_var(char *str, int j);
 void    put_env_var(t_data *minis);
+
+//ft_split_cmd.c
+void    ft_split_cmd(t_data *minis);
 
 //utils.c
 int is_no_open_single_quote(char *line, int i);
