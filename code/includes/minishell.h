@@ -10,7 +10,7 @@
 
 #include "../libft/libft.h"
 
-#define PATH_MAX 4096
+#define PATH_LEN 4096
 
 #define SUCCESS 1
 #define ERROR 0

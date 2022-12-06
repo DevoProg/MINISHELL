@@ -68,7 +68,7 @@ start:
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(OBJF)
-			@$(CC) $(FLAGS) $(OBJ) $(HEADER) libft.a -o $(NAME)		
+			@$(CC) $(FLAGS) $(OBJ) $(HEADER) -lreadline libft.a -o $(NAME)		
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 			@$(ECHO) -n "$(ORANGE)=$(DEF_COLOR)"
@@ -76,6 +76,12 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
+			@mkdir -p $(OBJ_DIR)$(BIN_DIR)
+			@mkdir -p $(OBJ_DIR)$(ENV_DIR)
+			@mkdir -p $(OBJ_DIR)$(MAIN_DIR)
+			@mkdir -p $(OBJ_DIR)$(PARS_DIR)
+			@mkdir -p $(OBJ_DIR)$(TOOLS_DIR)
+			
 			@touch $(OBJF)
 
 clean:
