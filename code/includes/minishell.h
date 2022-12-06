@@ -7,7 +7,7 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "../libft/libft.h"
+#include "../libft/includes/libft.h"
 
 #define PATH_LEN 1024
 
