@@ -20,6 +20,8 @@ void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier 
 {
     int i;
 
+    minis->path = getenv("PWD");
+    minis->oldpath = getenv("OLDPWD");
     minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
     if(!minis->cmd)
         ft_error("Malloc", minis, 2);

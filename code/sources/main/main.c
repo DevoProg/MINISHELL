@@ -34,7 +34,6 @@ void minishell_loop(char **envp)
 			// 	}
         	// 	i++;
     		// }
-
 			ft_check_builtins(&minis, envp);//fonction qui regarde si la fonction comprend des echo pwd ect
 			free_struct((&minis));//free la structure des commandes
 			free(minis.line);//free ligne lue

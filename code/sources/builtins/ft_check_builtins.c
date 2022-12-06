@@ -75,6 +75,8 @@ void ft_check_builtins(t_data *minis, char **envp)
             ft_echo(&minis->cmd[i]);
         else if(ft_strncmp(minis->cmd[i].tab[0], "exit", 4) == 0 && len == 4)
             ft_exit(minis);
+        else if(ft_strncmp(minis->cmd[i].tab[0], "cd", 2) == 0 && len == 2)
+            ft_cd(minis, &minis->cmd[i]);
         i++;
     }
 }
