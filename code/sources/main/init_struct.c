@@ -144,7 +144,7 @@ void init_struct(t_data *minis, char **envp)//allocation d'un tableau de strcutu
 {
     int i;
 
-    //ft_create_env(minis, envp);
+    ft_create_env(minis, envp);
     print_list(minis->env);
     minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
     if(!minis->cmd)
