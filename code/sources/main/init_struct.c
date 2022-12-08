@@ -40,40 +40,6 @@ void lst_add(t_var **lst, t_var *new)
 	}
 }
 
-char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste
-{
-    while(exp->next != NULL)
-    {
-        if(exp->name == str_name)
-            return(exp->value);
-        exp = exp->next;
-    }
-    if(exp->name == str_name)
-        return(exp->value);
-    return(NULL);
-}
-
-void print_list(t_var *exp)
-{
-    if(!exp)
-        return ;
-    while(exp->next != NULL)
-    {
-        ft_putstr_fd(exp->name, 1);
-        ft_putchar_fd('=', 1);
-        ft_putstr_fd(exp->value, 1);
-        ft_putchar_fd('\n', 1);
-        printf("%d\n", exp->is_export);
-        exp = exp->next;
-    }
-    ft_putstr_fd(exp->name, 1);
-    ft_putchar_fd('=', 1);
-    ft_putstr_fd(exp->value, 1);
-    ft_putchar_fd('\n', 1);
-    printf("%d\n", exp->is_export);
-
-}
-
 void ft_get_name(char *str, t_var *ptr)
 {
     int i;
@@ -145,8 +111,6 @@ void init_struct(t_data *minis, char **envp)//allocation d'un tableau de strcutu
 {
     int i;
 
-    ft_create_env(minis, envp);
-    //print_list(minis->env);
     minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
     if(!minis->cmd)
         ft_error("Malloc", minis, 2);

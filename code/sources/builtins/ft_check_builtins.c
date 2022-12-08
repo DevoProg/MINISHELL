@@ -13,16 +13,9 @@ int    ft_pwd(void)
         return (ERROR);
 }
 
-void ft_envp(char **envp)
+void ft_envp(t_data *minis)
 {
-    int i;
-
-    i = 0;
-    while(envp[i])
-    {
-        ft_putendl_fd(envp[i], 1);
-        i++;
-    }
+    print_list(minis->env);
 }
 
 void ft_echo(t_board *cmd)
@@ -67,15 +60,15 @@ void ft_check_builtins(t_data *minis, char **envp)
     while(i < minis->nb_cmd)
     {
         len = ft_strlen(minis->cmd[i].tab[0]);
-        if(ft_strncmp(minis->cmd[i].tab[0], "pwd", 3) == 0 && len == 3 && minis->cmd[i].nb_words == 2)//==2 ->aucune options 
+        if(ft_strcmp(minis->cmd[i].tab[0], "pwd") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
             ft_pwd();
-        else if(ft_strncmp(minis->cmd[i].tab[0], "env", 3) == 0 && len == 3 && minis->cmd[i].nb_words == 2)//==2 ->aucune options
-            ft_envp(envp);
-        else if(ft_strncmp(minis->cmd[i].tab[0], "echo", 4) == 0 && len == 4)
+        else if(ft_strcmp(minis->cmd[i].tab[0], "env") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
+            ft_envp(minis);
+        else if(ft_strcmp(minis->cmd[i].tab[0], "echo") == 0)
             ft_echo(&minis->cmd[i]);
-        else if(ft_strncmp(minis->cmd[i].tab[0], "exit", 4) == 0 && len == 4)
+        else if(ft_strcmp(minis->cmd[i].tab[0], "exit") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
             ft_exit(minis);
-        else if(ft_strncmp(minis->cmd[i].tab[0], "cd", 2) == 0 && len == 2)
+        else if(ft_strcmp(minis->cmd[i].tab[0], "cd") == 0)
             ft_cd(minis, &minis->cmd[i]);
         i++;
     }

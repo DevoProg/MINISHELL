@@ -11,6 +11,8 @@ void minishell_loop(char **envp)
 	t_data minis;
 
 	signal(SIGINT, &control_c);//si tu appuye sur control c ca quitte
+	ft_create_env(&minis, envp);
+	//print_list(minis->env);
 	while(1)//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
