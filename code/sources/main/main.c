@@ -1,30 +1,39 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
+/*
+	Fonction s'appliquant a la reception du signal ctrl-c.
+*/
 void control_c()
 {
 	printf("tu as press control c");//il faudra kill les process en cours et free/close
 	exit(1);
 }
 
+/*
+	Fonction de la loop principale du shell.
+	Gere les lignes recues et effectue tout type d'actions.
+*/
 void minishell_loop(char **envp)
 {
 	t_data minis;
 
-	signal(SIGINT, &control_c);//si tu appuye sur control c ca quitte
+	signal(SIGINT, &control_c);				//si tu appuye sur control c ca quitte
 	ft_create_env(&minis, envp);
-	//print_list(minis->env);
-	while(1)//looop qui lit avec un prompt
+	
+	while(1)													//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
 		if(*minis.line)
 		{
 			add_history(minis.line);
-			line_to_cmd(&minis);//split les commandes
-			init_struct(&minis, envp);//init struct et put les commandes dans chaque struct
+			line_to_cmd(&minis);					//split les commandes
+			init_struct(&minis, envp);		//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
-			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
-			ft_split_cmd(&minis);//fonction qui split la commande ' ' et prendre en compte les quotes
+			
+			put_env_var(&minis);					//fonction qui substitue la variable env en son contenu dans la ligne de commande
+			ft_split_cmd(&minis);					//fonction qui split la commande ' ' et prendre en compte les quotes
+			
 			// int i = 0;
     		// while(i < minis.nb_cmd)//boucle pour imprimer les commandes de la struct on peut la supprimer elle est juste utile pur visualiser les structure en fin de programmme
     		// {
@@ -36,9 +45,10 @@ void minishell_loop(char **envp)
 			// 	}
         	// 	i++;
     		// }
-			ft_check_builtins(&minis, envp);//fonction qui regarde si la fonction comprend des echo pwd ect
-			free_struct((&minis));//free la structure des commandes
-			free(minis.line);//free ligne lue
+			
+			ft_check_builtins(&minis, envp);		//fonction qui regarde si la fonction comprend des echo pwd ect
+			free_struct((&minis));							//free la structure des commandes
+			free(minis.line);										//free ligne lue
 		}
 	}
 }

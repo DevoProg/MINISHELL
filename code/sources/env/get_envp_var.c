@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int ft_strlen_var(char *str, int j)//fonction qui calcule le nombre de charcateres de la variable d'environnement
 {

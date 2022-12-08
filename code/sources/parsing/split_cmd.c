@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int ft_len_words(char *line)//calcule la de la prochaine commande
 {

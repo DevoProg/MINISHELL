@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int ft_count_command(char *line)//fonction qui compte le nombre de commande
 {
