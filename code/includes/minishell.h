@@ -25,8 +25,6 @@ typedef struct s_board
 
 typedef struct s_data
 {
-	char *path;
-	char *oldpath;
 	char *line;//la ligne lue
 	int nb_cmd;//le nombre de commande lue sur la ligne lue
 	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
@@ -72,5 +70,7 @@ char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);
 void free_tab(char **tab, int i);
+
+//echo sans argument a gerer!!
 
 #endif
