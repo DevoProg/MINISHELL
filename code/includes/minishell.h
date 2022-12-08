@@ -10,6 +10,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "../libft/includes/libft.h"
+#include "../libft/includes/ft_printf.h"
+
 
 #define PATH_LEN 1024
 
@@ -34,6 +36,7 @@ typedef struct s_board
 
 typedef struct s_data
 {
+	char path[PATH_LEN];
 	char *line;//la ligne lue
 	int nb_cmd;//le nombre de commande lue sur la ligne lue
 	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
@@ -56,7 +59,8 @@ int ft_count_command(char *line);
 void init_struct(t_data *minis, char **envp);
 void free_struct(t_data *minis);
 void ft_create_env(t_data *minis, char **envp);
-
+t_var *lst_name_finding(t_var *lst, char *name);
+void lst_change_value(t_var *lst, char *name, char* changing_value);
 //ft_envp_var.c
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
 char *ft_cpy_new_line(char *cmd, char *var_env, int i);
@@ -70,7 +74,7 @@ void    ft_split_cmd(t_data *minis);
 //ft_check_builtins.c
 void ft_check_builtins(t_data *minis, char **envp);
 int  ft_pwd(void);
-void ft_cd(t_data *minis, t_board *cmd);
+void ft_cd(t_var *env, t_board *cmd, t_data *minis);
 
 //utils.c
 int is_no_open_single_quote(char *line, int i);

@@ -29,6 +29,7 @@ char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec 
     }
     if(ft_strcmp(exp->name, str_name) == 0)
         return(exp->value);
+    ft_printf("test");
     return(NULL);
 }
 
@@ -119,7 +120,7 @@ char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)//copier le
         j++;
         k++;
     }
-    free(var_env);
+    //free(var_env);
     k = i + ft_strlen_var(cmd, i);
     while(cmd[k] && cmd)
     {

@@ -59,6 +59,8 @@ void ft_check_builtins(t_data *minis, char **envp)
     i = 0;
     while(i < minis->nb_cmd)
     {
+        // printf("1->oldpwd = %s\n", list_chr(minis->env, "OLDPWD"));
+        // printf("1->pwd = %s\n", list_chr(minis->env, "PWD"));
         len = ft_strlen(minis->cmd[i].tab[0]);
         if(ft_strcmp(minis->cmd[i].tab[0], "pwd") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
             ft_pwd();
@@ -69,7 +71,10 @@ void ft_check_builtins(t_data *minis, char **envp)
         else if(ft_strcmp(minis->cmd[i].tab[0], "exit") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
             ft_exit(minis);
         else if(ft_strcmp(minis->cmd[i].tab[0], "cd") == 0)
-            ft_cd(minis, &minis->cmd[i]);
+            ft_cd(minis->env, &minis->cmd[i], minis);
+        //ft_printf("oldpwd = %s\n", list_chr(minis->env, "OLDPWD"));
+        //ft_printf("pwd = %s\n", list_chr(minis->env, "PWD"));
+        //print_list(minis->env);
         i++;
     }
 }
