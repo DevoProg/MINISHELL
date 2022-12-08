@@ -14,11 +14,11 @@ void minishell_loop(char **envp)
 	while(1)//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
-		if(minis.line)
+		if(*minis.line)
 		{
 			add_history(minis.line);
 			line_to_cmd(&minis);//split les commandes
-			init_struct(&minis);//init struct et put les commandes dans chaque struct
+			init_struct(&minis, envp);//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
 			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande

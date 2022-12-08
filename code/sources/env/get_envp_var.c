@@ -76,6 +76,7 @@ char *get_envp_var(char *cmd)//retourne une commande avec la variable d'envrionn
         {
             var_env = search_env_var(cmd, i);//fonction qui recherche la variable d'environnement dans la commande
             res_env = getenv(var_env);//fonction autorisée retourne la contenu de la variable env res_env ne doit pas etre free!!!
+            //supprimer
             free(var_env);//on en aura plus besoin
             var_env = ft_cpy_new_line(cmd, res_env, i);//fonction qui copie les resultats sur la ligne finale et free l'ancienne cmd
             j = 0;

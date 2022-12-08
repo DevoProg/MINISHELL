@@ -16,6 +16,15 @@
 #define SUCCESS 1
 #define ERROR 0
 
+typedef struct s_var//structure pour les variable d'env
+{
+	char *name;
+	char *value;
+	int is_export;
+	struct s_var *next;
+}				t_var;
+
+
 typedef struct s_board
 {
 	char *line_cmd;//toute la commande qui a ete split du |
@@ -28,6 +37,7 @@ typedef struct s_data
 	char *line;//la ligne lue
 	int nb_cmd;//le nombre de commande lue sur la ligne lue
 	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
+	t_var *env;
 	t_board *cmd;//tableau de structure pour chaque commande cmd[0]->structure de la premiere commande
 															//cmd[1]->de la deuxieme ect
 }			t_data;//structure du programme minishell
@@ -43,7 +53,7 @@ char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
 
 //innit_struct.c
-void init_struct(t_data *minis);
+void init_struct(t_data *minis, char **envp);
 void free_struct(t_data *minis);
 
 //ft_envp_var.c
