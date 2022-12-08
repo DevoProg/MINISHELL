@@ -79,13 +79,13 @@ void ft_get_name(char *str, t_var *ptr)
     int i;
 
     i = 0;
-    while(str[i] != '=')
+    while(str[i] && str[i] != '=')
         i++;
     ptr->name = malloc(sizeof(char) * (i + 1));
     if(!ptr->name)
         exit(1);//il faudra quitter proprement
     i = 0;
-    while(str[i] != '=')
+    while(str[i] && str[i] != '=')
     {
         ptr->name[i] = str[i];
         i++;
@@ -135,6 +135,7 @@ void ft_create_env(t_data *minis, char **envp)
         else
             ptr->is_export = 1;
         i++;
+        ptr->next = NULL;
         lst_add(&minis->env, ptr);
         ptr = NULL;
     }
@@ -145,7 +146,7 @@ void init_struct(t_data *minis, char **envp)//allocation d'un tableau de strcutu
     int i;
 
     ft_create_env(minis, envp);
-    print_list(minis->env);
+    //print_list(minis->env);
     minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
     if(!minis->cmd)
         ft_error("Malloc", minis, 2);
