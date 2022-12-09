@@ -49,7 +49,10 @@ int ft_count_split(char *line)  //fonction qui compte le nombre de commande
 	return(count);
 }
 
-char *str_cpy_words(char *line, int *i)    //fonction qui alloue une string et la retourne pour la mettre dans le tableau
+/*
+  Fonction servant a allouer la string et a remplir le tableau.
+*/
+char *str_cpy_words(char *line, int *i)
 {
     char *new;
     int j;
@@ -66,10 +69,10 @@ char *str_cpy_words(char *line, int *i)    //fonction qui alloue une string et l
     while(line[j])
 	{
 		if(is_no_open_quote(line, j) && line[j] == ' ')
-            break;
-        new[k] = line[j];
-        k++;
-        j++;
+      break;
+    new[k] = line[j];
+    k++;
+    j++;
 	}
     new[k] = '\0';
     while(line[j] == ' ')
@@ -79,7 +82,8 @@ char *str_cpy_words(char *line, int *i)    //fonction qui alloue une string et l
 }
 
 /*
-  Fonction servant a 
+  Fonction servant a créer un tableau avec les commandes.
+  Renvoie le tableau rempli.
 */
 char **ft_split_each_cmd(char *str, t_board *cmd)
 {
