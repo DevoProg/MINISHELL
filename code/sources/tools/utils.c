@@ -74,7 +74,7 @@ int is_no_open_single_quote(char *line, int i)
         j++;
     }
     if(single_quote % 2 != 0)
-        return(0);i                //si ouverte return 0
+        return(0);                //si ouverte return 0
     return(1);                     //si fermée ou pas de quote return 1
 }                    //la fonction pour simple et double qote existe dans le fichier split_cmd.c
 
@@ -111,7 +111,7 @@ int is_no_open_quote(char *line, int i)
     double_quote = 0;
     while(j < i)
     {
-        if(line[j] == 39)i        // 39 == '
+        if(line[j] == 39)        // 39 == '
             single_quote++;
         if(line[j] == 34)         //34 == "
             double_quote++;

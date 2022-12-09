@@ -21,7 +21,7 @@ void ft_change_pwd(t_var *env, t_data *minis)
 {
     getcwd(minis->path, PATH_LEN);
     if(!*minis->path)
-        exit(1);i                                    //quitter proprement
+        exit(1);                                    //quitter proprement
     lst_change_value(env, "PWD", minis->path);
 }
 
