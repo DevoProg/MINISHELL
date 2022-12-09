@@ -39,6 +39,9 @@ void lst_change_value(t_var *lst, char *name, char* changing_value)
     //free(finder);
 }
 
+/*
+    Fonction servant a récupérer le dernier element t_var de la liste.
+*/
 t_var	*lst_last(t_var *lst)
 {
 	if (!lst)
@@ -48,42 +51,54 @@ t_var	*lst_last(t_var *lst)
 	return (lst);
 }
 
-void lst_add(t_var **lst, t_var *new)
+/*
+    Fonction servant a ajouter un ptr de variable complèté dans la liste "minis->env". 
+*/
+void lst_add(t_var **lst, t_var *newElem)
 {
 	t_var   *aux_lst;
 
-	if (new)
+	if (newElem)
 	{
 		if (!*lst)
 		{
-			*lst = new;
+			*lst = newElem;
 			return ;
 		}
-		aux_lst = lst_last(*lst);
-		aux_lst->next = new;
+		aux_lst = lst_last(*lst);        // Récuper le dernier element de la liste.
+		aux_lst->next = newElem;         // replacer la "fin" avec le nouveau noeud.
+    
 	}
 }
 
-void ft_get_name(char *str, t_var *ptr)
+/*
+    Fonction servant a recuperer le nom de la variable d'environnement.
+    Le nom est stocké dans la structure "t_var ptr".
+*/
+void ft_get_env_name(char *str, t_var *ptr)
 {
     int i;
 
     i = 0;
     while(str[i] && str[i] != '=')
         i++;
-    ptr->name = malloc(sizeof(char) * (i + 1));
+    ptr->name = malloc(sizeof(char) * (i + 1));     // malloc reprenant nom var ($VAR).
     if(!ptr->name)
-        exit(1);//il faudra quitter proprement
+        exit(1);                                    //il faudra quitter proprement
     i = 0;
     while(str[i] && str[i] != '=')
     {
-        ptr->name[i] = str[i];
+        ptr->name[i] = str[i];                      // Ecrit le nom de la variable.
         i++;
     }
     ptr->name[i] = '\0';
 }
 
-void ft_get_value(char *str, t_var *ptr)
+/*
+    Fonction servant a récupérer la valeur de la variable d'environnement.
+    La valeur est stocké dans la structure "t_var ptr".
+*/
+void ft_get_env_value(char *str, t_var *ptr)
 {
     int i;
     int j;
@@ -93,7 +108,7 @@ void ft_get_value(char *str, t_var *ptr)
     while(str[i] && str[i] != '=')
         i++;
     i++;
-    len = ft_strlen(str + i);
+    len = ft_strlen(str + i);                        // taille de la valeur (total + taille nom = taille valeur).
     ptr->value = malloc(sizeof(char) * (len + 1));
     if(!ptr->value)
         exit(1);//quitter proprement
@@ -107,44 +122,50 @@ void ft_get_value(char *str, t_var *ptr)
     ptr->value[j] = '\0';
 }
 
+/*
+    Fonction servant a recuperer les variables d'environnement.
+*/
 void ft_create_env(t_data *minis, char **envp)
 {
     t_var *ptr;
     int i;
 
     i = 0;
-    while(envp[i])
+    while(envp[i])                          // Parcours toutes les variables d'env
     {
         ptr = malloc(sizeof(t_var));
         if(!ptr)
-            exit(1);//il faudra exit proprement
-        ft_get_name(envp[i], ptr);
-        ft_get_value(envp[i], ptr);
+            exit(1);                        //il faudra exit proprement
+        ft_get_env_name(envp[i], ptr);          // recupére le nom
+        ft_get_env_value(envp[i], ptr);         // recupére la valeur
         if(ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')
             ptr->is_export = 0;
         else
             ptr->is_export = 1;
         i++;
-        ptr->next = NULL;
-        lst_add(&minis->env, ptr);
-        ptr = NULL;
+        ptr->next = NULL;                   // Replace la "fin" de la list sur next.
+        lst_add(&minis->env, ptr);          // Ajoute le pointeur de variable dans la list "mini->env"
+        free(ptr);                          // !!! Free nécessaire dans la loop, obligatoire a faire le mm nbr de fois que les ittérations. 
     }
 }
 
-void init_struct(t_data *minis, char **envp)//allocation d'un tableau de strcuture et copier le tableau dans chaque structure
+/*
+    Fonction servant a init la structure "minis".
+*/
+void init_struct(t_data *minis, char **envp)    //allocation d'un tableau de strcuture et copier le tableau dans chaque structure
 {
     int i;
 
-    minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
+    minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);    //allocation d'un tableau de structure
     if(!minis->cmd)
         ft_error("Malloc", minis, 2);
     i = 0;
-    while(i < minis->nb_cmd)//boucle qui met les commandes dans le tableau de structure
+    while(i < minis->nb_cmd)                                //boucle qui met les commandes dans le tableau de structure
     {
         minis->cmd[i].line_cmd = ft_strdup(minis->tab_cmd[i]);
         if(!minis->cmd[i].line_cmd)
             ft_error("Malloc", minis, 3);
         i++;
     }
-    free_tab(minis->tab_cmd, minis->nb_cmd + 1);//free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line
+    free_tab(minis->tab_cmd, minis->nb_cmd + 1);            //free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line
 }

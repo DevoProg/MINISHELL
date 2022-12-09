@@ -93,6 +93,9 @@ char *get_envp_var(t_data *minis, char *cmd)//retourne une commande avec la vari
 
 }
 
+/*
+    Fonction servant a 
+*/
 void    put_env_var(t_data *minis)
 {
     int i;

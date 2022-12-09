@@ -14,11 +14,11 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *newElem)
 {
-	if (new)
+	if (newElem)
 	{	
 		if (!lst)
-			*lst = new;
-		new->next = *lst;
-		*lst = new;
+			*lst = newElem;
+		newElem->next = *lst;
+		*lst = newElem;
 	}
 }

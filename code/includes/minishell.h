@@ -18,32 +18,32 @@
 #define SUCCESS 1
 #define ERROR 0
 
-typedef struct s_var//structure pour les variable d'env
+typedef struct s_var    // structure pour les variable d'env
 {
-	char *name;
-	char *value;
-	int is_export;
-	struct s_var *next;
+	char *name;           // nom variable d'environnement.
+	char *value;					// valeur de la variable d'environnement.
+	int is_export;				// Si la var = '_'.
+	struct s_var *next;   // Noeud suivant
 }				t_var;
 
 
 typedef struct s_board
 {
-	char *line_cmd;//toute la commande qui a ete split du |
-	char **tab;//split la commande en tableau des espaces
-	int nb_words;//le nombre de cases dans le tableau
-}				t_board;//structure pour chaque commande
+	char *line_cmd;			//toute la commande qui a ete split du |
+	char **tab;					//split la commande en tableau des espaces
+	int nb_words;				//le nombre de cases dans le tableau
+}				t_board;			//structure pour chaque commande
 
 typedef struct s_data
 {
 	char path[PATH_LEN];
-	char *line;//la ligne lue
-	int nb_cmd;//le nombre de commande lue sur la ligne lue
-	char **tab_cmd;//tableau avec les commandes (il est free dans init_struct)
+	char *line;						//la ligne lue
+	int nb_cmd;						//le nombre de commande lue sur la ligne lue
+	char **tab_cmd;				//tableau avec les commandes (il est free dans init_struct)
 	t_var *env;
-	t_board *cmd;//tableau de structure pour chaque commande cmd[0]->structure de la premiere commande
-															//cmd[1]->de la deuxieme ect
-}			t_data;//structure du programme minishell
+	t_board *cmd;					//tableau de structure pour chaque commande cmd[0]->structure de la premiere commande
+												//cmd[1]->de la deuxieme ect
+}			t_data;						//structure du programme minishell
 
 
 //main.c
