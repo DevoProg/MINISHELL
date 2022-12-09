@@ -1,22 +1,31 @@
 #include "../includes/minishell.h"
 
-void print_list(t_var *exp)
+void print_list(t_var *exp, int i)//si i = 1 print var_export //si i == 0 print env
 {
     if(!exp)
         return ;
     while(exp->next != NULL)
     {
-        ft_putstr_fd(exp->name, 1);
-        ft_putchar_fd('=', 1);
-        ft_putstr_fd(exp->value, 1);
-        ft_putchar_fd('\n', 1);
-        exp = exp->next;
+        if(i == 1 && exp->is_export == 0)
+        {
+            exp= exp->next;
+            continue;
+        }
+        else
+        {
+            ft_putstr_fd(exp->name, 1);
+            ft_putchar_fd('=', 1);
+            ft_putstr_fd(exp->value, 1);
+            ft_putchar_fd('\n', 1);
+            exp = exp->next;
+        }
     }
+    if(i == 1 && exp->is_export == 0)
+        return;
     ft_putstr_fd(exp->name, 1);
     ft_putchar_fd('=', 1);
     ft_putstr_fd(exp->value, 1);
     ft_putchar_fd('\n', 1);
-
 }
 
 char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec son name

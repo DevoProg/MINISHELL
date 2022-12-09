@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "../libft/includes/libft.h"
+#include "../libft/includes/ft_printf.h"//pas oublier de retirer
 
 #define PATH_LEN 1024
 
@@ -55,6 +56,10 @@ int ft_count_command(char *line);
 //innit_struct.c
 void init_struct(t_data *minis, char **envp);
 void free_struct(t_data *minis);
+t_var	*lst_last(t_var *lst);
+void lst_add(t_var **lst, t_var *new);
+void ft_get_name(char *str, t_var *ptr);
+void ft_get_value(char *str, t_var *ptr);
 void ft_create_env(t_data *minis, char **envp);
 t_var *lst_name_finding(t_var *lst, char *name);
 void lst_change_value(t_var *lst, char *name, char* changing_value);
@@ -73,6 +78,8 @@ void    ft_split_cmd(t_data *minis);
 void ft_check_builtins(t_data *minis, char **envp);
 int  ft_pwd(void);
 void ft_cd(t_data *minis, t_board *cmd);
+void ft_export(t_data *minis, t_board *cmd);
+void    ft_unset(t_data *minis, t_board *cmd);
 
 //utils.c
 int is_no_open_single_quote(char *line, int i);
@@ -81,7 +88,7 @@ int is_no_open_quote(char *line, int i);
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 int	ft_strcmp(char *s1, char *s2);
 char *list_chr(t_var *exp, char *str_name);
-void print_list(t_var *exp);
+void print_list(t_var *exp, int i);
 
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);

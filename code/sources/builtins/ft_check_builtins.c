@@ -15,7 +15,7 @@ int    ft_pwd(void)
 
 void ft_envp(t_data *minis)
 {
-    print_list(minis->env);
+    print_list(minis->env, 0);
 }
 
 void ft_echo(t_board *cmd)
@@ -70,6 +70,10 @@ void ft_check_builtins(t_data *minis, char **envp)
             ft_exit(minis);
         else if(ft_strcmp(minis->cmd[i].tab[0], "cd") == 0)
             ft_cd(minis, &minis->cmd[i]);
+        else if(ft_strcmp(minis->cmd[i].tab[0], "export") == 0)
+            ft_export(minis, &minis->cmd[i]);
+        else if(ft_strcmp(minis->cmd[i].tab[0], "unset") == 0)
+            ft_unset(minis, &minis->cmd[i]);
         i++;
     }
 }
