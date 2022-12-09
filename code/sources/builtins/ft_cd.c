@@ -1,41 +1,5 @@
 #include "../includes/minishell.h"
 
-int where_cut(char *str)
-{
-    int i;
-    int res;
-
-    i = 0;
-    while(str[i])
-    {
-        if(str[i] == '/')
-            res = i;
-        i++;
-    }
-    return(res);
-}
-
-char *cut_pwd(char *str)
-{
-    char *new;
-    int stop;
-    int i;
-
-    i = 0;
-    stop = where_cut(str);
-    new = malloc(sizeof(char) * (stop + 1));
-    if(!new)
-        exit(1);//il faudra exit proprement
-    while(str[i] && i < stop)
-    {
-        new[i] = str[i];
-        i++;
-    }
-    new[i] = '\0';
-    //il faudra peut-etre free str
-    return(new);
-}
-
 int access_check(char *path)
 {
     DIR  *c;
@@ -46,6 +10,37 @@ int access_check(char *path)
     return(SUCCESS);
 }
 
+void ft_change_oldpwd(t_var *env, t_data *minis)
+{
+    char *path;
+    t_var *ptr;
+
+    path = list_chr(env, "PWD");
+    if(!path)
+        exit(1);//quitter proprement
+    ptr = lst_name_finding(env, "OLDPWD");
+    free(ptr->value);
+    ptr->value = ft_strdup(path);
+    ptr = NULL;
+}
+
+/*
+    Fonction servant a changer le chemin d'acces actuel.
+    Modifie la valeur de la var "minis->path".
+*/
+void ft_change_pwd(t_var *env, t_data *minis)
+{
+    char path[PATH_LEN];
+    t_var *ptr;
+
+    getcwd(path, PATH_LEN);
+    if(!*path)
+        exit(1);                                    //quitter proprement
+    ptr = lst_name_finding(env, "PWD");
+    free(ptr->value);
+    ptr->value = ft_strdup(path);
+    ptr = NULL;
+}
 
 void ft_cd(t_data *minis, t_board *cmd)
 {
@@ -59,6 +54,6 @@ void ft_cd(t_data *minis, t_board *cmd)
         printf("%s\n", "ERROR CHANGING DIR");
         return;
     }
-    printf("NEW_PATH:");
-    ft_pwd();
+    ft_change_oldpwd(minis->env, minis);
+    ft_change_pwd(minis->env, minis);
 }

@@ -15,6 +15,29 @@ void free_struct(t_data *minis)//free le tableau de structure
     free(minis->cmd);
 }
 
+t_var *lst_name_finding(t_var *lst, char *name)
+{
+    while(lst->next != NULL && ft_strcmp(lst->name, name) != 0)
+        lst = lst->next;
+    if (ft_strcmp(lst->name, name) == 0)
+        return(lst);
+    else
+        return(NULL);
+}
+
+// void lst_change_value(t_var *lst, char *name, char* changing_value)
+// {
+//     t_var *finder;
+
+//     finder = lst_name_finding(lst, name);
+//     if(finder == NULL)
+//         return; //?
+//     finder->value = NULL;
+//     free(finder->value);
+//     finder->value = changing_value;
+//     //free(finder);
+// }
+
 t_var	*lst_last(t_var *lst)
 {
 	if (!lst)

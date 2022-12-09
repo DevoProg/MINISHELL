@@ -119,7 +119,7 @@ char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)//copier le
         j++;
         k++;
     }
-    free(var_env);
+    //free(var_env);//ne pas free sinon crash
     k = i + ft_strlen_var(cmd, i);
     while(cmd[k] && cmd)
     {

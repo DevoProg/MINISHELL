@@ -56,6 +56,8 @@ int ft_count_command(char *line);
 void init_struct(t_data *minis, char **envp);
 void free_struct(t_data *minis);
 void ft_create_env(t_data *minis, char **envp);
+t_var *lst_name_finding(t_var *lst, char *name);
+void lst_change_value(t_var *lst, char *name, char* changing_value);
 
 //ft_envp_var.c
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
