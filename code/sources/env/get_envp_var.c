@@ -1,6 +1,9 @@
 #include "../../includes/minishell.h"
 
-int ft_strlen_var(char *str, int j)//fonction qui calcule le nombre de charcateres de la variable d'environnement
+/*
+    Fonction servant a calcule nombre de characteres de la var d'environnement.
+*/
+int ft_strlen_var(char *str, int j)
 {
     int i;
 
@@ -15,7 +18,10 @@ int ft_strlen_var(char *str, int j)//fonction qui calcule le nombre de charcater
     return(i);
 }
 
-char  *search_env_var(char *str, int i)//renvoie la variable qui se trouve dans la commande
+/*
+    Fonction servant a recupérer la variable se trouvant dans la commande.
+*/
+char  *search_env_var(char *str, int i)
 {
     char *new;
     int k;
@@ -39,30 +45,37 @@ char  *search_env_var(char *str, int i)//renvoie la variable qui se trouve dans 
     return(new);
 }
 
-char *ft_cpy_new_line(char *cmd, char *var_env, int i)//malloc new et copie le debut de la commande
+/*
+    Fonction servant a reservé adresse mémoire et copier le debut de la commande. 
+*/
+char *ft_cpy_new_line(char *cmd, char *var_env, int i)
 {
     int j;
-    char *new;
+    char *newElem;
 
     j = ft_strlen(cmd) - ft_strlen_var(cmd, i);
     if(var_env)
         j += ft_strlen(var_env);
-    new = malloc(sizeof(char) * (j + 1));
-    if(!new)
-        exit(1);//il faudra quitter proprement
+    newElem = malloc(sizeof(char) * (j + 1));
+    if(!newElem)
+        exit(1);                    //il faudra quitter proprement
     j = 0;
     while(j < i && cmd)
     {
 
-        new[j] = cmd[j];
+        newElem[j] = cmd[j];
         j++;
     }
-    new[j] = '\0';
-    new = ft_cpy_new_line_bis(cmd, var_env, new, i);
-    return(new);
+    newElem[j] = '\0';
+    newElem = ft_cpy_new_line_bis(cmd, var_env, newElem, i);
+    return(newElem);
 }
 
-char *get_envp_var(t_data *minis, char *cmd)//retourne une commande avec la variable d'envrionnement remplacée par son contenu
+/*
+    Fonction servant a recupérer toutes les variables d'environnement.
+    Retourne une commande avec la variable d'environnement remplacée par son contenu.
+*/
+char *get_envp_var(t_data *minis, char *cmd)
 {
     char *var_env;
     char *res_env;
@@ -94,7 +107,7 @@ char *get_envp_var(t_data *minis, char *cmd)//retourne une commande avec la vari
 }
 
 /*
-    Fonction servant a 
+    Fonction servant a ecrire les variables d'environnements dans "minis->cmd[n].line_cmd". 
 */
 void    put_env_var(t_data *minis)
 {

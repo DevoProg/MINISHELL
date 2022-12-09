@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction servant a print la list des noms et des valeurs des variables d environnement. 
+*/
 void print_list(t_var *exp)
 {
     if(!exp)
@@ -19,7 +22,10 @@ void print_list(t_var *exp)
 
 }
 
-char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec son name
+/*
+    Fonction servant a rechercher une variable dans la liste via son "name".
+*/
+char *list_chr(t_var *exp, char *str_name)
 {
     while(exp->next != NULL)
     {
@@ -33,6 +39,9 @@ char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec 
     return(NULL);
 }
 
+/*
+    Fonction servant a comparer deux strings.
+*/
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -47,8 +56,12 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int is_no_open_single_quote(char *line, int i)//verifier qu'il n'y ait pas de single quote ouvert 
-{//il faudra quand meme verifier cette maniere de faire  /!\'
+/*
+    Fonction servant a vérifier qu'il n y ait pas de single quotes.
+    A VERIFIER SI OK A FAIRE COMME CA.    
+*/
+int is_no_open_single_quote(char *line, int i)
+{
     int single_quote;
     int j;
 
@@ -61,11 +74,14 @@ int is_no_open_single_quote(char *line, int i)//verifier qu'il n'y ait pas de si
         j++;
     }
     if(single_quote % 2 != 0)
-        return(0);//si ouverte return 0
-    return(1);//si fermée ou pas de quote return 1
-}//la fonction pour simple et double qote existe dans le fichier split_cmd.c
+        return(0);i                //si ouverte return 0
+    return(1);                     //si fermée ou pas de quote return 1
+}                    //la fonction pour simple et double qote existe dans le fichier split_cmd.c
 
-int ft_len_cmd(char *line)//calcule la de la prochaine commande
+/*
+    Fonction servant a calculer la taille de la prochaine commande.
+*/
+int ft_len_cmd(char *line)
 {
     int i;
 
@@ -81,7 +97,10 @@ int ft_len_cmd(char *line)//calcule la de la prochaine commande
 	return (i);
 }
 
-int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et se ferme derriere le pipe
+/*
+    Fonction vérifiant si un quote qui s'ouvre est bien fermé derriere le pipe. 
+*/
+int is_no_open_quote(char *line, int i)
 {
     int single_quote;
     int double_quote;
@@ -92,9 +111,9 @@ int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et
     double_quote = 0;
     while(j < i)
     {
-        if(line[j] == 39)// 39 == '
+        if(line[j] == 39)i        // 39 == '
             single_quote++;
-        if(line[j] == 34)//34 == "
+        if(line[j] == 34)         //34 == "
             double_quote++;
         j++;
     }
@@ -105,7 +124,10 @@ int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et
     return(1);
 }
 
-char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)//copier le resultat et la fin de la commande
+/*
+    Fcontion servant a copier le resultat et la fin de la commande.
+*/
+char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)
 {
     int k;
     int j;

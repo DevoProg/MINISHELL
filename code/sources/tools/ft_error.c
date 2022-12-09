@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction servant a liberer l espace memoire d'un tableau.
+*/
 void free_tab(char **tab, int i)
 {
     int j;
@@ -13,6 +16,9 @@ void free_tab(char **tab, int i)
     free(tab);
 }
 
+/*
+    Fonction servant a gerer les cas d'erreurs.
+*/
 void ft_error(char *message, t_data *minis, int z)
 {
     if(z == 1 || z == 2)

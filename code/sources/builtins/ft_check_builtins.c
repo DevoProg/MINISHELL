@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Cas commande : PWD.
+*/
 int    ft_pwd(void)
 {
     char    cwd[PATH_LEN];
@@ -13,11 +16,17 @@ int    ft_pwd(void)
         return (ERROR);
 }
 
+/*
+    Cas commande : ENV.
+*/
 void ft_envp(t_data *minis)
 {
     print_list(minis->env);
 }
 
+/*
+    Cas commande : ECHO.
+*/
 void ft_echo(t_board *cmd)
 {
     int i;
@@ -44,6 +53,10 @@ void ft_echo(t_board *cmd)
         ft_putchar_fd('\n', 1);
 }
 
+/*
+    Fonction servant a exit. 
+    Free tout les elements en mémoire.
+*/
 void ft_exit(t_data *minis)
 {
     free_struct(minis);
@@ -51,6 +64,9 @@ void ft_exit(t_data *minis)
     exit(1);
 }
 
+/*
+    Fonction servant a check si une commande contient les différentes fct bash.
+*/
 void ft_check_builtins(t_data *minis, char **envp)
 {
     int i;
