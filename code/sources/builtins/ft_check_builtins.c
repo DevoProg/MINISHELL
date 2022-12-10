@@ -23,7 +23,12 @@ void ft_echo(t_board *cmd)
     int i;
     int option;
 
-    if (ft_strncmp(cmd->tab[1], "-n", 2) == 0)
+    if(cmd->nb_words == 2)//si il n'y a pas d'argument ni option
+    {
+        ft_putchar_fd('\n', 1);
+        return;
+    }
+    if (ft_strcmp(cmd->tab[1], "-n") == 0)//option détécté est on passe a l'argument d'apres
     {
         option = 1;
         i = 2;
@@ -35,7 +40,7 @@ void ft_echo(t_board *cmd)
     }
     while (i < cmd->nb_words - 1)
     {
-        if ((i > 1 && option == 0) || (i > 2 && option == 1))
+        if ((i > 1 && option == 0) || (i > 2 && option == 1))//afficher un espace entre chaque argument
             ft_putchar_fd(' ', 1);
         ft_putstr_fd(cmd->tab[i], 1);
         i++;
@@ -51,7 +56,7 @@ void ft_exit(t_data *minis)
     exit(1);
 }
 
-void ft_check_builtins(t_data *minis, char **envp)
+void ft_check_builtins(t_data *minis)
 {
     int i;
     int len;

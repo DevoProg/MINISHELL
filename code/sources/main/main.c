@@ -20,7 +20,7 @@ void minishell_loop(char **envp)
 		{
 			add_history(minis.line);
 			line_to_cmd(&minis);//split les commandes
-			init_struct(&minis, envp);//init struct et put les commandes dans chaque struct
+			init_struct(&minis);//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
 			put_env_var(&minis);//fonction qui substitue la variable env en son contenu dans la ligne de commande
@@ -36,7 +36,7 @@ void minishell_loop(char **envp)
 			// 	}
         	// 	i++;
     		// }
-			ft_check_builtins(&minis, envp);//fonction qui regarde si la fonction comprend des echo pwd ect
+			ft_check_builtins(&minis);//fonction qui regarde si la fonction comprend des echo pwd ect
 			free_struct((&minis));//free la structure des commandes
 			free(minis.line);//free ligne lue
 		}

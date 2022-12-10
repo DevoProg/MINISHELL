@@ -106,7 +106,7 @@ void ft_get_value(char *str, t_var *ptr)
     ptr->value[j] = '\0';
 }
 
-void ft_create_env(t_data *minis, char **envp)
+void ft_create_env(t_data *minis, char **envp)//creation d'une liste chainee avec toutes les variables d'environnement
 {
     t_var *ptr;
     int i;
@@ -130,7 +130,7 @@ void ft_create_env(t_data *minis, char **envp)
     }
 }
 
-void init_struct(t_data *minis, char **envp)//allocation d'un tableau de strcuture et copier le tableau dans chaque structure
+void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier le tableau dans chaque structure
 {
     int i;
 

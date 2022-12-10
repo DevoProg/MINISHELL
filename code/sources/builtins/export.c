@@ -61,7 +61,7 @@ void ft_export(t_data *minis, t_board *cmd)
     while(i < cmd->nb_words - 1)
     {
         name = get_name(cmd->tab[i]);
-        if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))
+        if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
             ft_create_variable(minis, cmd->tab[i]);
         else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))
             ft_assign_new_value(minis, cmd->tab[i], name);

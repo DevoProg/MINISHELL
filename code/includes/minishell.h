@@ -29,7 +29,7 @@ typedef struct s_var//structure pour les variable d'env
 typedef struct s_board
 {
 	char *line_cmd;//toute la commande qui a ete split du |
-	char **tab;//split la commande en tableau des espaces
+	char **tab;//split la commande en tableau avec les espaces comme separateur(les guillets sont gerer) 
 	int nb_words;//le nombre de cases dans le tableau
 }				t_board;//structure pour chaque commande
 
@@ -54,9 +54,9 @@ char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
 
 //innit_struct.c
-void init_struct(t_data *minis, char **envp);
+void init_struct(t_data *minis);
 void free_struct(t_data *minis);
-t_var	*lst_last(t_var *lst);
+t_var *lst_last(t_var *lst);
 void lst_add(t_var **lst, t_var *new);
 void ft_get_name(char *str, t_var *ptr);
 void ft_get_value(char *str, t_var *ptr);
@@ -75,7 +75,7 @@ void    put_env_var(t_data *minis);
 void    ft_split_cmd(t_data *minis);
 
 //ft_check_builtins.c
-void ft_check_builtins(t_data *minis, char **envp);
+void ft_check_builtins(t_data *minis);
 int  ft_pwd(void);
 void ft_cd(t_data *minis, t_board *cmd);
 void ft_export(t_data *minis, t_board *cmd);
@@ -94,6 +94,5 @@ void print_list(t_var *exp, int i);
 void ft_error(char *message, t_data *minis, int z);
 void free_tab(char **tab, int i);
 
-//echo sans argument a gerer!!
 
 #endif
