@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void print_list(t_var *exp, int i)//si i = 1 print var_export //si i == 0 print env
 {

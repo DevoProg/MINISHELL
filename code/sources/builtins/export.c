@@ -1,5 +1,8 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
+/*
+    Fonction qui retourne une chaine de charactere allouée avec le nom de la variable d'evironnement
+*/
 char *get_name(char *str)
 {
     int i;
@@ -21,6 +24,9 @@ char *get_name(char *str)
     return(str_ret);
 }
 
+/*
+    Fonction pour assigner une nouvelle valeur a une node qui possede deja une valeur
+*/
 void ft_assign_new_value(t_data *minis, char *str, char *name)
 {
     t_var *ptr;
@@ -30,6 +36,9 @@ void ft_assign_new_value(t_data *minis, char *str, char *name)
     ft_get_value(str, ptr);
 }
 
+/*
+    Creation d'une  nouvelle node et ajout dans la liste
+*/
 void ft_create_variable(t_data *minis, char *str)
 {
     t_var *ptr;
@@ -45,6 +54,9 @@ void ft_create_variable(t_data *minis, char *str)
     ptr = NULL;
 }
 
+/*
+    Cas commande : EXPORT.
+*/
 void ft_export(t_data *minis, t_board *cmd)
 {
     t_var *ptr;
@@ -52,7 +64,7 @@ void ft_export(t_data *minis, t_board *cmd)
     char *value;
     int i;
 
-    if(cmd->nb_words == 2)
+    if(cmd->nb_words == 2)//si export ne possede pas d'argument il doit printlist
     {
         print_list(minis->env, 1);
         return ;
@@ -60,12 +72,12 @@ void ft_export(t_data *minis, t_board *cmd)
     i = 1;
     while(i < cmd->nb_words - 1)
     {
-        name = get_name(cmd->tab[i]);
+        name = get_name(cmd->tab[i]);//alloue name
         if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
-            ft_create_variable(minis, cmd->tab[i]);
-        else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))
-            ft_assign_new_value(minis, cmd->tab[i], name);
-        free(name);
+            ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
+        else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste
+            ft_assign_new_value(minis, cmd->tab[i], name);//alors on lui donne une nouvelle valuer
+        free(name);//désalloue name
         i++;
     }
 }

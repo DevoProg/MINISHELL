@@ -1,5 +1,8 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
+/*
+    Fonction servant a check les acces au chemin ciblé.
+*/
 int access_check(char *path)
 {
     DIR  *c;
@@ -10,6 +13,10 @@ int access_check(char *path)
     return(SUCCESS);
 }
 
+/*
+    Fonction servant a changer l'ancien chemin d'acces actuel.
+    Modifie la valeur de la var d'environnement
+*/
 void ft_change_oldpwd(t_var *env, t_data *minis)
 {
     char *path;
@@ -26,7 +33,7 @@ void ft_change_oldpwd(t_var *env, t_data *minis)
 
 /*
     Fonction servant a changer le chemin d'acces actuel.
-    Modifie la valeur de la var "minis->path".
+    Modifie la valeur de la var d'environnement
 */
 void ft_change_pwd(t_var *env, t_data *minis)
 {
@@ -42,6 +49,9 @@ void ft_change_pwd(t_var *env, t_data *minis)
     ptr = NULL;
 }
 
+/*
+    Cas commande : CD.
+*/
 void ft_cd(t_data *minis, t_board *cmd)
 {
     if(access_check(cmd->tab[1]) == ERROR)

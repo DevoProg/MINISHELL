@@ -1,12 +1,20 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int ft_len_words(char *line)//calcule la de la prochaine commande
+/*
+  Fonction servant a récupérer la taille de la lignes.
+   
+*/
+int ft_len_words(char *line)
 {
     int i;
+	int count;
 
-    if(!line)
+	if(!line)
 		return(0);
 	i = 0;
+	count = 0;
+    while(line[i] && line[i] == ' ')
+        line++;
 	while(line[i])
 	{
 		if(is_no_open_quote(line, i) && line[i] == ' ')
@@ -16,7 +24,11 @@ int ft_len_words(char *line)//calcule la de la prochaine commande
 	return (i);
 }
 
-int ft_count_split(char *line)//fonction qui compte le nombre de commande
+/*
+  Fonction servant a compter le nombre de commandes dans une ligne par rapport au ' '.
+  Chaque element entre ' ' est compatbilisé.  
+*/
+int ft_count_split(char *line)
 {
 	int i;
 	int count;
@@ -41,7 +53,10 @@ int ft_count_split(char *line)//fonction qui compte le nombre de commande
 	return(count);
 }
 
-char *str_cpy_words(char *line, int *i)//fonction qui alloue une string et la retourne pour la mettre dans le tableau
+/*
+  Fonction servant a allouer la string et a remplir le tableau.
+*/
+char *str_cpy_words(char *line, int *i)
 {
     char *new;
     int j;
@@ -70,14 +85,17 @@ char *str_cpy_words(char *line, int *i)//fonction qui alloue une string et la re
     return(new);
 }
 
-
+/*
+  Fonction servant a créer un tableau avec les commandes.
+  Renvoie le tableau rempli.
+*/
 char **ft_split_each_cmd(char *str, t_board *cmd)
 {
     int i;
     int j;
     char **tab;
 
-    cmd->nb_words = ft_count_split(str) + 1;//+1 pour alloc de la denriere ligne pour null??
+    cmd->nb_words = ft_count_split(str) + 1;                        //+1 pour alloc de la denriere ligne pour null??pas oublier
     tab = malloc(sizeof(char *) * (cmd->nb_words));
     if(!tab)
         exit(1);//il faudra exit proprement
@@ -92,6 +110,10 @@ char **ft_split_each_cmd(char *str, t_board *cmd)
     return(tab);
 }
 
+/*
+  Fonction servant a spit les commande stockée dans "minis->cmd[n]->line_cmd".
+  Les commandes obtenues sont placées dans "minis->cmd[n]->tab".
+*/
 void    ft_split_cmd(t_data *minis)
 {
     int i;

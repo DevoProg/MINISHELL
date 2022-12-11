@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void free_struct(t_data *minis)//free le tableau de structure
 {
@@ -38,6 +38,9 @@ t_var *lst_name_finding(t_var *lst, char *name)
 //     //free(finder);
 // }
 
+/*
+    Fonction servant a récupérer le dernier element t_var de la liste.
+*/
 t_var	*lst_last(t_var *lst)
 {
 	if (!lst)
@@ -47,6 +50,9 @@ t_var	*lst_last(t_var *lst)
 	return (lst);
 }
 
+/*
+    Fonction servant a ajouter un ptr de variable complèté dans la liste "minis->env". 
+*/
 void lst_add(t_var **lst, t_var *new)
 {
 	t_var   *aux_lst;
@@ -63,6 +69,10 @@ void lst_add(t_var **lst, t_var *new)
 	}
 }
 
+/*
+    Fonction servant a recuperer le nom de la variable d'environnement.
+    Le nom est stocké dans la structure "t_var ptr".
+*/
 void ft_get_name(char *str, t_var *ptr)
 {
     int i;
@@ -82,6 +92,10 @@ void ft_get_name(char *str, t_var *ptr)
     ptr->name[i] = '\0';
 }
 
+/*
+    Fonction servant a récupérer la valeur de la variable d'environnement.
+    La valeur est stocké dans la structure "t_var ptr".
+*/
 void ft_get_value(char *str, t_var *ptr)
 {
     int i;
@@ -106,7 +120,10 @@ void ft_get_value(char *str, t_var *ptr)
     ptr->value[j] = '\0';
 }
 
-void ft_create_env(t_data *minis, char **envp)//creation d'une liste chainee avec toutes les variables d'environnement
+/*
+    Fonction servant a recuperer les variables d'environnement et de creer une liste chainée
+*/
+void ft_create_env(t_data *minis, char **envp)
 {
     t_var *ptr;
     int i;
@@ -130,20 +147,23 @@ void ft_create_env(t_data *minis, char **envp)//creation d'une liste chainee ave
     }
 }
 
+/*
+    Fonction servant a init la structure "minis".
+*/
 void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier le tableau dans chaque structure
 {
     int i;
 
-    minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);//allocation d'un tableau de structure
+    minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);           //allocation d'un tableau de structure
     if(!minis->cmd)
         ft_error("Malloc", minis, 2);
     i = 0;
-    while(i < minis->nb_cmd)//boucle qui met les commandes dans le tableau de structure
+    while(i < minis->nb_cmd)                                          //boucle qui met les commandes dans le tableau de structure
     {
         minis->cmd[i].line_cmd = ft_strdup(minis->tab_cmd[i]);
         if(!minis->cmd[i].line_cmd)
             ft_error("Malloc", minis, 3);
         i++;
     }
-    free_tab(minis->tab_cmd, minis->nb_cmd + 1);//free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line
+    free_tab(minis->tab_cmd, minis->nb_cmd + 1);                        //free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line
 }

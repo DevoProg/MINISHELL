@@ -17,21 +17,21 @@
 #define SUCCESS 1
 #define ERROR 0
 
-typedef struct s_var//structure pour les variable d'env
+typedef struct s_var    // structure pour les variable d'env
 {
-	char *name;
-	char *value;
-	int is_export;
-	struct s_var *next;
+	char *name;           // nom variable d'environnement.
+	char *value;					// valeur de la variable d'environnement.
+	int is_export;				// Si la var = '_'.
+	struct s_var *next;   // Noeud suivant
 }				t_var;
 
 
 typedef struct s_board
 {
-	char *line_cmd;//toute la commande qui a ete split du |
-	char **tab;//split la commande en tableau avec les espaces comme separateur(les guillets sont gerer) 
-	int nb_words;//le nombre de cases dans le tableau
-}				t_board;//structure pour chaque commande
+	char *line_cmd;			//toute la commande qui a ete split du |
+	char **tab;					//split la commande en tableau des espaces
+	int nb_words;				//le nombre de cases dans le tableau
+}				t_board;			//structure pour chaque commande
 
 typedef struct s_data
 {
