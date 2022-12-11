@@ -44,52 +44,73 @@ typedef struct s_data
 }			t_data;//structure du programme minishell
 
 
+//MAIN
 //main.c
 void minishell_loop(char **envp);
 void control_c();
+//init_struct.c
+void init_struct(t_data *minis);
+void ft_create_env(t_data *minis, char **envp);
+void ft_get_value(char *str, t_var *ptr);
+void ft_get_name(char *str, t_var *ptr);
+void lst_add(t_var **lst, t_var *new);
+t_var *lst_last(t_var *lst);
+t_var *lst_name_finding(t_var *lst, char *name);
+void free_struct(t_data *minis);
 
+//PARSING
+//ft_split_cmd.c
+void    ft_split_cmd(t_data *minis);
+char **ft_split_each_cmd(char *str, t_board *cmd);
+char *str_cpy_words(char *line, int *i);
+int ft_count_split(char *line);
+int ft_len_words(char *line);
 //ft_split_line.c
 void line_to_cmd(t_data *minis);
 char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
 
-//innit_struct.c
-void init_struct(t_data *minis);
-void free_struct(t_data *minis);
-t_var *lst_last(t_var *lst);
-void lst_add(t_var **lst, t_var *new);
-void ft_get_name(char *str, t_var *ptr);
-void ft_get_value(char *str, t_var *ptr);
-void ft_create_env(t_data *minis, char **envp);
-t_var *lst_name_finding(t_var *lst, char *name);
-void lst_change_value(t_var *lst, char *name, char* changing_value);
-
+//ENV
 //ft_envp_var.c
+void    put_env_var(t_data *minis);
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
 char *ft_cpy_new_line(char *cmd, char *var_env, int i);
 char  *search_env_var(char *str, int i);
 int 	ft_strlen_var(char *str, int j);
-void    put_env_var(t_data *minis);
 
-//ft_split_cmd.c
-void    ft_split_cmd(t_data *minis);
-
+//BUILTINS
+//export.c
+void ft_export(t_data *minis, t_board *cmd);
+void ft_create_variable(t_data *minis, char *str);
+void ft_assign_new_value(t_data *minis, char *str, char *name);
+char *get_name(char *str);
+//ft_cd.c
+void ft_cd(t_data *minis, t_board *cmd);
+void ft_change_pwd(t_var *env, t_data *minis);
+void ft_change_oldpwd(t_var *env, t_data *minis);
+int access_check(char *path);
 //ft_check_builtins.c
 void ft_check_builtins(t_data *minis);
+void ft_exit(t_data *minis);
+void ft_echo(t_board *cmd);
+void ft_envp(t_data *minis);
 int  ft_pwd(void);
-void ft_cd(t_data *minis, t_board *cmd);
-void ft_export(t_data *minis, t_board *cmd);
+//unset.c
 void    ft_unset(t_data *minis, t_board *cmd);
+t_var    *ft_delete_node(char *str, t_var *env);
+t_var    *ft_delete_first_node(t_var *env);
+void    ft_delete_last_node(t_var *env);
+void    ft_delete_middle_node(t_var *env);
 
+//TOOLS
 //utils.c
-int is_no_open_single_quote(char *line, int i);
-int ft_len_cmd(char *line);
-int is_no_open_quote(char *line, int i);
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
+int is_no_open_quote(char *line, int i);
+int ft_len_cmd(char *line);
+int is_no_open_single_quote(char *line, int i);
 int	ft_strcmp(char *s1, char *s2);
 char *list_chr(t_var *exp, char *str_name);
 void print_list(t_var *exp, int i);
-
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z);
 void free_tab(char **tab, int i);
