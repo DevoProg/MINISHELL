@@ -18,7 +18,7 @@ void minishell_loop(char **envp)
 	t_data minis;
 
 	signal(SIGINT, &control_c);
-	ft_create_env(&minis, envp);
+	ft_create_env(&minis, envp);						//creation d'une liste chainée avec les variable d'env
 	while(1)											//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
