@@ -24,7 +24,7 @@ void ft_change_oldpwd(t_var *env, t_data *minis)
 
     path = list_chr(env, "PWD");
     if(!path)
-        exit(1);//quitter proprement
+        ft_error("Cd failed\n", minis, 2, 0);//quitter avec perror?
     ptr = lst_name_finding(env, "OLDPWD");
     free(ptr->value);
     ptr->value = ft_strdup(path);
@@ -42,7 +42,7 @@ void ft_change_pwd(t_var *env, t_data *minis)
 
     getcwd(path, PATH_LEN);
     if(!*path)
-        exit(1);                                    //quitter proprement
+        ft_error("Getcwd", minis, 2, 1);//quitter avec perror?
     ptr = lst_name_finding(env, "PWD");
     free(ptr->value);
     ptr->value = ft_strdup(path);

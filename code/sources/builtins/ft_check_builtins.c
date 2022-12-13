@@ -66,7 +66,7 @@ void ft_echo(t_board *cmd)
 void ft_exit(t_data *minis)
 {
     free_struct(minis);
-    free(minis->line);
+    free_list(minis->env);
     exit(1);
 }
 

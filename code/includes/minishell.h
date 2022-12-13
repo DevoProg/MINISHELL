@@ -20,8 +20,8 @@
 typedef struct s_var    // structure pour les variable d'env
 {
 	char *name;           // nom variable d'environnement.
-	char *value;					// valeur de la variable d'environnement.
-	int is_export;				// Si la var = '_'.
+	char *value;   		  // valeur de la variable d'environnement.
+	int is_export;		  // Si la var = '_'.
 	struct s_var *next;   // Noeud suivant
 }				t_var;
 
@@ -29,8 +29,8 @@ typedef struct s_var    // structure pour les variable d'env
 typedef struct s_board
 {
 	char *line_cmd;			//toute la commande qui a ete split du |
-	char **tab;					//split la commande en tableau des espaces
-	int nb_words;				//le nombre de cases dans le tableau
+	char **tab;				//split la commande en tableau des espaces
+	int nb_words;			//le nombre de cases dans le tableau
 }				t_board;			//structure pour chaque commande
 
 typedef struct s_data
@@ -61,8 +61,8 @@ void free_struct(t_data *minis);
 //PARSING
 //ft_split_cmd.c
 void    ft_split_cmd(t_data *minis);
-char **ft_split_each_cmd(char *str, t_board *cmd);
-char *str_cpy_words(char *line, int *i);
+char **ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
+char *str_cpy_words(char *line, int *i, t_data *minis);
 int ft_count_split(char *line);
 int ft_len_words(char *line);
 //ft_split_line.c
@@ -74,8 +74,8 @@ int ft_count_command(char *line);
 //ft_envp_var.c
 void    put_env_var(t_data *minis);
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
-char *ft_cpy_new_line(char *cmd, char *var_env, int i);
-char  *search_env_var(char *str, int i);
+char *ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
+char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
 
 //BUILTINS
@@ -83,7 +83,7 @@ int 	ft_strlen_var(char *str, int j);
 void ft_export(t_data *minis, t_board *cmd);
 void ft_create_variable(t_data *minis, char *str);
 void ft_assign_new_value(t_data *minis, char *str, char *name);
-char *get_name(char *str);
+char *get_name(char *str, t_data *minis);
 //ft_cd.c
 void ft_cd(t_data *minis, t_board *cmd);
 void ft_change_pwd(t_var *env, t_data *minis);
@@ -112,8 +112,10 @@ int	ft_strcmp(char *s1, char *s2);
 char *list_chr(t_var *exp, char *str_name);
 void print_list(t_var *exp, int i);
 //ft_error.c
-void ft_error(char *message, t_data *minis, int z);
+void ft_error(char *message, t_data *minis, int z, int is_perror);
+void free_list(t_var *env);
 void free_tab(char **tab, int i);
+void free_struct_cmd(t_data *minis);
 
 
 #endif

@@ -110,7 +110,7 @@ int is_no_open_quote(char *line, int i)//verifier si c'est un quote qui ouvre et
         return(0);
     if(double_quote % 2 != 0)
         return(0);
-    return(1);
+    return(1); //si y'a de quote ouverte
 }
 
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)//copier le resultat et la fin de la commande

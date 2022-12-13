@@ -2,7 +2,6 @@
 
 /*
   Fonction servant a récupérer la taille de la lignes.
-   
 */
 int ft_len_words(char *line)
 {
@@ -56,7 +55,7 @@ int ft_count_split(char *line)
 /*
   Fonction servant a allouer la string et a remplir le tableau.
 */
-char *str_cpy_words(char *line, int *i)
+char *str_cpy_words(char *line, int *i, t_data *minis)
 {
     char *new;
     int j;
@@ -65,7 +64,7 @@ char *str_cpy_words(char *line, int *i)
     j = ft_len_words(line);
     new = malloc(sizeof(char) * (j + 1));
     if(!new)
-        exit(1);//il faudra exit proprement
+        ft_error("Malloc", minis, 2, 1);
     j = 0;
     k = 0;
     while(line[j] == ' ')
@@ -89,24 +88,28 @@ char *str_cpy_words(char *line, int *i)
   Fonction servant a créer un tableau avec les commandes.
   Renvoie le tableau rempli.
 */
-char **ft_split_each_cmd(char *str, t_board *cmd)
+char **ft_split_each_cmd(char *str, t_board *cmd, t_data *minis)
 {
     int i;
     int j;
     char **tab;
+    int z;
 
-    cmd->nb_words = ft_count_split(str) + 1;                        //+1 pour alloc de la denriere ligne pour null??pas oublier
-    tab = malloc(sizeof(char *) * (cmd->nb_words));
+    z = ft_count_split(str) + 1;                        //+1 pour alloc de la denriere ligne pour null??pas oublier
+    tab = malloc(sizeof(char *) * (z));
     if(!tab)
-        exit(1);//il faudra exit proprement
+        ft_error("Malloc", minis, 2, 1);
     j = 0;
     i = 0;
+    cmd->nb_words = 0;
     while(str[i])
     {
-        tab[j] = str_cpy_words(str + i, &i);
+        tab[j] = str_cpy_words(str + i, &i, minis);
         j++;
+        cmd->nb_words++;
     }
     tab[j] = NULL;
+    cmd->nb_words++;
     return(tab);
 }
 
@@ -121,7 +124,7 @@ void    ft_split_cmd(t_data *minis)
     i = 0;
     while(i < minis->nb_cmd)
     {
-        minis->cmd[i].tab = ft_split_each_cmd(minis->cmd[i].line_cmd, &minis->cmd[i]);
+        minis->cmd[i].tab = ft_split_each_cmd(minis->cmd[i].line_cmd, &minis->cmd[i], minis);
         i++;
     }
 }

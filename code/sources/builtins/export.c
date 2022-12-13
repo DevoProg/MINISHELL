@@ -3,17 +3,17 @@
 /*
     Fonction qui retourne une chaine de charactere allouée avec le nom de la variable d'evironnement
 */
-char *get_name(char *str)
+char *get_name(char *str, t_data *minis)
 {
     int i;
-    char *str_ret;
+    char *str_ret = NULL;
 
     i = 0;
     while(str[i] && str[i] != '=')
         i++;
     str_ret = malloc(sizeof(char) * (i + 1));
     if(!str_ret)
-        exit(1);//il faudra quitter proprement
+        ft_error("Malloc", minis, 2, 1);
     i = 0;
     while(str[i] && str[i] != '=')
     {
@@ -45,10 +45,14 @@ void ft_create_variable(t_data *minis, char *str)
     
     ptr = malloc(sizeof(t_var));
     if(!ptr)
-        exit(1);
+        ft_error("Malloc", minis, 2, 1);
     ptr->next = NULL;
     ft_get_value(str, ptr);
+    if(!ptr->value)
+        ft_error("Malloc", minis, 2, 1);
     ft_get_name(str, ptr);
+    if(!ptr->name)
+        ft_error("Malloc", minis, 2, 1);
     ptr->is_export = 1;
     lst_add(&minis->env, ptr);
     ptr = NULL;
@@ -72,7 +76,7 @@ void ft_export(t_data *minis, t_board *cmd)
     i = 1;
     while(i < cmd->nb_words - 1)
     {
-        name = get_name(cmd->tab[i]);//alloue name
+        name = get_name(cmd->tab[i], minis);//alloue name
         if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
             ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
         else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste

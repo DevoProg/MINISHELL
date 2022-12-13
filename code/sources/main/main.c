@@ -1,11 +1,14 @@
 #include "../../includes/minishell.h"
-
 /*
 	Fonction s'appliquant a la reception du signal ctrl-c.
 */
-void control_c()
+void control_c(char **envp)
 {
-	printf("tu as press control c");//il faudra kill les process en cours et free/close
+	exit(1);
+}
+
+void control_backslash()
+{
 	exit(1);
 }
 
@@ -17,12 +20,18 @@ void minishell_loop(char **envp)
 {
 	t_data minis;
 
-	signal(SIGINT, &control_c);
-	ft_create_env(&minis, envp);						//creation d'une liste chainée avec les variable d'env
+	signal(SIGINT, &control_c(envp));
+	signal(SIGQUIT, &control_backslash);
+	ft_create_env(&minis, envp);//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
 	while(1)											//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
-		if(*minis.line)
+		if(!minis.line)// pour le control D
+		{
+			free_list(minis.env);
+			exit(1);
+		}
+		else if(minis.line && *minis.line)
 		{
 			add_history(minis.line);
 			line_to_cmd(&minis);						//split les commandes
@@ -31,11 +40,10 @@ void minishell_loop(char **envp)
 			//inserer les fonctions ici
 			
 
-			put_env_var(&minis);						//fonction qui substitue la variable env en son contenu dans la ligne de commande
+			put_env_var(&minis);				//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);						//fonction qui split la commande ' ' et prendre en compte les quotes
 			ft_check_builtins(&minis);					//fonction qui regarde si la fonction comprend des echo pwd ect
 			free_struct((&minis));						//free la structure des commandes
-			free(minis.line);							//free ligne lue
 		}
 	}
 }

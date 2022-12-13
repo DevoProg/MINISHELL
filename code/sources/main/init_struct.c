@@ -4,15 +4,8 @@ void free_struct(t_data *minis)//free le tableau de structure
 {
     int i;
 
-    i = 0;
-    while(i < minis->nb_cmd)
-    {
-        free(minis->cmd[i].line_cmd);
-        free_tab(minis->cmd[i].tab, minis->cmd[i].nb_words);
-        //free(&minis->cmd[i]);
-        i++;
-    }
-    free(minis->cmd);
+    free_struct_cmd(minis);
+    free(minis->line);
 }
 
 t_var *lst_name_finding(t_var *lst, char *name)
@@ -24,19 +17,6 @@ t_var *lst_name_finding(t_var *lst, char *name)
     else
         return(NULL);
 }
-
-// void lst_change_value(t_var *lst, char *name, char* changing_value)
-// {
-//     t_var *finder;
-
-//     finder = lst_name_finding(lst, name);
-//     if(finder == NULL)
-//         return; //?
-//     finder->value = NULL;
-//     free(finder->value);
-//     finder->value = changing_value;
-//     //free(finder);
-// }
 
 /*
     Fonction servant a récupérer le dernier element t_var de la liste.
@@ -82,7 +62,10 @@ void ft_get_name(char *str, t_var *ptr)
         i++;
     ptr->name = malloc(sizeof(char) * (i + 1));
     if(!ptr->name)
-        exit(1);//il faudra quitter proprement
+    {
+        free(ptr);
+        return;
+    }
     i = 0;
     while(str[i] && str[i] != '=')
     {
@@ -109,7 +92,11 @@ void ft_get_value(char *str, t_var *ptr)
     len = ft_strlen(str + i);
     ptr->value = malloc(sizeof(char) * (len + 1));
     if(!ptr->value)
-        exit(1);//quitter proprement
+    {   
+        free(ptr->name);
+        free(ptr);
+        return;
+    }
     j = 0;
     while(str[i])
     {
@@ -133,9 +120,13 @@ void ft_create_env(t_data *minis, char **envp)
     {
         ptr = malloc(sizeof(t_var));
         if(!ptr)
-            exit(1);//il faudra exit proprement
+            ft_error("Malloc", minis, 0, 1);
         ft_get_name(envp[i], ptr);
+        if(!ptr->name)
+            ft_error("Malloc", minis, 0, 1);//ptr est free dans ft_get_name
         ft_get_value(envp[i], ptr);
+        if(!ptr->value)
+            ft_error("Malloc", minis, 0, 1);// ptr et ptr name free dans ft_get_value
         if(ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')
             ptr->is_export = 0;
         else
@@ -156,13 +147,13 @@ void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier 
 
     minis->cmd = malloc(sizeof(t_board) * minis->nb_cmd);           //allocation d'un tableau de structure
     if(!minis->cmd)
-        ft_error("Malloc", minis, 2);
+        ft_error("Malloc", minis, 1, 1);
     i = 0;
-    while(i < minis->nb_cmd)                                          //boucle qui met les commandes dans le tableau de structure
+    while(i < minis->nb_cmd)                                        //boucle qui met les commandes dans le tableau de structure
     {
         minis->cmd[i].line_cmd = ft_strdup(minis->tab_cmd[i]);
         if(!minis->cmd[i].line_cmd)
-            ft_error("Malloc", minis, 3);
+            ft_error("Malloc", minis, 2, 1);
         i++;
     }
     free_tab(minis->tab_cmd, minis->nb_cmd + 1);                        //free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line

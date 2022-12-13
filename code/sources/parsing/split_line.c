@@ -36,7 +36,7 @@ char *str_cpy_cmd(char *line, int *i, t_data *minis)
     j = ft_len_cmd(line);
     new = malloc(sizeof(char) * (j + 1));
     if(!new)
-        ft_error("malloc doesn't work", minis, 2);
+        ft_error("Malloc", minis, 1, 1);
     j = 0;
     k = 0;
     // if(line[j] == '|')               // Techniquement pas besoin car checking dans "line_to_cmd" + error
@@ -64,11 +64,11 @@ void line_to_cmd(t_data *minis)
     int nb_cmd;
 
     if(minis->line && *minis->line == '|')                      //si la ligne lue commence par un pipe->error
-        ft_error("Parsing error", minis, 1);                    //ne devrait pas perror(!!!a changer!!!!)
+        ft_error("Parsing error", minis, 0, 0);                 //message erreur?
     nb_cmd = ft_count_command(minis->line);                     //retourne le nombre de commande dans la ligne
     minis->tab_cmd = malloc(sizeof(char *) * (nb_cmd + 1));     //allocation d'un tableau pour les commmandes
     if(!minis->tab_cmd)
-        ft_error("Malloc", minis, 1);
+        ft_error("Malloc", minis, 0, 1);
     i = 0;
     minis->nb_cmd = 0;
     while(minis->nb_cmd < nb_cmd)                                               //boucle qui met chaque commande dans une case du tableau
@@ -78,6 +78,6 @@ void line_to_cmd(t_data *minis)
     }
     minis->tab_cmd[minis->nb_cmd] = malloc(sizeof(char) * 2);//dernier element du tableau = '\0'
     if(!minis->tab_cmd[minis->nb_cmd])
-        ft_error("Malloc", minis, 2);
+        ft_error("Malloc", minis, 1, 1);
     minis->tab_cmd[minis->nb_cmd][0] = '\0';         // Plutot mettre NULL ??
 }

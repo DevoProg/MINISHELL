@@ -38,9 +38,11 @@ t_var    *ft_delete_first_node(t_var *env)
 
     tmp = env;
     env = env->next;
-    free(tmp->name);
-    free(tmp->value);
-    //tmp->next = NULL;
+    if(tmp->name)
+        free(tmp->name);
+    if(tmp->value)
+        free(tmp->value);
+    tmp->next = NULL;
     free(tmp);
     return(env);
 }

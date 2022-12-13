@@ -21,7 +21,7 @@ int ft_strlen_var(char *str, int j)
 /*
     Fonction servant a recupérer la variable se trouvant dans la commande.
 */
-char  *search_env_var(char *str, int i)
+char  *search_env_var(char *str, int i, t_data *minis)
 {
     char *new;
     int k;
@@ -32,7 +32,7 @@ char  *search_env_var(char *str, int i)
         j++;
     new = malloc(sizeof(char) * (j + 1));
     if(!new)
-        exit(1);//il faudra quitter proprement
+        ft_error("Malloc", minis, 2, 1);
     j = i + 1;
     k = 0;
     while(str[j] && (ft_isalnum(str[j]) || str[j] == '_'))
@@ -48,7 +48,7 @@ char  *search_env_var(char *str, int i)
 /*
     Fonction servant a reservé adresse mémoire et copier le debut de la commande. 
 */
-char *ft_cpy_new_line(char *cmd, char *var_env, int i)
+char *ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis)
 {
     int j;
     char *new;
@@ -58,11 +58,10 @@ char *ft_cpy_new_line(char *cmd, char *var_env, int i)
         j += ft_strlen(var_env);
     new = malloc(sizeof(char) * (j + 1));
     if(!new)
-        exit(1);//il faudra quitter proprement
+        ft_error("Malloc", minis, 2, 1);
     j = 0;
     while(j < i && cmd)
     {
-
         new[j] = cmd[j];
         j++;
     }
@@ -87,10 +86,10 @@ char *get_envp_var(t_data *minis, char *cmd)
     {
         if(cmd[i] == '$' && is_no_open_single_quote(cmd, i) && cmd[i + 1] && (ft_isalnum(cmd[i + 1]) || cmd[i + 1] == '_'))//si la string contient le dollar et qu'il n'y a pas de single quote ouverte
         {
-            var_env = search_env_var(cmd, i);//fonction qui recherche la variable d'environnement dans la commande
+            var_env = search_env_var(cmd, i, minis);//fonction qui recherche la variable d'environnement dans la commande
             res_env = list_chr(minis->env, var_env);//retourne la contenu de la variable env res_env ne doit pas etre free!!!
             free(var_env);//on en aura plus besoin
-            var_env = ft_cpy_new_line(cmd, res_env, i);//fonction qui copie les resultats sur la ligne finale et free l'ancienne cmd
+            var_env = ft_cpy_new_line(cmd, res_env, i, minis);//fonction qui copie les resultats sur la ligne finale et free l'ancienne cmd
             j = 0;
             while(var_env[j] && var_env[j] != '$')
                 j++;
