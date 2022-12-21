@@ -42,7 +42,8 @@ void minishell_loop(char **envp)
 
 			put_env_var(&minis);				//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);						//fonction qui split la commande ' ' et prendre en compte les quotes
-			//ft_check_builtins(&minis);					//fonction qui regarde si la fonction comprend des echo pwd ect
+			//ft_check_builtins(&minis, &minis.cmd[1]);					//fonction qui regarde si la fonction comprend des echo pwd ect
+			ft_pipe(&minis, envp);
 			free_struct((&minis));						//free la structure des commandes
 		}
 	}

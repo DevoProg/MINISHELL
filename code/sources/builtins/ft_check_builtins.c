@@ -73,29 +73,20 @@ void ft_exit(t_data *minis)
 /*
     Fonction servant a check si une commande contient les différentes fct bash.
 */
-void ft_check_builtins(t_data *minis)
+void ft_check_builtins(t_data *minis, t_board *cmd)
 {
-    int i;
-    int len;
-
-    i = 0;
-    while(i < minis->nb_cmd)
-    {
-        len = ft_strlen(minis->cmd[i].tab[0]);
-        if(ft_strcmp(minis->cmd[i].tab[0], "pwd") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
-            ft_pwd();
-        else if(ft_strcmp(minis->cmd[i].tab[0], "env") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
-            ft_envp(minis);
-        else if(ft_strcmp(minis->cmd[i].tab[0], "echo") == 0)
-            ft_echo(&minis->cmd[i]);
-        else if(ft_strcmp(minis->cmd[i].tab[0], "exit") == 0 && minis->cmd[i].nb_words == 2)//==2 ->aucune options ni arg
-            ft_exit(minis);
-        else if(ft_strcmp(minis->cmd[i].tab[0], "cd") == 0)
-            ft_cd(minis, &minis->cmd[i]);
-        else if(ft_strcmp(minis->cmd[i].tab[0], "export") == 0)
-            ft_export(minis, &minis->cmd[i]);
-        else if(ft_strcmp(minis->cmd[i].tab[0], "unset") == 0)
-            ft_unset(minis, &minis->cmd[i]);
-        i++;
-    }
+    if(ft_strcmp(cmd->tab[0], "pwd") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        ft_pwd();
+    else if(ft_strcmp(cmd->tab[0], "env") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        ft_envp(minis);
+    else if(ft_strcmp(cmd->tab[0], "echo") == 0)
+        ft_echo(cmd);
+    else if(ft_strcmp(cmd->tab[0], "exit") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        ft_exit(minis);
+    else if(ft_strcmp(cmd->tab[0], "cd") == 0)
+        ft_cd(minis, cmd);
+    else if(ft_strcmp(cmd->tab[0], "export") == 0)
+        ft_export(minis, cmd);
+    else if(ft_strcmp(cmd->tab[0], "unset") == 0)
+        ft_unset(minis, cmd);
 }

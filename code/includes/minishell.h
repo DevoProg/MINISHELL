@@ -31,6 +31,7 @@ typedef struct s_board
 	char *line_cmd;			//toute la commande qui a ete split du |
 	char **tab;				//split la commande en tableau des espaces
 	int nb_words;			//le nombre de cases dans le tableau
+	char *cmd_path;			//pour execve(path dans la variable d'environneemnt)
 }				t_board;			//structure pour chaque commande
 
 typedef struct s_data
@@ -90,7 +91,7 @@ void ft_change_pwd(t_var *env, t_data *minis);
 void ft_change_oldpwd(t_var *env, t_data *minis);
 int access_check(char *path);
 //ft_check_builtins.c
-void ft_check_builtins(t_data *minis);
+void ft_check_builtins(t_data *minis, t_board *cmd);
 void ft_exit(t_data *minis);
 void ft_echo(t_board *cmd);
 void ft_envp(t_data *minis);
@@ -118,5 +119,13 @@ void free_list(t_var *env);
 void free_tab(char **tab, int i);
 void free_struct_cmd(t_data *minis);
 
+//PIPE
+//pipe.c
+void ft_pipe(t_data *minis, char **envp);
+
+//path.c
+char *ft_try_path(t_data *minis, char *path, t_board *cmd);
+char *cpy_path(t_board *cmd, char *path, int *path_len);
+void cpy_cmd(t_board *cmd, char *poss, int i);
 
 #endif
