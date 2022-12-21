@@ -32,6 +32,7 @@ typedef struct s_board
 	char **tab;				//split la commande en tableau des espaces
 	int nb_words;			//le nombre de cases dans le tableau
 	char *cmd_path;			//pour execve(path dans la variable d'environneemnt)
+	int res_fork;			//int qui sert a wait le resultat du pipe
 }				t_board;			//structure pour chaque commande
 
 typedef struct s_data
