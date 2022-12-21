@@ -39,8 +39,8 @@ char *str_cpy_cmd(char *line, int *i, t_data *minis)
         ft_error("Malloc", minis, 1, 1);
     j = 0;
     k = 0;
-    // if(line[j] == '|')               // Techniquement pas besoin car checking dans "line_to_cmd" + error
-    //     j++;
+    if(line[j] == '|')               // Techniquement pas besoin car checking dans "line_to_cmd" + error
+        j++;
     while(line[j])
 	{
 		if(is_no_open_quote(line, j) && line[j] == '|')

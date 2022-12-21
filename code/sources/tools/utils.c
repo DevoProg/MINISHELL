@@ -1,5 +1,27 @@
 #include "../../includes/minishell.h"
 
+int ft_is_builtins(t_data *minis, t_board *cmd)
+{
+    int res;
+
+    res = 0;
+    if(ft_strcmp(cmd->tab[0], "pwd") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "env") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "echo") == 0)
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "exit") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "cd") == 0)
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "export") == 0)
+        res = 1;
+    else if(ft_strcmp(cmd->tab[0], "unset") == 0)
+        res = 1;
+    return(res);
+}
+
 void print_list(t_var *exp, int i)//si i = 1 print var_export //si i == 0 print env
 {
     if(!exp)

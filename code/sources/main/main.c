@@ -2,7 +2,7 @@
 /*
 	Fonction s'appliquant a la reception du signal ctrl-c.
 */
-void control_c(char **envp)
+void control_c()
 {
 	exit(1);
 }
@@ -20,7 +20,7 @@ void minishell_loop(char **envp)
 {
 	t_data minis;
 
-	signal(SIGINT, &control_c(envp));
+	signal(SIGINT, &control_c);
 	signal(SIGQUIT, &control_backslash);
 	ft_create_env(&minis, envp);//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
 	while(1)											//looop qui lit avec un prompt
@@ -42,7 +42,7 @@ void minishell_loop(char **envp)
 
 			put_env_var(&minis);				//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);						//fonction qui split la commande ' ' et prendre en compte les quotes
-			ft_check_builtins(&minis);					//fonction qui regarde si la fonction comprend des echo pwd ect
+			//ft_check_builtins(&minis);					//fonction qui regarde si la fonction comprend des echo pwd ect
 			free_struct((&minis));						//free la structure des commandes
 		}
 	}
