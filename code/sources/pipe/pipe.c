@@ -1,5 +1,47 @@
 #include "../../includes/minishell.h"
 
+void wait_all_pids(t_data *minis)
+{
+    int i;
+
+    i = 0;
+    while(i < minis->nb_cmd)
+    {
+        waitpid(minis->cmd[i].res_fork, NULL, 0);
+        i++;
+
+    }
+}
+
+void close_all_pipes(t_data *minis, int **fd)
+{
+    int i;
+
+    i = 0;
+    while(i < minis->nb_cmd - 1)
+    {
+        close(fd[i][0]);
+        close(fd[i][1]);
+        i++;
+    }
+}
+
+void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
+{
+    cmd->res_fork = fork();
+    if (cmd->res_fork < 0) {
+        return ;
+    }
+    
+    if (cmd->res_fork == 0) {
+        // Child process 1 (ping)
+        if(!ft_is_builtins(minis, cmd))
+            execve(cmd->cmd_path, cmd->tab, envp);
+        ft_check_builtins(minis, cmd);
+        exit(1);
+    }
+}
+
 void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 {
     cmd->res_fork = fork();
@@ -10,12 +52,7 @@ void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
     if (cmd->res_fork == 0) {
         // Child process 1 (ping)
         dup2(fd[i][1], STDOUT_FILENO);
-        close(fd[0][0]);
-        close(fd[0][1]);
-        close(fd[1][0]);
-        close(fd[1][1]);
-        close(fd[2][0]);
-        close(fd[2][1]);
+        close_all_pipes(minis, fd);
         if(!ft_is_builtins(minis, cmd))
             execve(cmd->cmd_path, cmd->tab, envp);
         ft_check_builtins(minis, cmd);
@@ -34,12 +71,7 @@ void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
         // Child process 2 (grep)
         dup2(fd[i - 1][0], STDIN_FILENO);
         dup2(fd[i][1], STDOUT_FILENO);
-        close(fd[0][0]);
-        close(fd[0][1]);
-        close(fd[1][0]);
-        close(fd[1][1]);
-        close(fd[2][0]);
-        close(fd[2][1]);
+        close_all_pipes(minis, fd);
         if(!ft_is_builtins(minis, cmd))
             execve(cmd->cmd_path, cmd->tab, envp);
         ft_check_builtins(minis,  cmd);
@@ -57,12 +89,7 @@ void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
     if (cmd->res_fork == 0) {
         // Child process 2 (grep)
         dup2(fd[i - 1][0], STDIN_FILENO);
-        close(fd[0][0]);
-        close(fd[0][1]);
-        close(fd[1][0]);
-        close(fd[1][1]);
-        close(fd[2][0]);
-        close(fd[2][1]);
+        close_all_pipes(minis, fd);
         if(!ft_is_builtins(minis, cmd))
             execve(cmd->cmd_path, cmd->tab, envp);
         ft_check_builtins(minis, cmd);
@@ -85,23 +112,22 @@ void ft_pipe(t_data *minis, char **envp)
     }
 //     // ////////////////////////////////////////////////////////////////////
     int **fd;
+
+    if(minis->nb_cmd == 1)
+    {
+        just_one_cmd(minis, &minis->cmd[0], envp);
+        waitpid(minis->cmd[0].res_fork, NULL, 0);
+        return;
+    }
     fd = malloc(sizeof(int*) * (minis->nb_cmd - 1));
     i = 0;
     while(i < minis->nb_cmd - 1)
     {
         fd[i] = malloc(sizeof(int) * 2);
+        if (pipe(fd[i]) == -1)
+            return;
         i++;
     }
-
-    if (pipe(fd[0]) == -1) {
-        return;
-    }
-    if (pipe(fd[1]) == -1) {
-        return;
-    }
-    if (pipe(fd[2]) == -1) {
-        return;
-     }
     i = 0;
     while(i < minis->nb_cmd)
     {
@@ -113,19 +139,6 @@ void ft_pipe(t_data *minis, char **envp)
             middle_cmd(minis, &minis->cmd[i], envp ,fd, i);
         i++;
     }
-    close(fd[0][0]);
-    close(fd[0][1]);
-    close(fd[1][0]);
-    close(fd[1][1]);
-    close(fd[2][0]);
-    close(fd[2][1]);
-    //if(!ft_is_builtins(minis, &minis->cmd[0]))
-    waitpid(minis->cmd[0].res_fork, NULL, 0);
-    // if(!ft_is_builtins(minis, &minis->cmd[1]))
-    waitpid(minis->cmd[1].res_fork, NULL, 0);
-    // if(!ft_is_builtins(minis, &minis->cmd[2]))
-    waitpid(minis->cmd[2].res_fork, NULL, 0);
-
-    waitpid(minis->cmd[3].res_fork, NULL, 0);
-
+    close_all_pipes(minis, fd);
+    wait_all_pids(minis);
 }
