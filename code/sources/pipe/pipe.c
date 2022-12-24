@@ -119,19 +119,12 @@ void ft_execute(t_data *minis, int **fd, char **envp)
         i++;
     }
 }
-void ft_pipe(t_data *minis, char **envp)
-{
-    
-    int i;
-    int **fd;
 
-    find_path_struct(minis);
-    if(minis->nb_cmd == 1)
-    {
-        just_one_cmd(minis, &minis->cmd[0], envp);
-        waitpid(minis->cmd[0].res_fork, NULL, 0);
-        return;
-    }
+int **malloc_pipes(t_data *minis)
+{
+    int **fd;
+    int i;
+
     fd = malloc(sizeof(int*) * (minis->nb_cmd - 1));
     if(!fd)
         exit(1);//il faudra quitter proprement
@@ -145,6 +138,21 @@ void ft_pipe(t_data *minis, char **envp)
             exit(1);//il faudra quitter prorpement
         i++;
     }
+    return(fd);
+}
+void ft_pipe(t_data *minis, char **envp)
+{   
+    int i;
+    int **fd;
+
+    find_path_struct(minis);
+    if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
+    {
+        just_one_cmd(minis, &minis->cmd[0], envp);
+        waitpid(minis->cmd[0].res_fork, NULL, 0);
+        return;
+    }
+    fd = malloc_pipes(minis);
     ft_execute(minis, fd, envp);
     close_all_pipes(minis, fd);
     wait_all_pids(minis);
