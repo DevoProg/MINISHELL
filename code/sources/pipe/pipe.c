@@ -97,7 +97,7 @@ void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
     }
 }
 
-void ft_pipe(t_data *minis, char **envp)
+void find_path_struct(t_data *minis)
 {
     char *path;
     int i;
@@ -110,9 +110,31 @@ void ft_pipe(t_data *minis, char **envp)
         //printf("%s\n", minis->cmd[i].cmd_path);
         i++;
     }
-//     // ////////////////////////////////////////////////////////////////////
+}
+
+void ft_execute(t_data *minis, int **fd, char **envp)
+{
+    int i;
+
+    i = 0;
+    while(i < minis->nb_cmd)
+    {
+        if(i == 0)
+            first_cmd(minis, &minis->cmd[i], envp, fd, i);
+        else if(i == minis->nb_cmd - 1)
+            last_cmd(minis, &minis->cmd[i], envp, fd, i);
+        else 
+            middle_cmd(minis, &minis->cmd[i], envp ,fd, i);
+        i++;
+    }
+}
+void ft_pipe(t_data *minis, char **envp)
+{
+    
+    int i;
     int **fd;
 
+    find_path_struct(minis);
     if(minis->nb_cmd == 1)
     {
         just_one_cmd(minis, &minis->cmd[0], envp);
@@ -128,17 +150,7 @@ void ft_pipe(t_data *minis, char **envp)
             return;
         i++;
     }
-    i = 0;
-    while(i < minis->nb_cmd)
-    {
-        if(i == 0)
-            first_cmd(minis, &minis->cmd[i], envp, fd, i);
-        else if(i == minis->nb_cmd - 1)
-            last_cmd(minis, &minis->cmd[i], envp, fd, i);
-        else 
-            middle_cmd(minis, &minis->cmd[i], envp ,fd, i);
-        i++;
-    }
+    ft_execute(minis, fd, envp);
     close_all_pipes(minis, fd);
     wait_all_pids(minis);
 }
