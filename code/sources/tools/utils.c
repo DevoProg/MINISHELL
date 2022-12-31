@@ -7,8 +7,6 @@ int ft_is_not_fork(t_data *minis, t_board *cmd)
     res = 0;
     if(ft_strcmp(cmd->tab[0], "pwd") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
         res = 1;
-    else if(ft_strcmp(cmd->tab[0], "env") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
-        res = 1;
     else if(ft_strcmp(cmd->tab[0], "exit") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
         res = 1;
     else if(ft_strcmp(cmd->tab[0], "cd") == 0)
