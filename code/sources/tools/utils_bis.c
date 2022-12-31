@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    fonction qui regarde si il ne faut pas fork pour la commande
+*/
 int ft_is_not_fork(t_data *minis, t_board *cmd)
 {
     int res;
@@ -18,6 +21,9 @@ int ft_is_not_fork(t_data *minis, t_board *cmd)
     return(res);
 }
 
+ /*
+    fonction qui regarde si la commande est un builtin
+*/
 int ft_is_builtins(t_data *minis, t_board *cmd)
 {
     int res;
@@ -40,7 +46,10 @@ int ft_is_builtins(t_data *minis, t_board *cmd)
     return(res);
 }
 
-void print_list(t_var *exp, int i)//si i = 1 print var_export //si i == 0 print env
+/*
+    fonction qui regarde print les variable d'env et var exportées //si i = 1 print var_export //si i == 0 print env
+*/
+void print_list(t_var *exp, int i)
 {
     if(!exp)
         return ;
@@ -68,7 +77,10 @@ void print_list(t_var *exp, int i)//si i = 1 print var_export //si i == 0 print 
     ft_putchar_fd('\n', 1);
 }
 
-char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec son name
+/*
+    foncttion qui retourne la valeur grace au name de la liste
+*/
+char *list_chr(t_var *exp, char *str_name)
 {
     while(exp->next != NULL)
     {
@@ -81,6 +93,9 @@ char *list_chr(t_var *exp, char *str_name)//chercher une var dans la liste avec 
     return(NULL);
 }
 
+/*
+    compare deux chaine de charactere
+*/
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
