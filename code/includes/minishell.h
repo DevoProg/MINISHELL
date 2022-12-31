@@ -106,15 +106,16 @@ void    ft_delete_middle_node(t_var *env);
 
 //TOOLS
 //utils.c
-int ft_is_not_fork(t_data *minis, t_board *cmd);
-int ft_is_builtins(t_data *minis, t_board *cmd);
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 int is_no_open_quote(char *line, int i);
 int ft_len_cmd(char *line);
 int is_no_open_single_quote(char *line, int i);
-int	ft_strcmp(char *s1, char *s2);
-char *list_chr(t_var *exp, char *str_name);
+//utils_bis.c
+int ft_is_not_fork(t_data *minis, t_board *cmd);
+int ft_is_builtins(t_data *minis, t_board *cmd);
 void print_list(t_var *exp, int i);
+char *list_chr(t_var *exp, char *str_name);
+int	ft_strcmp(char *s1, char *s2);
 //ft_error.c
 void ft_error(char *message, t_data *minis, int z, int is_perror);
 void free_list(t_var *env);
