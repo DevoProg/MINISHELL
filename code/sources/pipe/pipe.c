@@ -33,7 +33,7 @@ void close_all_pipes(t_data *minis, int **fd)
 }
 
 /*
-    fonction qui recherche le checmin d'acces de la commande dans execve
+    fonction qui recherche le chemin d'acces de la commande pour execve
 */
 void find_path_struct(t_data *minis)
 {
@@ -79,7 +79,7 @@ int **malloc_pipes(t_data *minis)
 }
 
 /*
-    fonction qui principale du pipe
+    fonction principale du pipe
 */
 void ft_pipe(t_data *minis, char **envp)
 {   

@@ -26,8 +26,11 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 /*
     fonction qui execute la premiere commande
 */
-void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+void first_cmd(t_data *minis, char **envp, int **fd, int i)
 {
+    t_board *cmd;
+
+    cmd = &minis->cmd[i];
     if(ft_is_not_fork(minis, cmd))
     {
         ft_check_builtins(minis, cmd);
@@ -50,8 +53,11 @@ void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 /*
     fonction qui execute la commande du millieu
 */
-void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+void middle_cmd(t_data *minis, char **envp, int **fd, int i)
 {
+    t_board *cmd;
+
+    cmd = &minis->cmd[i];
     if(ft_is_not_fork(minis, cmd))
     {
         ft_check_builtins(minis, cmd);
@@ -75,8 +81,11 @@ void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 /*
     fonction qui execute la derniere commande
 */
-void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+void last_cmd(t_data *minis, char **envp, int **fd, int i)
 {
+    t_board *cmd;
+
+    cmd = &minis->cmd[i];
     if(ft_is_not_fork(minis, cmd))
     {
         ft_check_builtins(minis, cmd);
@@ -107,11 +116,11 @@ void ft_execute(t_data *minis, int **fd, char **envp)
     while(i < minis->nb_cmd)
     {
         if(i == 0)
-            first_cmd(minis, &minis->cmd[i], envp, fd, i);
+            first_cmd(minis, envp, fd, i);
         else if(i == minis->nb_cmd - 1)
-            last_cmd(minis, &minis->cmd[i], envp, fd, i);
+            last_cmd(minis, envp, fd, i);
         else 
-            middle_cmd(minis, &minis->cmd[i], envp ,fd, i);
+            middle_cmd(minis, envp ,fd, i);
         i++;
     }
 }

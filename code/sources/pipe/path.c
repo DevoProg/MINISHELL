@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-#include "../../includes/minishell.h"
-
 /*
     fonction qui copie le reste de la commande apres le chemin d'acces
 */

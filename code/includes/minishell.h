@@ -10,7 +10,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "../libft/includes/libft.h"
-#include "../libft/includes/ft_printf.h"//pas oublier de retirer
+#include "../libft/includes/ft_printf.h"
 
 #define PATH_LEN 1024
 
@@ -134,11 +134,12 @@ char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
 //execute.c
 void ft_execute(t_data *minis, int **fd, char **envp);
-void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
-void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
-void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
+void last_cmd(t_data *minis, char **envp, int **fd, int i);
+void middle_cmd(t_data *minis, char **envp, int **fd, int i);
+void first_cmd(t_data *minis, char **envp, int **fd, int i);
 void just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
+//si cd n'est pas la derniere commande il doit rien faire
 
 #endif
