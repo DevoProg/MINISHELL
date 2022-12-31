@@ -7,7 +7,8 @@ void wait_all_pids(t_data *minis)
     i = 0;
     while(i < minis->nb_cmd)
     {
-        waitpid(minis->cmd[i].res_fork, NULL, 0);
+        if(!ft_is_not_fork(minis, &minis->cmd[i]))
+            waitpid(minis->cmd[i].res_fork, NULL, 0);
         i++;
     }
 }
@@ -27,6 +28,11 @@ void close_all_pipes(t_data *minis, int **fd)
 
 void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 {
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
     cmd->res_fork = fork();
     if (cmd->res_fork < 0)
         exit(1);//il faudra exit prorpement
@@ -42,6 +48,11 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 
 void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 {
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
     cmd->res_fork = fork();
     if (cmd->res_fork < 0)
         exit(1);//il faudra quitter prorement
@@ -58,6 +69,11 @@ void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 
 void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 {
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
     cmd->res_fork = fork();
     if (cmd->res_fork < 0)
         exit(1);//il faudra quitter prormeent
@@ -75,6 +91,11 @@ void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 
 void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
 {
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
     cmd->res_fork = fork();
     if (cmd->res_fork < 0) 
         exit(1);//il faudrda quitter prorpement
