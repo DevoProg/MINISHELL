@@ -1,0 +1,117 @@
+#include "../../includes/minishell.h"
+
+/*
+    fonction qui execute une commande car elle est seule dans la ligne lue
+*/
+void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
+{
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
+    cmd->res_fork = fork();
+    if (cmd->res_fork < 0)
+        exit(1);//il faudra exit prorpement
+    
+    if (cmd->res_fork == 0) 
+    {
+        if (!ft_is_builtins(minis, cmd))
+            execve(cmd->cmd_path, cmd->tab, envp);
+        ft_check_builtins(minis, cmd);
+        exit(1);
+    }
+}
+
+/*
+    fonction qui execute la premiere commande
+*/
+void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+{
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
+    cmd->res_fork = fork();
+    if (cmd->res_fork < 0)
+        exit(1);//il faudra quitter prorement
+    if (cmd->res_fork == 0) 
+    {
+        dup2(fd[i][1], STDOUT_FILENO);
+        close_all_pipes(minis, fd);
+        if(!ft_is_builtins(minis, cmd))
+            execve(cmd->cmd_path, cmd->tab, envp);
+        ft_check_builtins(minis, cmd);
+        exit(1);
+    }
+}
+
+/*
+    fonction qui execute la commande du millieu
+*/
+void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+{
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
+    cmd->res_fork = fork();
+    if (cmd->res_fork < 0)
+        exit(1);//il faudra quitter prormeent
+    if (cmd->res_fork == 0)
+    {
+        dup2(fd[i - 1][0], STDIN_FILENO);
+        dup2(fd[i][1], STDOUT_FILENO);
+        close_all_pipes(minis, fd);
+        if(!ft_is_builtins(minis, cmd))
+            execve(cmd->cmd_path, cmd->tab, envp);
+        ft_check_builtins(minis,  cmd);
+        exit(1);
+    }
+}
+
+/*
+    fonction qui execute la derniere commande
+*/
+void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i)
+{
+    if(ft_is_not_fork(minis, cmd))
+    {
+        ft_check_builtins(minis, cmd);
+        return ;
+    }
+    cmd->res_fork = fork();
+    if (cmd->res_fork < 0) 
+        exit(1);//il faudrda quitter prorpement
+    if (cmd->res_fork == 0)
+    {
+        dup2(fd[i - 1][0], STDIN_FILENO);
+        close_all_pipes(minis, fd);
+        if(!ft_is_builtins(minis, cmd))
+            execve(cmd->cmd_path, cmd->tab, envp);
+        ft_check_builtins(minis, cmd);
+        exit(1);
+    }
+}
+
+/*
+    fonction qui execute toutes les commandes en fonction de leur emplacement dans la ligne lue
+*/
+void ft_execute(t_data *minis, int **fd, char **envp)
+{
+    int i;
+
+    i = 0;
+    while(i < minis->nb_cmd)
+    {
+        if(i == 0)
+            first_cmd(minis, &minis->cmd[i], envp, fd, i);
+        else if(i == minis->nb_cmd - 1)
+            last_cmd(minis, &minis->cmd[i], envp, fd, i);
+        else 
+            middle_cmd(minis, &minis->cmd[i], envp ,fd, i);
+        i++;
+    }
+}

@@ -124,10 +124,21 @@ void free_struct_cmd(t_data *minis);
 //PIPE
 //pipe.c
 void ft_pipe(t_data *minis, char **envp);
-
+int **malloc_pipes(t_data *minis);
+void find_path_struct(t_data *minis);
+void close_all_pipes(t_data *minis, int **fd);
+void wait_all_pids(t_data *minis);
 //path.c
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
+//execute.c
+void ft_execute(t_data *minis, int **fd, char **envp);
+void last_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
+void middle_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
+void first_cmd(t_data *minis, t_board *cmd, char **envp, int **fd, int i);
+void just_one_cmd(t_data *minis, t_board *cmd, char **envp);
+
+//si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 
 #endif

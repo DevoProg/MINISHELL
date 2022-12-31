@@ -44,7 +44,7 @@ TOOLS_DIR	=	tools/
 TOOLS_FILES	=	ft_error utils
 
 PIPE_DIR	=	pipe/
-PIPE_FILES	=	pipe path
+PIPE_FILES	=	pipe path execute
 
 SRC_FILES+=$(addprefix $(BIN_DIR),$(BIN_FILES))
 SRC_FILES+=$(addprefix $(ENV_DIR),$(ENV_FILES))
