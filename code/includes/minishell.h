@@ -71,6 +71,13 @@ int ft_len_words(char *line);
 void line_to_cmd(t_data *minis);
 char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
+//delete_quote.c
+void delete_quote(t_data *minis);
+char *get_new_str(char *str);
+void write_to_new_doublequote(char *str, char *new, int *i, int *j);
+void write_to_new_singlequote(char *str, char *new, int *i, int *j);
+int count_new_quote(char *str);
+
 
 //ENV
 //ft_envp_var.c
@@ -79,6 +86,7 @@ char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa var
 char *ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
 char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
+
 
 //BUILTINS
 //export.c
@@ -104,8 +112,10 @@ t_var    *ft_delete_first_node(t_var *env);
 void    ft_delete_last_node(t_var *env);
 void    ft_delete_middle_node(t_var *env);
 
+
 //TOOLS
 //utils.c
+int count_to_new_quote(char *str, int *i, int quote);
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 int is_no_open_quote(char *line, int i);
 int ft_len_cmd(char *line);
@@ -121,6 +131,7 @@ void ft_error(char *message, t_data *minis, int z, int is_perror);
 void free_list(t_var *env);
 void free_tab(char **tab, int i);
 void free_struct_cmd(t_data *minis);
+
 
 //PIPE
 //pipe.c
@@ -142,5 +153,7 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 //si cd n'est pas la derniere commande il doit rien faire
+//retirer les guillemets
+//mettre les flags
 
 #endif

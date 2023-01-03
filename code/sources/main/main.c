@@ -38,12 +38,11 @@ void minishell_loop(char **envp)
 			init_struct(&minis);						//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
-			
 
-			put_env_var(&minis);				//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
-			ft_split_cmd(&minis);						//fonction qui split la commande ' ' et prendre en compte les quotes
-			//ft_check_builtins(&minis, &minis.cmd[1]);					//fonction qui regarde si la fonction comprend des echo pwd ect
-			ft_pipe(&minis, envp);
+			put_env_var(&minis);						//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
+			ft_split_cmd(&minis);						//fonction qui split la commande des espaces et prendre en compte les quotes
+			delete_quote(&minis);
+			ft_pipe(&minis, envp);						//fonction qui execute les commandes une par une
 			free_struct((&minis));						//free la structure des commandes
 		}
 	}

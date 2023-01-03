@@ -1,6 +1,23 @@
 #include "../../includes/minishell.h"
 
 /*
+    Fonction qui compte le nombre de lettre jusqu'au prochain quote
+*/
+int count_to_new_quote(char *str, int *i, int quote)
+{
+    int count;
+
+    count = 0;
+    *i += 1;
+    while(str[*i] && str[*i] != quote)
+    {
+        *i += 1;
+        count++;
+    }
+    return(count);
+}
+
+/*
     fonction qui regarde si il n'y a pas de open single quote sur la string a l'index i
 */
 int is_no_open_single_quote(char *line, int i)//verifier qu'il n'y ait pas de single quote ouvert 

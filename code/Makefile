@@ -38,7 +38,7 @@ MAIN_DIR	=	main/
 MAIN_FILES	=	init_struct main
 
 PARS_DIR	=	parsing/
-PARS_FILES	=	split_cmd split_line
+PARS_FILES	=	split_cmd split_line delete_quote
 
 TOOLS_DIR	=	tools/
 TOOLS_FILES	=	ft_error utils utils_bis
