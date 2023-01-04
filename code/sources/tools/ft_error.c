@@ -12,7 +12,7 @@ void free_struct_cmd(t_data *minis)
             free(minis->cmd[i].line_cmd);
         if(minis->cmd[i].tab)
             free_tab(minis->cmd[i].tab, minis->cmd[i].nb_words);
-        // if(minis->cmd[i].cmd_path && *minis->cmd[i].cmd_path)
+        // if(minis->cmd[i].cmd_path)//il faudra free le chemin d'access sans message d'erreur
         //     free(minis->cmd[i].cmd_path);
         i++;
     }

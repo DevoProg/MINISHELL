@@ -155,5 +155,6 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 //si cd n'est pas la derniere commande il doit rien faire
 //retirer les guillemets
 //mettre les flags
+//free cmd->path sans avoir de messages d'erreurs
 
 #endif
