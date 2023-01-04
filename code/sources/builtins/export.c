@@ -63,9 +63,7 @@ void ft_create_variable(t_data *minis, char *str)
 */
 void ft_export(t_data *minis, t_board *cmd)
 {
-    t_var *ptr;
     char *name;
-    char *value;
     int i;
 
     if(cmd->nb_words == 2)//si export ne possede pas d'argument il doit printlist

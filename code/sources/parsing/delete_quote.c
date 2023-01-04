@@ -5,7 +5,6 @@
 */
 int count_new_quote(char *str)
 {
-    char *new;
     int i;
     int count;
 

@@ -2,8 +2,6 @@
 
 void free_struct(t_data *minis)//free le tableau de structure
 {
-    int i;
-
     free_struct_cmd(minis);
     free(minis->line);
 }
@@ -154,6 +152,7 @@ void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier 
         minis->cmd[i].line_cmd = ft_strdup(minis->tab_cmd[i]);
         if(!minis->cmd[i].line_cmd)
             ft_error("Malloc", minis, 2, 1);
+        minis->cmd[i].cmd_path = NULL;
         i++;
     }
     free_tab(minis->tab_cmd, minis->nb_cmd + 1);                        //free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line

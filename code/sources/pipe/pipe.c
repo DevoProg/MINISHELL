@@ -3,17 +3,19 @@
 /*
     fonction qui attend l'execution de tous les forks
 */
-void wait_all_pids(t_data *minis)
+int wait_all_pids(t_data *minis)
 {
     int i;
+    int res;
 
     i = 0;
     while(i < minis->nb_cmd)
     {
-        if(!ft_is_not_fork(minis, &minis->cmd[i]))//si il faut fork alors on wait le porcess
-            waitpid(minis->cmd[i].res_fork, NULL, 0);
+        if(!ft_is_not_fork(&minis->cmd[i]))//si il faut fork alors on wait le porcess
+            waitpid(minis->cmd[i].res_fork, &res, 0);
         i++;
     }
+    return (WEXITSTATUS(res));
 }
 
 /*
@@ -35,7 +37,7 @@ void close_all_pipes(t_data *minis, int **fd)
 /*
     fonction qui recherche le chemin d'acces de la commande pour execve
 */
-void find_path_struct(t_data *minis)
+int find_path_struct(t_data *minis)
 {
     char *path;
     int i;
@@ -44,14 +46,18 @@ void find_path_struct(t_data *minis)
     path = list_chr(minis->env, "PATH");
     while(i < minis->nb_cmd)
     {
-        if(!ft_is_builtins(minis, &minis->cmd[i]))
+        if(!ft_is_builtins(&minis->cmd[i]))
         {
             minis->cmd[i].cmd_path = ft_try_path(minis, path, &minis->cmd[i]);
             if(!minis->cmd[i].cmd_path)
+            {
                 printf("command not found: %s\n", minis->cmd[i].tab[0]);
+                return (127);
+            }
         }
         i++;
     }
+    return(0);
 }
 
 /*
@@ -81,20 +87,22 @@ int **malloc_pipes(t_data *minis)
 /*
     fonction principale du pipe
 */
-void ft_pipe(t_data *minis, char **envp)
+int ft_pipe(t_data *minis, char **envp)
 {   
-    int i;
     int **fd;
+    int res;
 
-    find_path_struct(minis);
+    if(find_path_struct(minis) == 127)
+        return(127);
     if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
     {
         just_one_cmd(minis, &minis->cmd[0], envp);
-        waitpid(minis->cmd[0].res_fork, NULL, 0);
-        return;
+        waitpid(minis->cmd[0].res_fork, &res, 0);
+        return (WEXITSTATUS(res));
     }
     fd = malloc_pipes(minis);
     ft_execute(minis, fd, envp);
     close_all_pipes(minis, fd);
-    wait_all_pids(minis);
+    res = wait_all_pids(minis);
+    return(res);//il faudra chopper la variable
 }

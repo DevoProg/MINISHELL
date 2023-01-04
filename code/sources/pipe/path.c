@@ -23,7 +23,6 @@ void cpy_cmd(t_board *cmd, char *poss, int i)
 char *cpy_path(t_board *cmd, char *path, int *path_len)
 {
     int i;
-    int j;
     char *poss;
 
     *path_len = 0;

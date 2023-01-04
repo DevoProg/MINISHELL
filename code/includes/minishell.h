@@ -121,8 +121,8 @@ int is_no_open_quote(char *line, int i);
 int ft_len_cmd(char *line);
 int is_no_open_single_quote(char *line, int i);
 //utils_bis.c
-int ft_is_not_fork(t_data *minis, t_board *cmd);
-int ft_is_builtins(t_data *minis, t_board *cmd);
+int ft_is_not_fork(t_board *cmd);
+int ft_is_builtins(t_board *cmd);
 void print_list(t_var *exp, int i);
 char *list_chr(t_var *exp, char *str_name);
 int	ft_strcmp(char *s1, char *s2);
@@ -135,11 +135,11 @@ void free_struct_cmd(t_data *minis);
 
 //PIPE
 //pipe.c
-void ft_pipe(t_data *minis, char **envp);
+int ft_pipe(t_data *minis, char **envp);
 int **malloc_pipes(t_data *minis);
-void find_path_struct(t_data *minis);
+int find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis, int **fd);
-void wait_all_pids(t_data *minis);
+int wait_all_pids(t_data *minis);
 //path.c
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);

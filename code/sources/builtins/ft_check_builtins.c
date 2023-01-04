@@ -75,13 +75,13 @@ void ft_exit(t_data *minis)
 */
 void ft_check_builtins(t_data *minis, t_board *cmd)
 {
-    if(ft_strcmp(cmd->tab[0], "pwd") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+    if(ft_strcmp(cmd->tab[0], "pwd") == 0)
         ft_pwd();
-    else if(ft_strcmp(cmd->tab[0], "env") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+    else if(ft_strcmp(cmd->tab[0], "env") == 0)
         ft_envp(minis);
     else if(ft_strcmp(cmd->tab[0], "echo") == 0)
         ft_echo(cmd);
-    else if(ft_strcmp(cmd->tab[0], "exit") == 0 && cmd->nb_words == 2)//==2 ->aucune options ni arg
+    else if(ft_strcmp(cmd->tab[0], "exit") == 0)
         ft_exit(minis);
     else if(ft_strcmp(cmd->tab[0], "cd") == 0)
         ft_cd(minis, cmd);

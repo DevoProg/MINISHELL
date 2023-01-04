@@ -77,7 +77,7 @@ $(NAME):	$(OBJ) $(OBJF)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 			@$(ECHO) -n "$(ORANGE)=$(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+			@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
