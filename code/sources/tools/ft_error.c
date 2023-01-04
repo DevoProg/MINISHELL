@@ -4,7 +4,6 @@ void free_struct_cmd(t_data *minis)
 {
     int i;
 
-    ft_printf("salut\n");
     i = 0;
     while(i < minis->nb_cmd)                                        //boucle qui met les commandes dans le tableau de structure
     {
@@ -16,7 +15,6 @@ void free_struct_cmd(t_data *minis)
         //     free(minis->cmd[i].cmd_path);
         i++;
     }
-    ft_printf("ras\n");
     free(minis->cmd);
 }
 
