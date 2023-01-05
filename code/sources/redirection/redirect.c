@@ -1,27 +1,15 @@
 #include "../../includes/minishell.h"
 
-int ft_is_redi(char *str, size_t *i)
+int ft_is_redi(char *str, size_t i)
 {
-    if(ft_strncmp("<", str + *i, 1) == 0 && is_no_open_quote(str, *i))
-    {
-        *i += 1;
-        return(INFILE);
-    }
-    else if(ft_strncmp("<<", str + *i, 2) == 0 && is_no_open_quote(str, *i))
-    {
-        *i += 2;
+    if(ft_strncmp("<<", str + i, 2) == 0 && is_no_open_quote(str, i))
         return(D_INFILE);
-    }
-    else if(ft_strncmp(">", str + *i, 1) == 0 && is_no_open_quote(str, *i))
-    {
-        *i += 1;
-        return(OUTFILE);
-    }
-    else if(ft_strncmp(">>", str + *i, 2) == 0 && is_no_open_quote(str, *i))
-    {
-        *i += 2;
+    else if(ft_strncmp("<", str + i, 1) == 0 && is_no_open_quote(str, i))
+        return(INFILE);
+    else if(ft_strncmp(">>", str + i, 2) == 0 && is_no_open_quote(str, i))
         return(D_OUTFILE);
-    }
+    else if(ft_strncmp(">", str + i, 1) == 0 && is_no_open_quote(str, i))
+        return(OUTFILE);
     return (0);
 }
 
@@ -76,18 +64,38 @@ void lst_add_redi(t_redi **lst, t_redi *new)
 void stock_redi(t_board *cmd, char *str, int res)
 {
     t_redi *redi;
+    int j;
 
+    if(res == INFILE || res == OUTFILE)
+        j = 1;
+    else if(res == D_INFILE || res == D_OUTFILE)
+        j = 2;
     redi = malloc(sizeof(t_redi));
     if(!redi)
         exit(1);// QUITTER
     redi->type = res;
-    redi->file = get_file_redi(str);
+    redi->file = get_file_redi(str + j);
     redi->next = NULL;
     lst_add_redi(&cmd->redi, redi);
     //cmd->redi = NULL;
 }
 
-
+void clean_this_redi(char *str, int j, int res)
+{
+    str[j] = ' ';
+    if(res == D_INFILE || res == D_OUTFILE)
+    {
+        j++;
+        str[j] = ' ';
+    }
+    while(str[j] && str[j] == ' ')
+        j++;
+    while(str[j] && str[j] != ' ')
+    {
+        str[j] = ' ';
+        j++;
+    }
+}
 
 void redirection(t_data *minis)
 {
@@ -102,15 +110,19 @@ void redirection(t_data *minis)
         minis->cmd[i].redi = NULL;
         while(j < ft_strlen(minis->cmd[i].line_cmd))
         {
-            res = ft_is_redi(minis->cmd[i].line_cmd, &j);
+            res = ft_is_redi(minis->cmd[i].line_cmd, j);
             if(res != 0)
             {
                 stock_redi(&minis->cmd[i], minis->cmd[i].line_cmd + j, res);
+                //creer une focnrion qui clean les redirecitons
+                clean_this_redi(minis->cmd[i].line_cmd, j, res);
+                if(res == D_INFILE || res == D_OUTFILE)
+                    j++;
             }
             j++;
         }
         t_board *cmd = &minis->cmd[i];
-        if(cmd->redi)//il faudra print la chaine de redirection
+        if(cmd->redi)
         {
             t_redi *tmp = minis->cmd[i].redi;
             printf("commande ->%d\n", i);

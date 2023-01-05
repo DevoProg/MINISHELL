@@ -113,6 +113,7 @@ void ft_create_env(t_data *minis, char **envp)
     t_var *ptr;
     int i;
 
+    minis->env = NULL;
     i = 0;
     while(envp[i])
     {
