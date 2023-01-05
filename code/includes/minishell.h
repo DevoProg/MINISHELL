@@ -17,6 +17,18 @@
 #define SUCCESS 1
 #define ERROR 0
 
+#define INFILE 1
+#define D_INFILE 2
+#define OUTFILE 3
+#define D_OUTFILE 4
+
+typedef struct s_redi
+{
+	int type;// 1 = < ; 2 = << ; 3 = > ; 4 = >>
+	char *file;
+	struct s_redi *next;
+}				t_redi;
+
 typedef struct s_var    // structure pour les variable d'env
 {
 	char *name;           // nom variable d'environnement.
@@ -33,6 +45,7 @@ typedef struct s_board
 	int nb_words;			//le nombre de cases dans le tableau
 	char *cmd_path;			//pour execve(path dans la variable d'environneemnt)
 	int res_fork;			//int qui sert a wait le resultat du pipe
+	t_redi *redi;
 }				t_board;			//structure pour chaque commande
 
 typedef struct s_data
@@ -59,6 +72,11 @@ void lst_add(t_var **lst, t_var *new);
 t_var *lst_last(t_var *lst);
 t_var *lst_name_finding(t_var *lst, char *name);
 void free_struct(t_data *minis);
+
+
+//REDIRECTION
+//redirect.c
+void redirection(t_data *minis);
 
 //PARSING
 //ft_split_cmd.c

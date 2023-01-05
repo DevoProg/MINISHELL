@@ -46,12 +46,16 @@ TOOLS_FILES	=	ft_error utils utils_bis
 PIPE_DIR	=	pipe/
 PIPE_FILES	=	pipe path execute
 
+REDI_DIR	=	redirection/
+REDI_FILES	=	redirect
+
 SRC_FILES+=$(addprefix $(BIN_DIR),$(BIN_FILES))
 SRC_FILES+=$(addprefix $(ENV_DIR),$(ENV_FILES))
 SRC_FILES+=$(addprefix $(MAIN_DIR),$(MAIN_FILES))
 SRC_FILES+=$(addprefix $(PARS_DIR),$(PARS_FILES))
 SRC_FILES+=$(addprefix $(TOOLS_DIR),$(TOOLS_FILES))
 SRC_FILES+=$(addprefix $(PIPE_DIR),$(PIPE_FILES))
+SRC_FILES+=$(addprefix $(REDI_DIR),$(REDI_FILES))
 
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -87,7 +91,9 @@ $(OBJF):
 			@mkdir -p $(OBJ_DIR)$(PARS_DIR)
 			@mkdir -p $(OBJ_DIR)$(TOOLS_DIR)
 			@mkdir -p $(OBJ_DIR)$(PIPE_DIR)
-			
+			@mkdir -p $(OBJ_DIR)$(REDI_DIR)
+
+
 			@touch $(OBJF)
 
 clean:
