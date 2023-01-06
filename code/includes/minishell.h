@@ -28,6 +28,7 @@ typedef struct s_redi
 {
 	int type;// 1 = < ; 2 = << ; 3 = > ; 4 = >>
 	char *file;
+	int  file_fd;
 	struct s_redi *next;
 }				t_redi;
 
@@ -83,9 +84,9 @@ void redirection(t_data *minis);
 void close_redi_pipe(int redi_pipe[2][2]);
 //redirect_infile.c
 void dup_inflie(t_redi *ptr, int redi_pipe[2]);
-void dup_files_in(t_board *cmd, int redi_pipe[2][2]);
+void redirect_infile(t_board *cmd, int redi_pipe[2][2]);
 //redirect_outfile.c
-void dup_outfile(t_redi *ptr, int redi_pipe[2]);
+void dup_outfile(t_board *cmd);
 
 //PARSING
 //ft_split_cmd.c

@@ -25,7 +25,7 @@ void    dup_inflie(t_redi *ptr, int redi_pipe[2])
 }
 
 
-void dup_files_in(t_board *cmd, int redi_pipe[2][2])
+void redirect_infile(t_board *cmd, int redi_pipe[2][2])
 {
     t_redi *ptr;
 

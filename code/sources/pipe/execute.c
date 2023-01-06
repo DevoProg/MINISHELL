@@ -21,7 +21,7 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     
     if (cmd->res_fork == 0) 
     {
-        dup_files_in(cmd, redi_pipe);
+        redirect_infile(cmd, redi_pipe);
         close_redi_pipe(redi_pipe);
         if (!ft_is_builtins(cmd))
             execve(cmd->cmd_path, cmd->tab, envp);
