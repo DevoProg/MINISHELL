@@ -24,14 +24,18 @@ int is_no_open_single_quote(char *line, int i)//verifier qu'il n'y ait pas de si
 {
     //il faudra quand meme verifier cette maniere de faire  /!\'
     int single_quote;
+    int double_quote;
     int j;
 
     j = 0;
     single_quote = 0;
+    double_quote = 0;
     while(j < i)
     {
-        if(line[j] == 39)// 39 == '
+        if(line[j] == 39 && single_quote % 2 != 0)// 39 == '
             single_quote++;
+        if(line[j] == 34 && single_quote % 2 != 0)//34 == "
+            double_quote++;
         j++;
     }
     if(single_quote % 2 != 0)
@@ -72,9 +76,9 @@ int is_no_open_quote(char *line, int i)
     double_quote = 0;
     while(j < i)
     {
-        if(line[j] == 39)// 39 == '
+        if(line[j] == 39 && single_quote % 2 != 0)// 39 == '
             single_quote++;
-        if(line[j] == 34)//34 == "
+        if(line[j] == 34 && single_quote % 2 != 0)//34 == "
             double_quote++;
         j++;
     }
