@@ -62,7 +62,7 @@ typedef struct s_data
 }			t_data;//structure du programme minishell
 
 
-//MAIN
+//				MAIN
 //main.c
 void minishell_loop(char **envp);
 void control_c();
@@ -77,9 +77,15 @@ t_var *lst_name_finding(t_var *lst, char *name);
 void free_struct(t_data *minis);
 
 
-//REDIRECTION
+//				REDIRECTION
 //redirect.c
 void redirection(t_data *minis);
+void clean_this_redi(char *str, int j, int res);
+void stock_redi(t_board *cmd, char *str, int res);
+void lst_add_redi(t_redi **lst, t_redi *new);
+t_redi	*lst_last_redi(t_redi *lst);
+char *get_file_redi(char *str);
+int ft_is_redi(char *str, size_t i);
 //redirect_utils.c
 void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);
@@ -88,9 +94,10 @@ void close_redi_pipe(int redi_pipe[2][2]);
 void dup_inflie(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
+void write_in_all_file(char *buf, t_board *cmd);
 void redirect_outfile(t_board *cmd, int redi_pipe[2]);
 
-//PARSING
+//				PARSING
 //ft_split_cmd.c
 void    ft_split_cmd(t_data *minis);
 char **ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
@@ -109,7 +116,7 @@ void write_to_new_singlequote(char *str, char *new, int *i, int *j);
 int count_new_quote(char *str);
 
 
-//ENV
+//				ENV
 //ft_envp_var.c
 void    put_env_var(t_data *minis);
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
@@ -118,7 +125,7 @@ char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
 
 
-//BUILTINS
+//				BUILTINS
 //export.c
 void ft_export(t_data *minis, t_board *cmd);
 void ft_create_variable(t_data *minis, char *str);
@@ -143,7 +150,7 @@ void    ft_delete_last_node(t_var *env);
 void    ft_delete_middle_node(t_var *env);
 
 
-//TOOLS
+//				TOOLS
 //utils.c
 int count_to_new_quote(char *str, int *i, int quote);
 char *ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
@@ -163,7 +170,7 @@ void free_tab(char **tab, int i);
 void free_struct_cmd(t_data *minis);
 
 
-//PIPE
+//				PIPE
 //pipe.c
 int ft_pipe(t_data *minis, char **envp);
 int **malloc_pipes(t_data *minis);
