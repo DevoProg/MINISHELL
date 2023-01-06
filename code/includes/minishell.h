@@ -81,7 +81,11 @@ void free_struct(t_data *minis);
 void redirection(t_data *minis);
 //dup_files.c
 void close_redi_pipe(int redi_pipe[2][2]);
+//redirect_infile.c
+void dup_inflie(t_redi *ptr, int redi_pipe[2]);
 void dup_files_in(t_board *cmd, int redi_pipe[2][2]);
+//redirect_outfile.c
+void dup_outfile(t_redi *ptr, int redi_pipe[2]);
 
 //PARSING
 //ft_split_cmd.c
