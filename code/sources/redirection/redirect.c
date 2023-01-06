@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction qui regarde s'il il y a une redirection
+*/
 int ft_is_redi(char *str, size_t i)
 {
     if(ft_strncmp("<<", str + i, 2) == 0 && is_no_open_quote(str, i))
@@ -13,6 +16,9 @@ int ft_is_redi(char *str, size_t i)
     return (0);
 }
 
+/*
+    Fonction qui retourne le fichier atttribué a la redirection
+*/
 char *get_file_redi(char *str)
 {
     char *new;
@@ -36,6 +42,9 @@ char *get_file_redi(char *str)
     return(new);
 }
 
+/*
+    Fonction qui retourne la liste de la derniere redi
+*/
 t_redi	*lst_last_redi(t_redi *lst)
 {
 	if (!lst)
@@ -45,6 +54,9 @@ t_redi	*lst_last_redi(t_redi *lst)
 	return (lst);
 }
 
+/*
+    Fonction qui lajoute la redirection a  la liste chainée
+*/
 void lst_add_redi(t_redi **lst, t_redi *new)
 {
 	t_redi   *aux_lst;
@@ -61,6 +73,9 @@ void lst_add_redi(t_redi **lst, t_redi *new)
 	}
 }
 
+/*
+    Fonction qui stock la redirection dans une liste chainée de redirection
+*/
 void stock_redi(t_board *cmd, char *str, int res)
 {
     t_redi *redi;
@@ -80,6 +95,9 @@ void stock_redi(t_board *cmd, char *str, int res)
     //cmd->redi = NULL;
 }
 
+/*
+    Fonction qui retire les redirections de la commande
+*/
 void clean_this_redi(char *str, int j, int res)
 {
     str[j] = ' ';
@@ -97,6 +115,9 @@ void clean_this_redi(char *str, int j, int res)
     }
 }
 
+/*
+    Fonction qui parcourt toutes les commandes pour stocker les redirection dans la strucutre
+*/
 void redirection(t_data *minis)
 {
     int i;
@@ -114,27 +135,12 @@ void redirection(t_data *minis)
             if(res != 0)
             {
                 stock_redi(&minis->cmd[i], minis->cmd[i].line_cmd + j, res);
-                //creer une focnrion qui clean les redirecitons
                 clean_this_redi(minis->cmd[i].line_cmd, j, res);
                 if(res == D_INFILE || res == D_OUTFILE)
                     j++;
             }
             j++;
         }
-        // t_board *cmd = &minis->cmd[i];
-        // if(cmd->redi)
-        // {
-        //     t_redi *tmp = minis->cmd[i].redi;
-        //     printf("commande ->%d\n", i);
-        //     while(tmp->next != NULL)
-        //     {
-        //         printf("%s\n", tmp->file);
-        //         printf("%d\n", tmp->type);
-        //         tmp = tmp->next;
-        //     }
-        //     printf("%s\n", tmp->file);
-        //     printf("%d\n\n", tmp->type);
-        // }
         i++;
     }
 }

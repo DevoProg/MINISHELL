@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction qui ouvre tous les files de sortie (redirection)
+*/
 void open_all_redi_files(t_board *cmd)
 {
     t_redi *ptr;
@@ -30,6 +33,10 @@ void open_all_redi_files(t_board *cmd)
         }
     }
 }
+
+/*
+    Fonction qui ferme tous les files de sortie (redirection)
+*/
 void close_all_redi_files(t_board *cmd)
 {
     t_redi *ptr;
@@ -47,6 +54,9 @@ void close_all_redi_files(t_board *cmd)
         close(ptr->file_fd);
 }
 
+/*
+    Ferme tous les pipes de redirections
+*/
 void close_redi_pipe(int redi_pipe[2][2])
 {
     close(redi_pipe[0][0]);

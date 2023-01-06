@@ -7,12 +7,13 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     int redi_pipe[2][2];
 
     if(pipe(redi_pipe[0]) == -1)
-        exit(1);
+        exit(1);//il faudra quitter prorpement
     if(pipe(redi_pipe[1]) == -1)
-        exit(1);
+        exit(1);//il faudra quitter proprement
     if(ft_is_not_fork(cmd))
     {
         ft_check_builtins(minis, cmd);
+        close_redi_pipe(redi_pipe);
         return ;
     }
     cmd->res_fork = fork();

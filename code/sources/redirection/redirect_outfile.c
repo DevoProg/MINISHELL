@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction qui ecrit le resultat de la commande dans les fichiers de redirection de sorite ou le print
+*/
 void write_in_all_file(char *buf, t_board *cmd)
 {
     t_redi *ptr;
@@ -20,6 +23,9 @@ void write_in_all_file(char *buf, t_board *cmd)
         write(ptr->file_fd, buf, 1);
 }
 
+/*
+    Fonction qui lit le resultat de la commande(pipe redi)
+*/
 void redirect_outfile(t_board *cmd, int redi_pipe[2])
 {
     char *buf;

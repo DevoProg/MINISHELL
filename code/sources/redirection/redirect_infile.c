@@ -1,10 +1,13 @@
 #include "../../includes/minishell.h"
 
+/*
+    Fonction qui ecrit dans le pipes des redirections les contenu des fichiers
+*/
 void    dup_inflie(t_redi *ptr, int redi_pipe[2])
 {
     int fd;
     char *buf;
-    //char *res;
+    int len;
 
     fd = open(ptr->file, O_RDONLY);
     if(fd == -1)
@@ -14,17 +17,20 @@ void    dup_inflie(t_redi *ptr, int redi_pipe[2])
     }
     while(1)
     {
-        buf = get_next_line(fd);
+        buf = get_next_line(fd);//si get_next_line fail son malloc????
         if(buf == NULL)
             break ;
-        write(redi_pipe[1], buf, ft_strlen(buf));
+        len = ft_strlen(buf);
+        write(redi_pipe[1], buf, len);//verifier le write?
         free(buf);
     }
     dup2(redi_pipe[0], 0);
     close(fd);
 }
 
-
+/*
+    Fonction qui regarde s'il y a un fichier d'entrée en redirection
+*/
 void redirect_infile(t_board *cmd, int redi_pipe[2])
 {
     t_redi *ptr;
