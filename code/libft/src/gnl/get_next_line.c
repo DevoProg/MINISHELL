@@ -19,7 +19,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	subs = ft_strnew(len);
+	subs = ft_strnew_gnl(len);
 	if (subs == NULL)
 		return (NULL);
 	i = 0;
@@ -52,7 +52,7 @@ static char	*cut_function(char **str)
 	if ((*str)[len] == '\n')
 	{
 		line = ft_strsub(*str, 0, len + 1);
-		tmp = ft_strdup(&((*str)[len + 1]));
+		tmp = ft_strdup_gnl(&((*str)[len + 1]));
 		free(*str);
 		*str = tmp;
 		if ((*str)[0] == '\0')
@@ -60,7 +60,7 @@ static char	*cut_function(char **str)
 	}
 	else
 	{
-		line = ft_strdup(*str);
+		line = ft_strdup_gnl(*str);
 		ft_strdel(str);
 	}
 	return (line);
@@ -90,14 +90,14 @@ char	*get_next_line(int fd)
 			break ;
 		buff[ret] = '\0';
 		if (str == NULL)
-			str = ft_strdup(buff);
+			str = ft_strdup_gnl(buff);
 		else
 		{
-			tmp = ft_strjoin(str, buff);
+			tmp = ft_strjoin_gnl(str, buff);
 			free(str);
 			str = tmp;
 		}
-		if (ft_strchr(str, '\n'))
+		if (ft_strchr_gnl(str, '\n'))
 			break ;
 	}
 	return (output(&str, ret));

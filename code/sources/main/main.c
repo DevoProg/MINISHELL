@@ -38,7 +38,7 @@ void minishell_loop(char **envp)
 			init_struct(&minis);						//init struct et put les commandes dans chaque struct
 			
 			//inserer les fonctions ici
-			redirection(&minis);
+			redirection(&minis); 
 			put_env_var(&minis);						//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);						//fonction qui split la commande des espaces et prendre en compte les quotes
 			delete_quote(&minis);

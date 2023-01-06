@@ -47,7 +47,7 @@ PIPE_DIR	=	pipe/
 PIPE_FILES	=	pipe path execute
 
 REDI_DIR	=	redirection/
-REDI_FILES	=	redirect
+REDI_FILES	=	redirect dup_files
 
 SRC_FILES+=$(addprefix $(BIN_DIR),$(BIN_FILES))
 SRC_FILES+=$(addprefix $(ENV_DIR),$(ENV_FILES))

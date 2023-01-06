@@ -21,13 +21,13 @@ char *get_file_redi(char *str)
     i = 0;
     while(*str && *str == ' ')
         str++;
-    while(str[i] && str[i] != ' ')
+    while(str[i] && str[i] != ' '  && str[i] != '<' && str[i] != '>')
         i++;
     new = malloc(sizeof(char) * (i + 1));
     if(!new)
         exit(1);//quitter prorprement
     i = 0;
-    while(str[i] && str[i] != ' ')
+    while(str[i] && str[i] != ' '  && str[i] != '<' && str[i] != '>')
     {
         new[i] = str[i];
         i++;
@@ -90,7 +90,7 @@ void clean_this_redi(char *str, int j, int res)
     }
     while(str[j] && str[j] == ' ')
         j++;
-    while(str[j] && str[j] != ' ')
+    while(str[j] && str[j] != ' '  && str[j] != '<' && str[j] != '>')
     {
         str[j] = ' ';
         j++;
@@ -121,20 +121,20 @@ void redirection(t_data *minis)
             }
             j++;
         }
-        t_board *cmd = &minis->cmd[i];
-        if(cmd->redi)
-        {
-            t_redi *tmp = minis->cmd[i].redi;
-            printf("commande ->%d\n", i);
-            while(tmp->next != NULL)
-            {
-                printf("%s\n", tmp->file);
-                printf("%d\n", tmp->type);
-                tmp = tmp->next;
-            }
-            printf("%s\n", tmp->file);
-            printf("%d\n\n", tmp->type);
-        }
+        // t_board *cmd = &minis->cmd[i];
+        // if(cmd->redi)
+        // {
+        //     t_redi *tmp = minis->cmd[i].redi;
+        //     printf("commande ->%d\n", i);
+        //     while(tmp->next != NULL)
+        //     {
+        //         printf("%s\n", tmp->file);
+        //         printf("%d\n", tmp->type);
+        //         tmp = tmp->next;
+        //     }
+        //     printf("%s\n", tmp->file);
+        //     printf("%d\n\n", tmp->type);
+        // }
         i++;
     }
 }

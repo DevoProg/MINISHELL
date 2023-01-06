@@ -9,8 +9,10 @@
 #include <readline/history.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <fcntl.h>
 #include "../libft/includes/libft.h"
 #include "../libft/includes/ft_printf.h"
+#include "../libft/includes/get_next_line.h"
 
 #define PATH_LEN 1024
 
@@ -77,6 +79,9 @@ void free_struct(t_data *minis);
 //REDIRECTION
 //redirect.c
 void redirection(t_data *minis);
+//dup_files.c
+void close_redi_pipe(int redi_pipe[2][2]);
+void dup_files_in(t_board *cmd, int redi_pipe[2][2]);
 
 //PARSING
 //ft_split_cmd.c
