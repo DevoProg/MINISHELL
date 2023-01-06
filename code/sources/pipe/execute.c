@@ -21,16 +21,19 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     
     if (cmd->res_fork == 0) 
     {
-        redirect_infile(cmd, redi_pipe);
+        dup2(redi_pipe[1][1], STDOUT_FILENO);
+        redirect_infile(cmd, redi_pipe[0]);
         close_redi_pipe(redi_pipe);
         if (!ft_is_builtins(cmd))
             execve(cmd->cmd_path, cmd->tab, envp);
         ft_check_builtins(minis, cmd);
         exit(1);
     }
-    close_redi_pipe(redi_pipe);
-    //printf("%s", get_next_line(redi_pipe[1][0]));
-    
+    close(redi_pipe[1][1]);
+    close(redi_pipe[0][1]);
+    redirect_outfile(cmd, redi_pipe[1]);
+    close(redi_pipe[0][0]);
+    close(redi_pipe[1][0]);
 }
 
 /*

@@ -25,7 +25,7 @@ void    dup_inflie(t_redi *ptr, int redi_pipe[2])
 }
 
 
-void redirect_infile(t_board *cmd, int redi_pipe[2][2])
+void redirect_infile(t_board *cmd, int redi_pipe[2])
 {
     t_redi *ptr;
 
@@ -35,13 +35,9 @@ void redirect_infile(t_board *cmd, int redi_pipe[2][2])
     while(ptr->next != NULL)
     {
         if(ptr->type == INFILE)
-            dup_inflie(ptr, redi_pipe[0]);
-        if(ptr->type == OUTFILE)
-            dup_outfile(ptr, redi_pipe[1]);
+            dup_inflie(ptr, redi_pipe);
         ptr = ptr->next;
     }
     if(ptr->type == INFILE)
-        dup_inflie(ptr, redi_pipe[0]);
-    if(ptr->type == OUTFILE)
-        dup_outfile(ptr, redi_pipe[1]);
+        dup_inflie(ptr, redi_pipe);
 }

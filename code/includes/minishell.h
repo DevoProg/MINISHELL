@@ -80,13 +80,15 @@ void free_struct(t_data *minis);
 //REDIRECTION
 //redirect.c
 void redirection(t_data *minis);
-//dup_files.c
+//redirect_utils.c
+void open_all_redi_files(t_board *cmd);
+void close_all_redi_files(t_board *cmd);
 void close_redi_pipe(int redi_pipe[2][2]);
 //redirect_infile.c
 void dup_inflie(t_redi *ptr, int redi_pipe[2]);
-void redirect_infile(t_board *cmd, int redi_pipe[2][2]);
+void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
-void dup_outfile(t_board *cmd);
+void redirect_outfile(t_board *cmd, int redi_pipe[2]);
 
 //PARSING
 //ft_split_cmd.c
