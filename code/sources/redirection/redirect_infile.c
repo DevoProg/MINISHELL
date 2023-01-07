@@ -3,7 +3,7 @@
 /*
     Fonction qui ecrit dans le pipes des redirections les contenu des fichiers
 */
-void    dup_inflie(t_redi *ptr, int redi_pipe[2])
+void    infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
     int fd;
     char *buf;
@@ -41,9 +41,9 @@ void redirect_infile(t_board *cmd, int redi_pipe[2])
     while(ptr->next != NULL)
     {
         if(ptr->type == INFILE)
-            dup_inflie(ptr, redi_pipe);
+            infile_to_pipe(ptr, redi_pipe);
         ptr = ptr->next;
     }
     if(ptr->type == INFILE)
-        dup_inflie(ptr, redi_pipe);
+        infile_to_pipe(ptr, redi_pipe);
 }

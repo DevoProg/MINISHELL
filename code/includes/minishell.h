@@ -87,11 +87,12 @@ t_redi	*lst_last_redi(t_redi *lst);
 char *get_file_redi(char *str);
 int ft_is_redi(char *str, size_t i);
 //redirect_utils.c
+int is_redi_outfile(t_board *cmd);
 void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);
 void close_redi_pipe(int redi_pipe[2][2]);
 //redirect_infile.c
-void dup_inflie(t_redi *ptr, int redi_pipe[2]);
+void infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
 void write_in_all_file(char *buf, t_board *cmd);

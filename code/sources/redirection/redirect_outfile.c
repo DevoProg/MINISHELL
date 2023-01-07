@@ -7,7 +7,7 @@ void write_in_all_file(char *buf, t_board *cmd)
 {
     t_redi *ptr;
 
-    if(!cmd->redi)
+    if(!is_redi_outfile(cmd))
     {
         ft_printf("%s", buf);
         return;
