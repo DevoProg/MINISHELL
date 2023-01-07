@@ -1,29 +1,18 @@
 #include "../../includes/minishell.h"
 
-t_redi *find_new_heredoc(t_redi *redi, int z)
+t_redi *find_new_heredoc(t_redi *redi)
 {
     t_redi *ptr;
 
-    if(!redi)
-        return(NULL);
-    if(z == 1 && !redi->next)
-        return(NULL);
-    if(z == 1)
-        ptr = ptr->next;
-    else
-        ptr = redi;
-    ptr = ptr->next;
+    ptr = redi;
     while(ptr->next)
     {
-        if(ptr->type == D_OUTFILE)
+        if(ptr->type == D_INFILE)
             return(ptr);
         ptr = ptr->next;
     }
-    if(ptr->type == D_OUTFILE)
-    {
-        printf("cc\n\n");
-        return(ptr);
-    }
+    if(ptr->type == D_INFILE)
+            return(ptr);
     return(NULL);
 }
 
@@ -36,7 +25,7 @@ void    d_infile_to_pipe(t_redi *redi, int redi_pipe[2])
     if(!redi)
         return;
     i = 0;
-    ptr = redi;
+    ptr = find_new_heredoc(redi);
     while(1)
     {
         str = readline("heredoc>");
@@ -44,7 +33,9 @@ void    d_infile_to_pipe(t_redi *redi, int redi_pipe[2])
         {
             if(!ptr->next)
                 break;
-            ptr = ptr->next;
+            ptr = find_new_heredoc(ptr->next);
+            if(!ptr)
+                break;
             continue;
         }
         write(redi_pipe[1], str, ft_strlen(str));
