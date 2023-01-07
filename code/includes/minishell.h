@@ -87,6 +87,7 @@ t_redi	*lst_last_redi(t_redi *lst);
 char *get_file_redi(char *str);
 int ft_is_redi(char *str, size_t i);
 //redirect_utils.c
+int is_redi_infile(t_board *cmd);
 int is_redi_outfile(t_board *cmd);
 void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);

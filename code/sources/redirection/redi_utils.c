@@ -1,9 +1,33 @@
 #include "../../includes/minishell.h"
 
+int is_redi_infile(t_board *cmd)
+{
+    t_redi *ptr;
+
+    if(!cmd->redi)
+        return (0);
+    ptr = cmd->redi;
+    while(ptr->next != NULL)
+    {
+        if(ptr->type == INFILE)
+            return(1);
+        if(ptr->type == D_INFILE)
+            return(1);
+        ptr = ptr->next;
+    }
+    if(ptr->type == INFILE)
+        return(1);
+    if(ptr->type == D_INFILE)
+            return(1);
+    return(0);
+}
+
 int is_redi_outfile(t_board *cmd)
 {
     t_redi *ptr;
 
+    if(!cmd->redi)
+        return (0);
     ptr = cmd->redi;
     while(ptr->next != NULL)
     {
@@ -11,6 +35,7 @@ int is_redi_outfile(t_board *cmd)
             return(1);
         if(ptr->type == D_OUTFILE)
             return(1);
+        ptr = ptr->next;
     }
     if(ptr->type == OUTFILE)
         return(1);
