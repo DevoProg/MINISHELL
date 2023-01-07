@@ -26,6 +26,8 @@ int just_one_cmd(t_data *minis, t_board *cmd, char **envp)
         redirect_infile(cmd, redi_pipe[0]);
         if(is_redi_outfile(cmd))
             dup2(redi_pipe[1][1], STDOUT_FILENO);
+        if(is_redi_infile(cmd))
+            dup2(redi_pipe[0][0], STDIN_FILENO);
         close_redi_pipe(redi_pipe);
         if (!ft_is_builtins(cmd))
             execve(cmd->cmd_path, cmd->tab, envp);

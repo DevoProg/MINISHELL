@@ -1,49 +1,25 @@
 #include "../../includes/minishell.h"
 
-t_redi *find_new_heredoc(t_redi *redi)
-{
-    t_redi *ptr;
-
-    ptr = redi;
-    while(ptr->next)
-    {
-        if(ptr->type == D_INFILE)
-            return(ptr);
-        ptr = ptr->next;
-    }
-    if(ptr->type == D_INFILE)
-            return(ptr);
-    return(NULL);
-}
-
-void    d_infile_to_pipe(t_redi *redi, int redi_pipe[2])
+void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
     char *str;
-    t_redi *ptr;
     int i;
     
-    if(!redi)
+    if(!ptr)
         return;
-    i = 0;
-    ptr = find_new_heredoc(redi);
     while(1)
     {
         str = readline("heredoc>");
         if(str && *str && ft_strcmp(str, ptr->file) == 0)
         {
-            if(!ptr->next)
-                break;
-            ptr = find_new_heredoc(ptr->next);
-            if(!ptr)
-                break;
-            continue;
+            break;
         }
-        write(redi_pipe[1], str, ft_strlen(str));
+        i = ft_strlen(str);
+        write(redi_pipe[1], str, i);
         write(redi_pipe[1], "\n", 1);
         str = NULL;
         //free read line?????
     }
-    dup2(redi_pipe[0], 0);
 }
 
 /*
@@ -70,7 +46,6 @@ void    infile_to_pipe(t_redi *ptr, int redi_pipe[2])
         write(redi_pipe[1], buf, len);//verifier le write?
         free(buf);
     }
-    dup2(redi_pipe[0], 0);
     close(fd);
 }
 
@@ -88,10 +63,12 @@ void redirect_infile(t_board *cmd, int redi_pipe[2])
     {
         if(ptr->type == INFILE)
             infile_to_pipe(ptr, redi_pipe);
+        if(ptr->type == D_INFILE)
+            d_infile_to_pipe(ptr, redi_pipe);
         ptr = ptr->next;
     }
     if(ptr->type == INFILE)
         infile_to_pipe(ptr, redi_pipe);
-    d_infile_to_pipe(cmd->redi, redi_pipe);
-        
+    if(ptr->type == D_INFILE)
+        d_infile_to_pipe(ptr, redi_pipe);        
 }

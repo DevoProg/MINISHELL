@@ -195,5 +195,6 @@ int just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 //retirer les guillemets
 //mettre les flags
 //free cmd->path sans avoir de messages d'erreurs
+//CONTROL C DANS heredoc
 
 #endif
