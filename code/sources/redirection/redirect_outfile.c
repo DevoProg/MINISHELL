@@ -15,11 +15,11 @@ void write_in_all_file(char *buf, t_board *cmd)
     ptr = cmd->redi;
     while(ptr->next != NULL)
     {
-        if(ptr->type == OUTFILE)
+        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
             write(ptr->file_fd, buf, 1);
         ptr = ptr->next;
     }
-    if(ptr->type == OUTFILE)
+    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
         write(ptr->file_fd, buf, 1);
 }
 

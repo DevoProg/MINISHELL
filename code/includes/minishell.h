@@ -188,7 +188,7 @@ void ft_execute(t_data *minis, int **fd, char **envp);
 void last_cmd(t_data *minis, char **envp, int **fd, int i);
 void middle_cmd(t_data *minis, char **envp, int **fd, int i);
 void first_cmd(t_data *minis, char **envp, int **fd, int i);
-void just_one_cmd(t_data *minis, t_board *cmd, char **envp);
+int just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 //si cd n'est pas la derniere commande il doit rien faire

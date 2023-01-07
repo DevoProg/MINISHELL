@@ -55,9 +55,12 @@ void open_all_redi_files(t_board *cmd)
     ptr = cmd->redi;
     while(ptr->next != NULL)
     {
-        if(ptr->type == OUTFILE)
+        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
         {
-            ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+            if(ptr->type == OUTFILE)
+                ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+            else
+                ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
             if(ptr->file_fd == -1)
             {
                 printf("Erreur d'ouverture du fichier %s\n", ptr->file);
@@ -66,9 +69,12 @@ void open_all_redi_files(t_board *cmd)
         }
         ptr = ptr->next;
     }
-    if(ptr->type == OUTFILE)
+    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
     {
-        ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+        if(ptr->type == OUTFILE)
+            ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+        else if(ptr->type == D_OUTFILE)
+            ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
         if(ptr->file_fd == -1)
         {
             printf("Erreur d'ouverture du fichier %s\n", ptr->file);
@@ -89,11 +95,11 @@ void close_all_redi_files(t_board *cmd)
     ptr = cmd->redi;
     while(ptr->next != NULL)
     {
-        if(ptr->type == OUTFILE)
+        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
             close(ptr->file_fd);
         ptr = ptr->next;
     }
-    if(ptr->type == OUTFILE)
+    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
         close(ptr->file_fd);
 }
 

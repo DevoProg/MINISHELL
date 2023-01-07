@@ -96,9 +96,8 @@ int ft_pipe(t_data *minis, char **envp)
         return(127);
     if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
     {
-        just_one_cmd(minis, &minis->cmd[0], envp);
-        waitpid(minis->cmd[0].res_fork, &res, 0);
-        return (WEXITSTATUS(res));
+        res = just_one_cmd(minis, &minis->cmd[0], envp);
+        return (res);
     }
     fd = malloc_pipes(minis);
     ft_execute(minis, fd, envp);

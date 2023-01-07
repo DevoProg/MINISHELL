@@ -2,8 +2,9 @@
 /*
     fonction qui execute une commande car elle est seule dans la ligne lue
 */
-void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
+int just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 {
+    int res;
     int redi_pipe[2][2];
 
     if(pipe(redi_pipe[0]) == -1)
@@ -14,7 +15,7 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     {
         ft_check_builtins(minis, cmd);
         close_redi_pipe(redi_pipe);
-        return ;
+        return (0);//il faudra retoruner la bonne valeur pour chaque builtin?
     }
     cmd->res_fork = fork();
     if (cmd->res_fork < 0)
@@ -33,10 +34,12 @@ void just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     }
     close(redi_pipe[1][1]);
     close(redi_pipe[0][1]);
+    waitpid(minis->cmd[0].res_fork, &res, 0);
     if(is_redi_outfile(cmd))
-    redirect_outfile(cmd, redi_pipe[1]);
+        redirect_outfile(cmd, redi_pipe[1]);
     close(redi_pipe[0][0]);
     close(redi_pipe[1][0]);
+    return(WEXITSTATUS(res));
 }
 
 /*
