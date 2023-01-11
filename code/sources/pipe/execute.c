@@ -122,8 +122,8 @@ void middle_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);
     }
     close_redi_pipe(redi_pipe);
-    close(fd[0][0]);
-    close(fd[1][1]);
+    close(fd[i - 1][0]);
+    close(fd[i][1]);
 
 }
 
@@ -163,7 +163,7 @@ void last_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);
     }
     close_redi_pipe(redi_pipe);
-    close(fd[1][0]);
+    close(fd[i - 1][0]);
 }
 
 /*
