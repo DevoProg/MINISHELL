@@ -50,11 +50,18 @@ int just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 void first_cmd(t_data *minis, char **envp, int **fd, int i)
 {
     t_board *cmd;
+    int redi_pipe[2][2];
+
+    if(pipe(redi_pipe[0]) == -1)
+        exit(1);//il faudra quitter prorpement
+    if(pipe(redi_pipe[1]) == -1)
+        exit(1);//il faudra quitter proprement
 
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
         ft_check_builtins(minis, cmd);
+        close_redi_pipe(redi_pipe);
         return ;
     }
     cmd->res_fork = fork();
@@ -77,11 +84,18 @@ void first_cmd(t_data *minis, char **envp, int **fd, int i)
 void middle_cmd(t_data *minis, char **envp, int **fd, int i)
 {
     t_board *cmd;
+    int redi_pipe[2][2];
+
+    if(pipe(redi_pipe[0]) == -1)
+        exit(1);//il faudra quitter prorpement
+    if(pipe(redi_pipe[1]) == -1)
+        exit(1);//il faudra quitter proprement
 
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
         ft_check_builtins(minis, cmd);
+        close_redi_pipe(redi_pipe);
         return ;
     }
     cmd->res_fork = fork();
@@ -105,11 +119,18 @@ void middle_cmd(t_data *minis, char **envp, int **fd, int i)
 void last_cmd(t_data *minis, char **envp, int **fd, int i)
 {
     t_board *cmd;
+    int redi_pipe[2][2];
+
+    if(pipe(redi_pipe[0]) == -1)
+        exit(1);//il faudra quitter prorpement
+    if(pipe(redi_pipe[1]) == -1)
+        exit(1);//il faudra quitter proprement
 
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
         ft_check_builtins(minis, cmd);
+        close_redi_pipe(redi_pipe);
         return ;
     }
     cmd->res_fork = fork();
@@ -117,6 +138,11 @@ void last_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);//il faudrda quitter prorpement
     if (cmd->res_fork == 0)
     {
+        if(is_redi_infile(&minis->cmd[i]))
+        {
+            redirect_infile(cmd, redi_pipe[0]);
+            dup2(redi_pipe[0][0], STDIN_FILENO);
+        }
         dup2(fd[i - 1][0], STDIN_FILENO);
         close_all_pipes(minis, fd);
         if(!ft_is_builtins(cmd))
