@@ -4,15 +4,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <fcntl.h>
-#include "../libft/includes/libft.h"
-#include "../libft/includes/ft_printf.h"
-#include "../libft/includes/get_next_line.h"
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <dirent.h>
+# include <fcntl.h>
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
+# include "../libft/includes/get_next_line.h"
+# include <errno.h>
+# include <stdbool.h>
 
 #define PATH_LEN 1024
 
@@ -75,6 +78,10 @@ void lst_add(t_var **lst, t_var *new);
 t_var *lst_last(t_var *lst);
 t_var *lst_name_finding(t_var *lst, char *name);
 void free_struct(t_data *minis);
+//signal.c
+void	init_signals();
+void	line_empty(t_data *minis);
+void	free_env(t_data *minis);
 
 
 //				REDIRECTION

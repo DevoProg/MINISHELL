@@ -35,7 +35,7 @@ ENV_DIR		=	env/
 ENV_FILES	=	get_envp_var
 
 MAIN_DIR	=	main/
-MAIN_FILES	=	init_struct main
+MAIN_FILES	=	init_struct main signal
 
 PARS_DIR	=	parsing/
 PARS_FILES	=	split_cmd split_line delete_quote

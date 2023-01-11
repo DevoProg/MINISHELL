@@ -1,16 +1,4 @@
 #include "../../includes/minishell.h"
-/*
-	Fonction s'appliquant a la reception du signal ctrl-c.
-*/
-void control_c()
-{
-	exit(1);
-}
-
-void control_backslash()
-{
-	exit(1);
-}
 
 /*
 	Fonction de la loop principale du shell.
@@ -20,15 +8,14 @@ void minishell_loop(char **envp)
 {
 	t_data minis;
 
-	signal(SIGINT, &control_c);
-	signal(SIGQUIT, &control_backslash);
-	ft_create_env(&minis, envp);//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
-	while(1)											//looop qui lit avec un prompt
+	init_signals();								// Analyse les siganux recus
+	ft_create_env(&minis, envp);				//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
+	while(1)									//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
-		if(!minis.line)// pour le control D
+		if(!minis.line)							// pour le control D
 		{
-			free_list(minis.env);
+			line_empty(&minis);					// Free minis si signal ctrl+d, puis exit
 			exit(1);
 		}
 		else if(minis.line && *minis.line)
