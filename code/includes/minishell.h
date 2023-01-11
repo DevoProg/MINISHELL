@@ -100,11 +100,12 @@ void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);
 void close_redi_pipe(int redi_pipe[2][2]);
 //redirect_infile.c
-void res_cmd_to_pipe(int fd[2], int redi_pipe[2]);
+void res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outfile);
 void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
+t_redi *last_redi_out(t_redi *redi);
 void write_in_last_file(char *buf, t_board *cmd);
 void redirect_outfile(t_board *cmd, int redi_pipe[2]);
 

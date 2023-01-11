@@ -1,9 +1,13 @@
 #include "../../includes/minishell.h"
 
-void res_cmd_to_pipe(int fd[2], int redi_pipe[2])
+void res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outfile)
 {
+    t_redi *ptr;
     int res;
     char *buf;
+
+    if(is_outfile == 1)
+        open_all_redi_files(cmd);
     while(1)
     {
         buf = malloc(sizeof(char) * 2);
@@ -17,8 +21,15 @@ void res_cmd_to_pipe(int fd[2], int redi_pipe[2])
         }
         buf[1] = '\0';
         write(redi_pipe[1], buf, 1);
+        if(is_outfile == 1 && is_redi_outfile(cmd))
+        {
+            ptr = last_redi_out(cmd->redi);
+            write(ptr->file_fd, buf, 1);
+        }
         free(buf);
     }
+    if(is_outfile == 1)
+        close_all_redi_files(cmd);
 }
 
 void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
