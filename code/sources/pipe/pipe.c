@@ -101,7 +101,8 @@ int ft_pipe(t_data *minis, char **envp)
     }
     fd = malloc_pipes(minis);
     ft_execute(minis, fd, envp);
-    close_all_pipes(minis, fd);
-    res = wait_all_pids(minis);
+    //close_all_pipes(minis, fd);
+    //res = wait_all_pids(minis);
+    res = 0;
     return(res);//il faudra chopper la variable
 }

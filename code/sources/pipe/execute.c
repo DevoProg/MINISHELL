@@ -81,6 +81,7 @@ void first_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);
     }
     close_redi_pipe(redi_pipe);
+    close(fd[0][1]);
 }
 
 /*
@@ -108,7 +109,9 @@ void middle_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);//il faudra quitter prormeent
     if (cmd->res_fork == 0)
     {
-        dup2(fd[i - 1][0], STDIN_FILENO);
+        res_cmd_to_pipe(fd[i - 1], redi_pipe[0]);
+        redirect_infile(cmd, redi_pipe[0]);
+        dup2(redi_pipe[0][0], STDIN_FILENO);
         dup2(fd[i][1], STDOUT_FILENO);
         close_all_pipes(minis, fd);
         close_redi_pipe(redi_pipe);
@@ -119,6 +122,9 @@ void middle_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);
     }
     close_redi_pipe(redi_pipe);
+    close(fd[0][0]);
+    close(fd[1][1]);
+
 }
 
 /*
@@ -146,8 +152,9 @@ void last_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);//il faudrda quitter prorpement
     if (cmd->res_fork == 0)
     {
-        
-        dup2(fd[i - 1][0], STDIN_FILENO);
+        res_cmd_to_pipe(fd[i - 1], redi_pipe[0]);
+        redirect_infile(cmd, redi_pipe[0]);
+        dup2(redi_pipe[0][0], STDIN_FILENO);
         close_all_pipes(minis, fd);
         close_redi_pipe(redi_pipe);
         if(!ft_is_builtins(cmd))
@@ -156,7 +163,7 @@ void last_cmd(t_data *minis, char **envp, int **fd, int i)
         exit(1);
     }
     close_redi_pipe(redi_pipe);
-
+    close(fd[1][0]);
 }
 
 /*
@@ -170,11 +177,22 @@ void ft_execute(t_data *minis, int **fd, char **envp)
     while(i < minis->nb_cmd)
     {
         if(i == 0)
+        {
             first_cmd(minis, envp, fd, i);
+            waitpid(minis->cmd[i].res_fork, NULL, 0);
+        }
         else if(i == minis->nb_cmd - 1)
+        {
+
             last_cmd(minis, envp, fd, i);
-        else 
+            waitpid(minis->cmd[i].res_fork, NULL, 0);
+        }
+        else
+        {
+
             middle_cmd(minis, envp ,fd, i);
+            waitpid(minis->cmd[i].res_fork, NULL, 0);
+        } 
         i++;
     }
 }
