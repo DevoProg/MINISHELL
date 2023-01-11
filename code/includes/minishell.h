@@ -105,7 +105,7 @@ void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
-void write_in_all_file(char *buf, t_board *cmd);
+void write_in_last_file(char *buf, t_board *cmd);
 void redirect_outfile(t_board *cmd, int redi_pipe[2]);
 
 //				PARSING

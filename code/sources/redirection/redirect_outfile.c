@@ -1,9 +1,30 @@
 #include "../../includes/minishell.h"
 
+t_redi *last_redi_out(t_redi *redi)
+{
+    t_redi *ptr;
+    t_redi *res;
+
+    if(!redi)
+        return (NULL);
+    ptr = redi;
+    res = NULL;
+    while(ptr->next != NULL)
+    {
+        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+            res = ptr;
+        ptr = ptr->next;
+    }
+    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+            res = ptr;
+    return(res);
+}
+
+
 /*
-    Fonction qui ecrit le resultat de la commande dans les fichiers de redirection de sorite ou le print
+    Fonction qui ecrit le resultat de la commande dans le dernier fichier de redirection de sorite ou le print
 */
-void write_in_all_file(char *buf, t_board *cmd)
+void write_in_last_file(char *buf, t_board *cmd)
 {
     t_redi *ptr;
 
@@ -12,14 +33,8 @@ void write_in_all_file(char *buf, t_board *cmd)
         ft_printf("%s", buf);
         return;
     }
-    ptr = cmd->redi;
-    while(ptr->next != NULL)
-    {
-        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
-            write(ptr->file_fd, buf, 1);
-        ptr = ptr->next;
-    }
-    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+    ptr = last_redi_out(cmd->redi);
+    if(ptr)
         write(ptr->file_fd, buf, 1);
 }
 
@@ -41,7 +56,7 @@ void redirect_outfile(t_board *cmd, int redi_pipe[2])
         if(res_read == -1 || res_read == 0)
             return;
         buf[1] = '\0';
-        write_in_all_file(buf, cmd);
+        write_in_last_file(buf, cmd);
         free(buf);
     }
     close_all_redi_files(cmd);
