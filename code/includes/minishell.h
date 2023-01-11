@@ -51,6 +51,7 @@ typedef struct s_board
 	int nb_words;			//le nombre de cases dans le tableau
 	char *cmd_path;			//pour execve(path dans la variable d'environneemnt)
 	int res_fork;			//int qui sert a wait le resultat du pipe
+	int pipe_fd[2];
 	t_redi *redi;
 }				t_board;			//structure pour chaque commande
 
@@ -89,18 +90,19 @@ void	free_env(t_data *minis);
 void redirection(t_data *minis);
 void clean_this_redi(char *str, int j, int res);
 void stock_redi(t_board *cmd, char *str, int res);
-void lst_add_redi(t_redi **lst, t_redi *new);
-t_redi	*lst_last_redi(t_redi *lst);
 char *get_file_redi(char *str);
-int ft_is_redi(char *str, size_t i);
 //redirect_utils.c
 int is_redi_infile(t_board *cmd);
 int is_redi_outfile(t_board *cmd);
 void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);
+//redirect_utils_bis.c
+void ft_pipe_redi(int redi_pipe[2][2]);
 void close_redi_pipe(int redi_pipe[2][2]);
+int ft_is_redi(char *str, size_t i);
+void lst_add_redi(t_redi **lst, t_redi *new);
+t_redi	*lst_last_redi(t_redi *lst);
 //redirect_infile.c
-void res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outfile);
 void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
@@ -108,6 +110,7 @@ void redirect_infile(t_board *cmd, int redi_pipe[2]);
 t_redi *last_redi_out(t_redi *redi);
 void write_in_last_file(char *buf, t_board *cmd);
 void redirect_outfile(t_board *cmd, int redi_pipe[2]);
+void res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outfile);
 
 //				PARSING
 //ft_split_cmd.c
@@ -185,20 +188,26 @@ void free_struct_cmd(t_data *minis);
 //				PIPE
 //pipe.c
 int ft_pipe(t_data *minis, char **envp);
-int **malloc_pipes(t_data *minis);
+void do_pipe(t_data *minis);
 int find_path_struct(t_data *minis);
-void close_all_pipes(t_data *minis, int **fd);
-int wait_all_pids(t_data *minis);
+void close_all_pipes(t_data *minis);
+//int wait_all_pids(t_data *minis);
 //path.c
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
 //execute.c
-void ft_execute(t_data *minis, int **fd, char **envp);
-void last_cmd(t_data *minis, char **envp, int **fd, int i);
-void middle_cmd(t_data *minis, char **envp, int **fd, int i);
-void first_cmd(t_data *minis, char **envp, int **fd, int i);
+void ft_execute(t_data *minis, char **envp);
+void last_cmd(t_data *minis, char **envp, int i);
+void middle_cmd(t_data *minis, char **envp, int i);
+void first_cmd(t_data *minis, char **envp, int i);
 int just_one_cmd(t_data *minis, t_board *cmd, char **envp);
+//fork.c
+int is_builtin_no_fork(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
+void fork_one_cmd(t_data *minis, char **envp, int redi_pipe[2][2], t_board *cmd);
+void fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
+void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
+void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 //si cd n'est pas la derniere commande il doit rien faire

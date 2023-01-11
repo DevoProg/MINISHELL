@@ -44,10 +44,10 @@ TOOLS_DIR	=	tools/
 TOOLS_FILES	=	ft_error utils utils_bis
 
 PIPE_DIR	=	pipe/
-PIPE_FILES	=	pipe path execute
+PIPE_FILES	=	pipe path execute fork
 
 REDI_DIR	=	redirection/
-REDI_FILES	=	redirect redi_utils redirect_infile redirect_outfile
+REDI_FILES	=	redirect redi_utils redirect_infile redirect_outfile redi_utils_bis
 
 SRC_FILES+=$(addprefix $(BIN_DIR),$(BIN_FILES))
 SRC_FILES+=$(addprefix $(ENV_DIR),$(ENV_FILES))

@@ -43,6 +43,22 @@ int is_redi_outfile(t_board *cmd)
             return(1);
     return(0);
 }
+
+void try_open_file(t_redi *ptr)
+{
+    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+    {
+        if(ptr->type == OUTFILE)
+            ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+        else
+            ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
+        if(ptr->file_fd == -1)
+        {
+            printf("Erreur d'ouverture du fichier %s\n", ptr->file);
+            exit(1);//il faudra quitter proprement
+        }
+    }
+}
 /*
     Fonction qui ouvre tous les files de sortie (redirection)
 */
@@ -55,32 +71,10 @@ void open_all_redi_files(t_board *cmd)
     ptr = cmd->redi;
     while(ptr->next != NULL)
     {
-        if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
-        {
-            if(ptr->type == OUTFILE)
-                ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-            else
-                ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
-            if(ptr->file_fd == -1)
-            {
-                printf("Erreur d'ouverture du fichier %s\n", ptr->file);
-                exit(1);//il faudra quitter proprement
-            }
-        }
+        try_open_file(ptr);
         ptr = ptr->next;
     }
-    if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
-    {
-        if(ptr->type == OUTFILE)
-            ptr->file_fd = open(ptr->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-        else if(ptr->type == D_OUTFILE)
-            ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
-        if(ptr->file_fd == -1)
-        {
-            printf("Erreur d'ouverture du fichier %s\n", ptr->file);
-            exit(1);//il faudra quitter proprement
-        }
-    }
+    try_open_file(ptr);
 }
 
 /*
@@ -101,15 +95,4 @@ void close_all_redi_files(t_board *cmd)
     }
     if(ptr->type == OUTFILE || ptr->type == D_OUTFILE)
         close(ptr->file_fd);
-}
-
-/*
-    Ferme tous les pipes de redirections
-*/
-void close_redi_pipe(int redi_pipe[2][2])
-{
-    close(redi_pipe[0][0]);
-    close(redi_pipe[0][1]);
-    close(redi_pipe[1][0]);
-    close(redi_pipe[1][1]);
 }
