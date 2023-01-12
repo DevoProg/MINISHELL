@@ -57,7 +57,12 @@ char *ft_try_path(t_data *minis, char *path, t_board *cmd)
     if(!path || !*path)
         return (0);
     if (access(cmd->tab[0], X_OK) == 0)
-        return(cmd->tab[0]);
+    {
+        res = ft_strdup(cmd->tab[0]);
+        if(!res)
+            exit(1);//il faudra quitter prorpement
+        return(res);
+    }
     path_len = 0;
     if(path[path_len] == ':')
         path++;

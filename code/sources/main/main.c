@@ -29,7 +29,7 @@ void minishell_loop(char **envp)
 			put_env_var(&minis);						//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
 			ft_split_cmd(&minis);						//fonction qui split la commande des espaces et prendre en compte les quotes
 			delete_quote(&minis);
-			ft_pipe(&minis, envp);						//fonction qui execute les commandes une par une et retourne la valeure du pipe
+			printf("res_pipe = %d\n", ft_pipe(&minis, envp));						//fonction qui execute les commandes une par une et retourne la valeure du pipe
 			free_struct((&minis));						//free la structure des commandes
 		}
 	}
@@ -37,6 +37,9 @@ void minishell_loop(char **envp)
 
 int    main(int argc, char **argv, char **envp)
 {
+	int i;
+
+
 	minishell_loop(envp);
 	(void)argv;
 	(void)argc;

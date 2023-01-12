@@ -122,29 +122,41 @@ void last_cmd(t_data *minis, char **envp, int i)
 /*
     fonction qui execute toutes les commandes en fonction de leur emplacement dans la ligne lue
 */
-void ft_execute(t_data *minis, char **envp)
+int ft_execute(t_data *minis, char **envp)
 {
     int i;
+    int res;
 
+    res = 0;
+        ft_printf("->%d\n", res);
     i = 0;
     while(i < minis->nb_cmd)
     {
         if(i == 0)
         {
-            first_cmd(minis, envp, i);
-            waitpid(minis->cmd[i].res_fork, NULL, 0);
+            if(minis->cmd[i].cmd_path)
+                first_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+                waitpid(minis->cmd[i].res_fork, &res, 0);
         }
         else if(i == minis->nb_cmd - 1)
         {
 
-            last_cmd(minis, envp, i);
-            waitpid(minis->cmd[i].res_fork, NULL, 0);
+            if(minis->cmd[i].cmd_path)
+                last_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+                waitpid(minis->cmd[i].res_fork, &res, 0);
+            if(!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
+                return(127);
         }
         else
         {
-            middle_cmd(minis, envp, i);
-            waitpid(minis->cmd[i].res_fork, NULL, 0);
-        } 
+            if(minis->cmd[i].cmd_path)
+                middle_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+                waitpid(minis->cmd[i].res_fork, &res, 0);
+        }
         i++;
     }
+    return (WEXITSTATUS(res));
 }

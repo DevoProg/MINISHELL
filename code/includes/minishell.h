@@ -190,7 +190,7 @@ void free_struct_cmd(t_data *minis);
 //pipe.c
 int ft_pipe(t_data *minis, char **envp);
 void do_pipe(t_data *minis);
-int find_path_struct(t_data *minis);
+void find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis);
 //int wait_all_pids(t_data *minis);
 //path.c
@@ -198,7 +198,7 @@ char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
 //execute.c
-void ft_execute(t_data *minis, char **envp);
+int ft_execute(t_data *minis, char **envp);
 void last_cmd(t_data *minis, char **envp, int i);
 void middle_cmd(t_data *minis, char **envp, int i);
 void first_cmd(t_data *minis, char **envp, int i);
@@ -210,7 +210,10 @@ void fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 
+
+//cd sans argument doit se trouver a la racine
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
+//si export a est_ce qu'on doit export??
 //si cd n'est pas la derniere commande il doit rien faire
 //retirer les guillemets
 //remettre les flags

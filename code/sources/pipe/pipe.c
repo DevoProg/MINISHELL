@@ -37,7 +37,7 @@ void close_all_pipes(t_data *minis)
 /*
     fonction qui recherche le chemin d'acces de la commande pour execve
 */
-int find_path_struct(t_data *minis)
+void find_path_struct(t_data *minis)
 {
     char *path;
     int i;
@@ -50,14 +50,11 @@ int find_path_struct(t_data *minis)
         {
             minis->cmd[i].cmd_path = ft_try_path(minis, path, &minis->cmd[i]);
             if(!minis->cmd[i].cmd_path)
-            {
                 printf("command not found: %s\n", minis->cmd[i].tab[0]);
-                return (127);
-            }
         }
         i++;
     }
-    return(0);
+    return ;
 }
 
 /*
@@ -84,15 +81,13 @@ int ft_pipe(t_data *minis, char **envp)
     int **fd;
     int res;
 
-    if(find_path_struct(minis) == 127)
-        return(127);
+    find_path_struct(minis);
     if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
     {
         res = just_one_cmd(minis, &minis->cmd[0], envp);
         return (res);
     }
     do_pipe(minis);
-    ft_execute(minis, envp);
-    res = 0;//ne pas oublier de recuperer res avec waitpid
+    res = ft_execute(minis, envp);
     return(res);//il faudra chopper la variable
 }
