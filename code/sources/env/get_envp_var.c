@@ -10,7 +10,7 @@ int ft_strlen_var(char *str, int j)
     i = 1;
     j++;
 
-    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_'))//peut-etre seulement alnum et _??
+    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))//peut-etre seulement alnum et _??
     {
         i++;
         j++;
@@ -28,14 +28,14 @@ char  *search_env_var(char *str, int i, t_data *minis)
     int j;
 
     j = i + 1;
-    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_'))//peut-etre seulement alnum et _??
+    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))//peut-etre seulement alnum et _??
         j++;
     new = malloc(sizeof(char) * (j + 1));
     if(!new)
         ft_error("Malloc", minis, 2, 1);
     j = i + 1;
     k = 0;
-    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_'))
+    while(str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
     {
         new[k] = str[j];
         k++;
@@ -84,7 +84,7 @@ char *get_envp_var(t_data *minis, char *cmd)
     i = 0;
     while(cmd[i])//lire lettre par lettre la commande
     {
-        if(cmd[i] == '$' && is_no_open_single_quote(cmd, i) && cmd[i + 1] && (ft_isalnum(cmd[i + 1]) || cmd[i + 1] == '_'))//si la string contient le dollar et qu'il n'y a pas de single quote ouverte
+        if(cmd[i] == '$' && is_no_open_single_quote(cmd, i) && cmd[i + 1] && (ft_isalnum(cmd[i + 1]) || cmd[i + 1] == '_' || cmd[i + 1] == '?'))//si la string contient le dollar et qu'il n'y a pas de single quote ouverte
         {
             var_env = search_env_var(cmd, i, minis);//fonction qui recherche la variable d'environnement dans la commande
             res_env = list_chr(minis->env, var_env);//retourne la contenu de la variable env res_env ne doit pas etre free!!!

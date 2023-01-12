@@ -40,6 +40,7 @@ typedef struct s_var    // structure pour les variable d'env
 	char *name;           // nom variable d'environnement.
 	char *value;   		  // valeur de la variable d'environnement.
 	int is_export;		  // Si la var = '_'.
+	int is_print;		  // Gestion de $?.
 	struct s_var *next;   // Noeud suivant
 }				t_var;
 
@@ -212,7 +213,7 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 //si cd n'est pas la derniere commande il doit rien faire
 //retirer les guillemets
-//mettre les flags
+//remettre les flags
 //free cmd->path sans avoir de messages d'erreurs
 //CONTROL C DANS heredoc
 

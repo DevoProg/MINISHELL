@@ -55,7 +55,7 @@ void print_list(t_var *exp, int i)
         return ;
     while(exp->next != NULL)
     {
-        if(i == 1 && exp->is_export == 0)
+        if((i == 1 && exp->is_export == 0) || exp->is_print == 0)
         {
             exp= exp->next;
             continue;
@@ -69,7 +69,7 @@ void print_list(t_var *exp, int i)
             exp = exp->next;
         }
     }
-    if(i == 1 && exp->is_export == 0)
+    if((i == 1 && exp->is_export == 0) || exp->is_print == 0)
         return;
     ft_putstr_fd(exp->name, 1);
     ft_putchar_fd('=', 1);

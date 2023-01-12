@@ -131,10 +131,29 @@ void ft_create_env(t_data *minis, char **envp)
         else
             ptr->is_export = 1;
         i++;
+        ptr->is_print = 1;
         ptr->next = NULL;
         lst_add(&minis->env, ptr);
         ptr = NULL;
     }
+    ptr = malloc(sizeof(t_var));
+    if(!ptr)
+        exit(1);//quitter proprement
+    ptr->name = malloc(sizeof(char) * 2);
+    if(!ptr->name)
+        exit(1);
+    ptr->name[0] = '?';// je sais pas si on peut faire ainsi
+    ptr->name[1] ='\0';
+    ptr->value = malloc(sizeof(char) * 2);
+    if(!ptr->value)
+        exit(1);
+    ptr->value[0] = '1';
+    ptr->value[1] = '\0';
+	ptr->next = NULL;
+	ptr->is_export = 0;
+	ptr->is_print = 0;
+	lst_add(&minis->env, ptr);
+	ptr = NULL;
 }
 
 /*
