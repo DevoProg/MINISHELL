@@ -128,32 +128,27 @@ int ft_execute(t_data *minis, char **envp)
     int res;
 
     res = 0;
-        ft_printf("->%d\n", res);
     i = 0;
     while(i < minis->nb_cmd)
     {
         if(i == 0)
         {
-            if(minis->cmd[i].cmd_path)
-                first_cmd(minis, envp, i);
-            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+            first_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]))
                 waitpid(minis->cmd[i].res_fork, &res, 0);
         }
         else if(i == minis->nb_cmd - 1)
         {
-
-            if(minis->cmd[i].cmd_path)
-                last_cmd(minis, envp, i);
-            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+            last_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]))
                 waitpid(minis->cmd[i].res_fork, &res, 0);
             if(!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
                 return(127);
         }
         else
         {
-            if(minis->cmd[i].cmd_path)
-                middle_cmd(minis, envp, i);
-            if(!ft_is_not_fork(&minis->cmd[i]) && minis->cmd[i].cmd_path)
+            middle_cmd(minis, envp, i);
+            if(!ft_is_not_fork(&minis->cmd[i]))
                 waitpid(minis->cmd[i].res_fork, &res, 0);
         }
         i++;

@@ -3,7 +3,7 @@
 /*
     Cas commande : PWD.
 */
-int    ft_pwd(void)
+int    ft_pwd(t_data *minis)
 {
     char    cwd[PATH_LEN];
 
@@ -27,7 +27,7 @@ void ft_envp(t_data *minis)
 /*
     Cas commande : ECHO.
 */
-void ft_echo(t_board *cmd)
+void ft_echo(t_data *minis, t_board *cmd)
 {
     int i;
     int option;
@@ -76,11 +76,11 @@ void ft_exit(t_data *minis)
 void ft_check_builtins(t_data *minis, t_board *cmd)
 {
     if(ft_strcmp(cmd->tab[0], "pwd") == 0)
-        ft_pwd();
+        ft_pwd(minis);
     else if(ft_strcmp(cmd->tab[0], "env") == 0)
         ft_envp(minis);
     else if(ft_strcmp(cmd->tab[0], "echo") == 0)
-        ft_echo(cmd);
+        ft_echo(minis, cmd);
     else if(ft_strcmp(cmd->tab[0], "exit") == 0)
         ft_exit(minis);
     else if(ft_strcmp(cmd->tab[0], "cd") == 0)

@@ -1,23 +1,5 @@
 #include "../../includes/minishell.h"
 
-// /*
-//     fonction qui attend l'execution de tous les forks
-// */
-// int wait_all_pids(t_data *minis)
-// {
-//     int i;
-//     int res;
-
-//     i = 0;
-//     while(i < minis->nb_cmd)
-//     {
-//         if(!ft_is_not_fork(&minis->cmd[i]))//si il faut fork alors on wait le porcess
-//             waitpid(minis->cmd[i].res_fork, &res, 0);
-//         i++;
-//     }
-//     return (WEXITSTATUS(res));
-// }
-
 /*
     fonction qui ferme tous les pipes
 */
@@ -84,6 +66,8 @@ int ft_pipe(t_data *minis, char **envp)
     find_path_struct(minis);
     if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
     {
+        if(!minis->cmd[0].cmd_path && !ft_is_builtins(&minis->cmd[0]))
+            return(127);
         res = just_one_cmd(minis, &minis->cmd[0], envp);
         return (res);
     }

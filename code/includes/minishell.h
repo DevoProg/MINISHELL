@@ -139,6 +139,9 @@ char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa var
 char *ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
 char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
+//put_res_pipe.c
+void put_res_pipe(t_data *minis, int res);
+void builtin_res_pipe(t_data *minis);
 
 
 //				BUILTINS
@@ -155,9 +158,9 @@ int access_check(char *path);
 //ft_check_builtins.c
 void ft_check_builtins(t_data *minis, t_board *cmd);
 void ft_exit(t_data *minis);
-void ft_echo(t_board *cmd);
+void ft_echo(t_data *minis, t_board *cmd);
 void ft_envp(t_data *minis);
-int  ft_pwd(void);
+int  ft_pwd(t_data *minis);
 //unset.c
 void    ft_unset(t_data *minis, t_board *cmd);
 t_var    *ft_delete_node(char *str, t_var *env);
@@ -213,11 +216,14 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 
 //cd sans argument doit se trouver a la racine
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
-//si export a est_ce qu'on doit export??
+//si "export a "est_ce qu'on doit export??non mais message erreur?
 //si cd n'est pas la derniere commande il doit rien faire
-//retirer les guillemets
+//retirer les guillemets quand echo '??
 //remettre les flags
-//free cmd->path sans avoir de messages d'erreurs
+//free cmd->path sans avoir de messages d'erreurs 
 //CONTROL C DANS heredoc
+
+
+//cd fail $? = 1 si reussi = 0
 
 #endif

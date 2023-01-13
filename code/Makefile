@@ -32,7 +32,7 @@ BIN_DIR		=	builtins/
 BIN_FILES	=	ft_check_builtins ft_cd export unset
 
 ENV_DIR		=	env/
-ENV_FILES	=	get_envp_var
+ENV_FILES	=	get_envp_var put_res_pipe
 
 MAIN_DIR	=	main/
 MAIN_FILES	=	init_struct main signal
