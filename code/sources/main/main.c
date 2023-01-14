@@ -29,7 +29,8 @@ void minishell_loop(char **envp)
 			ft_split_cmd(&minis);						//fonction qui split la commande des espaces et prendre en compte les quotes
 			delete_quote(&minis);						//retire les quotes "inutiles"
 			res = ft_pipe(&minis, envp);				//fonction qui execute les commandes une par une et retourne la valeure du pipe
-			put_res_pipe(&minis, res);					//resultat de l'execution dans la variable '?'
+			if(!ft_is_not_fork(&minis.cmd[minis.nb_cmd - 1]))//si il y a fork sur la derniere commande on stock la variable
+				put_res_pipe(&minis, res);					//resultat de l'execution dans la variable '?'
 			free_struct((&minis));						//free
 		}
 	}
