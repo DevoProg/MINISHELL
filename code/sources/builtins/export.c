@@ -70,6 +70,7 @@ void ft_export(t_data *minis, t_board *cmd)
     if(cmd->nb_words == 2)//si export ne possede pas d'argument il doit printlist
     {
         print_list(minis->env, 1);
+        put_res_pipe(minis, 0);
         return ;
     }
     i = 1;
@@ -83,7 +84,7 @@ void ft_export(t_data *minis, t_board *cmd)
         else if(!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si il n'y a pas d'egal et qu'elle existe deja
         {
             free(name);
-            return ;
+            break;
         }
         else if(!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si pas egal et existe pas ->vide
             ft_create_variable(minis, cmd->tab[i]);

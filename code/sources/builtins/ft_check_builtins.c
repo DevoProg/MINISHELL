@@ -37,6 +37,7 @@ void ft_echo(t_data *minis, t_board *cmd)
     if(cmd->nb_words == 2)//si il n'y a pas d'argument ni option
     {
         ft_putchar_fd('\n', 1);
+        put_res_pipe(minis, 0);
         return ;
     }
     if (ft_strcmp(cmd->tab[1], "-n") == 0)//option détécté est on passe a l'argument d'apres
