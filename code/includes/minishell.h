@@ -160,6 +160,7 @@ int access_check(char *path);
 //ft_check_builtins.c /!\ trop de fonctions
 void butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void builtins_with_fork(t_data *minis, t_board *cmd);
+//buitlin_utils
 void ft_exit(t_data *minis);
 void ft_echo(t_data *minis, t_board *cmd);
 void ft_envp(t_data *minis);
@@ -198,7 +199,6 @@ int ft_pipe(t_data *minis, char **envp);
 void create_pipe(t_data *minis);
 void find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis);
-//int wait_all_pids(t_data *minis);
 //path.c
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);

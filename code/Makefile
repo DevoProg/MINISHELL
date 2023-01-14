@@ -29,7 +29,7 @@ WHITE		=	\033[0;97m
 # Sources
 
 BIN_DIR		=	builtins/
-BIN_FILES	=	ft_check_builtins ft_cd export unset
+BIN_FILES	=	ft_check_builtins ft_cd export unset builtin_utils
 
 ENV_DIR		=	env/
 ENV_FILES	=	get_envp_var create_env lst_env
