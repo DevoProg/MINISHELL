@@ -197,6 +197,8 @@ void find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis);
 //int wait_all_pids(t_data *minis);
 //path.c
+int command_error_message(t_data *minis, t_board *cmd, int print);
+int infile_error_message(t_data *minis, t_board *cmd, int print);
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
@@ -222,7 +224,7 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //gerer $? ok
 //si "export a "est_ce qu'on doit export?? oui ok
 //retirer les guillemets quand echo '?? non ok
-//si cd n'est pas la derniere commande il doit rien faire
+//si cd n'est pas la derniere commande il doit rien faire OK
 //message d'erreur "fichier existe pas" meme si la commande existe pas
 //check tout les petits tests
 //trier avec une dossier pour les variables d'environnement

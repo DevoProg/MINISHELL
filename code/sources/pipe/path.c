@@ -1,5 +1,55 @@
 #include "../../includes/minishell.h"
 
+int command_error_message(t_data *minis, t_board *cmd, int print)
+{
+    int i = 0;
+    while(i < minis->nb_cmd)
+    {
+        if(!minis->cmd[i].cmd_path)
+        {
+            if(print == 1)
+                printf("command not found: %s\n", minis->cmd[i].tab[0]);
+            return(0);
+        }
+        i++;
+    }
+    return(1);
+}
+
+int infile_error_message(t_data *minis, t_board *cmd, int print)
+{
+    t_redi *ptr;
+
+    ptr = cmd->redi;
+    if(!ptr)
+        return(1);
+    while(ptr->next != NULL)
+    {
+        if(ptr->type == INFILE)
+        {
+            if(access(ptr->file, R_OK) != 0)
+            {
+                if(print == 1)
+                    ft_printf("Error to open file : %s\n", ptr->file);
+                return(0);
+            }
+        }
+        ptr = ptr->next;
+    }
+    if(ptr->type == INFILE)
+    {
+        if(access(ptr->file, R_OK) != 0)
+        {
+            if(print == 1)
+                ft_printf("Error to open file : %s\n", ptr->file);
+            return(0);
+        }
+    }
+    if(!command_error_message(minis, cmd, 1))
+        return(0);
+    return(1);
+}
+
 /*
     fonction qui copie le reste de la commande apres le chemin d'acces
 */

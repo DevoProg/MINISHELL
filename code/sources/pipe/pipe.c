@@ -29,11 +29,9 @@ void find_path_struct(t_data *minis)
     while(i < minis->nb_cmd)
     {
         if(!ft_is_builtins(&minis->cmd[i]))
-        {
             minis->cmd[i].cmd_path = ft_try_path(minis, path, &minis->cmd[i]);
-            if(!minis->cmd[i].cmd_path)
-                printf("command not found: %s\n", minis->cmd[i].tab[0]);
-        }
+        // if(!minis->cmd[i].cmd_path)
+        //         printf("command not found: %s\n", minis->cmd[i].tab[0]);
         i++;
     }
     return ;
@@ -66,11 +64,11 @@ int ft_pipe(t_data *minis, char **envp)
     find_path_struct(minis);
     if(minis->nb_cmd == 1)//si il n'y a qu'un seule commande
     {
-        if(!minis->cmd[0].cmd_path && !ft_is_builtins(&minis->cmd[0]))
-            return(127);
         res = just_one_cmd(minis, &minis->cmd[0], envp);
         if(!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
             res = 0;
+        if(!minis->cmd[0].cmd_path && !ft_is_builtins(&minis->cmd[0]))
+            return(127);
         return (res);
     }
     create_pipe(minis);

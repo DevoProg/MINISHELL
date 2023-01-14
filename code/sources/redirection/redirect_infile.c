@@ -32,9 +32,9 @@ void    infile_to_pipe(t_redi *ptr, int redi_pipe[2])
     int len;
 
     fd = open(ptr->file, O_RDONLY);
-    if(fd == -1)
+    if(fd == -1)//si erreur d'ouverture du fichier quitter le processus en cours le message est affiché a la fin de tous les porcess
     {
-        printf("Erreur d'ouverture du fichier %s\n", ptr->file);
+        printf("Error to open file : %s\n", ptr->file);
         exit(1);//il faudra quitter proprement
     }
     while(1)
