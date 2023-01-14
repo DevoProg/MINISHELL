@@ -80,7 +80,16 @@ void ft_export(t_data *minis, t_board *cmd)
             ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
         else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste
             ft_assign_new_value(minis, cmd->tab[i], name);//alors on lui donne une nouvelle valuer
+        else if(!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si il n'y a pas d'egal et qu'elle existe deja
+        {
+            free(name);
+            return ;
+        }
+        else if(!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si pas egal et existe pas ->vide
+            ft_create_variable(minis, cmd->tab[i]);
+
         free(name);//désalloue name
         i++;
     }
+    put_res_pipe(minis, 0);
 }

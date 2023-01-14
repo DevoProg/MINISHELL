@@ -3,17 +3,17 @@
 /*
     Cas commande : PWD.
 */
-int    ft_pwd(t_data *minis)
+void    ft_pwd(t_data *minis)
 {
     char    cwd[PATH_LEN];
 
     if (getcwd(cwd, PATH_LEN))
     {
         ft_putendl_fd(cwd, 1);
-        return (SUCCESS);
+        put_res_pipe(minis, 0);
+        return ;
     }
-    else
-        return (ERROR);
+    put_res_pipe(minis, 1);
 }
 
 /*
@@ -22,6 +22,8 @@ int    ft_pwd(t_data *minis)
 void ft_envp(t_data *minis)
 {
     print_list(minis->env, 0);
+    put_res_pipe(minis, 0);
+
 }
 
 /*
@@ -35,7 +37,7 @@ void ft_echo(t_data *minis, t_board *cmd)
     if(cmd->nb_words == 2)//si il n'y a pas d'argument ni option
     {
         ft_putchar_fd('\n', 1);
-        return;
+        return ;
     }
     if (ft_strcmp(cmd->tab[1], "-n") == 0)//option détécté est on passe a l'argument d'apres
     {
@@ -56,6 +58,8 @@ void ft_echo(t_data *minis, t_board *cmd)
     }
     if(option == 0)
         ft_putchar_fd('\n', 1);
+    put_res_pipe(minis, 0);
+
 }
 
 /*
@@ -74,7 +78,7 @@ void ft_exit(t_data *minis)
     Fonction servant a check si une commande contient les différentes fct bash.
 */
 void ft_check_builtins(t_data *minis, t_board *cmd)
-{
+{    
     if(ft_strcmp(cmd->tab[0], "pwd") == 0)
         ft_pwd(minis);
     else if(ft_strcmp(cmd->tab[0], "env") == 0)

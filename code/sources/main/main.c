@@ -39,7 +39,6 @@ int    main(int argc, char **argv, char **envp)
 {
 	int i;
 
-
 	minishell_loop(envp);
 	(void)argv;
 	(void)argc;

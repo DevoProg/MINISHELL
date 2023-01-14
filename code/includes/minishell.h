@@ -141,7 +141,6 @@ char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
 //put_res_pipe.c
 void put_res_pipe(t_data *minis, int res);
-void builtin_res_pipe(t_data *minis);
 
 
 //				BUILTINS
@@ -160,7 +159,7 @@ void ft_check_builtins(t_data *minis, t_board *cmd);
 void ft_exit(t_data *minis);
 void ft_echo(t_data *minis, t_board *cmd);
 void ft_envp(t_data *minis);
-int  ft_pwd(t_data *minis);
+void  ft_pwd(t_data *minis);
 //unset.c
 void    ft_unset(t_data *minis, t_board *cmd);
 t_var    *ft_delete_node(char *str, t_var *env);
@@ -192,7 +191,7 @@ void free_struct_cmd(t_data *minis);
 //				PIPE
 //pipe.c
 int ft_pipe(t_data *minis, char **envp);
-void do_pipe(t_data *minis);
+void create_pipe(t_data *minis);
 void find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis);
 //int wait_all_pids(t_data *minis);
@@ -214,16 +213,26 @@ void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 
 
+//free cmd->path sans avoir de messages d'erreurs OK?
+
+
+//SAMEDI
+
+//gerer $?
+//si "export a "est_ce qu'on doit export??non mais message erreur?
+//retirer les guillemets quand echo '??
+//si cd n'est pas la derniere commande il doit rien faire
+//message d'erreur "fichier existe pas" meme si la commande existe pas
+//check tout les petits tests
+//trier avec une dossier pour les variables d'environnement
+
+//DIMANCHE
 //cd sans argument doit se trouver a la racine
 //si unset ne trouve pas d'id il doit dire `x': not a valid identifier
-//si "export a "est_ce qu'on doit export??non mais message erreur?
-//si cd n'est pas la derniere commande il doit rien faire
-//retirer les guillemets quand echo '??
+//free correctement tout au bon endroit
+
+//LUNDI
 //remettre les flags
-//free cmd->path sans avoir de messages d'erreurs 
-//CONTROL C DANS heredoc
-
-
-//cd fail $? = 1 si reussi = 0
-
+//norme
+//tout check
 #endif

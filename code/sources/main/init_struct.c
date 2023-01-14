@@ -74,6 +74,19 @@ void ft_get_name(char *str, t_var *ptr)
 }
 
 /*
+    Si il n'y a pas de égal dans le get_value de export sa value = ''
+*/
+void ft_malloc_empty(t_var *ptr)
+{
+    ptr->value = malloc(sizeof(char) * 3);
+    if(!ptr->value)//quitter prorpement
+        exit(1);
+    ptr->value[0] = 39;// '
+    ptr->value[1] = 39;// '
+    ptr->value[2] = '\0';
+}
+
+/*
     Fonction servant a récupérer la valeur de la variable d'environnement.
     La valeur est stocké dans la structure "t_var ptr".
 */
@@ -86,6 +99,11 @@ void ft_get_value(char *str, t_var *ptr)
     i = 0;
     while(str[i] && str[i] != '=')
         i++;
+    if(str[i] != '=')
+    {
+        ft_malloc_empty(ptr);
+        return;
+    }
     i++;
     len = ft_strlen(str + i);
     ptr->value = malloc(sizeof(char) * (len + 1));
@@ -136,6 +154,7 @@ void ft_create_env(t_data *minis, char **envp)
         lst_add(&minis->env, ptr);
         ptr = NULL;
     }
+    //creer une fontion pour tout ce bloc en dessous ->allocation d'une liste pour la variable $?
     ptr = malloc(sizeof(t_var));
     if(!ptr)
         exit(1);//quitter proprement

@@ -4,8 +4,8 @@
 */
 int just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 {
-    int res;
     int redi_pipe[2][2];
+    int res;
 
     ft_pipe_redi(redi_pipe);
     if(ft_is_not_fork(cmd))
@@ -94,6 +94,7 @@ void middle_cmd(t_data *minis, char **envp, int i)
 void last_cmd(t_data *minis, char **envp, int i)
 {
     t_board *cmd;
+    int res;
     int redi_pipe[2][2];
 
     ft_pipe_redi(redi_pipe);
@@ -127,7 +128,6 @@ int ft_execute(t_data *minis, char **envp)
     int i;
     int res;
 
-    res = 0;
     i = 0;
     while(i < minis->nb_cmd)
     {

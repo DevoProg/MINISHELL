@@ -56,14 +56,18 @@ void ft_cd(t_data *minis, t_board *cmd)
 {
     if(access_check(cmd->tab[1]) == ERROR)
     {
-        printf("%s\n", "wrong path or not authorized");
-        return;
+        ft_printf("%s\n", "wrong path or not authorized");
+        put_res_pipe(minis, 1);
+        return ;
     }
     if(chdir(cmd->tab[1]) == -1)
     {
-        printf("%s\n", "ERROR CHANGING DIR");
-        return;
+        ft_printf("%s\n", "ERROR CHANGING DIR");
+        put_res_pipe(minis, 1);
+        return ;
     }
     ft_change_oldpwd(minis->env, minis);
     ft_change_pwd(minis->env, minis);
+    put_res_pipe(minis, 0);
+
 }

@@ -40,9 +40,9 @@ void find_path_struct(t_data *minis)
 }
 
 /*
-    fonction qui alloue une double tableau de pipe
+    fonction qui crée le nombre de pipe nécessaire
 */
-void do_pipe(t_data *minis)
+void create_pipe(t_data *minis)
 {
     int i;
 
@@ -69,9 +69,13 @@ int ft_pipe(t_data *minis, char **envp)
         if(!minis->cmd[0].cmd_path && !ft_is_builtins(&minis->cmd[0]))
             return(127);
         res = just_one_cmd(minis, &minis->cmd[0], envp);
+        if(!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
+            res = 0;
         return (res);
     }
-    do_pipe(minis);
+    create_pipe(minis);
     res = ft_execute(minis, envp);
+    if(!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
+            res = 0;
     return(res);//il faudra chopper la variable
 }
