@@ -229,10 +229,10 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //si cd n'est pas la derniere commande il doit rien faire OK
 //message d'erreur "fichier existe pas" meme si la commande existe pas OK
 //cd sans argument doit se trouver a la racine OK
-//trier avec une dossier pour les variables d'environnement
-//variable environnement print dans env??
-//check tout les petits tests
+//trier avec une dossier pour les variables d'environnement OK
+//variable environnement print dans env?? OK
 //fichier de 25 lignes et 5fcontion max par fichier
+//check tout les petits tests
 
 //DIMANCHE
 //free correctement tout au bon endroit
