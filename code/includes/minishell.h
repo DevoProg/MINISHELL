@@ -218,9 +218,9 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 
 //SAMEDI
 
-//gerer $?
-//si "export a "est_ce qu'on doit export??non mais message erreur?
-//retirer les guillemets quand echo '??
+//gerer $? ok
+//si "export a "est_ce qu'on doit export?? oui ok
+//retirer les guillemets quand echo '?? non ok
 //si cd n'est pas la derniere commande il doit rien faire
 //message d'erreur "fichier existe pas" meme si la commande existe pas
 //check tout les petits tests

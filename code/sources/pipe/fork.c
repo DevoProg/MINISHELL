@@ -30,9 +30,12 @@ void fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
 
 void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
 {
-    res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0], &minis->cmd[i], 0);
-    redirect_infile(&minis->cmd[i], redi_pipe[0]);
-    dup2(redi_pipe[0][0], STDIN_FILENO);
+    if(!ft_is_not_fork(&minis->cmd[i - 1]))
+    {
+        res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0], &minis->cmd[i], 0);
+        redirect_infile(&minis->cmd[i], redi_pipe[0]);
+        dup2(redi_pipe[0][0], STDIN_FILENO);
+    }
     dup2(redi_pipe[1][1], STDOUT_FILENO);
     close_all_pipes(minis);
     close_redi_pipe(redi_pipe);
@@ -44,9 +47,12 @@ void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
 
 void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
 {
-    res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0], &minis->cmd[i], 0);
-    redirect_infile(&minis->cmd[i], redi_pipe[0]);
-    dup2(redi_pipe[0][0], STDIN_FILENO);
+    if(!ft_is_not_fork(&minis->cmd[i - 1]))
+    {
+        res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0], &minis->cmd[i], 0);
+        redirect_infile(&minis->cmd[i], redi_pipe[0]);
+        dup2(redi_pipe[0][0], STDIN_FILENO);
+    }
     if(is_redi_outfile(&minis->cmd[i]))
         dup2(redi_pipe[1][1], STDOUT_FILENO);
     close_all_pipes(minis);
