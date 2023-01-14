@@ -54,13 +54,23 @@ void ft_change_pwd(t_var *env, t_data *minis)
 */
 void ft_cd(t_data *minis, t_board *cmd)
 {
-    if(access_check(cmd->tab[1]) == ERROR)
+    char *home_dir;
+    t_var *ptr;
+
+    if(cmd->nb_words == 2)
+    {
+        ptr = lst_name_finding(minis->env, "HOME");
+        home_dir = ptr->value;
+    }
+    else 
+        home_dir = cmd->tab[1];
+    if(access_check(home_dir) == ERROR)
     {
         ft_printf("%s\n", "wrong path or not authorized");
         put_res_pipe(minis, 1);
         return ;
     }
-    if(chdir(cmd->tab[1]) == -1)
+    if(chdir(home_dir) == -1)
     {
         ft_printf("%s\n", "ERROR CHANGING DIR");
         put_res_pipe(minis, 1);
