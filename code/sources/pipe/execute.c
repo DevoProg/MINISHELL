@@ -10,7 +10,7 @@ int just_one_cmd(t_data *minis, t_board *cmd, char **envp)
     ft_pipe_redi(redi_pipe);
     if(ft_is_not_fork(cmd))
     {
-        ft_check_builtins(minis, cmd);
+        butiltins_without_fork(minis, cmd, 0);
         close_redi_pipe(redi_pipe);
         return (0);//il faudra retoruner la bonne valeur pour chaque builtin?
     }
@@ -41,7 +41,7 @@ void first_cmd(t_data *minis, char **envp, int i)
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
-        ft_check_builtins(minis, cmd);
+        butiltins_without_fork(minis, cmd, i);
         close_redi_pipe(redi_pipe);
         return ;//il faudra retoruner la bonne valeur pour chaque builtin?
     }
@@ -70,7 +70,7 @@ void middle_cmd(t_data *minis, char **envp, int i)
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
-        ft_check_builtins(minis, cmd);
+        butiltins_without_fork(minis, cmd, i);
         close_redi_pipe(redi_pipe);
         return ;//il faudra retoruner la bonne valeur pour chaque builtin?
     }
@@ -101,7 +101,7 @@ void last_cmd(t_data *minis, char **envp, int i)
     cmd = &minis->cmd[i];
     if(ft_is_not_fork(cmd))
     {
-        ft_check_builtins(minis, cmd);
+        butiltins_without_fork(minis, cmd, i);
         close_redi_pipe(redi_pipe);
         return ;//il faudra retoruner la bonne valeur pour chaque builtin?
     }

@@ -10,7 +10,7 @@ void    fork_one_cmd(t_data *minis, char **envp, int redi_pipe[2][2], t_board *c
     close_redi_pipe(redi_pipe);
     if (!ft_is_builtins(cmd))
         execve(cmd->cmd_path, cmd->tab, envp);
-    ft_check_builtins(minis, cmd);
+    builtins_with_fork(minis, cmd);
     exit(1);
 }
 
@@ -24,7 +24,7 @@ void fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
     close_redi_pipe(redi_pipe);
     if(!ft_is_builtins(&minis->cmd[0]))
         execve(minis->cmd[0].cmd_path, minis->cmd[0].tab, envp);
-    ft_check_builtins(minis, &minis->cmd[0]);
+    builtins_with_fork(minis, &minis->cmd[i]);
     exit(1);
 }
 
@@ -41,7 +41,7 @@ void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
     close_redi_pipe(redi_pipe);
     if(!ft_is_builtins(&minis->cmd[i]))
         execve(minis->cmd[i].cmd_path, minis->cmd[i].tab, envp);
-    ft_check_builtins(minis, &minis->cmd[i]);
+    builtins_with_fork(minis, &minis->cmd[i]);
     exit(1);
 }
 
@@ -59,6 +59,6 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i)
     close_redi_pipe(redi_pipe);
     if(!ft_is_builtins(&minis->cmd[i]))
         execve(minis->cmd[i].cmd_path, minis->cmd[i].tab, envp);
-    ft_check_builtins(minis, &minis->cmd[i]);
+    builtins_with_fork(minis, &minis->cmd[i]);
     exit(1);
 }

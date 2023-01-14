@@ -155,7 +155,8 @@ void ft_change_pwd(t_var *env, t_data *minis);
 void ft_change_oldpwd(t_var *env, t_data *minis);
 int access_check(char *path);
 //ft_check_builtins.c
-void ft_check_builtins(t_data *minis, t_board *cmd);
+void butiltins_without_fork(t_data *minis, t_board *cmd, int i);
+void builtins_with_fork(t_data *minis, t_board *cmd);
 void ft_exit(t_data *minis);
 void ft_echo(t_data *minis, t_board *cmd);
 void ft_envp(t_data *minis);
