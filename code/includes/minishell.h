@@ -73,17 +73,12 @@ void minishell_loop(char **envp);
 void control_c();
 //init_struct.c
 void init_struct(t_data *minis);
-void ft_create_env(t_data *minis, char **envp);
-void ft_get_value(char *str, t_var *ptr);
-void ft_get_name(char *str, t_var *ptr);
-void lst_add(t_var **lst, t_var *new);
-t_var *lst_last(t_var *lst);
-t_var *lst_name_finding(t_var *lst, char *name);
 void free_struct(t_data *minis);
 //signal.c
+void	signal_handler(int sig);
 void	init_signals();
-void	line_empty(t_data *minis);
 void	free_env(t_data *minis);
+void	line_empty(t_data *minis);
 
 
 //				REDIRECTION
@@ -95,22 +90,23 @@ char *get_file_redi(char *str);
 //redirect_utils.c
 int is_redi_infile(t_board *cmd);
 int is_redi_outfile(t_board *cmd);
+void try_open_file(t_redi *ptr);
 void open_all_redi_files(t_board *cmd);
 void close_all_redi_files(t_board *cmd);
 //redirect_utils_bis.c
 void ft_pipe_redi(int redi_pipe[2][2]);
 void close_redi_pipe(int redi_pipe[2][2]);
 int ft_is_redi(char *str, size_t i);
-void lst_add_redi(t_redi **lst, t_redi *new);
 t_redi	*lst_last_redi(t_redi *lst);
+void lst_add_redi(t_redi **lst, t_redi *new);
 //redirect_infile.c
 void    d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
-t_redi *last_redi_out(t_redi *redi);
-void write_in_last_file(char *buf, t_board *cmd);
 void redirect_outfile(t_board *cmd, int redi_pipe[2]);
+void write_in_last_file(char *buf, t_board *cmd);
+t_redi *last_redi_out(t_redi *redi);
 void res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outfile);
 
 //				PARSING
@@ -133,15 +129,22 @@ int count_new_quote(char *str);
 
 
 //				ENV
-//ft_envp_var.c
+//create_env.c
+void ft_create_env(t_data *minis, char **envp);
+void ft_get_value(char *str, t_var *ptr);
+void ft_get_name(char *str, t_var *ptr);
+void ft_malloc_empty(t_var *ptr);
+//lst_env.c
+void put_res_pipe(t_data *minis, int res);
+void lst_add(t_var **lst, t_var *new);
+t_var *lst_last(t_var *lst);
+t_var *lst_name_finding(t_var *lst, char *name);
+//get_envp_var.c
 void    put_env_var(t_data *minis);
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
 char *ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
 char  *search_env_var(char *str, int i, t_data *minis);
 int 	ft_strlen_var(char *str, int j);
-//put_res_pipe.c
-void put_res_pipe(t_data *minis, int res);
-
 
 //				BUILTINS
 //export.c
@@ -154,7 +157,7 @@ void ft_cd(t_data *minis, t_board *cmd);
 void ft_change_pwd(t_var *env, t_data *minis);
 void ft_change_oldpwd(t_var *env, t_data *minis);
 int access_check(char *path);
-//ft_check_builtins.c
+//ft_check_builtins.c /!\ trop de fonctions
 void butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void builtins_with_fork(t_data *minis, t_board *cmd);
 void ft_exit(t_data *minis);
@@ -197,11 +200,11 @@ void find_path_struct(t_data *minis);
 void close_all_pipes(t_data *minis);
 //int wait_all_pids(t_data *minis);
 //path.c
-int command_error_message(t_data *minis, t_board *cmd, int print);
-int infile_error_message(t_data *minis, t_board *cmd, int print);
 char *ft_try_path(t_data *minis, char *path, t_board *cmd);
 char *cpy_path(t_board *cmd, char *path, int *path_len);
 void cpy_cmd(t_board *cmd, char *poss, int i);
+int infile_error_message(t_data *minis, t_board *cmd, int print);
+int command_error_message(t_data *minis, t_board *cmd, int print);
 //execute.c
 int ft_execute(t_data *minis, char **envp);
 void last_cmd(t_data *minis, char **envp, int i);
@@ -209,7 +212,6 @@ void middle_cmd(t_data *minis, char **envp, int i);
 void first_cmd(t_data *minis, char **envp, int i);
 int just_one_cmd(t_data *minis, t_board *cmd, char **envp);
 //fork.c
-int is_builtin_no_fork(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void fork_one_cmd(t_data *minis, char **envp, int redi_pipe[2][2], t_board *cmd);
 void fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
@@ -226,8 +228,9 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //retirer les guillemets quand echo '?? non ok
 //si cd n'est pas la derniere commande il doit rien faire OK
 //message d'erreur "fichier existe pas" meme si la commande existe pas OK
-//cd sans argument doit se trouver a la racine
+//cd sans argument doit se trouver a la racine OK
 //trier avec une dossier pour les variables d'environnement
+//variable environnement print dans env??
 //check tout les petits tests
 //fichier de 25 lignes et 5fcontion max par fichier
 
