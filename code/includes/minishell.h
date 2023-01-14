@@ -225,13 +225,13 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //si "export a "est_ce qu'on doit export?? oui ok
 //retirer les guillemets quand echo '?? non ok
 //si cd n'est pas la derniere commande il doit rien faire OK
-//message d'erreur "fichier existe pas" meme si la commande existe pas
-//check tout les petits tests
+//message d'erreur "fichier existe pas" meme si la commande existe pas OK
+//cd sans argument doit se trouver a la racine
 //trier avec une dossier pour les variables d'environnement
+//check tout les petits tests
+//fichier de 25 lignes et 5fcontion max par fichier
 
 //DIMANCHE
-//cd sans argument doit se trouver a la racine
-//si unset ne trouve pas d'id il doit dire `x': not a valid identifier
 //free correctement tout au bon endroit
 
 //LUNDI
