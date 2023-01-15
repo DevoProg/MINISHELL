@@ -26,7 +26,7 @@ void builtins_with_fork(t_data *minis, t_board *cmd)
 */
 void butiltins_without_fork(t_data *minis, t_board *cmd, int i)
 {
-    if(minis->cmd[i + 1].line_cmd)//si il y a une commande apres celle ci elle ne fait rien
+    if(minis->nb_cmd != 1 && i != (minis->nb_cmd - 1))//si il y a une commande apres celle ci elle ne fait rien
         return;
     if(ft_strcmp(cmd->tab[0], "exit") == 0)
         ft_exit(minis);

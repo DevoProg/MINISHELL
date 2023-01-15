@@ -57,13 +57,7 @@ void ft_cd(t_data *minis, t_board *cmd)
     char *home_dir;
     t_var *ptr;
 
-    if(cmd->nb_words == 2)
-    {
-        ptr = lst_name_finding(minis->env, "HOME");
-        home_dir = ptr->value;
-    }
-    else 
-        home_dir = cmd->tab[1];
+    home_dir = cmd->tab[1];
     if(access_check(home_dir) == ERROR)
     {
         ft_printf("%s\n", "wrong path or not authorized");

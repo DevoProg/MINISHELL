@@ -158,7 +158,6 @@ int ft_execute(t_data *minis, char **envp)
             last_cmd(minis, envp, i);
             if(!ft_is_not_fork(&minis->cmd[i]) && infile_error_message(minis, &minis->cmd[i], 0))
                 waitpid(minis->cmd[i].res_fork, &res, 0);
-
             if(!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
                 return(127);
         }
