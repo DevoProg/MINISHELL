@@ -120,6 +120,7 @@ int ft_len_words(char *line);
 void line_to_cmd(t_data *minis);
 char *str_cpy_cmd(char *line, int *i, t_data *minis);
 int ft_count_command(char *line);
+void ft_write(char *new, char *str, int *i, int *j);
 //delete_quote.c
 void delete_quote(t_data *minis);
 char *get_new_str(char *str);
@@ -131,14 +132,16 @@ int count_new_quote(char *str);
 //				ENV
 //create_env.c
 void ft_create_env(t_data *minis, char **envp);
+void create_var(t_data *minis, char **envp, int i);
+void create_var_interr(t_data *minis);
 void ft_get_value(char *str, t_var *ptr);
 void ft_get_name(char *str, t_var *ptr);
-void ft_malloc_empty(t_var *ptr);
 //lst_env.c
 void put_res_pipe(t_data *minis, int res);
 void lst_add(t_var **lst, t_var *new);
 t_var *lst_last(t_var *lst);
 t_var *lst_name_finding(t_var *lst, char *name);
+void ft_malloc_empty(t_var *ptr);
 //get_envp_var.c
 void    put_env_var(t_data *minis);
 char *get_envp_var(t_data *minis, char *cmd);//remplace la string cmd par sa variable d'environnement
@@ -149,6 +152,7 @@ int 	ft_strlen_var(char *str, int j);
 //				BUILTINS
 //export.c
 void ft_export(t_data *minis, t_board *cmd);
+int export_arg(t_data *minis, t_board *cmd, int i);
 void ft_create_variable(t_data *minis, char *str);
 void ft_assign_new_value(t_data *minis, char *str, char *name);
 char *get_name(char *str, t_data *minis);
@@ -163,6 +167,7 @@ void builtins_with_fork(t_data *minis, t_board *cmd);
 //buitlin_utils
 void ft_exit(t_data *minis);
 void ft_echo(t_data *minis, t_board *cmd);
+void ft_echo_bis(t_data *minis, t_board *cmd, int i, int option);
 void ft_envp(t_data *minis);
 void  ft_pwd(t_data *minis);
 //unset.c
@@ -231,7 +236,7 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //cd sans argument doit se trouver a la racine OK
 //trier avec une dossier pour les variables d'environnement OK
 //variable environnement print dans env?? OK
-//cd libft | cat
+//cd libft | cat Ok
 //5fcontion max par fichier OK
 //fichier de 25 lignes
 //check tout les petits tests

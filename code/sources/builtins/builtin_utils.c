@@ -50,6 +50,11 @@ void ft_echo(t_data *minis, t_board *cmd)
         option = 0;
         i = 1;
     }
+    ft_echo_bis(minis, cmd, i, option);
+}
+
+void ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
+{
     while (i < cmd->nb_words - 1)
     {
         if ((i > 1 && option == 0) || (i > 2 && option == 1))//afficher un espace entre chaque argument
@@ -60,7 +65,6 @@ void ft_echo(t_data *minis, t_board *cmd)
     if(option == 0)
         ft_putchar_fd('\n', 1);
     put_res_pipe(minis, 0);
-
 }
 
 /*

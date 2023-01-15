@@ -81,3 +81,10 @@ void line_to_cmd(t_data *minis)
         ft_error("Malloc", minis, 1, 1);
     minis->tab_cmd[minis->nb_cmd][0] = '\0';         // Plutot mettre NULL ??
 }
+
+void ft_write(char *new, char *str, int *i, int *j)
+{
+    new[*j] = str[*i];
+    *i += 1;
+    *j += 1;
+}

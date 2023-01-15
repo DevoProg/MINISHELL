@@ -59,12 +59,31 @@ void ft_create_variable(t_data *minis, char *str)
     ptr = NULL;
 }
 
+int export_arg(t_data *minis, t_board *cmd, int i)
+{
+    char *name;
+
+    name = get_name(cmd->tab[i], minis);//alloue name
+    if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
+        ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
+    else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste
+        ft_assign_new_value(minis, cmd->tab[i], name);//alors on lui donne une nouvelle valuer
+    else if(!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si il n'y a pas d'egal et qu'elle existe deja
+    {
+        free(name);
+        return (0);
+    }
+    else if(!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si pas egal et existe pas ->vide
+        ft_create_variable(minis, cmd->tab[i]);
+    free(name);//désalloue name
+    return(1);
+}
+
 /*
     Cas commande : EXPORT.
 */
 void ft_export(t_data *minis, t_board *cmd)
 {
-    char *name;
     int i;
 
     if(cmd->nb_words == 2)//si export ne possede pas d'argument il doit printlist
@@ -76,20 +95,8 @@ void ft_export(t_data *minis, t_board *cmd)
     i = 1;
     while(i < cmd->nb_words - 1)
     {
-        name = get_name(cmd->tab[i], minis);//alloue name
-        if(ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
-            ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
-        else if(ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste
-            ft_assign_new_value(minis, cmd->tab[i], name);//alors on lui donne une nouvelle valuer
-        else if(!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si il n'y a pas d'egal et qu'elle existe deja
-        {
-            free(name);
-            break;
-        }
-        else if(!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si pas egal et existe pas ->vide
-            ft_create_variable(minis, cmd->tab[i]);
-
-        free(name);//désalloue name
+        if(!export_arg(minis, cmd, i))
+            return ;
         i++;
     }
     put_res_pipe(minis, 0);

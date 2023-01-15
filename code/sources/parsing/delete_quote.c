@@ -79,11 +79,7 @@ char *get_new_str(char *str)
         else if(str[i] == 34)//34 = "
             write_to_new_doublequote(str, new, &i, &j);
         else
-        {
-            new[j] = str[i];
-            i++;
-            j++;
-        }
+            ft_write(new, str, &i, &j);
     }
     new[j] = '\0';
     free(str);

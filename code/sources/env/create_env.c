@@ -26,20 +26,6 @@ void ft_get_name(char *str, t_var *ptr)
     ptr->name[i] = '\0';
 }
 
-
-/*
-    Si il n'y a pas de égal dans le get_value de export sa value = ''
-*/
-void ft_malloc_empty(t_var *ptr)
-{
-    ptr->value = malloc(sizeof(char) * 3);
-    if(!ptr->value)//quitter prorpement
-        exit(1);
-    ptr->value[0] = 39;// '
-    ptr->value[1] = 39;// '
-    ptr->value[2] = '\0';
-}
-
 /*
     Fonction servant a récupérer la valeur de la variable d'environnement.
     La valeur est stocké dans la structure "t_var ptr".
@@ -59,56 +45,18 @@ void ft_get_value(char *str, t_var *ptr)
         return;
     }
     i++;
-    len = ft_strlen(str + i);
-    ptr->value = malloc(sizeof(char) * (len + 1));
+    ptr->value = ft_strdup(str + i);
     if(!ptr->value)
     {   
         free(ptr->name);
         free(ptr);
         return;
     }
-    j = 0;
-    while(str[i])
-    {
-        ptr->value[j] = str[i];
-        j++;
-        i++;
-    }
-    ptr->value[j] = '\0';
 }
 
-
-/*
-    Fonction servant a recuperer les variables d'environnement et de creer une liste chainée
-*/
-void ft_create_env(t_data *minis, char **envp)
+void create_var_interr(t_data *minis)
 {
     t_var *ptr;
-    int i;
-
-    minis->env = NULL;
-    i = 0;
-    while(envp[i])
-    {
-        ptr = malloc(sizeof(t_var));
-        if(!ptr)
-            ft_error("Malloc", minis, 0, 1);
-        ft_get_name(envp[i], ptr);
-        if(!ptr->name)
-            ft_error("Malloc", minis, 0, 1);//ptr est free dans ft_get_name
-        ft_get_value(envp[i], ptr);
-        if(!ptr->value)
-            ft_error("Malloc", minis, 0, 1);// ptr et ptr name free dans ft_get_value
-        if(ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')
-            ptr->is_export = 0;
-        else
-            ptr->is_export = 1;
-        i++;
-        ptr->is_print = 1;
-        ptr->next = NULL;
-        lst_add(&minis->env, ptr);
-        ptr = NULL;
-    }
     //creer une fontion pour tout ce bloc en dessous ->allocation d'une liste pour la variable $?
     ptr = malloc(sizeof(t_var));
     if(!ptr)
@@ -128,4 +76,43 @@ void ft_create_env(t_data *minis, char **envp)
 	ptr->is_print = 0;
 	lst_add(&minis->env, ptr);
 	ptr = NULL;
+}
+
+void create_var(t_data *minis, char **envp, int i)
+{
+    t_var *ptr;
+    ptr = malloc(sizeof(t_var));
+    if(!ptr)
+        ft_error("Malloc", minis, 0, 1);
+    ft_get_name(envp[i], ptr);
+    if(!ptr->name)
+        ft_error("Malloc", minis, 0, 1);//ptr est free dans ft_get_name
+    ft_get_value(envp[i], ptr);
+    if(!ptr->value)
+        ft_error("Malloc", minis, 0, 1);// ptr et ptr name free dans ft_get_value
+    if(ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')
+        ptr->is_export = 0;
+    else
+        ptr->is_export = 1;
+    ptr->is_print = 1;
+    ptr->next = NULL;
+    lst_add(&minis->env, ptr);
+    ptr = NULL;
+}
+
+/*
+    Fonction servant a recuperer les variables d'environnement et de creer une liste chainée
+*/
+void ft_create_env(t_data *minis, char **envp)
+{
+    int i;
+
+    minis->env = NULL;
+    i = 0;
+    while(envp[i])
+    {
+        create_var(minis, envp, i);
+        i++;
+    }
+    create_var_interr(minis);
 }

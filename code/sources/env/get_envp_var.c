@@ -100,8 +100,6 @@ char *get_envp_var(t_data *minis, char *cmd)
         i++;
     }
     return(cmd);
-    //est-ce qu'il faut gerer les "é è ç à ù" ??
-
 }
 
 /*
