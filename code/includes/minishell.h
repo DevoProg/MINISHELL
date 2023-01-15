@@ -231,7 +231,9 @@ void fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //cd sans argument doit se trouver a la racine OK
 //trier avec une dossier pour les variables d'environnement OK
 //variable environnement print dans env?? OK
-//fichier de 25 lignes et 5fcontion max par fichier
+//cd libft | cat
+//5fcontion max par fichier OK
+//fichier de 25 lignes
 //check tout les petits tests
 
 //DIMANCHE

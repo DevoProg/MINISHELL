@@ -2,16 +2,11 @@
 
 int command_error_message(t_data *minis, t_board *cmd, int print)
 {
-    int i = 0;
-    while(i < minis->nb_cmd)
+    if(!cmd->cmd_path && !ft_is_builtins(cmd))
     {
-        if(!minis->cmd[i].cmd_path)
-        {
-            if(print == 1)
-                printf("command not found: %s\n", minis->cmd[i].tab[0]);
-            return(0);
-        }
-        i++;
+        if(print == 1)
+            printf("command not found: %s\n", cmd->tab[0]);
+        return(0);
     }
     return(1);
 }
@@ -22,7 +17,7 @@ int infile_error_message(t_data *minis, t_board *cmd, int print)
 
     ptr = cmd->redi;
     if(!ptr)
-        return(1);
+        return(command_error_message(minis, cmd, print));
     while(ptr->next != NULL)
     {
         if(ptr->type == INFILE)
@@ -45,9 +40,7 @@ int infile_error_message(t_data *minis, t_board *cmd, int print)
             return(0);
         }
     }
-    if(!command_error_message(minis, cmd, 1))
-        return(0);
-    return(1);
+    return(command_error_message(minis, cmd, print));
 }
 
 /*
