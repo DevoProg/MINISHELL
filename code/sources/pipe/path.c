@@ -99,6 +99,15 @@ char *ft_try_path(t_data *minis, char *path, t_board *cmd)
 
     if(!path || !*path)
         return (0);
+    if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
+    {
+        res = ft_strdup(cmd->tab[0]);
+        if(!res)
+            exit(1);//il faudra quitter prorpement
+        ft_printf("Permission denied %s\n", cmd->tab[0]);
+        return(res);
+    }
+        
     if (access(cmd->tab[0], X_OK) == 0)
     {
         res = ft_strdup(cmd->tab[0]);

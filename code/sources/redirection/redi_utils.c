@@ -54,7 +54,7 @@ void try_open_file(t_redi *ptr)
             ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
         if(ptr->file_fd == -1)
         {
-            printf("Erreur d'ouverture du fichier %s\n", ptr->file);
+            printf("Error to open file : %s\n", ptr->file);
             exit(1);//il faudra quitter proprement
         }
     }

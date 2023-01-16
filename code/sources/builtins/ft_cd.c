@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+
 /*
     Fonction servant a check les acces au chemin ciblé.
 */
@@ -49,6 +50,29 @@ void ft_change_pwd(t_var *env, t_data *minis)
     ptr = NULL;
 }
 
+int cd_without_arg(t_data *minis, t_board *cmd)
+{
+    t_var *ptr;
+
+    ptr = lst_name_finding(minis->env, "HOME");
+    if(access_check(ptr->value) == ERROR)
+    {
+        ft_printf("%s\n", "wrong path or not authorized");
+        put_res_pipe(minis, 1);
+        return (1);
+    }
+    if(chdir(ptr->value) == -1)
+    {
+        ft_printf("%s\n", "ERROR CHANGING DIR");
+        put_res_pipe(minis, 1);
+        return (1);
+    }
+    ft_change_oldpwd(minis->env, minis);
+    ft_change_pwd(minis->env, minis);
+    put_res_pipe(minis, 0);
+    return(1);
+}
+
 /*
     Cas commande : CD.
 */
@@ -57,6 +81,8 @@ void ft_cd(t_data *minis, t_board *cmd)
     char *home_dir;
     t_var *ptr;
 
+    if(cd_without_arg(minis, cmd))
+        return ;
     home_dir = cmd->tab[1];
     if(access_check(home_dir) == ERROR)
     {
