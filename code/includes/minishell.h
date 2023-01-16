@@ -74,6 +74,7 @@ void control_c();
 //init_struct.c
 void init_struct(t_data *minis);
 void free_struct(t_data *minis);
+void    free_redi(t_data *minis);
 //signal.c
 void	signal_handler(int sig);
 void	init_signals();

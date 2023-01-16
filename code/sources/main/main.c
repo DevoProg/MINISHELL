@@ -4,7 +4,7 @@ void each_things_to_do(t_data *minis, char **envp)
 {
 	int res;
 
-	add_history(minis->line);
+	add_history(minis->line);	
 	line_to_cmd(minis);						//split les commandes
 	init_struct(minis);						//init struct et put les commandes dans chaque struct
 	redirection(minis); 						//stock chaque redirection dans la structure de sa commande et retire la redirection de la ligne de la commande

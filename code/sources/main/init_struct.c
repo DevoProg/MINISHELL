@@ -4,7 +4,31 @@ void free_struct(t_data *minis)//free le tableau de structure
 {
     free_struct_cmd(minis);
     free(minis->line);
+    free_redi(minis);
 }
+
+
+void    free_redi(t_data *minis)
+{
+    int        i;
+    t_redi *current;
+    t_redi *next;
+
+    i = 0;
+    while (i < minis->nb_cmd) {
+        current = minis->cmd[i].redi;
+        while (current) {
+            next = current->next;
+            free(current->file);
+            free(current);
+            current = next;
+        }
+        free(minis->cmd[i].redi);
+        free(minis->cmd[i].redi);
+        i++;
+    }
+}
+
 /*
     Fonction servant a init la structure "minis".
 */
