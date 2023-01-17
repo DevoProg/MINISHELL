@@ -1,30 +1,23 @@
 #include "../../includes/minishell.h"
 
-void free_struct(t_data *minis)//free le tableau de structure
+void	free_redi(t_data *minis)
 {
-    free_struct_cmd(minis);
-    free(minis->line);
-    free_redi(minis);
-}
-
-
-void    free_redi(t_data *minis)
-{
-    int        i;
-    t_redi *current;
+	int		i;
+	t_redi *current;
     t_redi *next;
 
-    i = 0;
+	i = 0;
     while (i < minis->nb_cmd) {
         current = minis->cmd[i].redi;
-        while (current) {
-            next = current->next;
+        if(!current)
+            return ;
+        while (current->next) {
             free(current->file);
             free(current);
-            current = next;
+            current = current->next;
         }
-        free(minis->cmd[i].redi);
-        free(minis->cmd[i].redi);
+        free(current->file);
+        free(current);
         i++;
     }
 }
@@ -49,4 +42,11 @@ void init_struct(t_data *minis)//allocation d'un tableau de strcuture et copier 
         i++;
     }
     free_tab(minis->tab_cmd, minis->nb_cmd + 1);                        //free le tableau du split_cmd car les lignes ont ete copiee dans cmd[i]->cmd_line
+}
+
+void free_struct(t_data *minis)//free le tableau de structure
+{
+    free_struct_cmd(minis);
+    free(minis->line);
+    free_redi(minis);
 }

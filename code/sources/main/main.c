@@ -27,27 +27,33 @@ void minishell_loop(char **envp)
 	t_data minis;
 	int res;
 
-	init_signals();								// Analyse les siganux recus
-	ft_create_env(&minis, envp);				//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
-	while(1)									//looop qui lit avec un prompt
+	init_signals();									// Analyse les siganux recus
+	
+	ft_create_env(&minis, envp);					//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
+	while(1)										//looop qui lit avec un prompt
 	{
 		minis.line = readline(">$");
-		if(!minis.line)							// pour le control D
+		if(!minis.line)								// pour le control D
 		{
-			line_empty(&minis);					// Free minis si signal ctrl+d, puis exit
+			line_empty(&minis);						// Free minis si signal ctrl+d, puis exit
 			exit(1);
 		}
 		else if(minis.line && *minis.line)
 			each_things_to_do(&minis, envp);
 	}
+	free_list(minis.env);
+	//rl_clear_history(); il faut le garder juste que sur mon pc il est pas trouvé dans la lib
 }
 
 int    main(int argc, char **argv, char **envp)
 {
 	int i;
 
-	minishell_loop(envp);
-	(void)argv;
-	(void)argc;
-	return(1);
+	if(argc == 1)
+	{
+		minishell_loop(envp);
+		(void)argv;
+		(void)argc;
+		return(1);
+	}
 }

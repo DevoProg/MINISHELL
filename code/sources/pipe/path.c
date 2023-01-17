@@ -103,7 +103,7 @@ char *ft_try_path(t_data *minis, char *path, t_board *cmd)
     {
         res = ft_strdup(cmd->tab[0]);
         if(!res)
-            exit(1);//il faudra quitter prorpement
+            exit(1);                //il faudra quitter prorpement
         ft_printf("Permission denied %s\n", cmd->tab[0]);
         return(res);
     }
@@ -125,7 +125,10 @@ char *ft_try_path(t_data *minis, char *path, t_board *cmd)
     {
         res = ft_try_path(minis, path + path_len, cmd);
         if(res)
+        {
+            free(poss);
             return(res);
+        }
     }
     free(poss);
     return(NULL);

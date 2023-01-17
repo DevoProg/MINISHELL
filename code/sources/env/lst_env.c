@@ -12,6 +12,7 @@ void put_res_pipe(t_data *minis, int res)
         exit(1);//quitter prorperement
     free(ptr->value);
     ptr->value = ft_strdup(new_value);
+    free(new_value);
     if(!ptr->value)
         exit(1);//quitter prorpement
 }
