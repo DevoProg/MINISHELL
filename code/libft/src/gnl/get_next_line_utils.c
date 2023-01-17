@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:26:33 by alondot           #+#    #+#             */
-/*   Updated: 2022/02/07 16:30:06 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/17 00:22:21 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	str = (char *)malloc(sizeof(*s1)
+			* (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

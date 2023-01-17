@@ -1,53 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/17 00:34:32 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-void each_things_to_do(t_data *minis, char **envp)
+void	each_things_to_do(t_data *minis, char **envp)
 {
-	int res;
+	int	res;
 
 	add_history(minis->line);
-	line_to_cmd(minis);						//split les commandes
-	init_struct(minis);						//init struct et put les commandes dans chaque struct
-	redirection(minis); 						//stock chaque redirection dans la structure de sa commande et retire la redirection de la ligne de la commande
-	put_env_var(minis);						//si on la déplace atttention au free	//fonction qui substitue la variable env en son contenu dans la ligne de commande
-	ft_split_cmd(minis);						//fonction qui split la commande des espaces et prendre en compte les quotes
-	delete_quote(minis);						//retire les quotes "inutiles"
-	res = ft_pipe(minis, envp);				//fonction qui execute les commandes une par une et retourne la valeure du pipe
-	if(!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]))//si il y a fork sur la derniere commande on stock la variable
-		put_res_pipe(minis, res);					//resultat de l'execution dans la variable '?'
-	free_struct((minis));						//free
+	line_to_cmd(minis);
+	init_struct(minis);
+	redirection(minis);
+	put_env_var(minis);
+	ft_split_cmd(minis);
+	delete_quote(minis);
+	res = ft_pipe(minis, envp);
+	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]))
+		put_res_pipe(minis, res);
+	free_struct((minis));
 }
-
 
 /*
 	Fonction de la loop principale du shell.
 	Gere les lignes recues et effectue tout type d'actions.
 */
-void minishell_loop(char **envp)
+void	minishell_loop(char **envp)
 {
-	t_data minis;
-	int res;
+	t_data	minis;
+	int		res;
 
-	init_signals();								// Analyse les siganux recus
-	ft_create_env(&minis, envp);				//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
-	while(1)									//looop qui lit avec un prompt
+	init_signals();
+	ft_create_env(&minis, envp);
+	while (1)
 	{
 		minis.line = readline(">$");
-		if(!minis.line)							// pour le control D
+		if (!minis.line)
 		{
-			line_empty(&minis);					// Free minis si signal ctrl+d, puis exit
+			line_empty(&minis);
 			exit(1);
 		}
-		else if(minis.line && *minis.line)
+		else if (minis.line && *minis.line)
 			each_things_to_do(&minis, envp);
 	}
 }
 
-int    main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int i;
+	int	i;
 
 	minishell_loop(envp);
 	(void)argv;
 	(void)argc;
-	return(1);
+	return (1);
 }

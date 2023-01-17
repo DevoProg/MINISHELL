@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:24:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 19:31:03 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/16 23:04:13 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ void	ft_echo(t_data *minis, t_board *cmd)
 	int	option;
 
 	if (cmd->nb_words == 2)
-//si il n'y a pas d'argument ni option
 	{
 		ft_putchar_fd('\n', 1);
 		put_res_pipe(minis, 0);
 		return ;
 	}
 	if (ft_strcmp(cmd->tab[1], "-n") == 0)
-//	option détécté est on passe a l'argument d'apres
 	{
 		option = 1;
 		i = 2;
@@ -71,7 +69,6 @@ void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
 	while (i < cmd->nb_words - 1)
 	{
 		if ((i > 1 && option == 0) || (i > 2 && option == 1))
-//afficher un espace entre chaque argument
 			ft_putchar_fd(' ', 1);
 		ft_putstr_fd(cmd->tab[i], 1);
 		i++;

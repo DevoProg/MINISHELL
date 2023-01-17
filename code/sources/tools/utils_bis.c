@@ -1,94 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bis.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/17 00:38:39 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/17 00:41:24 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 /*
-    fonction qui regarde si il ne faut pas fork pour la commande
+	fonction qui regarde si il ne faut pas fork pour la commande
 */
-int ft_is_not_fork(t_board *cmd)
+int	ft_is_not_fork(t_board *cmd)
 {
-    int res;
+	int	res;
 
-    res = 0;
-    if(ft_strcmp(cmd->tab[0], "exit") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "cd") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "export") == 0 && cmd->nb_words > 2)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "unset") == 0)
-        res = 1;
-    return(res);
-}
-
- /*
-    fonction qui regarde si la commande est un builtin
-*/
-int ft_is_builtins(t_board *cmd)
-{
-    int res;
-
-    res = 0;
-    if(ft_strcmp(cmd->tab[0], "pwd") == 0)//==2 ->aucune options ni arg
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "env") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "echo") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "exit") == 0)//==2 ->aucune options ni arg
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "cd") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "export") == 0)
-        res = 1;
-    else if(ft_strcmp(cmd->tab[0], "unset") == 0)
-        res = 1;
-    return(res);
+	res = 0;
+	if (ft_strcmp(cmd->tab[0], "exit") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "cd") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "export") == 0 && cmd->nb_words > 2)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "unset") == 0)
+		res = 1;
+	return (res);
 }
 
 /*
-    fonction qui regarde print les variable d'env et var exportées //si i = 1 print var_export //si i == 0 print env
+	fonction qui regarde si la commande est un builtin
 */
-void print_list(t_var *exp, int i)
+int	ft_is_builtins(t_board *cmd)
 {
-    if(!exp)
-        return ;
-    while(exp->next != NULL)
-    {
-        if((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
-        {
-            ft_putstr_fd(exp->name, 1);
-            ft_putchar_fd('=', 1);
-            ft_putstr_fd(exp->value, 1);
-            ft_putchar_fd('\n', 1);
-        }
-        exp = exp->next;
-    }
-    if((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
-    {
-        ft_putstr_fd(exp->name, 1);
-        ft_putchar_fd('=', 1);
-        ft_putstr_fd(exp->value, 1);
-        ft_putchar_fd('\n', 1);
-    }
+	int	res;
+
+	res = 0;
+	if (ft_strcmp(cmd->tab[0], "pwd") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "env") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "echo") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "exit") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "cd") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "export") == 0)
+		res = 1;
+	else if (ft_strcmp(cmd->tab[0], "unset") == 0)
+		res = 1;
+	return (res);
 }
 
 /*
-    foncttion qui retourne la valeur grace au name de la liste
+	fonction qui regarde print les variable d'env et var exportées 
+	//si i = 1 print var_export //si i == 0 print env
 */
-char *list_chr(t_var *exp, char *str_name)
+void	print_list(t_var *exp, int i)
 {
-    while(exp->next != NULL)
-    {
-        if(ft_strcmp(exp->name, str_name) == 0)
-            return(exp->value);
-        exp = exp->next;
-    }
-    if(ft_strcmp(exp->name, str_name) == 0)
-        return(exp->value);
-    return(NULL);
+	if (!exp)
+		return ;
+	while (exp->next != NULL)
+	{
+		if ((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
+		{
+			ft_putstr_fd(exp->name, 1);
+			ft_putchar_fd('=', 1);
+			ft_putstr_fd(exp->value, 1);
+			ft_putchar_fd('\n', 1);
+		}
+		exp = exp->next;
+	}
+	if ((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
+	{
+		ft_putstr_fd(exp->name, 1);
+		ft_putchar_fd('=', 1);
+		ft_putstr_fd(exp->value, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
 
 /*
-    compare deux chaine de charactere
+	foncttion qui retourne la valeur grace au name de la liste
+*/
+char	*list_chr(t_var *exp, char *str_name)
+{
+	while (exp->next != NULL)
+	{
+		if (ft_strcmp(exp->name, str_name) == 0)
+			return (exp->value);
+		exp = exp->next;
+	}
+	if (ft_strcmp(exp->name, str_name) == 0)
+		return (exp->value);
+	return (NULL);
+}
+
+/*
+	compare deux chaine de charactere
 */
 int	ft_strcmp(char *s1, char *s2)
 {

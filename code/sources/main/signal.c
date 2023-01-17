@@ -1,14 +1,22 @@
-# include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/17 00:03:10 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/17 00:19:21 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int error;
+#include "../../includes/minishell.h"
 
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		//Si jamais donne error : 130
-		write (STDERR_FILENO, "\n", 1);
-		//rl_replace_line("", 0);
+		write(STDERR_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -19,10 +27,10 @@ void	signal_handler(int sig)
 	Le premier appel de signal sert a ignorer les appels de ctrl+\.
 	Le second exec le signal_handler qui s'occupera de reprompt.	
 */
-void	init_signals()
+void	init_signals(void)
 {
-	signal(SIGQUIT, SIG_IGN); 			// Ignore le signal ctrl+\ (SIGQUIT)
-	signal(SIGINT, signal_handler);		// Execute le signal_handler
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
 }
 
 /*
@@ -30,32 +38,28 @@ void	init_signals()
 */
 void	free_env(t_data *minis)
 {
-	int 	i;
 	t_var	*tmp;
-	
-	i = 0;
-	while(minis->env->next != NULL)
+
+	while (minis->env->next != NULL)
 	{
 		tmp = minis->env;
-
 		minis->env = minis->env->next;
-		if(tmp->name)
+		if (tmp->name)
 		{
 			tmp->name = NULL;
 			free(tmp->name);
 		}
-		if(tmp->value)
+		if (tmp->value)
 		{
 			tmp->value = NULL;
 			free(tmp->value);
 		}
-		if(tmp)
+		if (tmp)
 		{
 			tmp->next = NULL;
 			tmp = NULL;
 			free(tmp);
 		}
-		i++;
 	}
 	free(minis->env->name);
 	free(minis->env->value);
@@ -63,7 +67,8 @@ void	free_env(t_data *minis)
 }
 
 /*
-	Fonction servant a gerer le cas d'un signal ctrl+d. Free le minishell avant le exit.
+	Fonction servant a gerer le cas d'un signal ctrl+d.
+	Free le minishell avant le exit.
 */
 void	line_empty(t_data *minis)
 {
@@ -76,17 +81,3 @@ void	line_empty(t_data *minis)
 	printf("CTRL+D : exit le shell...\n");
 	exit(EXIT_SUCCESS);
 }
-
-// IDEE DE GETTER POUR LE PROMPT, POSSIBLE QU IL FAILLE FAIRE CETTE VERIFICATION A DISCUTER
-
-// static char	*get_input(void)
-// {
-// 	char	*input;
-// 	char	prompt[PROMPT_MAX];
-
-// 	if (isatty(STDIN_FILENO))
-// 		input = readline(get_prompt(prompt));
-// 	else
-// 		input = get_next_line(STDIN_FILENO);
-// 	return (input);
-// }

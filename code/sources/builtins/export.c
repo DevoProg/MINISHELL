@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:41:43 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 19:47:07 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/16 23:08:43 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,19 @@ int	export_arg(t_data *minis, t_board *cmd, int i)
 {
 	char	*name;
 
-	name = get_name(cmd->tab[i], minis);//alloue name
-	if (ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si le name existe pas dans la liste chainee de variable d'env
-		ft_create_variable(minis, cmd->tab[i]);//alors on cree une nouvelle node ett on la met dans la liste
-	else if (ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si elle existe deja dans la liste
-		ft_assign_new_value(minis, cmd->tab[i], name);//alors on lui donne une nouvelle valuer
-	else if (!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))//si il n'y a pas d'egal et qu'elle existe deja
+	name = get_name(cmd->tab[i], minis);
+	if (ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))
+		ft_create_variable(minis, cmd->tab[i]);
+	else if (ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))
+		ft_assign_new_value(minis, cmd->tab[i], name);
+	else if (!ft_strchr(cmd->tab[i], '=') && list_chr(minis->env, name))
 	{
 		free(name);
 		return (0);
 	}
-	else if (!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))//si pas egal et existe pas ->vide
+	else if (!ft_strchr(cmd->tab[i], '=') && !list_chr(minis->env, name))
 		ft_create_variable(minis, cmd->tab[i]);
-	free(name);//désalloue name
+	free(name);
 	return (1);
 }
 
@@ -101,7 +101,6 @@ void	ft_export(t_data *minis, t_board *cmd)
 {
 	int	i;
 
-//si export ne possede pas d'argument il doit printlist
 	if (cmd->nb_words == 2)
 	{
 		print_list(minis->env, 1);

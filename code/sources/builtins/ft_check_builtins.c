@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:51:20 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 19:52:53 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/16 23:12:10 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	builtins_with_fork(t_data *minis, t_board *cmd)
 */
 void	butiltins_without_fork(t_data *minis, t_board *cmd, int i)
 {
-	if (minis->nb_cmd != 1 && i != (minis->nb_cmd - 1))//si il y a une commande apres celle ci elle ne fait rien
+	if (minis->nb_cmd != 1 && i != (minis->nb_cmd - 1))
 		return ;
 	if (ft_strcmp(cmd->tab[0], "exit") == 0)
 		ft_exit(minis);

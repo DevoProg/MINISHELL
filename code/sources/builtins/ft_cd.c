@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:48:38 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 19:50:19 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/16 23:11:09 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_change_oldpwd(t_var *env, t_data *minis)
 
 	path = list_chr(env, "PWD");
 	if (!path)
-		ft_error("Cd failed\n", minis, 2, 0);//quitter avec perror?
+		ft_error("Cd failed\n", minis, 2, 0);
 	ptr = lst_name_finding(env, "OLDPWD");
 	free(ptr->value);
 	ptr->value = ft_strdup(path);
@@ -54,7 +54,7 @@ void	ft_change_pwd(t_var *env, t_data *minis)
 
 	getcwd(path, PATH_LEN);
 	if (!*path)
-		ft_error("Getcwd", minis, 2, 1);//quitter avec perror?
+		ft_error("Getcwd", minis, 2, 1);
 	ptr = lst_name_finding(env, "PWD");
 	free(ptr->value);
 	ptr->value = ft_strdup(path);
