@@ -47,8 +47,9 @@ void	fork_middle_cmd(t_data *minis, char **envp,
 {
 	if (!ft_is_not_fork(&minis->cmd[i - 1]))
 	{
-		res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd,
-			redi_pipe[0], &minis->cmd[i], 0);
+		if(!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd,
+			redi_pipe[0], &minis->cmd[i], 0))
+			ft_error_in_fork(minis, redi_pipe);
 		redirect_infile(&minis->cmd[i], redi_pipe[0]);
 	}
 	dup2(redi_pipe[0][0], STDIN_FILENO);
@@ -66,8 +67,9 @@ void	fork_last_cmd(t_data *minis, char **envp,
 {
 	if (!ft_is_not_fork(&minis->cmd[i - 1]))
 	{
-		res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0],
-			&minis->cmd[i], 0);
+		if(!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0],
+			&minis->cmd[i], 0))
+			ft_error_in_fork(minis, redi_pipe);
 		redirect_infile(&minis->cmd[i], redi_pipe[0]);
 	}
 	dup2(redi_pipe[0][0], STDIN_FILENO);

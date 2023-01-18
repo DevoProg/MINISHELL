@@ -51,7 +51,7 @@ void	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 	}
 	while (1)
 	{
-		buf = get_next_line(fd);
+		buf = get_next_line(fd);//si gnl foire ->close redi_pipe pipe_fd
 		if (buf == NULL)
 			break ;
 		len = ft_strlen(buf);

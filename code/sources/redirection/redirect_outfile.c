@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
+int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 {
 	t_redi	*ptr;
 	int		res;
@@ -24,7 +24,7 @@ void	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (!buf)
-			exit(1);
+			return(0);
 		res = read(fd[0], buf, 1);
 		if (res == -1 || res == 0)
 		{
@@ -42,6 +42,7 @@ void	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 	}
 	if (is_outf == 1)
 		close_all_redi_files(cmd);
+	return (1);
 }
 
 t_redi	*last_redi_out(t_redi *redi)
@@ -85,7 +86,7 @@ void	write_in_last_file(char *buf, t_board *cmd)
 /*
 	Fonction qui lit le resultat de la commande(pipe redi)
 */
-void	redirect_outfile(t_board *cmd, int redi_pipe[2])
+void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2])
 {
 	char	*buf;
 	int		res_read;
@@ -95,8 +96,14 @@ void	redirect_outfile(t_board *cmd, int redi_pipe[2])
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (!buf)
-			exit(1);
-		res_read = read(redi_pipe[0], buf, 1);
+		{
+			close(redi_pipe[0][0]);
+			close(redi_pipe[1][0]);
+			if(minis->nb_cmd > 1)
+				close_all_pipes(minis);
+			ft_error("Malloc", minis, 3, 1);
+		}
+		res_read = read(redi_pipe[1][0], buf, 1);
 		if (res_read == -1 || res_read == 0)
 		{
 			free(buf);

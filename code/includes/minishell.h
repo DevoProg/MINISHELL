@@ -112,10 +112,10 @@ void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
-void	redirect_outfile(t_board *cmd, int redi_pipe[2]);
+void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void	write_in_last_file(char *buf, t_board *cmd);
 t_redi	*last_redi_out(t_redi *redi);
-void	res_cmd_to_pipe(int fd[2], int redi_pipe[2],
+int	res_cmd_to_pipe(int fd[2], int redi_pipe[2],
 			t_board *cmd, int is_outfile);
 //				PARSING
 //ft_split_cmd.c
@@ -199,6 +199,9 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror);
 void	free_list(t_var *env);
 void	free_tab(char **tab, int i);
 void	free_struct_cmd(t_data *minis);
+void ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
+void ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
+void ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
 //				PIPE
 //pipe.c
 int		ft_pipe(t_data *minis, char **envp);
