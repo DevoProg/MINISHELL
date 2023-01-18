@@ -81,7 +81,7 @@ typedef struct s_data
 void	minishell_loop(char **envp);
 void	control_c(void);
 //init_struct.c
-void	free_redi(t_data *minis)
+void	free_redi(t_data *minis);
 void	init_struct(t_data *minis);
 void	free_struct(t_data *minis);
 //signal.c

@@ -65,6 +65,8 @@ int	cd_without_arg(t_data *minis, t_board *cmd)
 {
 	t_var	*ptr;
 
+	if(cmd->nb_words > 2)
+		return (0);
 	ptr = lst_name_finding(minis->env, "HOME");
 	if (access_check(ptr->value) == ERROR)
 	{
