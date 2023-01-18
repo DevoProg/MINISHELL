@@ -45,6 +45,8 @@ void	free_tab(char **tab, int i)
 
 void	free_list(t_var *env)
 {
+	if(!env)
+		return ;
 	while (env->next)
 	{
 		env = ft_delete_first_node(env);
