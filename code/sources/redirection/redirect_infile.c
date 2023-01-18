@@ -30,6 +30,7 @@ void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		write(redi_pipe[1], str, i);
 		write(redi_pipe[1], "\n", 1);
 		str = NULL;
+		free(str);
 	}
 }
 
