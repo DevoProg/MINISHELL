@@ -57,12 +57,12 @@ void	free_list(t_var *env)
 void	ft_error(char *message, t_data *minis, int z, int is_perror)
 {
 	if (z >= 0)
-	{
 		free_list(minis->env);
-		//rl_clear_history();
-	}
 	if (z > 0)
+	{
+		//rl_clear_history();
 		free(minis->line);
+	}
 	if (z == 1)
 		free_tab(minis->tab_cmd, minis->nb_cmd);
 	if (z >= 2)

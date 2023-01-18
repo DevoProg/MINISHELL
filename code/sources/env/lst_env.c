@@ -78,7 +78,7 @@ void	ft_malloc_empty(t_var *ptr)
 {
 	ptr->value = malloc(sizeof(char) * 3);
 	if (!ptr->value)
-		exit(1);
+		return;
 	ptr->value[0] = 39;
 	ptr->value[1] = 39;
 	ptr->value[2] = '\0';
