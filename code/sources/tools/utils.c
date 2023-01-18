@@ -53,6 +53,8 @@ int ft_len_cmd(char *line)
     if(!line)
 		return(0);
     i = 0;
+	if (line[i] == '|')
+		i++;
 	while(line[i])
 	{
 		if(is_no_open_quote(line, i) && line[i] == '|')
