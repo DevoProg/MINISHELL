@@ -21,7 +21,11 @@ int	access_check(char *path)
 
 	c = opendir(path);
 	if (c == NULL)
+	{
+		closedir(c);
 		return (ERROR);
+	}
+	closedir(c);
 	return (SUCCESS);
 }
 
