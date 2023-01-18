@@ -24,9 +24,10 @@ void	free_redi(t_data *minis)
         if (!current)
             return ;
         while (current->next) {
+			next = current->next;
             free(current->file);
             free(current);
-            current = current->next;
+            current = next;
         }
         free(current->file);
         free(current);
