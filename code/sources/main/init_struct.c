@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:28:43 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:30:35 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:18:45 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@ void	free_redi(t_data *minis)
 {
 	int		i;
 	t_redi	*current;
-    t_redi	*next;
+	t_redi	*next;
 
 	i = 0;
-    while (i < minis->nb_cmd) {
-        current = minis->cmd[i].redi;
-        if (!current)
-            return ;
-        while (current->next) {
+	while (i < minis->nb_cmd)
+	{
+		current = minis->cmd[i].redi;
+		if (!current)
+			return ;
+		while (current->next)
+		{
 			next = current->next;
-            free(current->file);
-            free(current);
-            current = next;
-        }
-        free(current->file);
-        free(current);
+			free(current->file);
+			free(current);
+			current = next;
+		}
+		free(current->file);
+		free(current);
 		i++;
 	}
 }
