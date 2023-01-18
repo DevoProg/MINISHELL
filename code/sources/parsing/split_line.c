@@ -88,7 +88,7 @@ void	line_to_cmd(t_data *minis)
 		minis->tab_cmd[minis->nb_cmd] = str_cpy_cmd(minis->line + i, &i, minis);
 		minis->nb_cmd++;
 	}
-	minis->tab_cmd[minis->nb_cmd] = malloc(sizeof(char) * 2);
+	minis->tab_cmd[minis->nb_cmd] = malloc(sizeof(char) * 1);
 	if (!minis->tab_cmd[minis->nb_cmd])
 		ft_error("Malloc", minis, 1, 1);
 	minis->tab_cmd[minis->nb_cmd][0] = '\0';
