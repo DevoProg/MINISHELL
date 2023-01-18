@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:42:04 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:46:32 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:19:07 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_len_cmd(char *line)
 	if (!line)
 		return (0);
 	i = 0;
-	if(line[i] == '|')
+	if (line[i] == '|')
 		i++;
 	while (line[i])
 	{

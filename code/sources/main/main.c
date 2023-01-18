@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:34:32 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:17:27 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int	i;
 
-	if(argc == 1);
+	if (argc == 1)
 		minishell_loop(envp);
 	(void)argv;
 	(void)argc;

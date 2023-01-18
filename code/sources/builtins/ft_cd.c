@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:48:38 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:11:09 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:16:50 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	cd_without_arg(t_data *minis, t_board *cmd)
 {
 	t_var	*ptr;
 
-	if(cmd->nb_words > 2)
+	if (cmd->nb_words > 2)
 		return (0);
 	ptr = lst_name_finding(minis->env, "HOME");
 	if (access_check(ptr->value) == ERROR)
