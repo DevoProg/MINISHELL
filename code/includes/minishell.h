@@ -207,7 +207,7 @@ void	find_path_struct(t_data *minis);
 void	close_all_pipes(t_data *minis);
 //path.c
 char	*ft_try_path(t_data *minis, char *path, t_board *cmd);
-char	*cpy_path(t_board *cmd, char *path, int *path_len);
+char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len);
 void	cpy_cmd(t_board *cmd, char *poss, int i);
 int		infile_error_message(t_data *minis, t_board *cmd, int print);
 int		command_error_message(t_data *minis, t_board *cmd, int print);

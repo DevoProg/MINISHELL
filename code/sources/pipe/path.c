@@ -75,7 +75,7 @@ void	cpy_cmd(t_board *cmd, char *poss, int i)
 /*
 	fonction qui copie un chemin d'acces dans une string
 */
-char	*cpy_path(t_board *cmd, char *path, int *path_len)
+char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len)
 {
 	int		i;
 	char	*poss;
@@ -87,7 +87,7 @@ char	*cpy_path(t_board *cmd, char *path, int *path_len)
 	i += ft_strlen(cmd->tab[0]);
 	poss = malloc(sizeof(char) * (i + 2));
 	if (!poss)
-		exit(1);
+		ft_error("Malloc", minis, 3, 1);
 	i = 0;
 	while (path[i] && path[i] != ':')
 	{
@@ -116,7 +116,7 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	{
 		res = ft_strdup(cmd->tab[0]);
 		if (!res)
-			exit(1);
+			ft_error("Malloc", minis, 3, 1);
 		ft_printf("Permission denied %s\n", cmd->tab[0]);
 		return (res);
 	}	
@@ -124,13 +124,13 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	{
 		res = ft_strdup(cmd->tab[0]);
 		if (!res)
-			exit(1);
+			ft_error("Malloc", minis, 3, 1);
 		return (res);
 	}
 	path_len = 0;
 	if (path[path_len] == ':')
 		path++;
-	poss = cpy_path(cmd, path, &path_len);
+	poss = cpy_path(minis, cmd, path, &path_len);
 	if (access(poss, X_OK) == 0)
 		return (poss);
 	if (path[path_len])
