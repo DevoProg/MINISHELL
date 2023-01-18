@@ -12,10 +12,33 @@
 
 #include "../../includes/minishell.h"
 
+void	free_redi(t_data *minis)
+{
+	int		i;
+	t_redi	*current;
+    t_redi	*next;
+
+	i = 0;
+    while (i < minis->nb_cmd) {
+        current = minis->cmd[i].redi;
+        if (!current)
+            return ;
+        while (current->next) {
+            free(current->file);
+            free(current);
+            current = current->next;
+        }
+        free(current->file);
+        free(current);
+		i++;
+	}
+}
+
 void	free_struct(t_data *minis)
 {
 	free_struct_cmd(minis);
 	free(minis->line);
+	free_redi(minis);
 }
 
 /*

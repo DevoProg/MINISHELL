@@ -137,8 +137,11 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	{
 		res = ft_try_path(minis, path + path_len, cmd);
 		if (res)
+		{
+			free(poss);
 			return (res);
+		}
 	}
-	free (poss);
+	free(poss);
 	return (NULL);
 }

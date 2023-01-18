@@ -26,6 +26,7 @@ void	put_res_pipe(t_data *minis, int res)
 	ptr->value = ft_strdup(new_value);
 	if (!ptr->value)
 		exit(1);
+	free(new_value);
 }
 
 t_var	*lst_name_finding(t_var *lst, char *name)
