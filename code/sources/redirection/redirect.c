@@ -27,7 +27,7 @@ char	*get_file_redi(char *str)
 		i++;
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
-		exit(1);
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '<' && str[i] != '>')
 	{
@@ -41,7 +41,7 @@ char	*get_file_redi(char *str)
 /*
 	Fonction qui stock la redirection dans une liste chainée de redirection
 */
-void	stock_redi(t_board *cmd, char *str, int res)
+void	stock_redi(t_data *minis, t_board *cmd, char *str, int res)
 {
 	t_redi	*redi;
 	int		j;
@@ -52,9 +52,14 @@ void	stock_redi(t_board *cmd, char *str, int res)
 		j = 2;
 	redi = malloc(sizeof(t_redi));
 	if (!redi)
-		exit(1);
+		ft_error("Malloc", minis, 3, 1);
 	redi->type = res;
 	redi->file = get_file_redi(str + j);
+	if(!redi->file)
+	{
+		free(redi);
+		ft_error("Malloc", minis, 3, 1);
+	}
 	redi->next = NULL;
 	lst_add_redi(&cmd->redi, redi);
 }
@@ -99,7 +104,7 @@ void	redirection(t_data *minis)
 			res = ft_is_redi(minis->cmd[i].line_cmd, j);
 			if (res != 0)
 			{
-				stock_redi(&minis->cmd[i], minis->cmd[i].line_cmd + j, res);
+				stock_redi(minis, &minis->cmd[i], minis->cmd[i].line_cmd + j, res);
 				clean_this_redi(minis->cmd[i].line_cmd, j, res);
 				if (res == D_INFILE || res == D_OUTFILE)
 					j++;

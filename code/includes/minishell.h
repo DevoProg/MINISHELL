@@ -93,7 +93,7 @@ void	line_empty(t_data *minis);
 //redirect.c
 void	redirection(t_data *minis);
 void	clean_this_redi(char *str, int j, int res);
-void	stock_redi(t_board *cmd, char *str, int res);
+void	stock_redi(t_data *minis, t_board *cmd, char *str, int res);
 char	*get_file_redi(char *str);
 //redirect_utils.c
 int		is_redi_infile(t_board *cmd);

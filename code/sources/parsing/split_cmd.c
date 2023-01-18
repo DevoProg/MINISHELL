@@ -77,7 +77,7 @@ char	*str_cpy_words(char *line, int *i, t_data *minis)
 	j = ft_len_words(line);
 	new = malloc(sizeof(char) * (j + 1));
 	if (!new)
-		ft_error("Malloc", minis, 2, 1);
+		return (NULL);
 	j = 0;
 	k = 0;
 	while (line[j] == ' ')
@@ -106,18 +106,22 @@ char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis)
 	int		i;
 	int		j;
 	char	**tab;
-	int		z;
 
-	z = ft_count_split(str) + 1;
-	tab = malloc(sizeof(char *) * (z));
+	i = ft_count_split(str) + 1;
+	tab = malloc(sizeof(char *) * (i));
 	if (!tab)
-		ft_error("Malloc", minis, 2, 1);
+		ft_error("Malloc", minis, 3, 1);
 	j = 0;
 	i = 0;
 	cmd->nb_words = 0;
 	while (str[i])
 	{
 		tab[j] = str_cpy_words(str + i, &i, minis);
+		if(!tab[j])
+		{
+			free_tab(tab, j);
+			ft_error("Malloc", minis, 3, 1);
+		}
 		j++;
 		cmd->nb_words++;
 	}

@@ -81,7 +81,10 @@ char	*get_new_str(char *str)
 	i = count_new_quote(str);
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
-		exit(1);
+	{
+		free(str);
+		return (NULL);
+	}
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -114,6 +117,8 @@ void	delete_quote(t_data *minis)
 		while (j < minis->cmd[i].nb_words - 1)
 		{
 			minis->cmd[i].tab[j] = get_new_str(minis->cmd[i].tab[j]);
+			if(!minis->cmd[i].tab[j])
+				ft_error("Malloc", minis, 3, 1);
 			j++;
 		}
 		i++;

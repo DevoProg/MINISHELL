@@ -37,7 +37,8 @@ void	free_tab(char **tab, int i)
 	j = 0;
 	while (j < i)
 	{
-		free(tab[j]);
+		if(tab[j])
+			free(tab[j]);
 		j++;
 	}
 	free(tab);
@@ -64,9 +65,11 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror)
 		free(minis->line);
 	}
 	if (z == 1)
-		free_tab(minis->tab_cmd, minis->nb_cmd);
+		free_tab(minis->tab_cmd, minis->nb_cmd + 1);
 	if (z >= 2)
 		free_struct_cmd(minis);
+	if(z >= 3)
+		free_redi(minis);
 	if (is_perror == 1)
 		perror(message);
 	else
