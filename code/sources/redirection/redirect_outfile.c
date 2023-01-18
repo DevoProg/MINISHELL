@@ -98,7 +98,10 @@ void	redirect_outfile(t_board *cmd, int redi_pipe[2])
 			exit(1);
 		res_read = read(redi_pipe[0], buf, 1);
 		if (res_read == -1 || res_read == 0)
+		{
+			free(buf);
 			return ;
+		}
 		buf[1] = '\0';
 		write_in_last_file(buf, cmd);
 		free(buf);
