@@ -83,10 +83,22 @@ void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
     Fonction servant a exit. 
     Free tout les elements en mémoire.
 */
-void	ft_exit(t_data *minis)
+void	ft_exit(t_data *minis, t_board *cmd)
 {
+	int exit_code;
+
+	if(cmd->nb_words == 2)
+		exit_code = 1;
+	else if(cmd->nb_words == 3)
+		exit_code = ft_atoi(cmd->tab[1]);
+	else
+	{
+		ft_putstr_fd("too much argument for exit\n", 2);
+		put_res_pipe(minis, 1);
+		return ;
+	}
 	free_struct(minis);
 	free_list(minis->env);
 	free_redi(minis);
-	exit(1);
+	exit(exit_code);
 }

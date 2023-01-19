@@ -170,7 +170,7 @@ int		access_check(char *path);
 void	butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void	builtins_with_fork(t_data *minis, t_board *cmd);
 //buitlin_utils
-void	ft_exit(t_data *minis);
+void	ft_exit(t_data *minis, t_board *cmd);
 void	ft_echo(t_data *minis, t_board *cmd);
 void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option);
 void	ft_envp(t_data *minis);

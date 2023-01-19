@@ -24,7 +24,7 @@ void	builtins_with_fork(t_data *minis, t_board *cmd)
 	else if (ft_strcmp(cmd->tab[0], "echo") == 0)
 		ft_echo(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "exit") == 0)
-		ft_exit(minis);
+		ft_exit(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "cd") == 0)
 		ft_cd(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "export") == 0)
@@ -41,7 +41,7 @@ void	butiltins_without_fork(t_data *minis, t_board *cmd, int i)
 	if (minis->nb_cmd != 1 && i != (minis->nb_cmd - 1))
 		return ;
 	if (ft_strcmp(cmd->tab[0], "exit") == 0)
-		ft_exit(minis);
+		ft_exit(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "cd") == 0)
 		ft_cd(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "export") == 0 && cmd->nb_words > 2)
