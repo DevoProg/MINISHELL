@@ -115,3 +115,18 @@ void ft_error_in_fork(t_data *minis, int redi_pipe[2][2])
 	ft_error("Malloc", minis, 3, 1);
 
 }
+
+void ft_error_to_pipe(t_data *minis, int i)
+{
+	int z;
+	
+	z = 0;
+	while(z <  i)
+	{
+		close(minis->cmd[z].pipe_fd[0]);
+		close(minis->cmd[z].pipe_fd[1]);
+			z++;
+	}
+	ft_error("Pipe", minis, 3, 1);
+	
+}

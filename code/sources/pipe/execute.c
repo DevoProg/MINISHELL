@@ -27,7 +27,7 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 		butiltins_without_fork(minis, cmd, 0);
 		return (0);
 	}
-	ft_pipe_redi(redi_pipe);
+	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
 		ft_error_fork(minis, redi_pipe, 0);
@@ -62,7 +62,7 @@ void	first_cmd(t_data *minis, char **envp, int i)
 		butiltins_without_fork(minis, cmd, i);
 		return ;
 	}
-	ft_pipe_redi(redi_pipe);
+	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
 		ft_error_fork(minis, redi_pipe, 1);
@@ -97,7 +97,7 @@ void	middle_cmd(t_data *minis, char **envp, int i)
 		butiltins_without_fork(minis, cmd, i);
 		return ;
 	}
-	ft_pipe_redi(redi_pipe);
+	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
 		ft_error_fork(minis, redi_pipe, 1);
@@ -133,7 +133,7 @@ void	last_cmd(t_data *minis, char **envp, int i)
 		butiltins_without_fork(minis, cmd, i);
 		return ;
 	}
-	ft_pipe_redi(redi_pipe);
+	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
 		ft_error_fork(minis, redi_pipe, 1);

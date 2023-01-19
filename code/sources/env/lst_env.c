@@ -21,11 +21,14 @@ void	put_res_pipe(t_data *minis, int res)
 	ptr = lst_name_finding(minis->env, "?");
 	new_value = ft_itoa(res);
 	if (!new_value)
-		exit(1);
+		ft_error("Malloc", minis, 3, 1);
 	free(ptr->value);
 	ptr->value = ft_strdup(new_value);
 	if (!ptr->value)
-		exit(1);
+	{
+		free(new_value);
+		ft_error("Malloc", minis, 3, 1);
+	}
 	free(new_value);
 }
 

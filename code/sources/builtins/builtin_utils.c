@@ -87,5 +87,6 @@ void	ft_exit(t_data *minis)
 {
 	free_struct(minis);
 	free_list(minis->env);
+	free_redi(minis);
 	exit(1);
 }

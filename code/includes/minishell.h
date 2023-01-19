@@ -102,7 +102,7 @@ void	try_open_file(t_redi *ptr);
 void	open_all_redi_files(t_board *cmd);
 void	close_all_redi_files(t_board *cmd);
 //redirect_utils_bis.c
-void	ft_pipe_redi(int redi_pipe[2][2]);
+void	ft_pipe_redi(t_data *minis, int redi_pipe[2][2]);
 void	close_redi_pipe(int redi_pipe[2][2]);
 int		ft_is_redi(char *str, size_t i);
 t_redi	*lst_last_redi(t_redi *lst);
@@ -195,13 +195,15 @@ void	print_list(t_var *exp, int i);
 char	*list_chr(t_var *exp, char *str_name);
 int		ft_strcmp(char *s1, char *s2);
 //ft_error.c
-void	ft_error(char *message, t_data *minis, int z, int is_perror);
 void	free_list(t_var *env);
 void	free_tab(char **tab, int i);
 void	free_struct_cmd(t_data *minis);
-void ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
-void ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
-void ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
+void	ft_error(char *message, t_data *minis, int z, int is_perror);
+void 	ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
+void 	ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
+void	 ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
+void 	ft_error_to_pipe(t_data *minis, int i);
+
 //				PIPE
 //pipe.c
 int		ft_pipe(t_data *minis, char **envp);

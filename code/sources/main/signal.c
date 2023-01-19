@@ -36,35 +36,35 @@ void	init_signals(void)
 /*
 	Free tout les elements de minis->env, afin de preparer le exit().
 */
-void	free_env(t_data *minis)
-{
-	t_var	*tmp;
+// void	free_env(t_data *minis)
+// {
+// 	t_var	*tmp;
 
-	while (minis->env->next != NULL)
-	{
-		tmp = minis->env;
-		minis->env = minis->env->next;
-		if (tmp->name)
-		{
-			tmp->name = NULL;
-			free(tmp->name);
-		}
-		if (tmp->value)
-		{
-			tmp->value = NULL;
-			free(tmp->value);
-		}
-		if (tmp)
-		{
-			tmp->next = NULL;
-			tmp = NULL;
-			free(tmp);
-		}
-	}
-	free(minis->env->name);
-	free(minis->env->value);
-	free(minis->env);
-}
+// 	while (minis->env->next != NULL)
+// 	{
+// 		tmp = minis->env;
+// 		minis->env = minis->env->next;
+// 		if (tmp->name)
+// 		{
+// 			tmp->name = NULL;
+// 			free(tmp->name);
+// 		}
+// 		if (tmp->value)
+// 		{
+// 			tmp->value = NULL;
+// 			free(tmp->value);
+// 		}
+// 		if (tmp)
+// 		{
+// 			tmp->next = NULL;
+// 			tmp = NULL;
+// 			free(tmp);
+// 		}
+// 	}
+// 	free(minis->env->name);
+// 	free(minis->env->value);
+// 	free(minis->env);
+// }
 
 /*
 	Fonction servant a gerer le cas d'un signal ctrl+d.
@@ -72,7 +72,7 @@ void	free_env(t_data *minis)
 */
 void	line_empty(t_data *minis)
 {
-	free_env(minis);
+	free_list(minis->env);
 	if (errno == ENOMEM)
 	{
 		perror("error");

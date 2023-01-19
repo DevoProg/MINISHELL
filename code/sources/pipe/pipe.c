@@ -58,7 +58,7 @@ void	create_pipe(t_data *minis)
 	while (i < minis->nb_cmd - 1)
 	{
 		if (pipe(minis->cmd[i].pipe_fd) == -1)
-			exit(1);
+			ft_error_to_pipe(minis, i);
 		i++;
 	}
 }

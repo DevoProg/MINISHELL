@@ -12,12 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_pipe_redi(int redi_pipe[2][2])
+void	ft_pipe_redi(t_data *minis, int redi_pipe[2][2])
 {
 	if (pipe(redi_pipe[0]) == -1)
-		exit(1);
+	{
+		close_all_pipes(minis);
+		ft_error("Pipe", minis, 3, 1);
+	}
 	if (pipe(redi_pipe[1]) == -1)
-		exit(1);
+	{
+		close_all_pipes(minis);
+		close(redi_pipe[0][1]);
+		close(redi_pipe[0][0]);
+		ft_error("Pipe", minis, 3, 1);
+	}
 }
 
 /*
