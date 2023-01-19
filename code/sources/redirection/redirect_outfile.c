@@ -107,7 +107,7 @@ void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2])
 		if (res_read == -1 || res_read == 0)
 		{
 			free(buf);
-			return ;
+			break ;
 		}
 		buf[1] = '\0';
 		write_in_last_file(buf, cmd);
