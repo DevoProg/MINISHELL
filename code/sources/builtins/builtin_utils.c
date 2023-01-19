@@ -91,7 +91,10 @@ int ft_is_digital(char *str)
 	while(str[i])
 	{
 		if(!ft_isdigit(str[i]))
+		{
+			ft_putstr_fd("numeric argument required\n", 2);
 			return(0);
+		}
 		i++;
 	}
 	return(1);
