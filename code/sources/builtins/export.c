@@ -69,7 +69,7 @@ void	ft_create_variable(t_data *minis, char *str)
 	if (!ptr->name)
 		ft_error("Malloc", minis, 2, 1);
 	ptr->is_export = 1;
-	ptr->is_print = 0;
+	ptr->is_print = 1;
 	lst_add(&minis->env, ptr);
 	ptr = NULL;
 }
