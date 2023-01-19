@@ -88,7 +88,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	int exit_code;
 
 	if(cmd->nb_words == 2)
-		exit_code = 1;
+		exit_code = 0;
 	else if(cmd->nb_words == 3)
 		exit_code = ft_atoi(cmd->tab[1]);
 	else
