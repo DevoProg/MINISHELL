@@ -17,7 +17,11 @@ int	command_error_message(t_data *minis, t_board *cmd, int print)
 	if (!cmd->cmd_path && !ft_is_builtins(cmd))
 	{
 		if (print == 1)
-			ft_printf("command not found: %s\n", cmd->tab[0]);
+		{
+			ft_putstr_fd("Command not found :", 2);
+			ft_putstr_fd(cmd->tab[0], 2);
+			ft_putchar_fd('\n', 2);
+		}
 		return (0);
 	}
 	return (1);
@@ -37,7 +41,11 @@ int	infile_error_message(t_data *minis, t_board *cmd, int print)
 			if (access(ptr->file, R_OK) != 0)
 			{
 				if (print == 1)
-					ft_printf("Error to open file : %s\n", ptr->file);
+				{
+					ft_putstr_fd("Error to open file :", 2);
+					ft_putstr_fd(ptr->file, 2);
+					ft_putchar_fd('\n', 2);
+				}
 				return (0);
 			}
 		}
@@ -48,7 +56,12 @@ int	infile_error_message(t_data *minis, t_board *cmd, int print)
 		if (access(ptr->file, R_OK) != 0)
 		{
 			if (print == 1)
-				ft_printf("Error to open file : %s\n", ptr->file);
+			{
+
+				ft_putstr_fd("Error to open file :", 2);
+				ft_putstr_fd(ptr->file, 2);
+				ft_putchar_fd('\n', 2);
+			}
 			return (0);
 		}
 	}
@@ -117,7 +130,9 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 		res = ft_strdup(cmd->tab[0]);
 		if (!res)
 			ft_error("Malloc", minis, 3, 1);
-		ft_printf("Permission denied %s\n", cmd->tab[0]);
+		ft_putstr_fd("Permission denied :", 2);
+		ft_putstr_fd(cmd->tab[0], 2);
+		ft_putchar_fd('\n', 2);
 		return (res);
 	}	
 	if (access(cmd->tab[0], X_OK) == 0)

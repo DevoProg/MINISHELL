@@ -66,7 +66,9 @@ void	try_open_file(t_redi *ptr)
 			ptr->file_fd = open(ptr->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
 		if (ptr->file_fd == -1)
 		{
-			ft_printf("Error to open file : %s\n", ptr->file);
+			ft_putstr_fd("Error to open file :", 2);
+			ft_putstr_fd(ptr->file, 2);
+			ft_putchar_fd('\n', 2);
 			exit(1);
 		}
 	}

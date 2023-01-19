@@ -21,10 +21,7 @@ int	access_check(char *path)
 
 	c = opendir(path);
 	if (c == NULL)
-	{
-		closedir(c);
 		return (ERROR);
-	}
 	closedir(c);
 	return (SUCCESS);
 }
@@ -74,13 +71,13 @@ int	cd_without_arg(t_data *minis, t_board *cmd)
 	ptr = lst_name_finding(minis->env, "HOME");
 	if (access_check(ptr->value) == ERROR)
 	{
-		ft_printf("%s\n", "wrong path or not authorized");
+		ft_putstr_fd("wrong path or not authorized\n", 2);
 		put_res_pipe(minis, 1);
 		return (1);
 	}
 	if (chdir(ptr->value) == -1)
 	{
-		ft_printf("%s\n", "ERROR CHANGING DIR");
+		ft_putstr_fd("ERROR CHANGING DIR\n", 2);
 		put_res_pipe(minis, 1);
 		return (1);
 	}
@@ -103,13 +100,13 @@ void	ft_cd(t_data *minis, t_board *cmd)
 	home_dir = cmd->tab[1];
 	if (access_check(home_dir) == ERROR)
 	{
-		ft_printf("%s\n", "wrong path or not authorized");
+		ft_putstr_fd("wrong path or not authorized\n", 2);
 		put_res_pipe(minis, 1);
 		return ;
 	}
 	if (chdir(home_dir) == -1)
 	{
-		ft_printf("%s\n", "ERROR CHANGING DIR");
+		ft_putstr_fd("ERROR CHANGING DIR\n", 2);
 		put_res_pipe(minis, 1);
 		return ;
 	}

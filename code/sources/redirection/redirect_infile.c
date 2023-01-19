@@ -46,7 +46,9 @@ void	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 	fd = open(ptr->file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Error to open file : %s\n", ptr->file);
+		ft_putstr_fd("Error to open file :", 2);
+		ft_putstr_fd(ptr->file, 2);
+		ft_putchar_fd('\n', 2);
 		exit(1);
 	}
 	while (1)
