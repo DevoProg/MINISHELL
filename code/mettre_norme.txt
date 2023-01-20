@@ -3,3 +3,5 @@
 2-tester le bash en heredoc
 3-remmettre les flags
 4-remettre a jour le fichier.h
+/bin/lss
+Command not found :/bin/lss?

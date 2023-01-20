@@ -27,6 +27,21 @@ int	command_error_message(t_data *minis, t_board *cmd, int print)
 	return (1);
 }
 
+int check_acces_read(t_redi *ptr, int print)
+{
+	if (access(ptr->file, R_OK) != 0)
+	{
+		if (print == 1)		
+		{
+			ft_putstr_fd("Error to open file :", 2);
+			ft_putstr_fd(ptr->file, 2);
+			ft_putchar_fd('\n', 2);
+		}
+		return (0);
+	}
+	return(1);
+}
+
 int	infile_error_message(t_data *minis, t_board *cmd, int print)
 {
 	t_redi	*ptr;
@@ -37,34 +52,13 @@ int	infile_error_message(t_data *minis, t_board *cmd, int print)
 	while (ptr->next != NULL)
 	{
 		if (ptr->type == INFILE)
-		{
-			if (access(ptr->file, R_OK) != 0)
-			{
-				if (print == 1)
-				{
-					ft_putstr_fd("Error to open file :", 2);
-					ft_putstr_fd(ptr->file, 2);
-					ft_putchar_fd('\n', 2);
-				}
+			if (!check_acces_read(ptr, print))
 				return (0);
-			}
-		}
 		ptr = ptr->next;
 	}
 	if (ptr->type == INFILE)
-	{
-		if (access(ptr->file, R_OK) != 0)
-		{
-			if (print == 1)
-			{
-
-				ft_putstr_fd("Error to open file :", 2);
-				ft_putstr_fd(ptr->file, 2);
-				ft_putchar_fd('\n', 2);
-			}
+		if (!check_acces_read(ptr, print))
 			return (0);
-		}
-	}
 	return (command_error_message(minis, cmd, print));
 }
 
@@ -113,18 +107,9 @@ char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len)
 	return (poss);
 }
 
-/*
-	fonction qui teste les chemin d'access pour les commandes
-	et qui le retourne si il est trouvé
-*/
-char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
-{
-	char	*poss;
-	char	*res;
-	int		path_len;
 
-	if (!path || !*path)
-		return (0);
+char *check_acces_path(t_data *minis, t_board *cmd, char *res)
+{
 	if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
 	{
 		res = ft_strdup(cmd->tab[0]);
@@ -142,12 +127,31 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 			ft_error("Malloc", minis, 3, 1);
 		return (res);
 	}
-	path_len = 0;
-	if (path[path_len] == ':')
-		path++;
+	return(NULL);
+}
+
+int ft_move_path(char *path, int *path_len)
+{
+	if (path[*path_len] == ':')
+		return(1);
+	return(0);
+}
+
+char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
+{
+	char	*poss;
+	char	*res;
+	int		path_len;
+
+	if (!path || !*path)
+		return (NULL);
+	res = check_acces_path(minis, cmd, res);
+	if(res)
+		return(res);
 	poss = cpy_path(minis, cmd, path, &path_len);
 	if (access(poss, X_OK) == 0)
 		return (poss);
+	path += ft_move_path(path, &path_len);
 	if (path[path_len])
 	{
 		res = ft_try_path(minis, path + path_len, cmd);
