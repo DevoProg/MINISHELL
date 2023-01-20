@@ -12,36 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-
-void close_for_cmd_pipe(t_data *minis, int z, int i)
-{
-	if(z == 1)
-		close(minis->cmd[0].pipe_fd[1]);
-	if(z == 2)
-	{
-		close(minis->cmd[i - 1].pipe_fd[0]);
-		close(minis->cmd[i].pipe_fd[1]);
-	}
-	if(z == 3)
-		close(minis->cmd[i - 1].pipe_fd[0]);
-}
-
-int error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
-{
-
-	if (!infile_error_message(minis, &minis->cmd[i], 1))
-	{	
-		close_for_cmd_pipe(minis, z, i);
-		return (1);
-	}
-	if (ft_is_not_fork(cmd))
-	{
-		close_for_cmd_pipe(minis, z, i);
-		butiltins_without_fork(minis, cmd, i);
-		return (1);
-	}
-	return (0);
-}
 /*
 	fonction qui execute une commande car elle est seule dans la ligne lue
 */

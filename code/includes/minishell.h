@@ -225,23 +225,23 @@ int 	ft_move_path(char *path, int *path_len);
 char 	*check_acces_path(t_data *minis, t_board *cmd, char *res);
 char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len);
 void	cpy_cmd(t_board *cmd, char *poss, int i);
-int		infile_error_message(t_data *minis, t_board *cmd, int print);
-int 	check_acces_read(t_redi *ptr, int print);
-int		command_error_message(t_data *minis, t_board *cmd, int print);
 //execute.c
 int		ft_execute(t_data *minis, char **envp);
 void	last_cmd(t_data *minis, char **envp, int i);
 void	middle_cmd(t_data *minis, char **envp, int i);
 void	first_cmd(t_data *minis, char **envp, int i);
 int		just_one_cmd(t_data *minis, t_board *cmd, char **envp);
-int 	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
-void 	close_for_cmd_pipe(t_data *minis, int z, int i);
-
 //fork.c
 void	fork_one_cmd(t_data *minis, char **envp,
 			int redi_pipe[2][2], t_board *cmd);
 void	fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void	fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void	fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
+//pipe_utils.c
+int 	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
+void 	close_for_cmd_pipe(t_data *minis, int z, int i);
+int		infile_error_message(t_data *minis, t_board *cmd, int print);
+int 	check_acces_read(t_redi *ptr, int print);
+int		command_error_message(t_data *minis, t_board *cmd, int print);
 
 #endif
