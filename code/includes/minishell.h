@@ -114,11 +114,12 @@ void	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
 void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
-void redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
+void 	redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void	write_in_last_file(char *buf, t_board *cmd);
 t_redi	*last_redi_out(t_redi *redi);
-int	res_cmd_to_pipe(int fd[2], int redi_pipe[2],
+int		res_cmd_to_pipe(int fd[2], int redi_pipe[2],
 			t_board *cmd, int is_outfile);
+char 	*read_from_pipe(int fd[2], char *buf);
 //				PARSING
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
@@ -127,10 +128,10 @@ char	*str_cpy_words(char *line, int *i, t_data *minis);
 int		ft_count_split(char *line);
 int		ft_len_words(char *line);
 //ft_split_line.c
+void	ft_write(char *new, char *str, int *i, int *j);
 void	line_to_cmd(t_data *minis);
 char	*str_cpy_cmd(char *line, int *i, t_data *minis);
 int		ft_count_command(char *line);
-void	ft_write(char *new, char *str, int *i, int *j);
 //delete_quote.c
 void	delete_quote(t_data *minis);
 char	*get_new_str(char *str);
@@ -188,11 +189,11 @@ void	ft_delete_middle_node(t_var *env);
 //				TOOLS
 //utils.c
 int		count_to_new_quote(char *str, int *i, int quote);
+int		is_no_open_single_quote(char *line, int i);
+int		ft_len_cmd(char *line);
+int		is_no_open_quote(char *line, int i);
 char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
-int		is_no_open_quote(char *line, int i);
-int		ft_len_cmd(char *line);
-int		is_no_open_single_quote(char *line, int i);
 //utils_bis.c
 int		ft_is_not_fork(t_board *cmd);
 int		ft_is_builtins(t_board *cmd);
@@ -200,11 +201,11 @@ void	print_list(t_var *exp, int i);
 char	*list_chr(t_var *exp, char *str_name);
 int		ft_strcmp(char *s1, char *s2);
 //ft_error.c
-void	free_list(t_var *env);
-void	free_tab(char **tab, int i);
 void	free_struct_cmd(t_data *minis);
+void	free_tab(char **tab, int i);
+void	free_list(t_var *env);
 void	ft_error(char *message, t_data *minis, int z, int is_perror);
-void ft_error_ptr(t_data *minis, t_var *ptr, int error);
+void 	ft_error_ptr(t_data *minis, t_var *ptr, int error);
 void 	ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
 void 	ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
 void	 ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
@@ -218,12 +219,12 @@ void	find_path_struct(t_data *minis);
 void	close_all_pipes(t_data *minis);
 //path.c
 char	*ft_try_path(t_data *minis, char *path, t_board *cmd);
-int ft_move_path(char *path, int *path_len);
-char *check_acces_path(t_data *minis, t_board *cmd, char *res);
+int 	ft_move_path(char *path, int *path_len);
+char 	*check_acces_path(t_data *minis, t_board *cmd, char *res);
 char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len);
 void	cpy_cmd(t_board *cmd, char *poss, int i);
-int check_acces_read(t_redi *ptr, int print);
 int		infile_error_message(t_data *minis, t_board *cmd, int print);
+int 	check_acces_read(t_redi *ptr, int print);
 int		command_error_message(t_data *minis, t_board *cmd, int print);
 //execute.c
 int		ft_execute(t_data *minis, char **envp);
@@ -231,6 +232,9 @@ void	last_cmd(t_data *minis, char **envp, int i);
 void	middle_cmd(t_data *minis, char **envp, int i);
 void	first_cmd(t_data *minis, char **envp, int i);
 int		just_one_cmd(t_data *minis, t_board *cmd, char **envp);
+int 	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
+void 	close_for_cmd_pipe(t_data *minis, int z, int i);
+
 //fork.c
 void	fork_one_cmd(t_data *minis, char **envp,
 			int redi_pipe[2][2], t_board *cmd);
