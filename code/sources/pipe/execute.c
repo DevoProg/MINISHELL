@@ -20,7 +20,7 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 	int	redi_pipe[2][2];
 	int	res;
 
-	if (!infile_error_message(minis, &minis->cmd[0], 1))
+	if (!infile_error_message(&minis->cmd[0], 1))
 		return (1);
 	if (ft_is_not_fork(cmd))
 	{
@@ -146,7 +146,7 @@ int	ft_execute(t_data *minis, char **envp)
 		else
 			middle_cmd(minis, envp, i);
 		if (!ft_is_not_fork(&minis->cmd[i])
-				&& infile_error_message(minis, &minis->cmd[i], 0))
+				&& infile_error_message(&minis->cmd[i], 0))
 				waitpid(minis->cmd[i].res_fork, &res, 0);
 		i++;
 	}
