@@ -12,6 +12,36 @@
 
 #include "../../includes/minishell.h"
 
+
+void close_for_cmd_pipe(t_data *minis, int z, int i)
+{
+	if(z == 1)
+		close(minis->cmd[0].pipe_fd[1]);
+	if(z == 2)
+	{
+		close(minis->cmd[i - 1].pipe_fd[0]);
+		close(minis->cmd[i].pipe_fd[1]);
+	}
+	if(z == 3)
+		close(minis->cmd[i - 1].pipe_fd[0]);
+}
+
+int error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
+{
+
+	if (!infile_error_message(minis, &minis->cmd[i], 1))
+	{	
+		close_for_cmd_pipe(minis, z, i);
+		return (1);
+	}
+	if (ft_is_not_fork(cmd))
+	{
+		close_for_cmd_pipe(minis, z, i);
+		butiltins_without_fork(minis, cmd, i);
+		return (1);
+	}
+	return (0);
+}
 /*
 	fonction qui execute une commande car elle est seule dans la ligne lue
 */
@@ -43,6 +73,7 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 	return (WEXITSTATUS(res));
 }
 
+
 /*
 	fonction qui execute la premiere commande
 */
@@ -52,16 +83,8 @@ void	first_cmd(t_data *minis, char **envp, int i)
 	int		redi_pipe[2][2];
 
 	cmd = &minis->cmd[i];
-	if (!infile_error_message(minis, &minis->cmd[i], 1))
-	{
-		close(minis->cmd[0].pipe_fd[1]);
-		return ;
-	}
-	if (ft_is_not_fork(cmd))
-	{
-		butiltins_without_fork(minis, cmd, i);
-		return ;
-	}
+	if (error_or_not_fork(minis, cmd, 1, i))
+		return;
 	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
@@ -85,18 +108,9 @@ void	middle_cmd(t_data *minis, char **envp, int i)
 	t_board	*cmd;
 	int		redi_pipe[2][2];
 
-	if (!infile_error_message(minis, &minis->cmd[i], 1))
-	{
-		close(minis->cmd[i - 1].pipe_fd[0]);
-		close(minis->cmd[i].pipe_fd[1]);
-		return ;
-	}
 	cmd = &minis->cmd[i];
-	if (ft_is_not_fork(cmd))
-	{
-		butiltins_without_fork(minis, cmd, i);
+	if (error_or_not_fork(minis, cmd, 2, i))
 		return ;
-	}
 	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
@@ -122,17 +136,9 @@ void	last_cmd(t_data *minis, char **envp, int i)
 	int		res;
 	int		redi_pipe[2][2];
 
-	if (!infile_error_message(minis, &minis->cmd[i], 1))
-	{
-		close(minis->cmd[i - 1].pipe_fd[0]);
-		return ;
-	}
 	cmd = &minis->cmd[i];
-	if (ft_is_not_fork(cmd))
-	{
-		butiltins_without_fork(minis, cmd, i);
-		return ;
-	}
+	if(error_or_not_fork(minis, cmd, 3, i))
+		return;
 	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
@@ -161,28 +167,18 @@ int	ft_execute(t_data *minis, char **envp)
 	while (i < minis->nb_cmd)
 	{
 		if (i == 0)
-		{
 			first_cmd(minis, envp, i);
-			if (!ft_is_not_fork(&minis->cmd[i])
-				&& infile_error_message(minis, &minis->cmd[i], 0))
-				waitpid(minis->cmd[i].res_fork, &res, 0);
-		}
 		else if (i == minis->nb_cmd - 1)
 		{
-			last_cmd(minis, envp, i);
-			if (!ft_is_not_fork(&minis->cmd[i])
-				&& infile_error_message(minis, &minis->cmd[i], 0))
-				waitpid(minis->cmd[i].res_fork, &res, 0);
 			if (!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
 				return (127);
+			last_cmd(minis, envp, i);
 		}
 		else
-		{
 			middle_cmd(minis, envp, i);
-			if (!ft_is_not_fork(&minis->cmd[i])
+		if (!ft_is_not_fork(&minis->cmd[i])
 				&& infile_error_message(minis, &minis->cmd[i], 0))
 				waitpid(minis->cmd[i].res_fork, &res, 0);
-		}
 		i++;
 	}
 	return (WEXITSTATUS(res));

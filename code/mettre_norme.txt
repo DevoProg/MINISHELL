@@ -1,1 +1,5 @@
 1- 6 fonction builtins
+2- excetue.c trop dee foncions
+2-tester le bash en heredoc
+3-remmettre les flags
+4-remettre a jour le fichier.h
