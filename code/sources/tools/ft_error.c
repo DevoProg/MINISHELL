@@ -12,49 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-void	free_struct_cmd(t_data *minis)
-{
-	int	i;
-
-	i = 0;
-	while (i < minis->nb_cmd)
-	{
-		if (minis->cmd[i].line_cmd)
-			free(minis->cmd[i].line_cmd);
-		if (minis->cmd[i].tab)
-			free_tab(minis->cmd[i].tab, minis->cmd[i].nb_words);
-		if (minis->cmd[i].cmd_path)
-			free(minis->cmd[i].cmd_path);
-		i++;
-	}
-	free(minis->cmd);
-}
-
-void	free_tab(char **tab, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < i)
-	{
-		if(tab[j])
-			free(tab[j]);
-		j++;
-	}
-	free(tab);
-}
-
-void	free_list(t_var *env)
-{
-	if(!env)
-		return ;
-	while (env->next)
-	{
-		env = ft_delete_first_node(env);
-	}
-	ft_delete_first_node(env);
-}
-
 void	ft_error(char *message, t_data *minis, int z, int is_perror)
 {
 	if (z >= 0)
@@ -102,46 +59,4 @@ void ft_error_fork(t_data *minis, int redi_pipe[2][2], int y)
 	if(y == 1)
 		close_all_pipes(minis);
 	ft_error("Fork", minis, 3, 1);
-}
-
-void ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z)
-{
-	if(y == 0 || y == 1)
-	{
-		close(redi_pipe[0][1]);
-		close(redi_pipe[1][1]);
-	}
-	if(y == 0 || y == 2)
-	{
-		close(redi_pipe[0][0]);
-		close(redi_pipe[1][0]);
-	}
-	if(z == 1)
-		close_all_pipes(minis);
-	ft_error("Malloc", minis, 3, 1);
-}
-
-void ft_error_in_fork(t_data *minis, int redi_pipe[2][2])
-{
-	close_all_pipes(minis);
-	close_redi_pipe(redi_pipe);
-	ft_error("Malloc", minis, 3, 1);
-	close_all_pipes(minis);
-	close_redi_pipe(redi_pipe);
-	ft_error("Malloc", minis, 3, 1);
-}
-
-void ft_error_to_pipe(t_data *minis, int i)
-{
-	int z;
-	
-	z = 0;
-	while(z <  i)
-	{
-		close(minis->cmd[z].pipe_fd[0]);
-		close(minis->cmd[z].pipe_fd[1]);
-			z++;
-	}
-	ft_error("Pipe", minis, 3, 1);
-	
 }

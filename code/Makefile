@@ -41,7 +41,7 @@ PARS_DIR	=	parsing/
 PARS_FILES	=	split_cmd split_line delete_quote
 
 TOOLS_DIR	=	tools/
-TOOLS_FILES	=	ft_error utils utils_bis
+TOOLS_FILES	=	ft_error ft_error_bis ft_free utils utils_bis count_quote
 
 PIPE_DIR	=	pipe/
 PIPE_FILES	=	pipe path execute fork

@@ -112,11 +112,11 @@ void	lst_add_redi(t_redi **lst, t_redi *new);
 void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	redirect_infile(t_board *cmd, int redi_pipe[2]);
+t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
 void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void 	redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void	write_in_last_file(char *buf, t_board *cmd);
-t_redi	*last_redi_out(t_redi *redi);
 int		res_cmd_to_pipe(int fd[2], int redi_pipe[2],
 			t_board *cmd, int is_outfile);
 char 	*read_from_pipe(int fd[2], char *buf);
@@ -188,10 +188,7 @@ void	ft_delete_last_node(t_var *env);
 void	ft_delete_middle_node(t_var *env);
 //				TOOLS
 //utils.c
-int		count_to_new_quote(char *str, int *i, int quote);
-int		is_no_open_single_quote(char *line, int i);
 int		ft_len_cmd(char *line);
-int		is_no_open_quote(char *line, int i);
 char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
 //utils_bis.c
@@ -200,17 +197,22 @@ int		ft_is_builtins(t_board *cmd);
 void	print_list(t_var *exp, int i);
 char	*list_chr(t_var *exp, char *str_name);
 int		ft_strcmp(char *s1, char *s2);
-//ft_error.c
+//ft_free.c
 void	free_struct_cmd(t_data *minis);
 void	free_tab(char **tab, int i);
 void	free_list(t_var *env);
+//count_quote.c
+int		count_to_new_quote(char *str, int *i, int quote);
+int		is_no_open_single_quote(char *line, int i);
+int		is_no_open_quote(char *line, int i);
+//ft_error.c
 void	ft_error(char *message, t_data *minis, int z, int is_perror);
 void 	ft_error_ptr(t_data *minis, t_var *ptr, int error);
 void 	ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
+//ft_error_bis.c
 void 	ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
 void	 ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
 void 	ft_error_to_pipe(t_data *minis, int i);
-
 //				PIPE
 //pipe.c
 int		ft_pipe(t_data *minis, char **envp);

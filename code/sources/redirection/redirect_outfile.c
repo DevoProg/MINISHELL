@@ -55,26 +55,6 @@ int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 	return (1);
 }
 
-t_redi	*last_redi_out(t_redi *redi)
-{
-	t_redi	*ptr;
-	t_redi	*res;
-
-	if (!redi)
-		return (NULL);
-	ptr = redi;
-	res = NULL;
-	while (ptr->next != NULL)
-	{
-		if (ptr->type == OUTFILE || ptr->type == D_OUTFILE)
-			res = ptr;
-		ptr = ptr->next;
-	}
-	if (ptr->type == OUTFILE || ptr->type == D_OUTFILE)
-			res = ptr;
-	return (res);
-}
-
 /*
 	Fonction qui ecrit le resultat de la commande dans 
 	le dernier fichier de redirection de sortie ou le print

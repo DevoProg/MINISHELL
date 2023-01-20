@@ -12,6 +12,26 @@
 
 #include "../../includes/minishell.h"
 
+t_redi	*last_redi_out(t_redi *redi)
+{
+	t_redi	*ptr;
+	t_redi	*res;
+
+	if (!redi)
+		return (NULL);
+	ptr = redi;
+	res = NULL;
+	while (ptr->next != NULL)
+	{
+		if (ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+			res = ptr;
+		ptr = ptr->next;
+	}
+	if (ptr->type == OUTFILE || ptr->type == D_OUTFILE)
+			res = ptr;
+	return (res);
+}
+
 void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
 	char	*str;
