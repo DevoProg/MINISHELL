@@ -56,29 +56,16 @@ char	*search_env_var(char *str, int i, t_data *minis)
 	return (new);
 }
 
-/*
-	Fonction servant a reservé adresse mémoire et copier le debut de la commande. 
-*/
-char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis)
+char *is_an_other_var_env(t_data *minis, char *var_env)
 {
-	int		j;
-	char	*new;
+	int j;
 
-	j = ft_strlen(cmd) - ft_strlen_var(cmd, i);
-	if (var_env)
-		j += ft_strlen(var_env);
-	new = malloc(sizeof(char) * (j + 1));
-	if (!new)
-		ft_error("Malloc", minis, 3, 1);
 	j = 0;
-	while (j < i && cmd)
-	{
-		new[j] = cmd[j];
+	while (var_env[j] && var_env[j] != '$')
 		j++;
-	}
-	new[j] = '\0';
-	new = ft_cpy_new_line_bis(cmd, var_env, new, i);
-	return (new);
+	if ((size_t)j != ft_strlen(var_env))
+		var_env = get_envp_var(minis, var_env);
+	return(var_env);
 }
 
 /*
@@ -91,7 +78,6 @@ char	*get_envp_var(t_data *minis, char *cmd)
 	char	*var_env;
 	char	*res_env;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (cmd[i])
@@ -104,12 +90,7 @@ char	*get_envp_var(t_data *minis, char *cmd)
 			res_env = list_chr(minis->env, var_env);
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
-			j = 0;
-			while (var_env[j] && var_env[j] != '$')
-				j++;
-			if ((size_t)j != ft_strlen(var_env))
-				var_env = get_envp_var(minis, var_env);
-			return (var_env);
+			var_env = is_an_other_var_env(minis, var_env);
 		}
 		i++;
 	}

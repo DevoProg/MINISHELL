@@ -12,34 +12,37 @@
 
 #include "../../includes/minishell.h"
 
+void delete_first_node_redi(t_data *minis, t_board *cmd)
+{
+    t_redi *ptr;
+
+    ptr = cmd->redi;
+    if(!ptr)
+        return ;
+    if(ptr->next)
+        cmd->redi = ptr->next;
+    else
+        cmd->redi = NULL;
+    if(ptr->file)
+        free(ptr->file);
+    ptr->file = NULL;
+    ptr->next = NULL;
+    free(ptr);
+}
+
 void    free_redi(t_data *minis)
 {
     int i;
+    t_redi *ptr;
     t_redi  *tmp;
 
     i = 0;
     while (i < minis->nb_cmd)
     {
-        while (minis->cmd[i].redi && minis->cmd[i].redi->next != NULL)
-        {
-            tmp = minis->cmd[i].redi;
-            minis->cmd[i].redi = minis->cmd[i].redi->next;
-            if (tmp->file)
-            {
-                tmp->file = NULL;
-                free(tmp->file);
-            }
-            if (tmp)
-            {
-                tmp->next = NULL;
-                tmp = NULL;
-                free(tmp);
-            }
-        }
         if (minis->cmd[i].redi)
         {
-            free(minis->cmd[i].redi->file);
-            free(minis->cmd[i].redi);
+            while(minis->cmd[i].redi)
+                delete_first_node_redi(minis, &minis->cmd[i]);
         }
         i++;
     }

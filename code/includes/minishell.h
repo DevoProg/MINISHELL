@@ -151,7 +151,7 @@ void	ft_malloc_empty(t_var *ptr);
 //get_envp_var.c
 void	put_env_var(t_data *minis);
 char	*get_envp_var(t_data *minis, char *cmd);
-char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
+char *is_an_other_var_env(t_data *minis, char *var_env);
 char	*search_env_var(char *str, int i, t_data *minis);
 int		ft_strlen_var(char *str, int j);
 //				BUILTINS
@@ -185,6 +185,7 @@ void	ft_delete_middle_node(t_var *env);
 //utils.c
 int		count_to_new_quote(char *str, int *i, int quote);
 char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
+char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
 int		is_no_open_quote(char *line, int i);
 int		ft_len_cmd(char *line);
 int		is_no_open_single_quote(char *line, int i);

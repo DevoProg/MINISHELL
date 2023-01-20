@@ -31,7 +31,7 @@ void	fork_first_cmd(t_data *minis, char **envp,
 		int redi_pipe[2][2], int i)
 {
 	redirect_infile(&minis->cmd[0], redi_pipe[0]);
-	//if (is_redi_infile(&minis->cmd[i]))
+	if (is_redi_infile(&minis->cmd[i]))
 		dup2(redi_pipe[0][0], STDIN_FILENO);
 	dup2(redi_pipe[1][1], STDOUT_FILENO);
 	close_all_pipes(minis);

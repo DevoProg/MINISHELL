@@ -132,3 +132,28 @@ char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i)
 	free(cmd);
 	return (new);
 }
+
+/*
+	Fonction servant a reservé adresse mémoire et copier le debut de la commande. 
+*/
+char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis)
+{
+	int		j;
+	char	*new;
+
+	j = ft_strlen(cmd) - ft_strlen_var(cmd, i);
+	if (var_env)
+		j += ft_strlen(var_env);
+	new = malloc(sizeof(char) * (j + 1));
+	if (!new)
+		ft_error("Malloc", minis, 3, 1);
+	j = 0;
+	while (j < i && cmd)
+	{
+		new[j] = cmd[j];
+		j++;
+	}
+	new[j] = '\0';
+	new = ft_cpy_new_line_bis(cmd, var_env, new, i);
+	return (new);
+}
