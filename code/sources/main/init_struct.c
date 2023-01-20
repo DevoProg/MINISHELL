@@ -28,13 +28,12 @@ void delete_first_node_redi(t_data *minis, t_board *cmd)
     ptr->file = NULL;
     ptr->next = NULL;
     free(ptr);
+    ptr = NULL;
 }
 
 void    free_redi(t_data *minis)
 {
     int i;
-    t_redi *ptr;
-    t_redi  *tmp;
 
     i = 0;
     while (i < minis->nb_cmd)
