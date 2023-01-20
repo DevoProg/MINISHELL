@@ -75,19 +75,12 @@ void	create_var_interr(t_data *minis)
 		ft_error("Malloc", minis, 0, 1);
 	ptr->name = malloc(sizeof(char) * 2);
 	if (!ptr->name)
-	{
-		free(ptr);
-		ft_error("Malloc", minis, 0, 1);
-	}
+		ft_error_ptr(minis, ptr, 1);
 	ptr->name[0] = '?';
 	ptr->name[1] = '\0';
 	ptr->value = malloc(sizeof(char) * 2);
 	if (!ptr->value)
-	{
-		free(ptr->name);
-		free(ptr);
-		ft_error("Malloc", minis, 0, 1);
-	}
+		ft_error_ptr(minis, ptr, 1);
 	ptr->value[0] = '1';
 	ptr->value[1] = '\0';
 	ptr->next = NULL;
@@ -96,6 +89,7 @@ void	create_var_interr(t_data *minis)
 	lst_add(&minis->env, ptr);
 	ptr = NULL;
 }
+
 
 void	create_var(t_data *minis, char **envp, int i)
 {
@@ -106,17 +100,10 @@ void	create_var(t_data *minis, char **envp, int i)
 		ft_error("Malloc", minis, 0, 1);
 	ft_get_name(envp[i], ptr);
 	if (!ptr->name)
-	{
-		free(ptr);
-		ft_error("Malloc", minis, 0, 1);
-	}
+		ft_error_ptr(minis, ptr, 1);
 	ft_get_value(envp[i], ptr);
 	if (!ptr->value)
-	{
-		free(ptr->name);
-		free(ptr);
-		ft_error("Malloc", minis, 0, 1);
-	}
+		ft_error_ptr(minis, ptr, 2);
 	if (ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')
 		ptr->is_export = 0;
 	else

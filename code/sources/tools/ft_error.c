@@ -77,6 +77,22 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror)
 	exit(1);
 }
 
+void ft_error_ptr(t_data *minis, t_var *ptr, int error)
+{
+	if (error == 1)
+	{
+		free(ptr);
+		ft_error("Malloc", minis, 0, 1);
+	}
+	if (error == 2)
+	{
+		free(ptr->name);
+		free(ptr);
+		ft_error("Malloc", minis, 0, 1);
+	}
+
+}
+
 void ft_error_fork(t_data *minis, int redi_pipe[2][2], int y)
 {
 	close(redi_pipe[0][1]);

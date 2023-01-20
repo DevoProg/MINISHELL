@@ -199,6 +199,7 @@ void	free_list(t_var *env);
 void	free_tab(char **tab, int i);
 void	free_struct_cmd(t_data *minis);
 void	ft_error(char *message, t_data *minis, int z, int is_perror);
+void ft_error_ptr(t_data *minis, t_var *ptr, int error);
 void 	ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
 void 	ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
 void	 ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
