@@ -36,7 +36,6 @@ void	each_things_to_do(t_data *minis, char **envp)
 void	minishell_loop(char **envp)
 {
 	t_data	minis;
-	int		res;
 
 	init_signals();
 	ft_create_env(&minis, envp);
@@ -55,8 +54,6 @@ void	minishell_loop(char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
-
 	if (argc == 1)
 		minishell_loop(envp);
 	(void)argv;

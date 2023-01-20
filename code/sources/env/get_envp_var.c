@@ -56,7 +56,7 @@ char	*search_env_var(char *str, int i, t_data *minis)
 	return (new);
 }
 
-int is_an_other_var_env(t_data *minis, char *var_env)
+int is_an_other_var_env(char *var_env)
 {
 	int j;
 
@@ -90,7 +90,7 @@ char	*get_envp_var(t_data *minis, char *cmd)
 			res_env = list_chr(minis->env, var_env);
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
-			if(is_an_other_var_env(minis, var_env))
+			if(is_an_other_var_env(var_env))
 				var_env = get_envp_var(minis, var_env);
 			return(var_env);
 		}

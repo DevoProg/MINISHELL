@@ -82,7 +82,7 @@ void	each_things_to_do(t_data *minis, char **envp);
 void	minishell_loop(char **envp);
 void	control_c(void);
 //init_struct.c
-void	delete_first_node_redi(t_data *minis, t_board *cmd);
+void	delete_first_node_redi(t_board *cmd);
 void	free_redi(t_data *minis);
 void	init_struct(t_data *minis);
 void	free_struct(t_data *minis);
@@ -115,7 +115,7 @@ void	redirect_infile(t_board *cmd, int redi_pipe[2]);
 t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
 void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
-void 	redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
+void 	redirect_error(t_data *minis, int redi_pipe[2][2]);
 void	write_in_last_file(char *buf, t_board *cmd);
 int		res_cmd_to_pipe(int fd[2], int redi_pipe[2],
 			t_board *cmd, int is_outfile);
@@ -124,7 +124,7 @@ char 	*read_from_pipe(int fd[2], char *buf);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
-char	*str_cpy_words(char *line, int *i, t_data *minis);
+char	*str_cpy_words(char *line, int *i);
 int		ft_count_split(char *line);
 int		ft_len_words(char *line);
 //ft_split_line.c
@@ -154,7 +154,7 @@ void	ft_malloc_empty(t_var *ptr);
 //get_envp_var.c
 void	put_env_var(t_data *minis);
 char	*get_envp_var(t_data *minis, char *cmd);
-int		is_an_other_var_env(t_data *minis, char *var_env);
+int		is_an_other_var_env(char *var_env);
 char	*search_env_var(char *str, int i, t_data *minis);
 int		ft_strlen_var(char *str, int j);
 //				BUILTINS
@@ -222,7 +222,7 @@ void	close_all_pipes(t_data *minis);
 //path.c
 char	*ft_try_path(t_data *minis, char *path, t_board *cmd);
 int 	ft_move_path(char *path, int *path_len);
-char 	*check_acces_path(t_data *minis, t_board *cmd, char *res);
+char 	*check_acces_path(t_data *minis, t_board *cmd);
 char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len);
 void	cpy_cmd(t_board *cmd, char *poss, int i);
 //execute.c
@@ -240,8 +240,8 @@ void	fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 //pipe_utils.c
 int 	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
 void 	close_for_cmd_pipe(t_data *minis, int z, int i);
-int		infile_error_message(t_data *minis, t_board *cmd, int print);
+int		infile_error_message(t_board *cmd, int print);
 int 	check_acces_read(t_redi *ptr, int print);
-int		command_error_message(t_data *minis, t_board *cmd, int print);
+int		command_error_message(t_board *cmd, int print);
 
 #endif

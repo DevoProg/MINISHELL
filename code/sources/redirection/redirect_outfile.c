@@ -29,7 +29,6 @@ char *read_from_pipe(int fd[2], char *buf)
 int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 {
 	t_redi	*ptr;
-	int		res;
 	char	*buf;
 
 	if (is_outf == 1)
@@ -73,7 +72,7 @@ void	write_in_last_file(char *buf, t_board *cmd)
 		write(ptr->file_fd, buf, 1);
 }
 
-void redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2])
+void redirect_error(t_data *minis, int redi_pipe[2][2])
 {
 	close(redi_pipe[0][0]);
 	close(redi_pipe[1][0]);
@@ -95,7 +94,7 @@ void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2])
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (!buf)
-			redirect_error(minis, cmd, redi_pipe);
+			redirect_error(minis, redi_pipe);
 		res_read = read(redi_pipe[1][0], buf, 1);
 		if (res_read == -1 || res_read == 0)
 		{

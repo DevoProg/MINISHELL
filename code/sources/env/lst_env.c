@@ -16,7 +16,6 @@ void	put_res_pipe(t_data *minis, int res)
 {
 	t_var	*ptr;
 	char	*new_value;
-	int		i;
 
 	ptr = lst_name_finding(minis->env, "?");
 	new_value = ft_itoa(res);

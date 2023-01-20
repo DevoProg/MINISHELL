@@ -46,6 +46,7 @@ void	stock_redi(t_data *minis, t_board *cmd, char *str, int res)
 	t_redi	*redi;
 	int		j;
 
+	j = 0;
 	if (res == INFILE || res == OUTFILE)
 		j = 1;
 	else if (res == D_INFILE || res == D_OUTFILE)

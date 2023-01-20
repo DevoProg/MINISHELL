@@ -68,7 +68,6 @@ void	create_pipe(t_data *minis)
 */
 int	ft_pipe(t_data *minis, char **envp)
 {	
-	int	**fd;
 	int	res;
 
 	find_path_struct(minis);

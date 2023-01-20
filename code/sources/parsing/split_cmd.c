@@ -68,7 +68,7 @@ int	ft_count_split(char *line)
 /*
   Fonction servant a allouer la string et a remplir le tableau.
 */
-char	*str_cpy_words(char *line, int *i, t_data *minis)
+char	*str_cpy_words(char *line, int *i)
 {
 	char	*new;
 	int		j;
@@ -116,7 +116,7 @@ char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis)
 	cmd->nb_words = 0;
 	while (str[i])
 	{
-		tab[j] = str_cpy_words(str + i, &i, minis);
+		tab[j] = str_cpy_words(str + i, &i);
 		if(!tab[j])
 		{
 			free_tab(tab, j);

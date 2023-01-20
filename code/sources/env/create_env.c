@@ -45,8 +45,6 @@ void	ft_get_name(char *str, t_var *ptr)
 void	ft_get_value(char *str, t_var *ptr)
 {
 	int	i;
-	int	j;
-	int	len;
 
 	i = 0;
 	while (str[i] && str[i] != '=')

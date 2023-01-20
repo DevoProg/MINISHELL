@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void delete_first_node_redi(t_data *minis, t_board *cmd)
+void delete_first_node_redi(t_board *cmd)
 {
     t_redi *ptr;
 
@@ -41,7 +41,7 @@ void    free_redi(t_data *minis)
         if (minis->cmd[i].redi)
         {
             while(minis->cmd[i].redi)
-                delete_first_node_redi(minis, &minis->cmd[i]);
+                delete_first_node_redi(&minis->cmd[i]);
         }
         i++;
     }

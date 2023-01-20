@@ -1,8 +1,8 @@
-1- 6 fonction builtins
-2- excetue.c trop dee foncions
+1- 6 fonction builtins OK
+2- excetue.c trop dee foncions OK
 2-tester le bash en heredoc
 3-remmettre les flags
-4-remettre a jour le fichier.h
-/bin/lss
+4-remettre a jour le fichier.h OK
+/bin/lss 
 Command not found :/bin/lss?
 malloc empty pas proteger sur malloc

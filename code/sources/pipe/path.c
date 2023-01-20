@@ -58,8 +58,10 @@ char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len)
 }
 
 
-char *check_acces_path(t_data *minis, t_board *cmd, char *res)
+char *check_acces_path(t_data *minis, t_board *cmd)
 {
+	char *res;
+
 	if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
 	{
 		res = ft_strdup(cmd->tab[0]);
@@ -95,7 +97,7 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 
 	if (!path || !*path)
 		return (NULL);
-	res = check_acces_path(minis, cmd, res);
+	res = check_acces_path(minis, cmd);
 	if(res)
 		return(res);
 	poss = cpy_path(minis, cmd, path, &path_len);

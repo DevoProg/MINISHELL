@@ -9,7 +9,7 @@ HEADER		=	-I $(INC)
 SRC_DIR		=	sources/
 OBJ_DIR		=	obj/
 CC			=	gcc
-FLAGS		=	#Wall -Werror -Wextra
+FLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 ECHO		=	echo -e
 

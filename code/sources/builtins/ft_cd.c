@@ -93,7 +93,6 @@ int	cd_without_arg(t_data *minis, t_board *cmd)
 void	ft_cd(t_data *minis, t_board *cmd)
 {
 	char	*home_dir;
-	t_var	*ptr;
 
 	if (cd_without_arg(minis, cmd))
 		return ;

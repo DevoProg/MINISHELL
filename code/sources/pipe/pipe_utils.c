@@ -17,7 +17,7 @@ void close_for_cmd_pipe(t_data *minis, int z, int i)
 int error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 {
 
-	if (!infile_error_message(minis, &minis->cmd[i], 1))
+	if (!infile_error_message(&minis->cmd[i], 1))
 	{	
 		close_for_cmd_pipe(minis, z, i);
 		return (1);
@@ -31,7 +31,7 @@ int error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 	return (0);
 }
 
-int	command_error_message(t_data *minis, t_board *cmd, int print)
+int	command_error_message(t_board *cmd, int print)
 {
 	if (!cmd->cmd_path && !ft_is_builtins(cmd))
 	{
@@ -61,13 +61,13 @@ int check_acces_read(t_redi *ptr, int print)
 	return(1);
 }
 
-int	infile_error_message(t_data *minis, t_board *cmd, int print)
+int	infile_error_message(t_board *cmd, int print)
 {
 	t_redi	*ptr;
 
 	ptr = cmd->redi;
 	if (!ptr)
-		return (command_error_message(minis, cmd, print));
+		return (command_error_message(cmd, print));
 	while (ptr->next != NULL)
 	{
 		if (ptr->type == INFILE)
@@ -78,5 +78,5 @@ int	infile_error_message(t_data *minis, t_board *cmd, int print)
 	if (ptr->type == INFILE)
 		if (!check_acces_read(ptr, print))
 			return (0);
-	return (command_error_message(minis, cmd, print));
+	return (command_error_message(cmd, print));
 }

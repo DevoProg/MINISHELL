@@ -103,7 +103,6 @@ void	middle_cmd(t_data *minis, char **envp, int i)
 void	last_cmd(t_data *minis, char **envp, int i)
 {
 	t_board	*cmd;
-	int		res;
 	int		redi_pipe[2][2];
 
 	cmd = &minis->cmd[i];
