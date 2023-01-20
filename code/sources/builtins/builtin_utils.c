@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:24:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:04:13 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:20:07 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,3 @@ void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
 		ft_putchar_fd('\n', 1);
 	put_res_pipe(minis, 0);
 }
-

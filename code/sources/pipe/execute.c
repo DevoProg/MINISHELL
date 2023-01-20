@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:20:32 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:24:43 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:41:28 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 	return (WEXITSTATUS(res));
 }
 
-
 /*
 	fonction qui execute la premiere commande
 */
@@ -54,7 +53,7 @@ void	first_cmd(t_data *minis, char **envp, int i)
 
 	cmd = &minis->cmd[i];
 	if (error_or_not_fork(minis, cmd, 1, i))
-		return;
+		return ;
 	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
@@ -63,7 +62,7 @@ void	first_cmd(t_data *minis, char **envp, int i)
 		fork_first_cmd(minis, envp, redi_pipe, i);
 	close(redi_pipe[1][1]);
 	close(redi_pipe[0][1]);
-	if(!res_cmd_to_pipe(redi_pipe[1], minis->cmd[0].pipe_fd, cmd, 1))
+	if (!res_cmd_to_pipe(redi_pipe[1], minis->cmd[0].pipe_fd, cmd, 1))
 		ft_error_pipe(minis, redi_pipe, 2, 1);
 	close(redi_pipe[0][0]);
 	close(redi_pipe[1][0]);
@@ -89,7 +88,7 @@ void	middle_cmd(t_data *minis, char **envp, int i)
 		fork_middle_cmd(minis, envp, redi_pipe, i);
 	close(redi_pipe[1][1]);
 	close(redi_pipe[0][1]);
-	if(!res_cmd_to_pipe(redi_pipe[1], minis->cmd[i].pipe_fd, cmd, 1))
+	if (!res_cmd_to_pipe(redi_pipe[1], minis->cmd[i].pipe_fd, cmd, 1))
 		ft_error_pipe(minis, redi_pipe, 2, 1);
 	close(redi_pipe[0][0]);
 	close(redi_pipe[1][0]);
@@ -106,8 +105,8 @@ void	last_cmd(t_data *minis, char **envp, int i)
 	int		redi_pipe[2][2];
 
 	cmd = &minis->cmd[i];
-	if(error_or_not_fork(minis, cmd, 3, i))
-		return;
+	if (error_or_not_fork(minis, cmd, 3, i))
+		return ;
 	ft_pipe_redi(minis, redi_pipe);
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
@@ -146,8 +145,8 @@ int	ft_execute(t_data *minis, char **envp)
 		else
 			middle_cmd(minis, envp, i);
 		if (!ft_is_not_fork(&minis->cmd[i])
-				&& infile_error_message(&minis->cmd[i], 0))
-				waitpid(minis->cmd[i].res_fork, &res, 0);
+			&& infile_error_message(&minis->cmd[i], 0))
+			waitpid(minis->cmd[i].res_fork, &res, 0);
 		i++;
 	}
 	return (WEXITSTATUS(res));

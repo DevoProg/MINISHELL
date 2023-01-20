@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_quote.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/21 00:28:36 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/21 00:28:38 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
@@ -43,6 +54,7 @@ int	is_no_open_single_quote(char *line, int i)
 		return (0);
 	return (1);
 }
+
 /*
 	fonction qui y ait pas de single ou double pipe ouvert a l'index i
 */

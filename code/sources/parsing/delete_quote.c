@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:45:13 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:49:07 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:19:28 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	delete_quote(t_data *minis)
 		while (j < minis->cmd[i].nb_words - 1)
 		{
 			minis->cmd[i].tab[j] = get_new_str(minis->cmd[i].tab[j]);
-			if(!minis->cmd[i].tab[j])
+			if (!minis->cmd[i].tab[j])
 				ft_error("Malloc", minis, 3, 1);
 			j++;
 		}

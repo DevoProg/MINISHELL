@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 20:06:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:06:35 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:30:19 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	create_var_interr(t_data *minis)
 	lst_add(&minis->env, ptr);
 	ptr = NULL;
 }
-
 
 void	create_var(t_data *minis, char **envp, int i)
 {

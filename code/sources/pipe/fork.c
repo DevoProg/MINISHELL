@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:07:36 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:10:38 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:35:50 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	fork_middle_cmd(t_data *minis, char **envp,
 {
 	if (!ft_is_not_fork(&minis->cmd[i - 1]))
 	{
-		if(!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd,
-			redi_pipe[0], &minis->cmd[i], 0))
+		if (!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd,
+				redi_pipe[0], &minis->cmd[i], 0))
 			ft_error_in_fork(minis, redi_pipe);
 		redirect_infile(&minis->cmd[i], redi_pipe[0]);
 	}
@@ -67,8 +67,8 @@ void	fork_last_cmd(t_data *minis, char **envp,
 {
 	if (!ft_is_not_fork(&minis->cmd[i - 1]))
 	{
-		if(!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0],
-			&minis->cmd[i], 0))
+		if (!res_cmd_to_pipe(minis->cmd[i - 1].pipe_fd, redi_pipe[0],
+				&minis->cmd[i], 0))
 			ft_error_in_fork(minis, redi_pipe);
 		redirect_infile(&minis->cmd[i], redi_pipe[0]);
 	}

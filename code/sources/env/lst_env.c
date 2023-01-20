@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:49:47 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:51:43 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:29:02 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_malloc_empty(t_var *ptr)
 {
 	ptr->value = malloc(sizeof(char) * 3);
 	if (!ptr->value)
-		return;
+		return ;
 	ptr->value[0] = 39;
 	ptr->value[1] = 39;
 	ptr->value[2] = '\0';

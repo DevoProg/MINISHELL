@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:13:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:16:51 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:39:30 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len)
 	return (poss);
 }
 
-
-char *check_acces_path(t_data *minis, t_board *cmd)
+char	*check_acces_path(t_data *minis, t_board *cmd)
 {
-	char *res;
+	char	*res;
 
 	if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
 	{
@@ -79,14 +78,14 @@ char *check_acces_path(t_data *minis, t_board *cmd)
 			ft_error("Malloc", minis, 3, 1);
 		return (res);
 	}
-	return(NULL);
+	return (NULL);
 }
 
-int ft_move_path(char *path, int *path_len)
+int	ft_move_path(char *path, int *path_len)
 {
 	if (path[*path_len] == ':')
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }
 
 char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
@@ -98,8 +97,8 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	if (!path || !*path)
 		return (NULL);
 	res = check_acces_path(minis, cmd);
-	if(res)
-		return(res);
+	if (res)
+		return (res);
 	poss = cpy_path(minis, cmd, path, &path_len);
 	if (access(poss, X_OK) == 0)
 		return (poss);

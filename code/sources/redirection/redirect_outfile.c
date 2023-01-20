@@ -6,24 +6,24 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:33:55 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:39:35 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:18:39 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char *read_from_pipe(int fd[2], char *buf)
+char	*read_from_pipe(int fd[2], char *buf)
 {
-	int res;
+	int	res;
 
 	res = read(fd[0], buf, 1);
 	if (res == -1 || res == 0)
 	{
 		free(buf);
-		return(NULL) ;
+		return (NULL);
 	}
 	buf[1] = '\0';
-	return(buf);
+	return (buf);
 }
 
 int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
@@ -37,10 +37,10 @@ int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (!buf)
-			return(0);
+			return (0);
 		buf = read_from_pipe(fd, buf);
-		if(!buf)
-			break;
+		if (!buf)
+			break ;
 		write(redi_pipe[1], buf, 1);
 		if (is_outf == 1 && is_redi_outfile(cmd))
 		{
@@ -72,11 +72,11 @@ void	write_in_last_file(char *buf, t_board *cmd)
 		write(ptr->file_fd, buf, 1);
 }
 
-void redirect_error(t_data *minis, int redi_pipe[2][2])
+void	redirect_error(t_data *minis, int redi_pipe[2][2])
 {
 	close(redi_pipe[0][0]);
 	close(redi_pipe[1][0]);
-	if(minis->nb_cmd > 1)
+	if (minis->nb_cmd > 1)
 		close_all_pipes(minis);
 	ft_error("Malloc", minis, 3, 1);
 }

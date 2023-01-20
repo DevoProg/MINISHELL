@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:19:44 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:22:41 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:16:20 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	stock_redi(t_data *minis, t_board *cmd, char *str, int res)
 		ft_error("Malloc", minis, 3, 1);
 	redi->type = res;
 	redi->file = get_file_redi(str + j);
-	if(!redi->file)
+	if (!redi->file)
 	{
 		free(redi);
 		ft_error("Malloc", minis, 3, 1);
@@ -105,7 +105,8 @@ void	redirection(t_data *minis)
 			res = ft_is_redi(minis->cmd[i].line_cmd, j);
 			if (res != 0)
 			{
-				stock_redi(minis, &minis->cmd[i], minis->cmd[i].line_cmd + j, res);
+				stock_redi(minis, &minis->cmd[i],
+					minis->cmd[i].line_cmd + j, res);
 				clean_this_redi(minis->cmd[i].line_cmd, j, res);
 				if (res == D_INFILE || res == D_OUTFILE)
 					j++;

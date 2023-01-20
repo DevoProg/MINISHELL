@@ -1,22 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/21 00:39:38 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/21 00:41:57 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-
-void close_for_cmd_pipe(t_data *minis, int z, int i)
+void	close_for_cmd_pipe(t_data *minis, int z, int i)
 {
-	if(z == 1)
+	if (z == 1)
 		close(minis->cmd[0].pipe_fd[1]);
-	if(z == 2)
+	if (z == 2)
 	{
 		close(minis->cmd[i - 1].pipe_fd[0]);
 		close(minis->cmd[i].pipe_fd[1]);
 	}
-	if(z == 3)
+	if (z == 3)
 		close(minis->cmd[i - 1].pipe_fd[0]);
 }
 
-int error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
+int	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 {
-
 	if (!infile_error_message(&minis->cmd[i], 1))
 	{	
 		close_for_cmd_pipe(minis, z, i);
@@ -46,11 +56,11 @@ int	command_error_message(t_board *cmd, int print)
 	return (1);
 }
 
-int check_acces_read(t_redi *ptr, int print)
+int	check_acces_read(t_redi *ptr, int print)
 {
 	if (access(ptr->file, R_OK) != 0)
 	{
-		if (print == 1)		
+		if (print == 1)
 		{
 			ft_putstr_fd("Error to open file :", 2);
 			ft_putstr_fd(ptr->file, 2);
@@ -58,7 +68,7 @@ int check_acces_read(t_redi *ptr, int print)
 		}
 		return (0);
 	}
-	return(1);
+	return (1);
 }
 
 int	infile_error_message(t_board *cmd, int print)

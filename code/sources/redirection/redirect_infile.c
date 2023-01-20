@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:41:48 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:44:29 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:19:08 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 	}
 	while (1)
 	{
-		buf = get_next_line(fd);//si gnl foire ->close redi_pipe pipe_fd
+		buf = get_next_line(fd);
 		if (buf == NULL)
 			break ;
 		len = ft_strlen(buf);

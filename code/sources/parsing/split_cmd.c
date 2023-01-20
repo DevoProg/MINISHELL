@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:53:41 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:02:32 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:19:47 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis)
 	while (str[i])
 	{
 		tab[j] = str_cpy_words(str + i, &i);
-		if(!tab[j])
+		if (!tab[j])
 		{
 			free_tab(tab, j);
 			ft_error("Malloc", minis, 3, 1);

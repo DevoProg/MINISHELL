@@ -6,12 +6,11 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:42:04 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/18 03:19:07 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:25:16 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 /*
 	fonction qui calcule la longueur de la prochaine commande
@@ -33,7 +32,6 @@ int	ft_len_cmd(char *line)
 	}
 	return (i);
 }
-
 
 /*
 	fonction qui copie le resultat et la fin de la commande

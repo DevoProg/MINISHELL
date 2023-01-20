@@ -5,46 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 00:28:43 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/18 03:18:45 by alondot          ###   ########.fr       */
+/*   Created: 2023/01/21 00:22:36 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/21 00:23:05 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void delete_first_node_redi(t_board *cmd)
+void	delete_first_node_redi(t_board *cmd)
 {
-    t_redi *ptr;
+	t_redi	*ptr;
 
-    ptr = cmd->redi;
-    if(!ptr)
-        return ;
-    if(ptr->next)
-        cmd->redi = ptr->next;
-    else
-        cmd->redi = NULL;
-    if(ptr->file)
-        free(ptr->file);
-    ptr->file = NULL;
-    ptr->next = NULL;
-    free(ptr);
-    ptr = NULL;
+	ptr = cmd->redi;
+	if (!ptr)
+		return ;
+	if (ptr->next)
+		cmd->redi = ptr->next;
+	else
+		cmd->redi = NULL;
+	if (ptr->file)
+		free(ptr->file);
+	ptr->file = NULL;
+	ptr->next = NULL;
+	free(ptr);
+	ptr = NULL;
 }
 
-void    free_redi(t_data *minis)
+void	free_redi(t_data *minis)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < minis->nb_cmd)
-    {
-        if (minis->cmd[i].redi)
-        {
-            while(minis->cmd[i].redi)
-                delete_first_node_redi(&minis->cmd[i]);
-        }
-        i++;
-    }
+	i = 0;
+	while (i < minis->nb_cmd)
+	{
+		if (minis->cmd[i].redi)
+		{
+			while (minis->cmd[i].redi)
+				delete_first_node_redi(&minis->cmd[i]);
+		}
+		i++;
+	}
 }
 
 void	free_struct(t_data *minis)

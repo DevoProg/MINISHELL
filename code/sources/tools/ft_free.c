@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/21 00:26:06 by alondot           #+#    #+#             */
+/*   Updated: 2023/01/21 00:26:09 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	free_struct_cmd(t_data *minis)
@@ -25,7 +37,7 @@ void	free_tab(char **tab, int i)
 	j = 0;
 	while (j < i)
 	{
-		if(tab[j])
+		if (tab[j])
 			free(tab[j]);
 		j++;
 	}
@@ -34,7 +46,7 @@ void	free_tab(char **tab, int i)
 
 void	free_list(t_var *env)
 {
-	if(!env)
+	if (!env)
 		return ;
 	while (env->next)
 	{

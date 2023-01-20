@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:51:20 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:12:10 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:21:16 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,36 @@
     Fonction servant a exit. 
     Free tout les elements en mémoire.
 */
-int ft_is_digital(char *str)
+int	ft_is_digital(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]))
 		{
 			ft_putstr_fd("numeric argument required\n", 2);
-			return(0);
+			return (0);
 		}
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 void	ft_exit(t_data *minis, t_board *cmd)
 {
-	int exit_code;
-	int i;
+	int	exit_code;
+	int	i;
 
 	i = 0;
-	if(cmd->nb_words == 2)
+	if (cmd->nb_words == 2)
 		exit_code = 0;
-	else if(cmd->nb_words == 3)
+	else if (cmd->nb_words == 3)
 	{
-		if(cmd->tab[1][0] == '-')
+		if (cmd->tab[1][0] == '-')
 			i++;
-		if(!ft_is_digital(cmd->tab[1] + i))
+		if (!ft_is_digital(cmd->tab[1] + i))
 			exit_code = 255;
 		else
 			exit_code = ft_atoi(cmd->tab[1]);
@@ -62,6 +62,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	free_redi(minis);
 	exit(exit_code);
 }
+
 /*
 	Fonction servant a check si une commande contient les différentes fct bash.
 */

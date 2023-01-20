@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:53:06 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:26:02 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:29:58 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ char	*search_env_var(char *str, int i, t_data *minis)
 	return (new);
 }
 
-int is_an_other_var_env(char *var_env)
+int	is_an_other_var_env(char *var_env)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (var_env[j] && var_env[j] != '$')
 		j++;
 	if ((size_t)j != ft_strlen(var_env))
 		return (1);
-	return(0);
+	return (0);
 }
 
 /*
@@ -90,9 +90,9 @@ char	*get_envp_var(t_data *minis, char *cmd)
 			res_env = list_chr(minis->env, var_env);
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
-			if(is_an_other_var_env(var_env))
+			if (is_an_other_var_env(var_env))
 				var_env = get_envp_var(minis, var_env);
-			return(var_env);
+			return (var_env);
 		}
 		i++;
 	}
