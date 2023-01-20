@@ -113,6 +113,7 @@ void	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 void	redirect_infile(t_board *cmd, int redi_pipe[2]);
 //redirect_outfile.c
 void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
+void redirect_error(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
 void	write_in_last_file(char *buf, t_board *cmd);
 t_redi	*last_redi_out(t_redi *redi);
 int	res_cmd_to_pipe(int fd[2], int redi_pipe[2],
