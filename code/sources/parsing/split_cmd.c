@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:53:41 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:00:20 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:02:32 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 int	ft_len_words(char *line)
 {
 	int	i;
-	int	count;
 
 	if (!line)
 		return (0);
 	i = 0;
-	count = 0;
 	while (line[i] && line[i] == ' ')
 		line++;
 	while (line[i])
