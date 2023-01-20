@@ -170,9 +170,9 @@ int	ft_execute(t_data *minis, char **envp)
 			first_cmd(minis, envp, i);
 		else if (i == minis->nb_cmd - 1)
 		{
+			last_cmd(minis, envp, i);
 			if (!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
 				return (127);
-			last_cmd(minis, envp, i);
 		}
 		else
 			middle_cmd(minis, envp, i);

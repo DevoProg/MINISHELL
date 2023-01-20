@@ -56,7 +56,7 @@ char	*search_env_var(char *str, int i, t_data *minis)
 	return (new);
 }
 
-char *is_an_other_var_env(t_data *minis, char *var_env)
+int is_an_other_var_env(t_data *minis, char *var_env)
 {
 	int j;
 
@@ -64,8 +64,8 @@ char *is_an_other_var_env(t_data *minis, char *var_env)
 	while (var_env[j] && var_env[j] != '$')
 		j++;
 	if ((size_t)j != ft_strlen(var_env))
-		var_env = get_envp_var(minis, var_env);
-	return(var_env);
+		return (1);
+	return(0);
 }
 
 /*
@@ -90,7 +90,9 @@ char	*get_envp_var(t_data *minis, char *cmd)
 			res_env = list_chr(minis->env, var_env);
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
-			var_env = is_an_other_var_env(minis, var_env);
+			if(is_an_other_var_env(minis, var_env))
+				var_env = get_envp_var(minis, var_env);
+			return(var_env);
 		}
 		i++;
 	}

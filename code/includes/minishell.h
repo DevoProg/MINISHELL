@@ -78,16 +78,17 @@ typedef struct s_data
 
 //				MAIN
 //main.c
+void	each_things_to_do(t_data *minis, char **envp);
 void	minishell_loop(char **envp);
 void	control_c(void);
 //init_struct.c
+void	delete_first_node_redi(t_data *minis, t_board *cmd);
 void	free_redi(t_data *minis);
 void	init_struct(t_data *minis);
 void	free_struct(t_data *minis);
 //signal.c
 void	signal_handler(int sig);
 void	init_signals(void);
-void	free_env(t_data *minis);
 void	line_empty(t_data *minis);
 //				REDIRECTION
 //redirect.c
@@ -152,7 +153,7 @@ void	ft_malloc_empty(t_var *ptr);
 //get_envp_var.c
 void	put_env_var(t_data *minis);
 char	*get_envp_var(t_data *minis, char *cmd);
-char *is_an_other_var_env(t_data *minis, char *var_env);
+int		is_an_other_var_env(t_data *minis, char *var_env);
 char	*search_env_var(char *str, int i, t_data *minis);
 int		ft_strlen_var(char *str, int j);
 //				BUILTINS
