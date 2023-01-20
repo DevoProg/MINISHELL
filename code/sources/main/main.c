@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/18 03:17:27 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:49:43 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 {
 	int	res;
 
-	add_history(minis->line);
+	//add_history(minis->line);
 	line_to_cmd(minis);
 	init_struct(minis);
 	redirection(minis);
@@ -33,23 +33,28 @@ void	each_things_to_do(t_data *minis, char **envp)
 	Fonction de la loop principale du shell.
 	Gere les lignes recues et effectue tout type d'actions.
 */
-void	minishell_loop(char **envp)
+void minishell_loop(char **envp)
 {
-	t_data	minis;
+	t_data minis;
 
-	init_signals();
-	ft_create_env(&minis, envp);
-	while (1)
-	{
-		minis.line = readline(">$");
-		if (!minis.line)
+	init_signals();									// Analyse les siganux recus
+	
+	ft_create_env(&minis, envp);					//ne pas oublier de free avec les exit	//creation d'une liste chainée avec les variable d'env
+	//while(1)										//looop qui lit avec un prompt
+	//{
+		minis.line = ft_strdup("ls | cat | cat");
+		if(!minis.line)								// pour le control D
 		{
-			line_empty(&minis);
+			line_empty(&minis);						// Free minis si signal ctrl+d, puis exit
 			exit(1);
 		}
-		else if (minis.line && *minis.line)
+		else if(minis.line && *minis.line)
 			each_things_to_do(&minis, envp);
-	}
+	//}
+	free_list(minis.env);
+	
+	//rl_clear_history();
+	//free_history_entry(current_history());
 }
 
 int	main(int argc, char **argv, char **envp)

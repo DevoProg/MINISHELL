@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:47:29 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:27:59 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:48:51 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror)
 		free_list(minis->env);
 	if (z > 0)
 	{
-		rl_clear_history();
+		//rl_clear_history();
 		free(minis->line);
 	}
 	if (z == 1)
