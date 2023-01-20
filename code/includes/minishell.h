@@ -164,14 +164,16 @@ void	ft_assign_new_value(t_data *minis, char *str, char *name);
 char	*get_name(char *str, t_data *minis);
 //ft_cd.c
 void	ft_cd(t_data *minis, t_board *cmd);
+int		cd_without_arg(t_data *minis, t_board *cmd);
 void	ft_change_pwd(t_var *env, t_data *minis);
 void	ft_change_oldpwd(t_var *env, t_data *minis);
 int		access_check(char *path);
 //ft_check_builtins.c /!\ trop de fonctions
 void	butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void	builtins_with_fork(t_data *minis, t_board *cmd);
-//buitlin_utils
 void	ft_exit(t_data *minis, t_board *cmd);
+int 	ft_is_digital(char *str);
+//buitlin_utils
 void	ft_echo(t_data *minis, t_board *cmd);
 void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option);
 void	ft_envp(t_data *minis);

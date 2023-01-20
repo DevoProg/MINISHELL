@@ -13,6 +13,56 @@
 #include "../../includes/minishell.h"
 
 /*
+    Cas commande : EXIT
+    Fonction servant a exit. 
+    Free tout les elements en mémoire.
+*/
+int ft_is_digital(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if(!ft_isdigit(str[i]))
+		{
+			ft_putstr_fd("numeric argument required\n", 2);
+			return(0);
+		}
+		i++;
+	}
+	return(1);
+}
+
+void	ft_exit(t_data *minis, t_board *cmd)
+{
+	int exit_code;
+	int i;
+
+	i = 0;
+	if(cmd->nb_words == 2)
+		exit_code = 0;
+	else if(cmd->nb_words == 3)
+	{
+		if(cmd->tab[1][0] == '-')
+			i++;
+		if(!ft_is_digital(cmd->tab[1] + i))
+			exit_code = 255;
+		else
+			exit_code = ft_atoi(cmd->tab[1]);
+	}
+	else
+	{
+		ft_putstr_fd("too much argument for exit\n", 2);
+		put_res_pipe(minis, 1);
+		return ;
+	}
+	free_struct(minis);
+	free_list(minis->env);
+	free_redi(minis);
+	exit(exit_code);
+}
+/*
 	Fonction servant a check si une commande contient les différentes fct bash.
 */
 void	builtins_with_fork(t_data *minis, t_board *cmd)
