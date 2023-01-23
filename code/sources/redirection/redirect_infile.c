@@ -41,7 +41,7 @@ void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		return ;
 	while (1)
 	{
-		str = readline("heredoc>");
+		str = readline(">");
 		if (str && *str && ft_strcmp(str, ptr->file) == 0)
 		{
 			break ;

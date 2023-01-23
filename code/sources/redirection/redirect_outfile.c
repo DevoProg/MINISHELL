@@ -39,7 +39,7 @@ int	res_cmd_to_pipe(int fd[2], int redi_pipe[2], t_board *cmd, int is_outf)
 		if (!buf)
 			return (0);
 		buf = read_from_pipe(fd, buf);
-		if (!buf)
+		if (!buf || !*buf)
 			break ;
 		write(redi_pipe[1], buf, 1);
 		if (is_outf == 1 && is_redi_outfile(cmd))

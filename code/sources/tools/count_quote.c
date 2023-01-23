@@ -44,9 +44,9 @@ int	is_no_open_single_quote(char *line, int i)
 	double_quote = 0;
 	while (j < i)
 	{
-		if (line[j] == 39 && double_quote % 2 != 0)
+		if (line[j] == 39 && double_quote % 2 == 0)
 			single_quote++;
-		if (line[j] == 34 && single_quote % 2 != 0)
+		if (line[j] == 34 && single_quote % 2 == 0)
 			double_quote++;
 		j++;
 	}
@@ -69,9 +69,9 @@ int	is_no_open_quote(char *line, int i)
 	double_quote = 0;
 	while (j < i)
 	{
-		if (line[j] == 39 && double_quote % 2 != 0)
+		if (line[j] == 39 && double_quote % 2 == 0)
 			single_quote++;
-		if (line[j] == 34 && single_quote % 2 != 0)
+		if (line[j] == 34 && single_quote % 2 == 0)
 			double_quote++;
 		j++;
 	}

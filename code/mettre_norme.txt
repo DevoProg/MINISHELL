@@ -8,26 +8,28 @@ make -n affiche pas les flags?
 
 var env _ = /Users/guixmoht99/Desktop/minis8/code/./minishell a la place de env on doit gerer?? /!!!\
 
-tester le bash en heredoc comme la varsion bash ecole pour changer le prompt
+tester le bash en heredoc comme la varsion bash ecole pour changer le prompt OK
 
-fonction exit print exit avant de exit                                     /!!!\
+fonction exit print exit avant de exit                                     /!!!\ OK
 
 /bin/ls/unknown-> command not found au lieu de not a directory: /bin/ls/unknow il faut changer??
 
-changer le message ctrl-D?
+changer le message ctrl-D?                              OK
 
 ls puis->control_C puis->enter affiche ls(chez moi en tout cas           /!!!\
 
 control backslash ne fonctionne pas   avec la commande cat               /!!!\
 
 echo "cat lol.c | cat"
-cat lol.c                                                               /!!!\
+cat lol.c                                                               /!!!\ . OK
 
 "ls | cat" ->execute commande et ne devrait pas
 
 echo '$USER'
-guixmoht99                                                              /!!!\
+guixmoht99                                                              /!!!\ . OK
 
-echo yo ">" test                                                           /!!!\
+echo yo ">" test                                                           /!!!\ . OK
 
-echo '$USER'                                                            /!!!\
+echo '$USER'                                                            /!!!\ OK
+
+rl_clear_history en commentaire /!!!!!!\

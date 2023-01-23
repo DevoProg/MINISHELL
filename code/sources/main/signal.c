@@ -78,6 +78,6 @@ void	line_empty(t_data *minis)
 		perror("error");
 		exit(EXIT_FAILURE);
 	}
-	printf("CTRL+D : exit le shell...\n");
+	printf("exit\n");
 	exit(EXIT_SUCCESS);
 }

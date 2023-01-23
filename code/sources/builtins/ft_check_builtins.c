@@ -40,9 +40,14 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd->nb_words == 2)
-		exit_code = 0;
-	else if (cmd->nb_words == 3)
+	ft_putstr_fd("exit\n", 2);
+	if (cmd->nb_words > 3)
+	{
+		ft_putstr_fd("too much argument for exit\n", 2);
+		put_res_pipe(minis, 1);
+		return ;
+	}
+	if(cmd->nb_words == 3)
 	{
 		if (cmd->tab[1][0] == '-')
 			i++;
@@ -52,11 +57,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 			exit_code = ft_atoi(cmd->tab[1]);
 	}
 	else
-	{
-		ft_putstr_fd("too much argument for exit\n", 2);
-		put_res_pipe(minis, 1);
-		return ;
-	}
+		exit_code = 0;
 	free_struct(minis);
 	free_list(minis->env);
 	free_redi(minis);
