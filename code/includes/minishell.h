@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:28:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:12:07 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/24 12:15:05 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # include "../libft/includes/get_next_line.h"
 # include <errno.h>
 # include <stdbool.h>
+
+//# include "../lib_externe/readline-8.2/readline.h"
+
 
 # define PATH_LEN 1024
 

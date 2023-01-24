@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:03:10 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:19:21 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/24 12:31:49 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(STDERR_FILENO, "\n", 1);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
