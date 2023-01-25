@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+int code_erreur;
+
 void	each_things_to_do(t_data *minis, char **envp)
 {
 	add_history(minis->line);

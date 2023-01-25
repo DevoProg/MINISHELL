@@ -94,11 +94,11 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	char	*res;
 	int		path_len;
 
-	if (!path || !*path)
-		return (NULL);
 	res = check_acces_path(minis, cmd);
 	if (res)
 		return (res);
+	if (!path || !*path)
+		return (NULL);
 	poss = cpy_path(minis, cmd, path, &path_len);
 	if (access(poss, X_OK) == 0)
 		return (poss);
