@@ -33,13 +33,8 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 		ft_error_fork(minis, redi_pipe, 0);
 	if (cmd->res_fork == 0)
 		fork_one_cmd(minis, envp, redi_pipe, cmd);
-	close(redi_pipe[1][1]);
-	close(redi_pipe[0][1]);
+	close_redi_pipe(redi_pipe);
 	waitpid(minis->cmd[0].res_fork, &res, 0);
-	if (is_redi_outfile(cmd))
-		redirect_outfile(minis, cmd, redi_pipe);
-	close(redi_pipe[0][0]);
-	close(redi_pipe[1][0]);
 	return (WEXITSTATUS(res));
 }
 
@@ -60,13 +55,7 @@ void	first_cmd(t_data *minis, char **envp, int i)
 		ft_error_fork(minis, redi_pipe, 1);
 	if (cmd->res_fork == 0)
 		fork_first_cmd(minis, envp, redi_pipe, i);
-	close(redi_pipe[1][1]);
-	close(redi_pipe[0][1]);
-	if (!res_cmd_to_pipe(redi_pipe[1], minis->cmd[0].pipe_fd, cmd, 1))
-		ft_error_pipe(minis, redi_pipe, 2, 1);
-	close(redi_pipe[0][0]);
-	close(redi_pipe[1][0]);
-	close(minis->cmd[0].pipe_fd[1]);
+	close_redi_pipe(redi_pipe);
 }
 
 /*
@@ -86,14 +75,7 @@ void	middle_cmd(t_data *minis, char **envp, int i)
 		ft_error_fork(minis, redi_pipe, 1);
 	if (cmd->res_fork == 0)
 		fork_middle_cmd(minis, envp, redi_pipe, i);
-	close(redi_pipe[1][1]);
-	close(redi_pipe[0][1]);
-	if (!res_cmd_to_pipe(redi_pipe[1], minis->cmd[i].pipe_fd, cmd, 1))
-		ft_error_pipe(minis, redi_pipe, 2, 1);
-	close(redi_pipe[0][0]);
-	close(redi_pipe[1][0]);
-	close(minis->cmd[i - 1].pipe_fd[0]);
-	close(minis->cmd[i].pipe_fd[1]);
+	close_redi_pipe(redi_pipe);
 }
 
 /*
@@ -113,13 +95,7 @@ void	last_cmd(t_data *minis, char **envp, int i)
 		ft_error_fork(minis, redi_pipe, 1);
 	if (cmd->res_fork == 0)
 		fork_last_cmd(minis, envp, redi_pipe, i);
-	close(redi_pipe[1][1]);
-	close(redi_pipe[0][1]);
-	if (is_redi_outfile(cmd))
-		redirect_outfile(minis, cmd, redi_pipe);
-	close(redi_pipe[0][0]);
-	close(redi_pipe[1][0]);
-	close(minis->cmd[i - 1].pipe_fd[0]);
+	close_redi_pipe(redi_pipe);
 }
 
 /*
@@ -144,6 +120,12 @@ int	ft_execute(t_data *minis, char **envp)
 		}
 		else
 			middle_cmd(minis, envp, i);
+		i++;
+	}
+	close_all_pipes(minis);
+	i = 0;
+	while (i < minis->nb_cmd)
+	{
 		if (!ft_is_not_fork(&minis->cmd[i])
 			&& infile_error_message(&minis->cmd[i], 0))
 			waitpid(minis->cmd[i].res_fork, &res, 0);

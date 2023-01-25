@@ -97,8 +97,8 @@ void	clean_this_redi(char *str, int j, int res);
 void	stock_redi(t_data *minis, t_board *cmd, char *str, int res);
 char	*get_file_redi(char *str);
 //redirect_utils.c
-int		is_redi_infile(t_board *cmd);
-int		is_redi_outfile(t_board *cmd);
+int		is_redi_infile(t_redi *ptr);
+int		is_redi_outfile(t_redi *ptr);
 void	try_open_file(t_redi *ptr);
 void	open_all_redi_files(t_board *cmd);
 void	close_all_redi_files(t_board *cmd);
@@ -109,17 +109,13 @@ int		ft_is_redi(char *str, size_t i);
 t_redi	*lst_last_redi(t_redi *lst);
 void	lst_add_redi(t_redi **lst, t_redi *new);
 //redirect_infile.c
-void	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-void	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-void	redirect_infile(t_board *cmd, int redi_pipe[2]);
+int		d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
+int	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
+int 	redirect_infile(t_board *cmd, int redi_pipe[2]);
 t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
-void	redirect_outfile(t_data *minis, t_board *cmd, int redi_pipe[2][2]);
+int		redirect_outfile(t_board *cmd, int redi_pipe[2]);
 void	redirect_error(t_data *minis, int redi_pipe[2][2]);
-void	write_in_last_file(char *buf, t_board *cmd);
-int		res_cmd_to_pipe(int fd[2], int redi_pipe[2],
-			t_board *cmd, int is_outfile);
-char	*read_from_pipe(int fd[2], char *buf);
 //				PARSING
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
@@ -210,8 +206,6 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror);
 void	ft_error_ptr(t_data *minis, t_var *ptr, int error);
 void	ft_error_fork(t_data *minis, int redi_pipe[2][2], int y);
 //ft_error_bis.c
-void	ft_error_pipe(t_data *minis, int redi_pipe[2][2], int y, int z);
-void	ft_error_in_fork(t_data *minis, int redi_pipe[2][2]);
 void	ft_error_to_pipe(t_data *minis, int i);
 //				PIPE
 //pipe.c

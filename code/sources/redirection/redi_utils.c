@@ -12,13 +12,10 @@
 
 #include "../../includes/minishell.h"
 
-int	is_redi_infile(t_board *cmd)
+int	is_redi_infile(t_redi *ptr)
 {
-	t_redi	*ptr;
-
-	if (!cmd->redi)
+	if(!ptr)
 		return (0);
-	ptr = cmd->redi;
 	while (ptr->next != NULL)
 	{
 		if (ptr->type == INFILE)
@@ -34,13 +31,10 @@ int	is_redi_infile(t_board *cmd)
 	return (0);
 }
 
-int	is_redi_outfile(t_board *cmd)
+int	is_redi_outfile(t_redi *ptr)
 {
-	t_redi	*ptr;
-
-	if (!cmd->redi)
+	if(!ptr)
 		return (0);
-	ptr = cmd->redi;
 	while (ptr->next != NULL)
 	{
 		if (ptr->type == OUTFILE)
