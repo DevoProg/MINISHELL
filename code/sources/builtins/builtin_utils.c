@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:24:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 17:57:58 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/24 21:35:33 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ void	ft_envp(t_data *minis)
 	Si une autre lettre que n apparait suite a un '-' --> PAS OK (0).
 	Si uniquement - suivit de plein de n --> OPTION OK (1).
 */
-int	check_option_echo(char *cmd)
+int		check_option_echo(char *cmd)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	if (cmd[i] == '-')
+	if(cmd[i] == '-')
 	{
 		i++;
-		while (cmd[i])
+		while(cmd[i])
 		{
-			if (cmd[i] != 'n')
+			if(cmd[i] != 'n')
 				return (0);
 			i++;
 		}
-		return (1);
+		return(1);
 	}
 	return (0);
 }
@@ -78,13 +78,13 @@ void	ft_echo(t_data *minis, t_board *cmd)
 		return ;
 	}
 	i = 1;
-	while (i < cmd->nb_words - 1)
+	while(i < cmd->nb_words - 1)
 	{
-		if (!check_option_echo(cmd->tab[i]))
+		if(!check_option_echo(cmd->tab[i]))
 			break ;
 		i++;
 	}
-	if (i > 1)
+	if(i > 1)
 		option = 1;
 	ft_echo_bis(minis, cmd, i, option);
 }

@@ -76,7 +76,7 @@ char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis)
 		j += ft_strlen(var_env);
 	new = malloc(sizeof(char) * (j + 1));
 	if (!new)
-		ft_error("Malloc", minis, 3, 1);
+		ft_error("Malloc", minis, 2, 1);
 	j = 0;
 	while (j < i && cmd)
 	{

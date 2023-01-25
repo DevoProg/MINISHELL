@@ -19,7 +19,8 @@ void	signal_handler(int sig)
 		write(STDERR_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		rl_redisplay();
+		if(code_erreur != 130)
+			rl_redisplay();
 	}
 }
 
@@ -74,6 +75,7 @@ void	init_signals(void)
 void	line_empty(t_data *minis)
 {
 	free_list(minis->env);
+	rl_clear_history();
 	if (errno == ENOMEM)
 	{
 		perror("error");

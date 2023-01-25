@@ -48,7 +48,7 @@ void	ft_assign_new_value(t_data *minis, char *str, char *name)
 
 	ptr = lst_name_finding(minis->env, name);
 	free(ptr->value);
-	ft_get_value(str, ptr);
+	ft_get_value(minis, str, ptr);
 }
 
 /*
@@ -62,7 +62,7 @@ void	ft_create_variable(t_data *minis, char *str)
 	if (!ptr)
 		ft_error("Malloc", minis, 2, 1);
 	ptr->next = NULL;
-	ft_get_value(str, ptr);
+	ft_get_value(minis, str, ptr);
 	if (!ptr->value)
 		ft_error("Malloc", minis, 2, 1);
 	ft_get_name(str, ptr);

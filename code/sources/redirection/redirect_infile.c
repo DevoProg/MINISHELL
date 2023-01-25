@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:41:48 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 17:56:44 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:19:08 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
 	char	*str;
 	int		i;
-	int		res;
+	int res;
 
 	res = 0;
 	if (!ptr)
@@ -47,7 +47,7 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		if (str && *str && ft_strcmp(str, ptr->file) == 0)
 			break ;
 		i = ft_strlen(str);
-		if (!is_redi_infile(ptr->next))
+		if(!is_redi_infile(ptr->next))
 		{
 			write(redi_pipe[1], str, i);
 			write(redi_pipe[1], "\n", 1);
@@ -65,7 +65,7 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 int	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
 	int		fd;
-	int		res;
+	int 	res;
 
 	res = 0;
 	fd = open(ptr->file, O_RDONLY);
@@ -74,9 +74,10 @@ int	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		ft_putstr_fd("Error to open file :", 2);
 		ft_putstr_fd(ptr->file, 2);
 		ft_putchar_fd('\n', 2);
+		//close pipe
 		exit(1);
 	}
-	if (!is_redi_infile(ptr->next))
+	if(!is_redi_infile(ptr->next))
 	{
 		dup2(fd, redi_pipe[0]);
 		res = 1;
@@ -91,7 +92,7 @@ int	infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 int	redirect_infile(t_board *cmd, int redi_pipe[2])
 {
 	t_redi	*ptr;
-	int		res;
+	int res;
 
 	res = 0;
 	if (!cmd->redi)

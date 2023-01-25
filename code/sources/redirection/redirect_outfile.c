@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:33:55 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 17:55:08 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:18:39 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	redirect_error(t_data *minis, int redi_pipe[2][2])
 */
 int	redirect_outfile(t_board *cmd, int redi_pipe[2])
 {
-	t_redi	*ptr;
+	t_redi *ptr;
 
 	ptr = cmd->redi;
-	if (!ptr)
+	if(!ptr)
 		return (0);
 	open_all_redi_files(cmd);
 	ptr = last_redi_out(cmd->redi);
-	if (!ptr)
+	if(!ptr)
 		return (0);
 	dup2(ptr->file_fd, redi_pipe[1]);
 	close_all_redi_files(cmd);

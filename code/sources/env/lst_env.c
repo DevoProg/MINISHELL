@@ -73,15 +73,10 @@ void	lst_add(t_var **lst, t_var *new)
 	}
 }
 
-/*
-	Si il n'y a pas de égal dans le get_value de export sa value = ''
-*/
-void	ft_malloc_empty(t_var *ptr)
+void	ft_malloc_empty(t_data *minis, t_var *ptr)
 {
-	ptr->value = malloc(sizeof(char) * 3);
+	ptr->value = malloc(sizeof(char) * 1);
 	if (!ptr->value)
-		return ;
-	ptr->value[0] = 39;
-	ptr->value[1] = 39;
+		ft_error("Malloc", minis, 3, 1);
 	ptr->value[2] = '\0';
 }

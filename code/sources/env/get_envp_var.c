@@ -43,7 +43,7 @@ char	*search_env_var(char *str, int i, t_data *minis)
 		j++;
 	new = malloc(sizeof(char) * (j + 1));
 	if (!new)
-		ft_error("Malloc", minis, 3, 1);
+		ft_error("Malloc", minis, 2, 1);
 	j = i + 1;
 	k = 0;
 	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))

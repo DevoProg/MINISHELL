@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:51:20 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 17:58:36 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:21:16 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 		put_res_pipe(minis, 1);
 		return ;
 	}
-	if (cmd->nb_words == 3)
+	if(cmd->nb_words == 3)
 	{
 		if (cmd->tab[1][0] == '-')
 			i++;
@@ -58,6 +58,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	}
 	else
 		exit_code = 0;
+	rl_clear_history();
 	free_struct(minis);
 	free_list(minis->env);
 	free_redi(minis);

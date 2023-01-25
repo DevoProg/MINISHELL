@@ -42,7 +42,7 @@ void	ft_get_name(char *str, t_var *ptr)
 	Fonction servant a récupérer la valeur de la variable d'environnement.
 	La valeur est stocké dans la structure "t_var ptr".
 */
-void	ft_get_value(char *str, t_var *ptr)
+void	ft_get_value(t_data *minis, char *str, t_var *ptr)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void	ft_get_value(char *str, t_var *ptr)
 		i++;
 	if (str[i] != '=')
 	{
-		ft_malloc_empty(ptr);
+		ft_malloc_empty(minis, ptr);
 		return ;
 	}
 	i++;
@@ -98,7 +98,7 @@ void	create_var(t_data *minis, char **envp, int i)
 	ft_get_name(envp[i], ptr);
 	if (!ptr->name)
 		ft_error_ptr(minis, ptr, 1);
-	ft_get_value(envp[i], ptr);
+	ft_get_value(minis, envp[i], ptr);
 	if (!ptr->value)
 		ft_error_ptr(minis, ptr, 2);
 	if (ptr->name && ptr->name[0] == '_' && ptr->name[1] == '\0')

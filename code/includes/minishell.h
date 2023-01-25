@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:28:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 17:54:04 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:45:10 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define D_INFILE 2
 # define OUTFILE 3
 # define D_OUTFILE 4
+
+extern int code_erreur;
 
 typedef struct s_redi
 {
@@ -110,13 +112,15 @@ t_redi	*lst_last_redi(t_redi *lst);
 void	lst_add_redi(t_redi **lst, t_redi *new);
 //redirect_infile.c
 int		d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-int		infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-int		redirect_infile(t_board *cmd, int redi_pipe[2]);
+int	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
+int 	redirect_infile(t_board *cmd, int redi_pipe[2]);
 t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
 int		redirect_outfile(t_board *cmd, int redi_pipe[2]);
 void	redirect_error(t_data *minis, int redi_pipe[2][2]);
 //				PARSING
+//parse.c
+int parse(t_data *minis, char *str);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
@@ -139,14 +143,14 @@ int		count_new_quote(char *str);
 void	ft_create_env(t_data *minis, char **envp);
 void	create_var(t_data *minis, char **envp, int i);
 void	create_var_interr(t_data *minis);
-void	ft_get_value(char *str, t_var *ptr);
+void	ft_get_value(t_data *minis, char *str, t_var *ptr);
 void	ft_get_name(char *str, t_var *ptr);
 //lst_env.c
 void	put_res_pipe(t_data *minis, int res);
 void	lst_add(t_var **lst, t_var *new);
 t_var	*lst_last(t_var *lst);
 t_var	*lst_name_finding(t_var *lst, char *name);
-void	ft_malloc_empty(t_var *ptr);
+void	ft_malloc_empty(t_data *minis, t_var *ptr);
 //get_envp_var.c
 void	put_env_var(t_data *minis);
 char	*get_envp_var(t_data *minis, char *cmd);

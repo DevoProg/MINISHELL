@@ -40,7 +40,7 @@ MAIN_DIR	=	main/
 MAIN_FILES	=	init_struct main signal
 
 PARS_DIR	=	parsing/
-PARS_FILES	=	split_cmd split_line delete_quote
+PARS_FILES	=	parse split_cmd split_line delete_quote
 
 TOOLS_DIR	=	tools/
 TOOLS_FILES	=	ft_error ft_error_bis ft_free utils utils_bis count_quote

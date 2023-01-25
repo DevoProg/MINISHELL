@@ -32,4 +32,21 @@ echo yo ">" test                                                           /!!!\
 
 echo '$USER'                                                            /!!!\ OK
 
-rl_clear_history en commentaire /!!!!!!\
+si guillemet dans fichier de redirection OK
+
+inverser put_env_var et les redirections dans le main OK
+
+tout free dans le bon ordre main OK
+
+si trop de pipe ou trp de redirection erreur 258 OK
+
+si redirection vers variable env qui existe pas code erreur 1
+
+code erreur lorsque il y a pas de fichier apres la redirection
+
+gerer code erreur des signaux
+
+erreur 130 cat->control_C
+
+
+control_c dans <<

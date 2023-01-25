@@ -83,8 +83,8 @@ int	ft_pipe(t_data *minis, char **envp)
 	}
 	create_pipe(minis);
 	res = ft_execute(minis, envp);
-	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1])
-		&& ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
-		res = 0;
+	// if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1])
+	// 	&& ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
+	// 	res = 0;
 	return (res);
 }

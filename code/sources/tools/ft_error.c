@@ -18,7 +18,7 @@ void	ft_error(char *message, t_data *minis, int z, int is_perror)
 		free_list(minis->env);
 	if (z > 0)
 	{
-		//rl_clear_history();
+		rl_clear_history();
 		free(minis->line);
 	}
 	if (z == 1)

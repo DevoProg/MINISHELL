@@ -66,19 +66,21 @@ void	print_list(t_var *exp, int i)
 		return ;
 	while (exp->next != NULL)
 	{
-		if ((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
+		if ((i == 0 && exp->is_print == 1 && *exp->value) || (i == 1 && exp->is_export == 1))
 		{
 			ft_putstr_fd(exp->name, 1);
-			ft_putchar_fd('=', 1);
+			if(*exp->value)
+				ft_putchar_fd('=', 1);
 			ft_putstr_fd(exp->value, 1);
 			ft_putchar_fd('\n', 1);
 		}
 		exp = exp->next;
 	}
-	if ((i == 0 && exp->is_print == 1) || (i == 1 && exp->is_export == 1))
+	if ((i == 0 && exp->is_print == 1 && *exp->value) || (i == 1 && exp->is_export == 1))
 	{
 		ft_putstr_fd(exp->name, 1);
-		ft_putchar_fd('=', 1);
+		if(*exp->value)
+			ft_putchar_fd('=', 1);
 		ft_putstr_fd(exp->value, 1);
 		ft_putchar_fd('\n', 1);
 	}
