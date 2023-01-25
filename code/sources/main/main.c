@@ -6,18 +6,16 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/24 21:35:57 by adevos           ###   ########.fr       */
+/*   Updated: 2023/01/25 21:15:40 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	code_erreur;
-
 void	each_things_to_do(t_data *minis, char **envp)
 {
 	add_history(minis->line);
-	if(!parse(minis, minis->line))
+	if (!parse(minis, minis->line))
 		return ;
 	line_to_cmd(minis);
 	init_struct(minis);
@@ -39,7 +37,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 void	minishell_loop(char **envp)
 {
 	t_data	minis;
-	
+
 	init_signals();
 	ft_create_env(&minis, envp);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:38:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 00:41:24 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/25 21:19:28 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,22 @@ void	print_list(t_var *exp, int i)
 		return ;
 	while (exp->next != NULL)
 	{
-		if ((i == 0 && exp->is_print == 1 && *exp->value) || (i == 1 && exp->is_export == 1))
+		if ((i == 0 && exp->is_print == 1 && *exp->value)
+			|| (i == 1 && exp->is_export == 1))
 		{
 			ft_putstr_fd(exp->name, 1);
-			if(*exp->value)
+			if (*exp->value)
 				ft_putchar_fd('=', 1);
 			ft_putstr_fd(exp->value, 1);
 			ft_putchar_fd('\n', 1);
 		}
 		exp = exp->next;
 	}
-	if ((i == 0 && exp->is_print == 1 && *exp->value) || (i == 1 && exp->is_export == 1))
+	if ((i == 0 && exp->is_print == 1 && *exp->value)
+		|| (i == 1 && exp->is_export == 1))
 	{
 		ft_putstr_fd(exp->name, 1);
-		if(*exp->value)
+		if (*exp->value)
 			ft_putchar_fd('=', 1);
 		ft_putstr_fd(exp->value, 1);
 		ft_putchar_fd('\n', 1);

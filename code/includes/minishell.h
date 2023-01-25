@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:28:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/24 17:45:10 by adevos           ###   ########.fr       */
+/*   Updated: 2023/01/25 21:04:33 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define OUTFILE 3
 # define D_OUTFILE 4
 
-extern int code_erreur;
+extern int	code_erreur;
 
 typedef struct s_redi
 {
@@ -112,15 +112,15 @@ t_redi	*lst_last_redi(t_redi *lst);
 void	lst_add_redi(t_redi **lst, t_redi *new);
 //redirect_infile.c
 int		d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-int	infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
-int 	redirect_infile(t_board *cmd, int redi_pipe[2]);
+int		infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
+int		redirect_infile(t_board *cmd, int redi_pipe[2]);
 t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
 int		redirect_outfile(t_board *cmd, int redi_pipe[2]);
 void	redirect_error(t_data *minis, int redi_pipe[2][2]);
 //				PARSING
 //parse.c
-int parse(t_data *minis, char *str);
+int		parse(t_data *minis, char *str);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
