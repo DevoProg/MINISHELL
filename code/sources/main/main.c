@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/24 21:35:57 by adevos           ###   ########.fr       */
+/*   Updated: 2023/01/25 17:58:56 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 void	minishell_loop(char **envp)
 {
 	t_data	minis;
-	
+
 	init_signals();
 	ft_create_env(&minis, envp);
 	while (1)

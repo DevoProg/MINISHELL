@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:31:51 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/16 23:33:08 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:54:37 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_redi_infile(t_redi *ptr)
 {
-	if(!ptr)
+	if (!ptr)
 		return (0);
 	while (ptr->next != NULL)
 	{
@@ -33,7 +33,7 @@ int	is_redi_infile(t_redi *ptr)
 
 int	is_redi_outfile(t_redi *ptr)
 {
-	if(!ptr)
+	if (!ptr)
 		return (0);
 	while (ptr->next != NULL)
 	{
