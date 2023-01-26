@@ -19,9 +19,9 @@ void	each_things_to_do(t_data *minis, char **envp)
 	int res;
 
 	add_history(minis->line);
-	if (!parse(minis, minis->line))
-		return ;
 	put_res_pipe(minis, code_erreur);
+	if (!parse(minis->line))
+		return ;
 	line_to_cmd(minis);
 	init_struct(minis);
 	put_env_var(minis);

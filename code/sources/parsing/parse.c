@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	parse(t_data *minis, char *str)
+int	parse(char *str)
 {
 	int	i;
 	int	count;
@@ -26,13 +26,13 @@ int	parse(t_data *minis, char *str)
 			if (!str[i + 1])
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 			if (str[i + 1] == '|')
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 			i++;
@@ -41,7 +41,7 @@ int	parse(t_data *minis, char *str)
 			if (!str[i])
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 		}
@@ -52,7 +52,7 @@ int	parse(t_data *minis, char *str)
 			if (str[i + 1] == '<' || str[i + 1] == '>')
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 			while (str[i] && str[i] == ' ')
@@ -61,7 +61,7 @@ int	parse(t_data *minis, char *str)
 			if (!str[i])
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 		}
@@ -72,7 +72,7 @@ int	parse(t_data *minis, char *str)
 			if (str[i + 1] == '<' || str[i + 1] == '>')
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 			while (str[i] && str[i] == ' ')
@@ -81,7 +81,7 @@ int	parse(t_data *minis, char *str)
 			if (!str[i])
 			{
 				ft_printf("Error parsing\n");
-				put_res_pipe(minis, 258);
+				code_erreur = 258;
 				return (0);
 			}
 		}
