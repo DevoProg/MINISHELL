@@ -15,17 +15,17 @@
 /*
     Cas commande : PWD.
 */
-void	ft_pwd(t_data *minis)
+void	ft_pwd()
 {
 	char	cwd[PATH_LEN];
 
 	if (getcwd(cwd, PATH_LEN))
 	{
 		ft_putendl_fd(cwd, 1);
-		put_res_pipe(minis, 0);
+		code_erreur = 0;
 		return ;
 	}
-	put_res_pipe(minis, 1);
+	code_erreur = 1;
 }
 
 /*
@@ -34,7 +34,7 @@ void	ft_pwd(t_data *minis)
 void	ft_envp(t_data *minis)
 {
 	print_list(minis->env, 0);
-	put_res_pipe(minis, 0);
+	code_erreur = 0;
 }
 
 /*
@@ -65,7 +65,7 @@ int	check_option_echo(char *cmd)
 /*
     Cas commande : ECHO.
 */
-void	ft_echo(t_data *minis, t_board *cmd)
+void	ft_echo(t_board *cmd)
 {
 	int	i;
 	int	option;
@@ -74,7 +74,7 @@ void	ft_echo(t_data *minis, t_board *cmd)
 	if (cmd->nb_words == 2)
 	{
 		ft_putchar_fd('\n', 1);
-		put_res_pipe(minis, 0);
+		code_erreur = 0;
 		return ;
 	}
 	i = 1;
@@ -86,10 +86,10 @@ void	ft_echo(t_data *minis, t_board *cmd)
 	}
 	if (i > 1)
 		option = 1;
-	ft_echo_bis(minis, cmd, i, option);
+	ft_echo_bis(cmd, i, option);
 }
 
-void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
+void	ft_echo_bis(t_board *cmd, int i, int option)
 {
 	while (i < cmd->nb_words - 1)
 	{
@@ -100,5 +100,5 @@ void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option)
 	}
 	if (option == 0)
 		ft_putchar_fd('\n', 1);
-	put_res_pipe(minis, 0);
+	code_erreur = 0;
 }

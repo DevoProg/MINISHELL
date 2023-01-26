@@ -44,7 +44,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	if (cmd->nb_words > 3)
 	{
 		ft_putstr_fd("too much argument for exit\n", 2);
-		put_res_pipe(minis, 1);
+		code_erreur = 1;
 		return ;
 	}
 	if (cmd->nb_words == 3)
@@ -71,11 +71,11 @@ void	ft_exit(t_data *minis, t_board *cmd)
 void	builtins_with_fork(t_data *minis, t_board *cmd)
 {
 	if (ft_strcmp(cmd->tab[0], "pwd") == 0)
-		ft_pwd(minis);
+		ft_pwd();
 	else if (ft_strcmp(cmd->tab[0], "env") == 0)
 		ft_envp(minis);
 	else if (ft_strcmp(cmd->tab[0], "echo") == 0)
-		ft_echo(minis, cmd);
+		ft_echo(cmd);
 	else if (ft_strcmp(cmd->tab[0], "exit") == 0)
 		ft_exit(minis, cmd);
 	else if (ft_strcmp(cmd->tab[0], "cd") == 0)

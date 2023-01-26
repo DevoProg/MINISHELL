@@ -176,10 +176,10 @@ void	builtins_with_fork(t_data *minis, t_board *cmd);
 void	ft_exit(t_data *minis, t_board *cmd);
 int		ft_is_digital(char *str);
 //buitlin_utils
-void	ft_echo(t_data *minis, t_board *cmd);
-void	ft_echo_bis(t_data *minis, t_board *cmd, int i, int option);
+void	ft_echo(t_board *cmd);
+void	ft_echo_bis(t_board *cmd, int i, int option);
 void	ft_envp(t_data *minis);
-void	ft_pwd(t_data *minis);
+void	ft_pwd();
 //unset.c
 void	ft_unset(t_data *minis, t_board *cmd);
 t_var	*ft_delete_node(char *str, t_var *env);

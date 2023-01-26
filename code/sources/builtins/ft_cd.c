@@ -72,18 +72,18 @@ int	cd_without_arg(t_data *minis, t_board *cmd)
 	if (access_check(ptr->value) == ERROR)
 	{
 		ft_putstr_fd("wrong path or not authorized\n", 2);
-		put_res_pipe(minis, 1);
+		code_erreur = 1;
 		return (1);
 	}
 	if (chdir(ptr->value) == -1)
 	{
 		ft_putstr_fd("ERROR CHANGING DIR\n", 2);
-		put_res_pipe(minis, 1);
+		code_erreur = 1;
 		return (1);
 	}
 	ft_change_oldpwd(minis->env, minis);
 	ft_change_pwd(minis->env, minis);
-	put_res_pipe(minis, 0);
+	code_erreur = 0;
 	return (1);
 }
 
@@ -100,16 +100,16 @@ void	ft_cd(t_data *minis, t_board *cmd)
 	if (access_check(home_dir) == ERROR)
 	{
 		ft_putstr_fd("wrong path or not authorized\n", 2);
-		put_res_pipe(minis, 1);
+		code_erreur = 1;
 		return ;
 	}
 	if (chdir(home_dir) == -1)
 	{
 		ft_putstr_fd("ERROR CHANGING DIR\n", 2);
-		put_res_pipe(minis, 1);
+		code_erreur = 1;
 		return ;
 	}
 	ft_change_oldpwd(minis->env, minis);
 	ft_change_pwd(minis->env, minis);
-	put_res_pipe(minis, 0);
+	code_erreur = 0;
 }
