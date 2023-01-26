@@ -12,33 +12,24 @@
 
 #include "../../includes/minishell.h"
 
-void	signal_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(STDERR_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		if (code_erreur != 130)
-			rl_redisplay();
-	}
-}
-
-/*
-	Fonction interceptant les signaux.
-	Le premier appel de signal sert a ignorer les appels de ctrl+\.
-	Le second exec le signal_handler qui s'occupera de reprompt.	
-*/
 void	init_signals(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 }
 
-/*
-	Fonction servant a gerer le cas d'un signal ctrl+d.
-	Free le minishell avant le exit.
-*/
+void	signal_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		code_erreur = 1;
+		write(STDERR_FILENO, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 void	line_empty(t_data *minis)
 {
 	free_list(minis->env);
@@ -49,5 +40,46 @@ void	line_empty(t_data *minis)
 		exit(EXIT_FAILURE);
 	}
 	printf("exit\n");
-	exit(EXIT_SUCCESS);
+	exit(code_erreur);
+}
+
+void	init_signals_child(void)
+{
+	signal(SIGQUIT, signal_handler_child);
+	signal(SIGINT, signal_handler_child);
+}
+
+void	signal_handler_child(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(STDERR_FILENO, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
+	if(sig == SIGQUIT)
+	{
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		ft_putstr_fd("Quit: 3\n", 1);
+	}
+}
+
+
+
+void	init_signals_h_doc(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler_h_doc);
+}
+
+void	signal_handler_h_doc(int sig)
+{
+	if (sig == SIGINT)
+		exit(1);
+}
+
+void line_empty_h_doc()
+{
+	exit(0);
 }

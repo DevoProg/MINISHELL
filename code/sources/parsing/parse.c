@@ -25,13 +25,13 @@ int	parse(char *str)
 		{
 			if (!str[i + 1])
 			{
-				ft_printf("Error parsing\n");
+				ft_printf("Error parsing : unexpected token `|'\n");
 				code_erreur = 258;
 				return (0);
 			}
 			if (str[i + 1] == '|')
 			{
-				ft_printf("Error parsing\n");
+				ft_printf("Error parsing : unexpected token `|'\n");
 				code_erreur = 258;
 				return (0);
 			}
@@ -40,7 +40,7 @@ int	parse(char *str)
 				i++;
 			if (!str[i])
 			{
-				ft_printf("Error parsing\n");
+				ft_printf("Error parsing : unexpected token `|'\n");
 				code_erreur = 258;
 				return (0);
 			}

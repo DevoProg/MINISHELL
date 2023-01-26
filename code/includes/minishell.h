@@ -89,9 +89,14 @@ void	free_redi(t_data *minis);
 void	init_struct(t_data *minis);
 void	free_struct(t_data *minis);
 //signal.c
-void	signal_handler(int sig);
 void	init_signals(void);
+void	signal_handler(int sig);
 void	line_empty(t_data *minis);
+void	init_signals_child(void);
+void	signal_handler_child(int sig);
+void	init_signals_h_doc(void);
+void	signal_handler_h_doc(int sig);
+void line_empty_h_doc(void);
 //				REDIRECTION
 //redirect.c
 void	redirection(t_data *minis);
@@ -179,7 +184,7 @@ int		ft_is_digital(char *str);
 void	ft_echo(t_board *cmd);
 void	ft_echo_bis(t_board *cmd, int i, int option);
 void	ft_envp(t_data *minis);
-void	ft_pwd();
+void	ft_pwd(void);
 //unset.c
 void	ft_unset(t_data *minis, t_board *cmd);
 t_var	*ft_delete_node(char *str, t_var *env);

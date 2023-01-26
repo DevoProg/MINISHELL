@@ -33,9 +33,10 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 		ft_error_fork(minis, redi_pipe, 0);
 	if (cmd->res_fork == 0)
 		fork_one_cmd(minis, envp, redi_pipe, cmd);
+	init_signals_child();
 	close_redi_pipe(redi_pipe);
 	waitpid(minis->cmd[0].res_fork, &res, 0);
-	return (WEXITSTATUS(res));
+	return (res);
 }
 
 /*

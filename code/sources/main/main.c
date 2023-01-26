@@ -29,7 +29,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 	redirection(minis);
 	ft_split_cmd(minis);
 	res = ft_pipe(minis, envp);
-	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]))
+	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && code_erreur != 126)
 		code_erreur = res;
 	free_struct((minis));
 }
@@ -43,10 +43,10 @@ void	minishell_loop(char **envp)
 	t_data	minis;
 
 	code_erreur = 0;
-	init_signals();
 	ft_create_env(&minis, envp);
 	while (1)
 	{
+		init_signals();
 		minis.line = readline(">$");
 		if (!minis.line)
 		{

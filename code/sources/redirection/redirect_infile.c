@@ -43,7 +43,10 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		return (res);
 	while (1)
 	{
+		init_signals_h_doc();
 		str = readline(">");
+		if(!str)
+			line_empty_h_doc();
 		if (str && *str && ft_strcmp(str, ptr->file) == 0)
 			break ;
 		i = ft_strlen(str);
@@ -56,6 +59,7 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		str = NULL;
 		free(str);
 	}
+	init_signals_child();
 	return (res);
 }
 
