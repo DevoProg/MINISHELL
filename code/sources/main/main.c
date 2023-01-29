@@ -47,7 +47,7 @@ void	minishell_loop(char **envp)
 	while (1)
 	{
 		init_signals();
-		minis.line = readline(">$");
+		minis.line = readline("minishell$ ");
 		if (!minis.line)
 		{
 			line_empty(&minis);
