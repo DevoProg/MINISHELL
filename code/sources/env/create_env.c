@@ -60,7 +60,7 @@ void	ft_get_value(t_data *minis, char *str, t_var *ptr)
 	{	
 		free(ptr->name);
 		free(ptr);
-		return ;
+		ft_error("Malloc", minis, 3, 1);
 	}
 }
 

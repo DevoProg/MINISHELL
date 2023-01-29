@@ -1,7 +1,5 @@
 malloc empty pas proteger sur malloc                                        /!!!\
 
-proteger get_next_line                                                      /!!!\
-
 cat | ls ? en cours..                                                          /!!!\
 
 make -n affiche pas les flags?    
