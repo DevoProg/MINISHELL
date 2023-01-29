@@ -133,5 +133,5 @@ int	ft_execute(t_data *minis, char **envp)
 	command_error_message(minis, 1);
 	if (!minis->cmd[minis->nb_cmd - 1].cmd_path && !ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
 				return (127);
-	return (WEXITSTATUS(res));
+	return (res);
 }
