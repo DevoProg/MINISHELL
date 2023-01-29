@@ -23,9 +23,9 @@ int	ft_strlen_var(char *str, int j)
 	j++;
 	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
 	{
+		i++;
 		if(str[j] == '?')
 			break ;
-		i++;
 		j++;
 	}
 	return (i);

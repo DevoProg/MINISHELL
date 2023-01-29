@@ -36,6 +36,7 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 	init_signals_child();
 	close_redi_pipe(redi_pipe);
 	waitpid(minis->cmd[0].res_fork, &res, 0);
+	command_error_message(minis, 1);
 	return (res);
 }
 
@@ -96,6 +97,7 @@ void	last_cmd(t_data *minis, char **envp, int i)
 		ft_error_fork(minis, redi_pipe, 1);
 	if (cmd->res_fork == 0)
 		fork_last_cmd(minis, envp, redi_pipe, i);
+	init_signals_child();
 	close_redi_pipe(redi_pipe);
 }
 
@@ -114,11 +116,7 @@ int	ft_execute(t_data *minis, char **envp)
 		if (i == 0)
 			first_cmd(minis, envp, i);
 		else if (i == minis->nb_cmd - 1)
-		{
 			last_cmd(minis, envp, i);
-			if (!minis->cmd[i].cmd_path && !ft_is_builtins(&minis->cmd[i]))
-				return (127);
-		}
 		else
 			middle_cmd(minis, envp, i);
 		i++;
@@ -132,5 +130,8 @@ int	ft_execute(t_data *minis, char **envp)
 			waitpid(minis->cmd[i].res_fork, &res, 0);
 		i++;
 	}
+	command_error_message(minis, 1);
+	if (!minis->cmd[minis->nb_cmd - 1].cmd_path && !ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
+				return (127);
 	return (WEXITSTATUS(res));
 }

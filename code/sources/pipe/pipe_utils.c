@@ -41,17 +41,26 @@ int	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 	return (0);
 }
 
-int	command_error_message(t_board *cmd, int print)
+int	command_error_message(t_data *minis, int print)
 {
-	if (!cmd->cmd_path && !ft_is_builtins(cmd))
+	t_board *cmd;
+	int i;
+
+	i = 0;
+	while(i < minis->nb_cmd)
 	{
-		if (print == 1)
+		cmd = &minis->cmd[i];
+		if (!cmd->cmd_path && !ft_is_builtins(cmd))
 		{
-			ft_putstr_fd("Command not found :", 2);
-			ft_putstr_fd(cmd->tab[0], 2);
-			ft_putchar_fd('\n', 2);
+			if (print == 1)
+			{
+				ft_putstr_fd("Command not found :", 2);
+				ft_putstr_fd(cmd->tab[0], 2);
+				ft_putchar_fd('\n', 2);
+			}
+			return (0);
 		}
-		return (0);
+		i++;
 	}
 	return (1);
 }
@@ -77,7 +86,7 @@ int	infile_error_message(t_board *cmd, int print)
 
 	ptr = cmd->redi;
 	if (!ptr)
-		return (command_error_message(cmd, print));
+		return (1);
 	while (ptr->next != NULL)
 	{
 		if (ptr->type == INFILE)
@@ -88,5 +97,5 @@ int	infile_error_message(t_board *cmd, int print)
 	if (ptr->type == INFILE)
 		if (!check_acces_read(ptr, print))
 			return (0);
-	return (command_error_message(cmd, print));
+	return (1);
 }

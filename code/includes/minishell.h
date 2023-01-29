@@ -245,6 +245,6 @@ int		error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
 void	close_for_cmd_pipe(t_data *minis, int z, int i);
 int		infile_error_message(t_board *cmd, int print);
 int		check_acces_read(t_redi *ptr, int print);
-int		command_error_message(t_board *cmd, int print);
+int		command_error_message(t_data *minis, int print);
 
 #endif
