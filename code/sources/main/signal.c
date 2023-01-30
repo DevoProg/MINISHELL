@@ -22,7 +22,7 @@ void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		code_erreur = 1;
+		g_code_erreur = 1;
 		write(STDERR_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -40,7 +40,7 @@ void	line_empty(t_data *minis)
 		exit(EXIT_FAILURE);
 	}
 	printf("exit\n");
-	exit(code_erreur);
+	exit(g_code_erreur);
 }
 
 void	init_signals_child(void)
@@ -57,29 +57,10 @@ void	signal_handler_child(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
-	if(sig == SIGQUIT)
+	if (sig == SIGQUIT)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		ft_putstr_fd("Quit: 3\n", 1);
 	}
-}
-
-
-
-void	init_signals_h_doc(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler_h_doc);
-}
-
-void	signal_handler_h_doc(int sig)
-{
-	if (sig == SIGINT)
-		exit(1);
-}
-
-void line_empty_h_doc()
-{
-	exit(0);
 }

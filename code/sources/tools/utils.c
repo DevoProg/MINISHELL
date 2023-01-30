@@ -12,6 +12,18 @@
 
 #include "../../includes/minishell.h"
 
+
+int len_env_var(char *str, int j)
+{
+	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
+	{
+		if (str[j] == '?')
+			break ;
+		j++;
+	}
+	return(j);
+}
+
 /*
 	fonction qui calcule la longueur de la prochaine commande
 */

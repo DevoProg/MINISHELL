@@ -39,7 +39,7 @@
 # define OUTFILE 3
 # define D_OUTFILE 4
 
-extern int	code_erreur;
+extern int	g_code_erreur;
 
 typedef struct s_redi
 {
@@ -94,9 +94,10 @@ void	signal_handler(int sig);
 void	line_empty(t_data *minis);
 void	init_signals_child(void);
 void	signal_handler_child(int sig);
+//signal_hdoc.c
 void	init_signals_h_doc(void);
 void	signal_handler_h_doc(int sig);
-void 	line_empty_h_doc(void);
+void	line_empty_h_doc(void);
 //				REDIRECTION
 //redirect.c
 void	redirection(t_data *minis);
@@ -119,6 +120,7 @@ void	lst_add_redi(t_redi **lst, t_redi *new);
 int		d_infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 int		infile_to_pipe(t_redi *ptr, int redi_pipe[2]);
 int		redirect_infile(t_board *cmd, int redi_pipe[2]);
+int 	read_input_h_doc(t_redi *ptr, int redi_pipe[2], int *res);
 t_redi	*last_redi_out(t_redi *redi);
 //redirect_outfile.c
 int		redirect_outfile(t_board *cmd, int redi_pipe[2]);
@@ -126,10 +128,10 @@ void	redirect_error(t_data *minis, int redi_pipe[2][2]);
 //				PARSING
 //parse.c
 int		parse(t_data *minis, char *str);
-int 	nothing_after_redi(t_data *minis, char *str, int i);
-int 	check_after_redi(char *str, char *new_str, int j, int i);
-int 	unknow_env_redi(t_data *minis, char *str, int i);
-int 	pipe_at_end(t_data *minis, char *str, int i);
+int		nothing_after_redi(t_data *minis, char *str, int i);
+int		check_after_redi(char *str, char *new_str, int j, int i);
+int		unknow_env_redi(t_data *minis, char *str, int i);
+int		pipe_at_end(t_data *minis, char *str, int i);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
@@ -197,6 +199,7 @@ void	ft_delete_last_node(t_var *env);
 void	ft_delete_middle_node(t_var *env);
 //				TOOLS
 //utils.c
+int 	len_env_var(char *str, int j);
 int		ft_len_cmd(char *line);
 char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
@@ -244,6 +247,7 @@ void	fork_one_cmd(t_data *minis, char **envp,
 void	fork_first_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void	fork_middle_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
 void	fork_last_cmd(t_data *minis, char **envp, int redi_pipe[2][2], int i);
+void 	wait_all_pid(t_data *minis, int *res);
 //pipe_utils.c
 int		error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
 void	close_for_cmd_pipe(t_data *minis, int z, int i);

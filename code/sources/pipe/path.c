@@ -69,7 +69,7 @@ char	*check_acces_path(t_data *minis, t_board *cmd)
 		ft_putstr_fd("Permission denied :", 2);
 		ft_putstr_fd(cmd->tab[0], 2);
 		ft_putchar_fd('\n', 2);
-		code_erreur = 126;
+		g_code_erreur = 126;
 		return (res);
 	}	
 	if (access(cmd->tab[0], X_OK) == 0)
@@ -94,7 +94,7 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	char	*poss;
 	char	*res;
 	int		path_len;
-	
+
 	res = check_acces_path(minis, cmd);
 	if (res)
 		return (res);

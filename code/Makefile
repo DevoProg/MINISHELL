@@ -37,7 +37,7 @@ ENV_DIR		=	env/
 ENV_FILES	=	get_envp_var create_env lst_env
 
 MAIN_DIR	=	main/
-MAIN_FILES	=	init_struct main signal
+MAIN_FILES	=	init_struct main signal signal_hdoc
 
 PARS_DIR	=	parsing/
 PARS_FILES	=	parse split_cmd split_line delete_quote

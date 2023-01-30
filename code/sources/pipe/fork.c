@@ -91,3 +91,17 @@ void	fork_last_cmd(t_data *minis, char **envp,
 	free_list(minis->env);
 	exit(1);
 }
+
+void wait_all_pid(t_data *minis, int *res)
+{
+	int i;
+
+	i = 0;
+	while (i < minis->nb_cmd)
+	{
+		if (!ft_is_not_fork(&minis->cmd[i])
+			&& infile_error_message(&minis->cmd[i], 0))
+			waitpid(minis->cmd[i].res_fork, res, 0);
+		i++;
+	}
+}

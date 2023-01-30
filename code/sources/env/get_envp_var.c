@@ -24,7 +24,7 @@ int	ft_strlen_var(char *str, int j)
 	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
 	{
 		i++;
-		if(str[j] == '?')
+		if (str[j] == '?')
 			break ;
 		j++;
 	}
@@ -41,12 +41,7 @@ char	*search_env_var(char *str, int i, t_data *minis)
 	int		j;
 
 	j = i + 1;
-	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
-	{
-		if (str[j] == '?')
-			break ;
-		j++;
-	}
+	j = len_env_var(str, j);
 	new = malloc(sizeof(char) * (j + 1));
 	if (!new)
 		ft_error("Malloc", minis, 2, 1);

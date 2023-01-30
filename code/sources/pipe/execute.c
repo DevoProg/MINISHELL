@@ -122,16 +122,9 @@ int	ft_execute(t_data *minis, char **envp)
 		i++;
 	}
 	close_all_pipes(minis);
-	i = 0;
-	while (i < minis->nb_cmd)
-	{
-		if (!ft_is_not_fork(&minis->cmd[i])
-			&& infile_error_message(&minis->cmd[i], 0))
-			waitpid(minis->cmd[i].res_fork, &res, 0);
-		i++;
-	}
+	wait_all_pid(minis, &res);
 	command_error_message(minis, 1);
 	if (!minis->cmd[minis->nb_cmd - 1].cmd_path && !ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
-				return (127);
+		return (127);
 	return (res);
 }

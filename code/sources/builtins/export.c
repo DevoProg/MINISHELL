@@ -104,7 +104,7 @@ void	ft_export(t_data *minis, t_board *cmd)
 	if (cmd->nb_words == 2)
 	{
 		print_list(minis->env, 1);
-		code_erreur = 0;
+		g_code_erreur = 0;
 		return ;
 	}
 	i = 1;
@@ -114,5 +114,5 @@ void	ft_export(t_data *minis, t_board *cmd)
 			return ;
 		i++;
 	}
-	code_erreur = 0;
+	g_code_erreur = 0;
 }

@@ -12,14 +12,14 @@
 
 #include "../../includes/minishell.h"
 
-int code_erreur;
+int	g_code_erreur;
 
 void	each_things_to_do(t_data *minis, char **envp)
 {
-	int res;
+	int	res;
 
 	add_history(minis->line);
-	put_res_pipe(minis, code_erreur);
+	put_res_pipe(minis, g_code_erreur);
 	if (!parse(minis, minis->line))
 		return ;
 	line_to_cmd(minis);
@@ -29,8 +29,8 @@ void	each_things_to_do(t_data *minis, char **envp)
 	redirection(minis);
 	ft_split_cmd(minis);
 	res = ft_pipe(minis, envp);
-	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && code_erreur != 126)
-		code_erreur = res;
+	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && g_code_erreur != 126)
+		g_code_erreur = res;
 	free_struct((minis));
 }
 
@@ -42,7 +42,7 @@ void	minishell_loop(char **envp)
 {
 	t_data	minis;
 
-	code_erreur = 0;
+	g_code_erreur = 0;
 	ft_create_env(&minis, envp);
 	while (1)
 	{

@@ -43,11 +43,11 @@ int	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 
 int	command_error_message(t_data *minis, int print)
 {
-	t_board *cmd;
-	int i;
+	t_board	*cmd;
+	int		i;
 
 	i = 0;
-	while(i < minis->nb_cmd)
+	while (i < minis->nb_cmd)
 	{
 		cmd = &minis->cmd[i];
 		if (!cmd->cmd_path && !ft_is_builtins(cmd))

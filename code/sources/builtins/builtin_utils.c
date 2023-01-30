@@ -15,17 +15,17 @@
 /*
     Cas commande : PWD.
 */
-void	ft_pwd()
+void	ft_pwd(void)
 {
 	char	cwd[PATH_LEN];
 
 	if (getcwd(cwd, PATH_LEN))
 	{
 		ft_putendl_fd(cwd, 1);
-		code_erreur = 0;
+		g_code_erreur = 0;
 		return ;
 	}
-	code_erreur = 1;
+	g_code_erreur = 1;
 }
 
 /*
@@ -34,7 +34,7 @@ void	ft_pwd()
 void	ft_envp(t_data *minis)
 {
 	print_list(minis->env, 0);
-	code_erreur = 0;
+	g_code_erreur = 0;
 }
 
 /*
@@ -74,7 +74,7 @@ void	ft_echo(t_board *cmd)
 	if (cmd->nb_words == 2)
 	{
 		ft_putchar_fd('\n', 1);
-		code_erreur = 0;
+		g_code_erreur = 0;
 		return ;
 	}
 	i = 1;
@@ -100,5 +100,5 @@ void	ft_echo_bis(t_board *cmd, int i, int option)
 	}
 	if (option == 0)
 		ft_putchar_fd('\n', 1);
-	code_erreur = 0;
+	g_code_erreur = 0;
 }

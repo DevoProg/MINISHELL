@@ -80,7 +80,7 @@ int	ft_pipe(t_data *minis, char **envp)
 	}
 	if (res >= 2 && res <= 31)
 		return (res + 128);
-	if (res % 256 == 0)//changer? pour les signaux
+	if (res % 256 == 0)
 		res /= 256;
 	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1])
 		&& ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))

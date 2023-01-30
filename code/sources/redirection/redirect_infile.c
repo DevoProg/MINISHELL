@@ -32,10 +32,31 @@ t_redi	*last_redi_out(t_redi *redi)
 	return (res);
 }
 
+int read_input_h_doc(t_redi *ptr, int redi_pipe[2], int *res)
+{
+	char *str;
+	int i;
+
+	init_signals_h_doc();
+	str = readline(">");
+	if (!str)
+		line_empty_h_doc();
+	if (str && *str && ft_strcmp(str, ptr->file) == 0)
+		return (0);
+	i = ft_strlen(str);
+	if (!is_redi_infile(ptr->next))
+	{
+		write(redi_pipe[1], str, i);
+		write(redi_pipe[1], "\n", 1);
+		*res = 1;
+	}
+	str = NULL;
+	free(str);
+	return (1);
+}
+
 int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 {
-	char	*str;
-	int		i;
 	int		res;
 
 	res = 0;
@@ -43,21 +64,8 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		return (res);
 	while (1)
 	{
-		init_signals_h_doc();
-		str = readline(">");
-		if(!str)
-			line_empty_h_doc();
-		if (str && *str && ft_strcmp(str, ptr->file) == 0)
-			break ;
-		i = ft_strlen(str);
-		if (!is_redi_infile(ptr->next))
-		{
-			write(redi_pipe[1], str, i);
-			write(redi_pipe[1], "\n", 1);
-			res = 1;
-		}
-		str = NULL;
-		free(str);
+		if(!read_input_h_doc(ptr, redi_pipe, &res))
+			break;
 	}
 	init_signals_child();
 	return (res);

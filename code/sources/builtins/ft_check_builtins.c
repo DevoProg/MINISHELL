@@ -34,6 +34,13 @@ int	ft_is_digital(char *str)
 	return (1);
 }
 
+void	ft_free_exit(t_data *minis)
+{
+	free_struct(minis);
+	free_list(minis->env);
+	free_redi(minis);
+}
+
 void	ft_exit(t_data *minis, t_board *cmd)
 {
 	int	exit_code;
@@ -44,7 +51,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	if (cmd->nb_words > 3)
 	{
 		ft_putstr_fd("too much argument for exit\n", 2);
-		code_erreur = 1;
+		g_code_erreur = 1;
 		return ;
 	}
 	if (cmd->nb_words == 3)
@@ -59,9 +66,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	else
 		exit_code = 0;
 	rl_clear_history();
-	free_struct(minis);
-	free_list(minis->env);
-	free_redi(minis);
+	ft_free_exit(minis);
 	exit(exit_code);
 }
 
