@@ -25,8 +25,8 @@ void	each_things_to_do(t_data *minis, char **envp)
 	line_to_cmd(minis);
 	init_struct(minis);
 	put_env_var(minis);
-	delete_quote(minis);
 	redirection(minis);
+	delete_quote(minis);
 	ft_split_cmd(minis);
 	res = ft_pipe(minis, envp);
 	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && g_code_erreur != 126)

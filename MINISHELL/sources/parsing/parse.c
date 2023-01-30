@@ -95,7 +95,7 @@ int	nothing_after_redi(t_data *minis, char *str, int i)
 		j++;
 	if (check_after_redi(str, new_str, j, i))
 		return (1);
-	if (unknow_env_redi(minis, str, i))
+	if (unknow_env_redi(minis, new_str, i))
 	{
 		ft_putstr_fd("ambiguous redirect\n", 2);
 		g_code_erreur = 1;

@@ -12,26 +12,49 @@
 
 #include "../../includes/minishell.h"
 
-char	*get_file_redi(char *str)
+char *cpy_redi(char *new_str, int i)
 {
-	char	*new;
-	int		i;
+	char *new;
 
-	i = 0;
-	while (*str && *str == ' ')
-		str++;
-	while (str[i] && str[i] != ' ')
-		i++;
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
 		return (NULL);
 	i = 0;
-	while (str[i] && str[i] != ' ')
+	while (new_str[i] && new_str[i] == ' ')
+		i++;
+	while (new_str[i] && new_str[i] != ' ')
 	{
-		new[i] = str[i];
+		new[i] = new_str[i];
 		i++;
 	}
 	new[i] = '\0';
+	return(new);
+}
+
+char	*get_file_redi(t_data *minis, char *str)
+{
+	char *new_str;
+	char *new;
+	int		i;
+	int len;
+
+	len = 0;
+	new_str = ft_strdup(str);
+	if (!new_str)
+		ft_error("Malloc", minis, 3, 1);
+	new_str = get_new_str(new_str);
+	if (!new_str)
+		ft_error("Malloc", minis, 3, 1);
+	i = 0;
+	while (new_str[i] && new_str[i] == ' ')
+		i++;
+	while (new_str[i] && new_str[i] != ' ')
+	{
+		len++;
+		i++;
+	}
+	new = cpy_redi(new_str, len);
+	free(new_str);
 	return (new);
 }
 
@@ -49,7 +72,7 @@ void	stock_redi(t_data *minis, t_board *cmd, char *str, int res)
 	if (!redi)
 		ft_error("Malloc", minis, 3, 1);
 	redi->type = res;
-	redi->file = get_file_redi(str + j);
+	redi->file = get_file_redi(minis, str + j);
 	if (!redi->file)
 	{
 		free(redi);

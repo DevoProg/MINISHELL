@@ -25,7 +25,6 @@
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
 # include "../libft/includes/ft_printf.h"
-# include "../libft/includes/get_next_line.h"
 # include <errno.h>
 # include <stdbool.h>
 
@@ -100,10 +99,11 @@ void	signal_handler_h_doc(int sig);
 void	line_empty_h_doc(void);
 //				REDIRECTION
 //redirect.c
+char 	*cpy_redi(char *new_str, int i);
 void	redirection(t_data *minis);
 void	clean_this_redi(char *str, int j, int res);
 void	stock_redi(t_data *minis, t_board *cmd, char *str, int res);
-char	*get_file_redi(char *str);
+char	*get_file_redi(t_data *minis, char *str);
 //redirect_utils.c
 int		is_redi_infile(t_redi *ptr);
 int		is_redi_outfile(t_redi *ptr);
@@ -184,6 +184,7 @@ int		access_check(char *path);
 //ft_check_builtins.c /!\ trop de fonctions
 void	butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void	builtins_with_fork(t_data *minis, t_board *cmd);
+void	ft_free_exit(t_data *minis);
 void	ft_exit(t_data *minis, t_board *cmd);
 int		ft_is_digital(char *str);
 //buitlin_utils
