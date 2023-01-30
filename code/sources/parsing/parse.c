@@ -18,19 +18,19 @@ int pipe_at_end(char *str, int i)
 		i++;
 	if (!str[i])
 	{
-		ft_printf("Error parsing : unexpected token `|'\n");
+		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
 		return (1);
 	}
 	if (str[i] == '|')
 	{
-		ft_printf("Error parsing : unexpected token `|'\n");
+		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
 		return (1);
 	}
 	if (!str[i])
 	{
-		ft_printf("Error parsing : unexpected token `|'\n");
+		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
 		return (1);
 	}
@@ -67,28 +67,28 @@ int nothing_after_redi(t_data *minis, char *str, int i)
 		i++;
 	if (new_str[i] == '<' || new_str[i] == '>')
 	{
-		ft_printf("Error parsing\n");
+		ft_putstr_fd("Error parsing\n", 2);
 		code_erreur = 258;
 		free(new_str);
 		return (1);
 	}
 	if (new_str[i] == '|')
 	{
-		ft_printf("Error parsing : unexpected token `|'\n");
+		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
 		free(new_str);
 		return (1);
 	}
 	if(unknow_env_redi(minis, str, i))
 	{
-		ft_printf("ambiguous redirect\n");
+		ft_putstr_fd("ambiguous redirect\n", 2);
 		code_erreur = 1;
 		free(new_str);
 		return (1);
 	}
 	if (!new_str[i])
 	{
-		ft_printf("Error parsing\n");
+		ft_putstr_fd("Error parsing\n", 2);
 		code_erreur = 258;
 		free(new_str);
 		return (1);
@@ -124,7 +124,7 @@ int	parse(t_data *minis, char *str)
 				i++;
 			if (str[i + 1] == '<' || str[i + 1] == '>')
 			{
-				ft_printf("Error parsing\n");
+				ft_putstr_fd("Error parsing\n", 2);
 				code_erreur = 258;
 				return (0);
 			}
@@ -133,7 +133,7 @@ int	parse(t_data *minis, char *str)
 			i++;
 			if (!str[i])
 			{
-				ft_printf("Error parsing\n");
+				ft_putstr_fd("Error parsing\n", 2);
 				code_erreur = 258;
 				return (0);
 			}

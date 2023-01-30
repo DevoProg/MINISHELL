@@ -9,5 +9,3 @@ si redirection vers variable env qui existe pas code erreur 1
 Parse 25 lignes
 
 error 2 dans ft_error put_res_pipe
-
-putstr_fd_2 dans parse
