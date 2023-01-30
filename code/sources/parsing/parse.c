@@ -12,16 +12,26 @@
 
 #include "../../includes/minishell.h"
 
-int pipe_at_end(char *str, int i)
+int pipe_at_end(t_data *minis, char *str, int i)
 {
-	while (str[i] && str[i] == ' ')
+	char *new_str;
+
+	new_str = ft_strdup(str);
+	if(!new_str)
+		ft_error("Malloc", minis, 2, 1);
+	new_str = get_new_str(new_str);
+	if(!new_str)
+		ft_error("Malloc", minis, 2, 1);
+	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	if (!str[i] || str[i] == '|')
+	if (!new_str[i] || new_str[i] == '|')
 	{
 		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
+		free(new_str);
 		return (1);
 	}
+	free(new_str);
 	return(0);
 }
 
@@ -107,7 +117,7 @@ int	parse(t_data *minis, char *str)
 	{
 		if (str[i] == '|' && is_no_open_quote(str, i))
 		{
-			if(pipe_at_end(str, i + 1))
+			if(pipe_at_end(minis, str, i + 1))
 				return(0);
 		}
 		else if ((str[i] == '>' || str[i] == '>' ) && is_no_open_quote(str, i))
