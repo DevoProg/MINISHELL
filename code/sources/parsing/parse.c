@@ -16,19 +16,7 @@ int pipe_at_end(char *str, int i)
 {
 	while (str[i] && str[i] == ' ')
 		i++;
-	if (!str[i])
-	{
-		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
-		code_erreur = 258;
-		return (1);
-	}
-	if (str[i] == '|')
-	{
-		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
-		code_erreur = 258;
-		return (1);
-	}
-	if (!str[i])
+	if (!str[i] || str[i] == '|')
 	{
 		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
 		code_erreur = 258;
@@ -56,6 +44,7 @@ int unknow_env_redi(t_data *minis, char *str, int i)
 int nothing_after_redi(t_data *minis, char *str, int i)
 {
 	char *new_str;
+	int j;
 
 	new_str = ft_strdup(str);
 	if(!new_str)
@@ -65,13 +54,9 @@ int nothing_after_redi(t_data *minis, char *str, int i)
 		ft_error("Malloc", minis, 2, 1);
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	if (new_str[i] == '<' || new_str[i] == '>')
-	{
-		ft_putstr_fd("Error parsing\n", 2);
-		code_erreur = 258;
-		free(new_str);
-		return (1);
-	}
+	j = i;
+	while(str[i] && new_str[j] && new_str[i] != str[j])
+		j++;
 	if (new_str[i] == '|')
 	{
 		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
@@ -86,7 +71,7 @@ int nothing_after_redi(t_data *minis, char *str, int i)
 		free(new_str);
 		return (1);
 	}
-	if (!new_str[i])
+	if (!new_str[i] || ((new_str[i] == '<' || new_str[i] == '>') && is_no_open_quote(str, j)))
 	{
 		ft_putstr_fd("Error parsing\n", 2);
 		code_erreur = 258;
@@ -120,23 +105,10 @@ int	parse(t_data *minis, char *str)
 		}
 		else if (str[i] == '<' && is_no_open_quote(str, i))
 		{
-			if (str[i + 1] == '<')
+			if(str[i + 1] == '<')
 				i++;
-			if (str[i + 1] == '<' || str[i + 1] == '>')
-			{
-				ft_putstr_fd("Error parsing\n", 2);
-				code_erreur = 258;
+			if (nothing_after_redi(minis, str, i + 1))
 				return (0);
-			}
-			while (str[i] && str[i] == ' ')
-				i++;
-			i++;
-			if (!str[i])
-			{
-				ft_putstr_fd("Error parsing\n", 2);
-				code_erreur = 258;
-				return (0);
-			}
 		}
 		i++;
 	}
