@@ -41,6 +41,32 @@ int unknow_env_redi(t_data *minis, char *str, int i)
 	return(0);
 }
 
+
+int check_after_redi(char *str, char *new_str, int j, int i)
+{
+	if(str[j] == 34 || str[j] == 39)
+	{
+		ft_putstr_fd(" : No such file or directory\n", 2);
+		code_erreur = 1;
+		free(new_str);
+		return (1);
+	}
+	if (new_str[i] == '|')
+	{
+		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
+		code_erreur = 258;
+		free(new_str);
+		return (1);
+	}
+	if (!new_str[i] || ((new_str[i] == '<' || new_str[i] == '>') && is_no_open_quote(str, j)))
+	{
+		ft_putstr_fd("Error parsing\n", 2);
+		code_erreur = 258;
+		free(new_str);
+		return (1);
+	}
+	return (0);
+}
 int nothing_after_redi(t_data *minis, char *str, int i)
 {
 	char *new_str;
@@ -55,26 +81,14 @@ int nothing_after_redi(t_data *minis, char *str, int i)
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
 	j = i;
-	while(str[i] && new_str[j] && new_str[i] != str[j])
+	while(str[j] && new_str[i] && new_str[i] != str[j])
 		j++;
-	if (new_str[i] == '|')
-	{
-		ft_putstr_fd("Error parsing : unexpected token `|'\n", 2);
-		code_erreur = 258;
-		free(new_str);
-		return (1);
-	}
+	if(check_after_redi(str, new_str, j, i))
+		return(1);
 	if(unknow_env_redi(minis, str, i))
 	{
 		ft_putstr_fd("ambiguous redirect\n", 2);
 		code_erreur = 1;
-		free(new_str);
-		return (1);
-	}
-	if (!new_str[i] || ((new_str[i] == '<' || new_str[i] == '>') && is_no_open_quote(str, j)))
-	{
-		ft_putstr_fd("Error parsing\n", 2);
-		code_erreur = 258;
 		free(new_str);
 		return (1);
 	}
@@ -96,16 +110,11 @@ int	parse(t_data *minis, char *str)
 			if(pipe_at_end(str, i + 1))
 				return(0);
 		}
-		else if (str[i] == '>' && is_no_open_quote(str, i))
+		else if ((str[i] == '>' || str[i] == '>' ) && is_no_open_quote(str, i))
 		{
-			if(str[i + 1] == '>')
+			if(str[i + 1] == '>' && str[i] == '>')
 				i++;
-			if (nothing_after_redi(minis, str, i + 1))
-				return (0);
-		}
-		else if (str[i] == '<' && is_no_open_quote(str, i))
-		{
-			if(str[i + 1] == '<')
+			else if(str[i + 1] == '<' && str[i] == '<')
 				i++;
 			if (nothing_after_redi(minis, str, i + 1))
 				return (0);
