@@ -125,7 +125,7 @@ int		redirect_outfile(t_board *cmd, int redi_pipe[2]);
 void	redirect_error(t_data *minis, int redi_pipe[2][2]);
 //				PARSING
 //parse.c
-int		parse(char *str);
+int		parse(t_data *minis, char *str);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);

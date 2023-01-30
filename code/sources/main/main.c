@@ -20,7 +20,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 
 	add_history(minis->line);
 	put_res_pipe(minis, code_erreur);
-	if (!parse(minis->line))
+	if (!parse(minis, minis->line))
 		return ;
 	line_to_cmd(minis);
 	init_struct(minis);

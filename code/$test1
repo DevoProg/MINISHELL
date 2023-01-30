@@ -1,0 +1,15 @@
+""
+$USERb
+$test1
+'$USER'
+'$USERa'
+'$test'
+Makefile
+b
+includes
+libft
+libft.a
+mettre_norme.txt
+minishell
+obj
+sources
