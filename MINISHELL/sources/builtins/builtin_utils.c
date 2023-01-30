@@ -37,7 +37,7 @@ int	check_option_echo(char *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd[i] == '-')
+	if (cmd[i] == '-' && cmd[i + 1] == 'n')
 	{
 		i++;
 		while (cmd[i])
