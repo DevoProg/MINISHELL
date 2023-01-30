@@ -96,7 +96,7 @@ void	init_signals_child(void);
 void	signal_handler_child(int sig);
 void	init_signals_h_doc(void);
 void	signal_handler_h_doc(int sig);
-void line_empty_h_doc(void);
+void 	line_empty_h_doc(void);
 //				REDIRECTION
 //redirect.c
 void	redirection(t_data *minis);
@@ -126,6 +126,10 @@ void	redirect_error(t_data *minis, int redi_pipe[2][2]);
 //				PARSING
 //parse.c
 int		parse(t_data *minis, char *str);
+int 	nothing_after_redi(t_data *minis, char *str, int i);
+int 	check_after_redi(char *str, char *new_str, int j, int i);
+int 	unknow_env_redi(t_data *minis, char *str, int i);
+int 	pipe_at_end(t_data *minis, char *str, int i);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
