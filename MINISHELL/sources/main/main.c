@@ -14,6 +14,18 @@
 
 int	g_code_erreur;
 
+int check_all_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] && str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
+}
+
 void	each_things_to_do(t_data *minis, char **envp)
 {
 	int	res;
@@ -26,8 +38,8 @@ void	each_things_to_do(t_data *minis, char **envp)
 	init_struct(minis);
 	put_env_var(minis);
 	redirection(minis);
-	delete_quote(minis);
 	ft_split_cmd(minis);
+	delete_quote(minis);
 	res = ft_pipe(minis, envp);
 	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && g_code_erreur != 126)
 		g_code_erreur = res;

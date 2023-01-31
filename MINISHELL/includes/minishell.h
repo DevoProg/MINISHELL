@@ -65,6 +65,7 @@ typedef struct s_board
 	char	*cmd_path;
 	int		res_fork;
 	int		pipe_fd[2];
+	int 	var_env_empty;
 	t_redi	*redi;
 }t_board;
 
@@ -82,6 +83,7 @@ typedef struct s_data
 void	each_things_to_do(t_data *minis, char **envp);
 void	minishell_loop(char **envp);
 void	control_c(void);
+int 	check_all_spaces(char *str);
 //init_struct.c
 void	delete_first_node_redi(t_board *cmd);
 void	free_redi(t_data *minis);
@@ -131,7 +133,7 @@ int		parse(t_data *minis, char *str);
 int		nothing_after_redi(t_data *minis, char *str, int i);
 int		check_after_redi(char *str, char *new_str, int j, int i);
 int		unknow_env_redi(t_data *minis, char *str, int i);
-int		pipe_at_end(t_data *minis, char *str, int i);
+int		pipe_at_end(char *str, int i);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
@@ -164,7 +166,7 @@ t_var	*lst_name_finding(t_var *lst, char *name);
 void	ft_malloc_empty(t_data *minis, t_var *ptr);
 //get_envp_var.c
 void	put_env_var(t_data *minis);
-char	*get_envp_var(t_data *minis, char *cmd);
+char	*get_envp_var(t_data *minis, char *cmd, int *empty);
 int		is_an_other_var_env(char *var_env);
 char	*search_env_var(char *str, int i, t_data *minis);
 int		ft_strlen_var(char *str, int j);
@@ -181,7 +183,7 @@ int		cd_without_arg(t_data *minis, t_board *cmd);
 void	ft_change_pwd(t_var *env, t_data *minis);
 void	ft_change_oldpwd(t_var *env, t_data *minis);
 int		access_check(char *path);
-//ft_check_builtins.c /!\ trop de fonctions
+//ft_check_builtins.c
 void	butiltins_without_fork(t_data *minis, t_board *cmd, int i);
 void	builtins_with_fork(t_data *minis, t_board *cmd);
 void	ft_free_exit(t_data *minis);
@@ -254,6 +256,6 @@ int		error_or_not_fork(t_data *minis, t_board *cmd, int z, int i);
 void	close_for_cmd_pipe(t_data *minis, int z, int i);
 int		infile_error_message(t_board *cmd, int print);
 int		check_acces_read(t_redi *ptr, int print);
-int		command_error_message(t_data *minis, int print);
+void	command_error_message(t_data *minis, int print);
 
 #endif

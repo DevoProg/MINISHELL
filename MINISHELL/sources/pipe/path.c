@@ -55,6 +55,8 @@ char	*check_acces_path(t_data *minis, t_board *cmd)
 {
 	char	*res;
 
+	if(!cmd->tab[0])
+		return (NULL);
 	if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
 	{
 		res = ft_strdup(cmd->tab[0]);
@@ -89,6 +91,8 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	char	*res;
 	int		path_len;
 
+	if(!cmd->tab[0])
+		return (NULL);
 	res = check_acces_path(minis, cmd);
 	if (res)
 		return (res);

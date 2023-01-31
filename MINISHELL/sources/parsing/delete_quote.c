@@ -92,13 +92,19 @@ char	*get_new_str(char *str)
 void	delete_quote(t_data *minis)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (i < minis->nb_cmd)
 	{
-		minis->cmd[i].line_cmd = get_new_str(minis->cmd[i].line_cmd);
-		if (!minis->cmd[i].line_cmd)
-			ft_error("Malloc", minis, 2, 1);
+		j = 0;
+		while(j < minis->cmd[i].nb_words - 1)
+		{
+			minis->cmd[i].tab[j] = get_new_str(minis->cmd[i].tab[j]);
+			if (!minis->cmd[i].tab[j])
+				ft_error("Malloc", minis, 2, 1);
+			j++;
+		}
 		i++;
 	}
 }

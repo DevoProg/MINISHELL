@@ -41,7 +41,7 @@ int	error_or_not_fork(t_data *minis, t_board *cmd, int z, int i)
 	return (0);
 }
 
-int	command_error_message(t_data *minis, int print)
+void	command_error_message(t_data *minis, int print)
 {
 	t_board	*cmd;
 	int		i;
@@ -50,19 +50,22 @@ int	command_error_message(t_data *minis, int print)
 	while (i < minis->nb_cmd)
 	{
 		cmd = &minis->cmd[i];
-		if (!cmd->cmd_path && !ft_is_builtins(cmd))
+		if ((!cmd->cmd_path && !ft_is_builtins(cmd)) || (cmd->tab[0][0] == '\0'))
 		{
 			if (print == 1)
 			{
+				if(cmd->var_env_empty == 1)
+				{
+					i++;
+					continue ;
+				}
 				ft_putstr_fd("Command not found :", 2);
 				ft_putstr_fd(cmd->tab[0], 2);
 				ft_putchar_fd('\n', 2);
 			}
-			return (0);
 		}
 		i++;
 	}
-	return (1);
 }
 
 int	check_acces_read(t_redi *ptr, int print)

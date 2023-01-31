@@ -16,6 +16,8 @@ int	ft_is_not_fork(t_board *cmd)
 {
 	int	res;
 
+	if(!cmd->tab[0])
+		return (0);
 	res = 0;
 	if (ft_strcmp(cmd->tab[0], "exit") == 0)
 		res = 1;
@@ -32,6 +34,8 @@ int	ft_is_builtins(t_board *cmd)
 {
 	int	res;
 
+	if(!cmd->tab[0])
+		return (0);
 	res = 0;
 	if (ft_strcmp(cmd->tab[0], "pwd") == 0)
 		res = 1;

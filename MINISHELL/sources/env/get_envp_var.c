@@ -65,7 +65,7 @@ int	is_an_other_var_env(char *var_env)
 	return (0);
 }
 
-char	*get_envp_var(t_data *minis, char *cmd)
+char	*get_envp_var(t_data *minis, char *cmd, int *empty)
 {
 	char	*var_env;
 	char	*res_env;
@@ -80,10 +80,12 @@ char	*get_envp_var(t_data *minis, char *cmd)
 		{
 			var_env = search_env_var(cmd, i, minis);
 			res_env = list_chr(minis->env, var_env);
+			if(res_env == NULL || ft_strlen(res_env) == 0)
+				*empty = 1;
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
 			if (is_an_other_var_env(var_env))
-				var_env = get_envp_var(minis, var_env);
+				var_env = get_envp_var(minis, var_env, empty);
 			return (var_env);
 		}
 		i++;
@@ -94,11 +96,17 @@ char	*get_envp_var(t_data *minis, char *cmd)
 void	put_env_var(t_data *minis)
 {
 	int	i;
+	int empty;
 
 	i = 0;
 	while (i < minis->nb_cmd)
 	{
-		minis->cmd[i].line_cmd = get_envp_var(minis, minis->cmd[i].line_cmd);
+		empty = 0;
+		minis->cmd[i].line_cmd = get_envp_var(minis, minis->cmd[i].line_cmd, &empty);
+		if(ft_strlen(minis->cmd[i].line_cmd) == 0 && empty == 1)
+			minis->cmd[i].var_env_empty = 1;
+		else
+			minis->cmd[i].var_env_empty = 0;
 		i++;
 	}
 }

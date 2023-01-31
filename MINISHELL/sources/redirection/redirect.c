@@ -22,7 +22,7 @@ char	*cpy_redi(char *new_str, int i)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	while (new_str[i] && new_str[i] != ' ')
+	while (new_str[i] && new_str[i] != ' ' && new_str[i] != '<' && new_str[i] != '>')
 	{
 		new[i] = new_str[i];
 		i++;
@@ -48,7 +48,7 @@ char	*get_file_redi(t_data *minis, char *str)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	while (new_str[i] && new_str[i] != ' ')
+	while (new_str[i] && new_str[i] != ' ' && new_str[i] != '>' && new_str[i] != '<')
 	{
 		len++;
 		i++;
@@ -92,7 +92,7 @@ void	clean_this_redi(char *str, int j, int res)
 	}
 	while (str[j] && str[j] == ' ')
 		j++;
-	while (str[j] && str[j] != ' ')
+	while (str[j] && str[j] != ' ' && str[j] != '>' && str[j] != '<')
 	{
 		str[j] = ' ';
 		j++;
