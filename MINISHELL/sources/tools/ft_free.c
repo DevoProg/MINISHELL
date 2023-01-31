@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 00:26:06 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:26:09 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:26:34 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	free_struct_cmd(t_data *minis)
 			free(minis->cmd[i].cmd_path);
 		i++;
 	}
-	free(minis->cmd);
+	if (minis->cmd)
+		free(minis->cmd);
 }
 
 void	free_tab(char **tab, int i)

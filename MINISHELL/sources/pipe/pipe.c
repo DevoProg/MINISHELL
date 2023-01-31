@@ -36,7 +36,7 @@ void	find_path_struct(t_data *minis)
 	{
 		if (!ft_is_builtins(&minis->cmd[i]))
 		{
-			if (&minis->cmd[i].tab[0])
+			if (!&minis->cmd[i].tab[0])
 			{
 				i++;
 				continue ;
