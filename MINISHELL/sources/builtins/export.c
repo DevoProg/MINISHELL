@@ -49,14 +49,14 @@ void	ft_create_variable(t_data *minis, char *str)
 
 	ptr = malloc(sizeof(t_var));
 	if (!ptr)
-		ft_error("Malloc", minis, 2, 1);
+		ft_error("Malloc", minis, 3, 1);
 	ptr->next = NULL;
 	ft_get_value(minis, str, ptr);
 	if (!ptr->value)
-		ft_error("Malloc", minis, 2, 1);
+		ft_error("Malloc", minis, 3, 1);
 	ft_get_name(str, ptr);
 	if (!ptr->name)
-		ft_error("Malloc", minis, 2, 1);
+		ft_error("Malloc", minis, 3, 1);
 	ptr->is_export = 1;
 	ptr->is_print = 1;
 	lst_add(&minis->env, ptr);

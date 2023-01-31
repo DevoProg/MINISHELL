@@ -68,8 +68,9 @@ void	lst_add(t_var **lst, t_var *new)
 
 void	ft_malloc_empty(t_data *minis, t_var *ptr)
 {
-	ptr->value = malloc(sizeof(char) * 1);
+	ptr->value = malloc(sizeof(char) * 2);
 	if (!ptr->value)
 		ft_error("Malloc", minis, 3, 1);
-	ptr->value[2] = '\0';
+	ptr->value[0] = ' ';
+	ptr->value[1] = '\0';
 }
