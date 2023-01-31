@@ -25,12 +25,12 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 		return (0);
 	}
 	ft_pipe_redi(minis, redi_pipe);
+	init_signals_child();
 	cmd->res_fork = fork();
 	if (cmd->res_fork < 0)
 		ft_error_fork(minis, redi_pipe, 0);
 	if (cmd->res_fork == 0)
 		fork_one_cmd(minis, envp, redi_pipe, cmd);
-	init_signals_child();
 	close_redi_pipe(redi_pipe);
 	waitpid(minis->cmd[0].res_fork, &res, 0);
 	command_error_message(minis, 1);
@@ -85,7 +85,6 @@ void	last_cmd(t_data *minis, char **envp, int i)
 		ft_error_fork(minis, redi_pipe, 1);
 	if (cmd->res_fork == 0)
 		fork_last_cmd(minis, envp, redi_pipe, i);
-	init_signals_child();
 	close_redi_pipe(redi_pipe);
 }
 
@@ -94,6 +93,7 @@ int	ft_execute(t_data *minis, char **envp)
 	int	i;
 	int	res;
 
+	init_signals_child();
 	i = 0;
 	while (i < minis->nb_cmd)
 	{

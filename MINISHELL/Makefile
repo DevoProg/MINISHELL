@@ -9,7 +9,7 @@ HEADER		=	-I $(INC)
 SRC_DIR		=	sources/
 OBJ_DIR		=	obj/
 CC			=	gcc
-FLAGS		=	-Wall -Werror -Wextra -I/opt/homebrew/opt/readline/include
+FLAGS		=	-Wall -Werror -Wextra -I/Users/gmohimon/.brew/opt/readline/include
 RM			=	rm -f
 ECHO		=	echo -e
 #RL_LIB_DIR	=	-lreadline
@@ -79,7 +79,7 @@ start:
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(OBJF)
-			@$(CC) $(FLAGS) $(OBJ) $(HEADER) -lreadline libft.a -L/opt/homebrew/opt/readline/lib -o $(NAME)		
+			@$(CC) $(FLAGS) $(OBJ) $(HEADER) -lreadline libft.a -L/Users/gmohimon/.brew/opt/readline/lib -o $(NAME)		
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 			@$(ECHO) -n "$(ORANGE)=$(DEF_COLOR)"

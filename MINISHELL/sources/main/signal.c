@@ -57,7 +57,7 @@ void	signal_handler_child(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
-	if (sig == SIGQUIT)
+	if(sig == SIGQUIT)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
