@@ -12,8 +12,6 @@ CC			=	gcc
 FLAGS		=	-Wall -Werror -Wextra -I$(HOME)/.brew/opt/readline/include
 RM			=	rm -f
 ECHO		=	echo -e
-#RL_LIB_DIR	=	-lreadline
-#RL_LIB		=	libreadline.a libhistory.a
 
 # Colors
 
@@ -64,8 +62,6 @@ SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 OBJF		=	.cache_exists
-
-###
 
 start:
 			@make -C $(LIBFT)
