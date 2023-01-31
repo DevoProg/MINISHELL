@@ -91,8 +91,6 @@ char	*ft_try_path(t_data *minis, char *path, t_board *cmd)
 	char	*res;
 	int		path_len;
 
-	if(!cmd->tab[0])
-		return (NULL);
 	res = check_acces_path(minis, cmd);
 	if (res)
 		return (res);

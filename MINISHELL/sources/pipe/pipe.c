@@ -35,7 +35,14 @@ void	find_path_struct(t_data *minis)
 	while (i < minis->nb_cmd)
 	{
 		if (!ft_is_builtins(&minis->cmd[i]))
+		{
+			if(&minis->cmd[i].tab[0])
+			{
+				i++;
+				continue ;
+			}
 			minis->cmd[i].cmd_path = ft_try_path(minis, path, &minis->cmd[i]);
+		}
 		i++;
 	}
 	return ;
