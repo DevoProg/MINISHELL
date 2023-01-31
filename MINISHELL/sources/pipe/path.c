@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:13:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:39:30 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:01:31 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*check_acces_path(t_data *minis, t_board *cmd)
 {
 	char	*res;
 
-	if(!cmd->tab[0])
+	if (!cmd->tab[0])
 		return (NULL);
 	if (access(cmd->tab[0], F_OK) == 0 && access(cmd->tab[0], X_OK) != 0)
 	{

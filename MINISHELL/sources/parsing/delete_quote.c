@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:45:13 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:19:28 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:00:43 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ char	*get_new_str(char *str)
 void	delete_quote(t_data *minis)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < minis->nb_cmd)
 	{
 		j = 0;
-		while(j < minis->cmd[i].nb_words - 1)
+		while (j < minis->cmd[i].nb_words - 1)
 		{
 			minis->cmd[i].tab[j] = get_new_str(minis->cmd[i].tab[j]);
 			if (!minis->cmd[i].tab[j])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:19:44 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 11:26:58 by gmohimon         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:03:30 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*cpy_redi(char *new_str, int i)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	while (new_str[i] && new_str[i] != ' ' && new_str[i] != '<' && new_str[i] != '>')
+	while (new_str[i] && new_str[i] != ' '
+		&& new_str[i] != '<' && new_str[i] != '>')
 	{
 		new[i] = new_str[i];
 		i++;
@@ -48,7 +49,8 @@ char	*get_file_redi(t_data *minis, char *str)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-	while (new_str[i] && new_str[i] != ' ' && new_str[i] != '>' && new_str[i] != '<')
+	while (new_str[i] && new_str[i] != ' '
+		&& new_str[i] != '>' && new_str[i] != '<')
 	{
 		len++;
 		i++;

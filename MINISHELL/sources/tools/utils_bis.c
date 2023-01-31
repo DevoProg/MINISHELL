@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:38:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:19:28 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:04:06 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_is_not_fork(t_board *cmd)
 {
 	int	res;
 
-	if(!cmd->tab[0])
+	if (!cmd->tab[0])
 		return (0);
 	res = 0;
 	if (ft_strcmp(cmd->tab[0], "exit") == 0)
@@ -34,7 +34,7 @@ int	ft_is_builtins(t_board *cmd)
 {
 	int	res;
 
-	if(!cmd->tab[0])
+	if (!cmd->tab[0])
 		return (0);
 	res = 0;
 	if (ft_strcmp(cmd->tab[0], "pwd") == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:08:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 11:20:15 by gmohimon         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:00:53 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	parse(t_data *minis, char *str)
 {
 	int	i;
 
-	if(!check_all_spaces(str))
+	if (!check_all_spaces(str))
 		return (0);
 	i = 0;
 	while (str[i])

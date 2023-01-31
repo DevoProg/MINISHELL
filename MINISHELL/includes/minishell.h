@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:28:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 11:17:03 by gmohimon         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:53:57 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_board
 	char	*cmd_path;
 	int		res_fork;
 	int		pipe_fd[2];
-	int 	var_env_empty;
+	int		var_env_empty;
 	t_redi	*redi;
 }t_board;
 
@@ -83,7 +83,7 @@ typedef struct s_data
 void	each_things_to_do(t_data *minis, char **envp);
 void	minishell_loop(char **envp);
 void	control_c(void);
-int 	check_all_spaces(char *str);
+int		check_all_spaces(char *str);
 //init_struct.c
 void	delete_first_node_redi(t_board *cmd);
 void	free_redi(t_data *minis);

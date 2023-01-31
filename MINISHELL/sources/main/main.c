@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:31:35 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:15:40 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:00:17 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	g_code_erreur;
 
-int check_all_spaces(char *str)
+int	check_all_spaces(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i] && str[i] == ' ')
+	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
 		return (0);

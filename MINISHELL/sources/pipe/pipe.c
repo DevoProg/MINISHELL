@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:17:49 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 11:23:32 by gmohimon         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:02:43 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	find_path_struct(t_data *minis)
 	{
 		if (!ft_is_builtins(&minis->cmd[i]))
 		{
-			if(&minis->cmd[i].tab[0])
+			if (&minis->cmd[i].tab[0])
 			{
 				i++;
 				continue ;

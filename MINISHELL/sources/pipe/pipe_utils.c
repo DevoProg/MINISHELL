@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 00:39:38 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:41:57 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:02:28 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ void	command_error_message(t_data *minis, int print)
 	while (i < minis->nb_cmd)
 	{
 		cmd = &minis->cmd[i];
-		if ((!cmd->cmd_path && !ft_is_builtins(cmd)) || (cmd->tab[0][0] == '\0'))
+		if ((!cmd->cmd_path && !ft_is_builtins(cmd))
+			|| (cmd->tab[0][0] == '\0'))
 		{
 			if (print == 1)
 			{
-				if(cmd->var_env_empty == 1)
+				if (cmd->var_env_empty == 1)
 				{
 					i++;
 					continue ;
