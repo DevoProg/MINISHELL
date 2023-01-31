@@ -6,15 +6,15 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:19:44 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:16:20 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:26:58 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char *cpy_redi(char *new_str, int i)
+char	*cpy_redi(char *new_str, int i)
 {
-	char *new;
+	char	*new;
 
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
@@ -28,15 +28,15 @@ char *cpy_redi(char *new_str, int i)
 		i++;
 	}
 	new[i] = '\0';
-	return(new);
+	return (new);
 }
 
 char	*get_file_redi(t_data *minis, char *str)
 {
-	char *new_str;
-	char *new;
+	char	*new_str;
+	char	*new;
 	int		i;
-	int len;
+	int		len;
 
 	len = 0;
 	new_str = ft_strdup(str);

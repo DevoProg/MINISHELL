@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:07:36 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:20:00 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:24:44 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	fork_last_cmd(t_data *minis, char **envp,
 	exit(1);
 }
 
-void wait_all_pid(t_data *minis, int *res)
+void	wait_all_pid(t_data *minis, int *res)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < minis->nb_cmd)

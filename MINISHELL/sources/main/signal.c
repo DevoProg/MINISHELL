@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:03:10 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:12:36 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:18:34 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	signal_handler_child(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
-	if(sig == SIGQUIT)
+	if (sig == SIGQUIT)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();

@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:17:49 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/17 01:19:32 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:23:32 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	ft_pipe(t_data *minis, char **envp)
 	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1])
 		&& ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
 		res = 0;
-	if (!minis->cmd[minis->nb_cmd - 1].cmd_path && !ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
+	if (!minis->cmd[minis->nb_cmd - 1].cmd_path
+		&& !ft_is_builtins(&minis->cmd[minis->nb_cmd - 1]))
 		return (127);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:41:48 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:08:01 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:28:13 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_redi	*last_redi_out(t_redi *redi)
 	return (res);
 }
 
-int read_input_h_doc(t_redi *ptr, int redi_pipe[2], int *res)
+int	read_input_h_doc(t_redi *ptr, int redi_pipe[2], int *res)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	init_signals_h_doc();
 	str = readline(">");
@@ -64,8 +64,8 @@ int	d_infile_to_pipe(t_redi *ptr, int redi_pipe[2])
 		return (res);
 	while (1)
 	{
-		if(!read_input_h_doc(ptr, redi_pipe, &res))
-			break;
+		if (!read_input_h_doc(ptr, redi_pipe, &res))
+			break ;
 	}
 	init_signals_child();
 	return (res);

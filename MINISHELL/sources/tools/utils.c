@@ -6,14 +6,13 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:42:04 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/21 00:25:16 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:29:10 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-int len_env_var(char *str, int j)
+int	len_env_var(char *str, int j)
 {
 	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_' || str[j] == '?'))
 	{
@@ -21,7 +20,7 @@ int len_env_var(char *str, int j)
 			break ;
 		j++;
 	}
-	return(j);
+	return (j);
 }
 
 int	ft_len_cmd(char *line)

@@ -6,12 +6,11 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:24:39 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/25 21:11:14 by alondot          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:17:54 by gmohimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	ft_pwd(void)
 {
