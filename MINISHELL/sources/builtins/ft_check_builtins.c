@@ -42,7 +42,7 @@ void	ft_exit(t_data *minis, t_board *cmd)
 	int	i;
 
 	i = 0;
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	if (cmd->nb_words > 3)
 	{
 		ft_putstr_fd("too much argument for exit\n", 2);
