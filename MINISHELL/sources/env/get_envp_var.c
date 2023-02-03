@@ -80,7 +80,7 @@ char	*get_envp_var(t_data *minis, char *cmd, int *empty)
 		{
 			var_env = search_env_var(cmd, i, minis);
 			res_env = list_chr(minis->env, var_env);
-			if (res_env == NULL || ft_strlen(res_env) == 0)
+			if (res_env == NULL || is_empty(res_env) == 0)
 				*empty = 1;
 			free(var_env);
 			var_env = ft_cpy_new_line(cmd, res_env, i, minis);
@@ -103,7 +103,7 @@ void	put_env_var(t_data *ms)
 	{
 		empty = 0;
 		ms->cmd[i].line_cmd = get_envp_var(ms, ms->cmd[i].line_cmd, &empty);
-		if (ft_strlen(ms->cmd[i].line_cmd) == 0 && empty == 1)
+		if (is_empty(ms->cmd[i].line_cmd) == 0 && empty == 1)
 			ms->cmd[i].var_env_empty = 1;
 		else
 			ms->cmd[i].var_env_empty = 0;

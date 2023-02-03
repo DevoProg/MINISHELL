@@ -241,10 +241,13 @@ char	*cpy_path(t_data *minis, t_board *cmd, char *path, int *path_len);
 void	cpy_cmd(t_board *cmd, char *poss, int i);
 //execute.c
 int		ft_execute(t_data *minis, char **envp);
+void	ft_execute_bis(t_data *minis, char **envp, int i);
+//each_cmd.c
 void	last_cmd(t_data *minis, char **envp, int i);
 void	middle_cmd(t_data *minis, char **envp, int i);
 void	first_cmd(t_data *minis, char **envp, int i);
 int		just_one_cmd(t_data *minis, t_board *cmd, char **envp);
+int		is_empty(char *str);
 //fork.c
 void	fork_one_cmd(t_data *minis, char **envp,
 			int redi_pipe[2][2], t_board *cmd);

@@ -12,6 +12,22 @@
 
 #include "../../includes/minishell.h"
 
+int	is_empty(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 {
 	int	redi_pipe[2][2];

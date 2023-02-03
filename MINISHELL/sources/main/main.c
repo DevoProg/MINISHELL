@@ -43,6 +43,8 @@ void	each_things_to_do(t_data *minis, char **envp)
 	res = ft_pipe(minis, envp);
 	if (!ft_is_not_fork(&minis->cmd[minis->nb_cmd - 1]) && g_code_erreur != 126)
 		g_code_erreur = res;
+	if (minis->cmd[minis->nb_cmd - 1].var_env_empty)
+		g_code_erreur = 0;
 	free_struct((minis));
 }
 
