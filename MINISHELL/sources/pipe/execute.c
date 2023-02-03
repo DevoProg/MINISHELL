@@ -100,9 +100,17 @@ int	ft_execute(t_data *minis, char **envp)
 		if (i == 0)
 			first_cmd(minis, envp, i);
 		else if (i == minis->nb_cmd - 1)
+		{
+			if(is_redi_d_infile(minis->cmd[i - 1].redi))
+				wait(NULL);
 			last_cmd(minis, envp, i);
+		}
 		else
+		{
+			if(is_redi_d_infile(minis->cmd[i - 1].redi))
+				wait(NULL);
 			middle_cmd(minis, envp, i);
+		}
 		i++;
 	}
 	close_all_pipes(minis);

@@ -55,7 +55,7 @@ void	command_error_message(t_data *minis, int print)
 		{
 			if (print == 1)
 			{
-				if (cmd->var_env_empty == 1)
+				if (cmd->var_env_empty == 1 || is_redi_infile(minis->cmd[i].redi) || is_redi_outfile(minis->cmd[i].redi))
 				{
 					i++;
 					continue ;

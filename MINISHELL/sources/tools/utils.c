@@ -89,3 +89,18 @@ char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis)
 	new = ft_cpy_new_line_bis(cmd, var_env, new, i);
 	return (new);
 }
+
+int	is_redi_d_infile(t_redi *ptr)
+{
+	if (!ptr)
+		return (0);
+	while (ptr->next != NULL)
+	{
+		if (ptr->type == D_INFILE)
+			return (1);
+		ptr = ptr->next;
+	}
+	if (ptr->type == D_INFILE)
+		return (1);
+	return (0);
+}

@@ -206,6 +206,7 @@ int		len_env_var(char *str, int j);
 int		ft_len_cmd(char *line);
 char	*ft_cpy_new_line_bis(char *cmd, char *var_env, char *new, int i);
 char	*ft_cpy_new_line(char *cmd, char *var_env, int i, t_data *minis);
+int		is_redi_d_infile(t_redi *ptr);
 //utils_bis.c
 int		ft_is_not_fork(t_board *cmd);
 int		ft_is_builtins(t_board *cmd);

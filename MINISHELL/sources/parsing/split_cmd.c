@@ -61,7 +61,7 @@ char	*str_cpy_words(char *line, int *i)
 	int		j;
 	int		k;
 
-	j = ft_len_words(line + *i);
+	j = ft_len_words(line);
 	new = malloc(sizeof(char) * (j + 1));
 	if (!new)
 		return (NULL);
