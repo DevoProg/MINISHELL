@@ -12,80 +12,22 @@
 
 #include "../../includes/minishell.h"
 
-int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
+void	ft_execute_bis(t_data *minis, char **envp, int i)
 {
-	int	redi_pipe[2][2];
-	int	res;
-
-	if (!infile_error_message(&minis->cmd[0], 1))
-		return (1);
-	if (ft_is_not_fork(cmd))
+	if (i == 0)
+		first_cmd(minis, envp, i);
+	else if (i == minis->nb_cmd - 1)
 	{
-		butiltins_without_fork(minis, cmd, 0);
-		return (0);
+		if (is_redi_d_infile(minis->cmd[i - 1].redi))
+			wait(NULL);
+		last_cmd(minis, envp, i);
 	}
-	ft_pipe_redi(minis, redi_pipe);
-	init_signals_child();
-	cmd->res_fork = fork();
-	if (cmd->res_fork < 0)
-		ft_error_fork(minis, redi_pipe, 0);
-	if (cmd->res_fork == 0)
-		fork_one_cmd(minis, envp, redi_pipe, cmd);
-	close_redi_pipe(redi_pipe);
-	waitpid(minis->cmd[0].res_fork, &res, 0);
-	command_error_message(minis, 1);
-	return (res);
-}
-
-void	first_cmd(t_data *minis, char **envp, int i)
-{
-	t_board	*cmd;
-	int		redi_pipe[2][2];
-
-	cmd = &minis->cmd[i];
-	if (error_or_not_fork(minis, cmd, 1, i))
-		return ;
-	ft_pipe_redi(minis, redi_pipe);
-	cmd->res_fork = fork();
-	if (cmd->res_fork < 0)
-		ft_error_fork(minis, redi_pipe, 1);
-	if (cmd->res_fork == 0)
-		fork_first_cmd(minis, envp, redi_pipe, i);
-	close_redi_pipe(redi_pipe);
-}
-
-void	middle_cmd(t_data *minis, char **envp, int i)
-{
-	t_board	*cmd;
-	int		redi_pipe[2][2];
-
-	cmd = &minis->cmd[i];
-	if (error_or_not_fork(minis, cmd, 2, i))
-		return ;
-	ft_pipe_redi(minis, redi_pipe);
-	cmd->res_fork = fork();
-	if (cmd->res_fork < 0)
-		ft_error_fork(minis, redi_pipe, 1);
-	if (cmd->res_fork == 0)
-		fork_middle_cmd(minis, envp, redi_pipe, i);
-	close_redi_pipe(redi_pipe);
-}
-
-void	last_cmd(t_data *minis, char **envp, int i)
-{
-	t_board	*cmd;
-	int		redi_pipe[2][2];
-
-	cmd = &minis->cmd[i];
-	if (error_or_not_fork(minis, cmd, 3, i))
-		return ;
-	ft_pipe_redi(minis, redi_pipe);
-	cmd->res_fork = fork();
-	if (cmd->res_fork < 0)
-		ft_error_fork(minis, redi_pipe, 1);
-	if (cmd->res_fork == 0)
-		fork_last_cmd(minis, envp, redi_pipe, i);
-	close_redi_pipe(redi_pipe);
+	else
+	{
+		if (is_redi_d_infile(minis->cmd[i - 1].redi))
+			wait(NULL);
+		middle_cmd(minis, envp, i);
+	}
 }
 
 int	ft_execute(t_data *minis, char **envp)
@@ -97,20 +39,7 @@ int	ft_execute(t_data *minis, char **envp)
 	i = 0;
 	while (i < minis->nb_cmd)
 	{
-		if (i == 0)
-			first_cmd(minis, envp, i);
-		else if (i == minis->nb_cmd - 1)
-		{
-			if(is_redi_d_infile(minis->cmd[i - 1].redi))
-				wait(NULL);
-			last_cmd(minis, envp, i);
-		}
-		else
-		{
-			if(is_redi_d_infile(minis->cmd[i - 1].redi))
-				wait(NULL);
-			middle_cmd(minis, envp, i);
-		}
+		ft_execute_bis(minis, envp, i);
 		i++;
 	}
 	close_all_pipes(minis);

@@ -53,13 +53,10 @@ void	command_error_message(t_data *minis, int print)
 		if ((!cmd->cmd_path && !ft_is_builtins(cmd))
 			|| (cmd->tab[0][0] == '\0'))
 		{
-			if (print == 1)
+			if (print == 1 && !is_redi_infile(minis->cmd[i].redi)
+				&& cmd->var_env_empty != 1
+				&& !is_redi_outfile(minis->cmd[i].redi))
 			{
-				if (cmd->var_env_empty == 1 || is_redi_infile(minis->cmd[i].redi) || is_redi_outfile(minis->cmd[i].redi))
-				{
-					i++;
-					continue ;
-				}
 				ft_putstr_fd("Command not found :", 2);
 				ft_putstr_fd(cmd->tab[0], 2);
 				ft_putchar_fd('\n', 2);
