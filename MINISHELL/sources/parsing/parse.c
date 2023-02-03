@@ -111,7 +111,7 @@ int	parse(t_data *minis, char *str)
 			if (pipe_at_end(str, i + 1))
 				return (0);
 		}
-		else if ((str[i] == '>' || str[i] == '>' ) && is_no_open_quote(str, i))
+		else if ((str[i] == '>' || str[i] == '<' ) && is_no_open_quote(str, i))
 		{
 			if (str[i + 1] == '>' && str[i] == '>')
 				i++;
