@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:28:24 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 15:53:57 by adevos           ###   ########.fr       */
+/*   Updated: 2023/02/03 17:53:15 by adevos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		check_after_redi(char *str, char *new_str, int j, int i);
 int		unknow_env_redi(t_data *minis, char *str, int i);
 int		pipe_at_end(char *str, int i);
 //is_directory.c
-void 	check_directory(t_data *minis);
+void	check_directory(t_data *minis);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);
