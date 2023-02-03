@@ -45,6 +45,7 @@ void	each_things_to_do(t_data *minis, char **envp)
 		g_code_erreur = res;
 	if (minis->cmd[minis->nb_cmd - 1].var_env_empty)
 		g_code_erreur = 0;
+	check_directory(minis);
 	free_struct((minis));
 }
 

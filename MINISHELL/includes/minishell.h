@@ -134,6 +134,8 @@ int		nothing_after_redi(t_data *minis, char *str, int i);
 int		check_after_redi(char *str, char *new_str, int j, int i);
 int		unknow_env_redi(t_data *minis, char *str, int i);
 int		pipe_at_end(char *str, int i);
+//is_directory.c
+void 	check_directory(t_data *minis);
 //ft_split_cmd.c
 void	ft_split_cmd(t_data *minis);
 char	**ft_split_each_cmd(char *str, t_board *cmd, t_data *minis);

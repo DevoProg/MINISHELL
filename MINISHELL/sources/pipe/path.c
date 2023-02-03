@@ -68,7 +68,7 @@ char	*check_acces_path(t_data *minis, t_board *cmd)
 		g_code_erreur = 126;
 		return (res);
 	}	
-	if (access(cmd->tab[0], X_OK) == 0)
+	if (access(cmd->tab[0], X_OK) == 0 && !access_check(cmd->tab[0]))
 	{
 		res = ft_strdup(cmd->tab[0]);
 		if (!res)

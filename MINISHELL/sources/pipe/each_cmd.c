@@ -49,7 +49,6 @@ int	just_one_cmd(t_data *minis, t_board *cmd, char **envp)
 		fork_one_cmd(minis, envp, redi_pipe, cmd);
 	close_redi_pipe(redi_pipe);
 	waitpid(minis->cmd[0].res_fork, &res, 0);
-	command_error_message(minis, 1);
 	return (res);
 }
 
