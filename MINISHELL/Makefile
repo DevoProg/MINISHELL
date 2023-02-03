@@ -44,7 +44,7 @@ TOOLS_DIR	=	tools/
 TOOLS_FILES	=	ft_error ft_error_bis ft_free utils utils_bis count_quote
 
 PIPE_DIR	=	pipe/
-PIPE_FILES	=	pipe path execute fork pipe_utils
+PIPE_FILES	=	pipe path execute each_cmd fork pipe_utils
 
 REDI_DIR	=	redirection/
 REDI_FILES	=	redirect redi_utils redirect_infile redirect_outfile redi_utils_bis
