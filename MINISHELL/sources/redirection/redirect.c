@@ -6,7 +6,7 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:19:44 by alondot           #+#    #+#             */
-/*   Updated: 2023/01/31 16:03:30 by adevos           ###   ########.fr       */
+/*   Updated: 2023/02/09 15:18:42 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*cpy_redi(char *new_str, int i)
 {
 	char	*new;
-    int     j;
+	int		j;
 
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
@@ -23,17 +23,15 @@ char	*cpy_redi(char *new_str, int i)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
-    printf("xx%sxx\n", new_str + i);
-    j = 0;
+	j = 0;
 	while (new_str[i] && new_str[i] != ' '
 		&& new_str[i] != '<' && new_str[i] != '>')
 	{
 		new[j] = new_str[i];
 		i++;
-        j++;
+		j++;
 	}
 	new[j] = '\0';
-    printf("xx%sxx\n", new);
 	return (new);
 }
 

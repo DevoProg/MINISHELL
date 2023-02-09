@@ -38,7 +38,7 @@ void	free_redi(t_data *minis)
 	i = 0;
 	while (i < minis->nb_cmd)
 	{
-		if (minis->cmd[i].redi)
+		if (minis->cmd[i].redi != NULL)
 		{
 			while (minis->cmd[i].redi)
 				delete_first_node_redi(&minis->cmd[i]);
@@ -49,9 +49,9 @@ void	free_redi(t_data *minis)
 
 void	free_struct(t_data *minis)
 {
+	free_redi(minis);
 	free_struct_cmd(minis);
 	free(minis->line);
-	free_redi(minis);
 }
 
 void	init_struct(t_data *minis)

@@ -9,7 +9,7 @@ HEADER		=	-I $(INC)
 SRC_DIR		=	sources/
 OBJ_DIR		=	obj/
 CC			=	gcc
-FLAGS		=	-Wall -Werror -Wextra -I$(HOME)/.brew/opt/readline/include
+FLAGS		=	-Wall -Werror -Wextra -I$(HOME)/.brew/opt/readline/include 
 RM			=	rm -f
 ECHO		=	echo -e
 

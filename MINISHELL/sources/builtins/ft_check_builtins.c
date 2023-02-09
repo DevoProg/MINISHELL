@@ -33,7 +33,6 @@ void	ft_free_exit(t_data *minis)
 {
 	free_struct(minis);
 	free_list(minis->env);
-	free_redi(minis);
 }
 
 void	ft_exit(t_data *minis, t_board *cmd)
