@@ -15,6 +15,7 @@
 char	*cpy_redi(char *new_str, int i)
 {
 	char	*new;
+    int     j;
 
 	new = malloc(sizeof(char) * (i + 1));
 	if (!new)
@@ -22,13 +23,17 @@ char	*cpy_redi(char *new_str, int i)
 	i = 0;
 	while (new_str[i] && new_str[i] == ' ')
 		i++;
+    printf("xx%sxx\n", new_str + i);
+    j = 0;
 	while (new_str[i] && new_str[i] != ' '
 		&& new_str[i] != '<' && new_str[i] != '>')
 	{
-		new[i] = new_str[i];
+		new[j] = new_str[i];
 		i++;
+        j++;
 	}
-	new[i] = '\0';
+	new[j] = '\0';
+    printf("xx%sxx\n", new);
 	return (new);
 }
 

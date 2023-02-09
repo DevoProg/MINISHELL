@@ -6,13 +6,13 @@
 /*   By: adevos <adevos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:13:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/03 17:56:54 by adevos           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:55:00 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	interror_message_directory(t_data *minis, t_board *cmd, int i)
+int	error_message_directory(t_data *minis, t_board *cmd, int i)
 {
 	int		j;
 
